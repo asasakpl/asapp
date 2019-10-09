@@ -1,6 +1,7 @@
 'use strict'
 
 import { app, protocol, BrowserWindow } from 'electron'
+import path from 'path'
 import {
   createProtocol,
   installVueDevtools
@@ -12,13 +13,20 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 let win: BrowserWindow | null
 
 // Scheme must be registered before the app is ready
-protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true, standard: true } }])
+protocol.registerSchemesAsPrivileged([
+  { scheme: 'app', privileges: { secure: true, standard: true } }
+])
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600, webPreferences: {
-    nodeIntegration: true
-  } })
+  win = new BrowserWindow({
+    width: 1920,
+    height: 1080,
+    webPreferences: {
+      nodeIntegration: true
+    },
+    icon: path.join(__dirname, 'assets/icons/icon.ico')
+  })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -59,11 +67,10 @@ app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
     try {
-  await installVueDevtools()
-} catch (e) {
-  console.error('Vue Devtools failed to install:', e.toString())
-}
-
+      await installVueDevtools()
+    } catch (e) {
+      console.error('Vue Devtools failed to install:', e.toString())
+    }
   }
   createWindow()
 })

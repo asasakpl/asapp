@@ -7,7 +7,7 @@
         </v-flex>
 
         <v-flex mb-5 xs12>
-          <h2 class="headline font-weight-bold mb-3 mt-6">Zaloguj sie</h2>
+          <h2 class="headline font-weight-bold mb-3 mt-6">Test text for auto updater test</h2>
 
           <v-layout justify-center>
             <v-form @submit.prevent="login">

@@ -1,6 +1,8 @@
 {
   "name": "asapp",
-  "version": "0.0.3",
+  "version": "0.0.1",
+  "description": "Production app for asasak.pl",
+  "author": "asasakpl",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

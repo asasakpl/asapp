@@ -1,48 +1,54 @@
 <template>
-  <v-content>
-    <v-container class="fill-height" fluid>
-      <v-layout text-center wrap>
-        <v-flex xs12>
-          <v-img :src="require('../assets/logo.png')" class="my-3 mt-5 mb-5" contain height="200"></v-img>
-        </v-flex>
+  <v-app>
+    <v-content>
+      <v-container class="fill-height" height="100%" fluid>
+        <v-layout text-center wrap>
+          <v-flex xs12>
+            <v-img :src="require('../assets/logo.png')" class="my-3 mt-5 mb-5" contain height="200"></v-img>
+          </v-flex>
 
-        <v-flex mb-5 xs12>
-          <h2 class="headline font-weight-bold mb-3 mt-6">Test text for auto updater test</h2>
+          <v-flex mb-5 xs12>
+            <h2 class="headline font-weight-bold mb-3 mt-6">Zaloguj się</h2>
 
-          <v-layout justify-center>
-            <v-form @submit.prevent="login">
-              <v-row style="width: 330px;">
-                <v-col cols="12">
-                  <v-text-field
-                    outlined
-                    v-model="email"
-                    label="Email"
-                    name="email"
-                    prepend-inner-icon="mail"
-                    type="text"
-                    color="green accent-4"
-                  ></v-text-field>
+            <v-layout justify-center>
+              <v-form @submit.prevent="login">
+                <v-row style="width: 330px;">
+                  <v-col cols="12">
+                    <v-text-field
+                      outlined
+                      v-model="email"
+                      label="Email"
+                      name="email"
+                      prepend-inner-icon="mail"
+                      type="text"
+                      color="green accent-4"
+                    ></v-text-field>
 
-                  <v-text-field
-                    v-model="password"
-                    outlined
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-inner-icon="lock"
-                    type="password"
-                    color="green accent-4"
-                  ></v-text-field>
+                    <v-text-field
+                      v-model="password"
+                      outlined
+                      id="password"
+                      label="Password"
+                      name="password"
+                      prepend-inner-icon="lock"
+                      type="password"
+                      color="green accent-4"
+                    ></v-text-field>
 
-                  <v-btn color="green accent-4" class="white--text" type="sumbit">Zaloguj</v-btn>
-                </v-col>
-              </v-row>
-            </v-form>
-          </v-layout>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-content>
+                    <v-btn color="green accent-4" class="white--text" type="sumbit">Zaloguj</v-btn>
+                  </v-col>
+                </v-row>
+              </v-form>
+            </v-layout>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+    <v-footer justify-center class="grey--text">
+      <div class="flex-grow-1"></div>
+      <div>asapp version {{ $store.getters.appVersion }}</div>
+    </v-footer>
+  </v-app>
 </template>
 
 <script lang="ts">

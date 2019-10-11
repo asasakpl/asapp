@@ -1,6 +1,6 @@
 {
   "name": "asapp",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "Production app for asasak.pl",
   "author": "asasakpl",
   "private": true,
@@ -25,7 +25,8 @@
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
     "vuetify": "^2.1.0",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "webpack": "^4.41.1"
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",

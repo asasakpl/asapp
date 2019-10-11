@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    packageVersion: process.env.PACKAGE_VERSION || '0',
     status: '',
     token: localStorage.getItem('token') || '',
     user: {}
@@ -66,6 +67,9 @@ export default new Vuex.Store({
   },
   getters: {
     isLoggedIn: state => !!state.token,
-    authStatus: state => state.status
+    authStatus: state => state.status,
+    appVersion: state => {
+      return state.packageVersion
+    }
   }
 })

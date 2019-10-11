@@ -1,6 +1,6 @@
 {
   "name": "asapp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Production app for asasak.pl",
   "author": "asasakpl",
   "private": true,
@@ -11,11 +11,13 @@
     "electron:build": "vue-cli-service electron:build -p always --win",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "electron:generate-icons": "electron-icon-builder --input=./public/icon.png --output=build --flatten"
   },
   "main": "background.js",
   "dependencies": {
     "axios": "^0.19.0",
+    "electron-log": "^3.0.8",
     "electron-updater": "^4.1.2",
     "material-design-icons-iconfont": "^5.0.1",
     "vue": "^2.6.10",
@@ -32,6 +34,7 @@
     "@vue/cli-service": "^3.11.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "electron": "^5.0.0",
+    "electron-icon-builder": "^1.0.1",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "ts-jest": "^23.0.0",
@@ -39,6 +42,7 @@
     "vue-cli-plugin-electron-builder": "^1.4.0",
     "vue-cli-plugin-vuetify": "^1.0.0",
     "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.2.2"
+    "vuetify-loader": "^1.2.2",
+    "webpack-dev-server": "^3.8.2"
   }
 }

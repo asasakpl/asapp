@@ -1,12 +1,12 @@
 {
   "name": "asapp",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test": "vue-cli-service test:unit",
-    "electron:build": "vue-cli-service electron:build",
+    "electron:build": "vue-cli-service electron:build -p always --win",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
@@ -14,6 +14,7 @@
   "main": "background.js",
   "dependencies": {
     "axios": "^0.19.0",
+    "electron-updater": "^4.1.2",
     "material-design-icons-iconfont": "^5.0.1",
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",

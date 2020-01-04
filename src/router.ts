@@ -7,30 +7,44 @@ import Dashboard from './views/Dashboard.vue'
 
 Vue.use(Router)
 
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isLoggedIn) {
+    next()
+    return
+  }
+  next('/')
+}
+
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isLoggedIn) {
+    next()
+    return
+  }
+  next('/login')
+}
+
 let router = new Router({
+  mode: process.env.IS_ELECTRON ? 'hash' : 'history',
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      beforeEnter: ifNotAuthenticated
     },
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: About
     },
     {
-      path: '/dashboard',
+      path: '/',
       name: 'dashboard',
       component: Dashboard,
-
+      beforeEnter: ifAuthenticated
     }
   ]
 })
-
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {

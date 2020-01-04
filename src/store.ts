@@ -31,30 +31,28 @@ export default new Vuex.Store({
   },
   actions: {
     login({ commit }, user) {
-      return new Promise((resolve, reject) => {
-        commit('auth_request')
+      commit('auth_request')
 
-        axios({
-          method: 'post',
-          url: 'http://localhost:3000/v1/auth/login',
-          data: { email: user.email, password: user.password }
-        })
-          .then(resp => {
-            const token = resp.data.token
-            const user = resp.data.user
-            localStorage.setItem('token', token)
-
-            axios.defaults.headers.common['auth'] = token
-            commit('auth_success', token, user)
-            resolve(resp)
-          })
-          .catch(err => {
-            commit('auth_error')
-
-            localStorage.removeItem('token')
-            reject(err)
-          })
+      return axios({
+        method: 'post',
+        url: 'http://localhost:3000/v1/auth/login',
+        data: { email: user.email, password: user.password }
       })
+        .then(resp => {
+          const token = resp.data.token
+          const user = resp.data.user
+          localStorage.setItem('token', token)
+
+          axios.defaults.headers.common['auth'] = token
+          commit('auth_success', { token, user })
+          return resp
+        })
+        .catch(err => {
+          commit('auth_error')
+
+          localStorage.removeItem('token')
+          throw err
+        })
     },
     logout({ commit }) {
       return new Promise((resolve, reject) => {

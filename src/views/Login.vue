@@ -64,25 +64,27 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue'
 
 export default Vue.extend({
   data() {
-    image: "../assets/login_background";
+    image: '../assets/login_background'
     return {
-      email: "",
-      password: ""
-    };
+      email: '',
+      password: ''
+    }
   },
   methods: {
     login: async function() {
-      let email = this.email;
-      let password = this.password;
+      let email = this.email
+      let password = this.password
       this.$store
-        .dispatch("login", { email, password })
-        .then(() => this.$router.push("/dashboard"))
-        .catch(err => console.log(err));
+        .dispatch('login', { email, password })
+        .then(() => {
+          this.$router.push('/')
+        })
+        .catch(err => console.log(err))
     }
   }
-});
+})
 </script>

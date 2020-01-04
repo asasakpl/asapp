@@ -9,7 +9,7 @@ export default new Vuex.Store({
     packageVersion: process.env.PACKAGE_VERSION || '0',
     status: '',
     token: localStorage.getItem('token') || '',
-    user: {}
+    userId: localStorage.getItem('m_user') || ''
   },
   mutations: {
     auth_request(state) {
@@ -18,7 +18,7 @@ export default new Vuex.Store({
     auth_success(state, { token, user }) {
       state.status = 'success'
       state.token = token
-      state.user = user
+      state.userId = user
       return
     },
     auth_error(state) {
@@ -42,9 +42,11 @@ export default new Vuex.Store({
           const token = resp.data.token
           const user = resp.data.user
           localStorage.setItem('token', token)
+          localStorage.setItem('m_user', user.id)
 
           axios.defaults.headers.common['auth'] = token
           commit('auth_success', { token, user })
+          console.log(user)
           return resp
         })
         .catch(err => {

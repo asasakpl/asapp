@@ -36,13 +36,13 @@ export default new Vuex.Store({
 
         axios({
           method: 'post',
-          url: 'http://localhost:3000/auth/login',
+          url: 'http://localhost:3000/v1/auth/login',
           data: { email: user.email, password: user.password }
         })
           .then(resp => {
             const token = resp.data.token
             const user = resp.data.user
-            localStorage.setItem('data', token)
+            localStorage.setItem('token', token)
 
             axios.defaults.headers.common['auth'] = token
             commit('auth_success', token, user)

@@ -76,8 +76,8 @@ export default Vue.extend({
       drawer: true,
       items: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard', to: 'dashboard' },
-        { title: 'Orders', icon: 'mdi-truck' },
-        { title: 'Users', icon: 'mdi-account-group' }
+        { title: 'Orders', icon: 'mdi-truck', to: 'orders' },
+        { title: 'Users', icon: 'mdi-account-group', to: 'users' }
       ],
       color: 'red',
       colors: ['primary', 'blue', 'success', 'red', 'teal'],

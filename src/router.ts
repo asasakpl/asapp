@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import store from './store'
 import Router from 'vue-router'
-import Login from './views/Login.vue'
-import About from './views/About.vue'
-import Dashboard from './views/Dashboard.vue'
-import Default from './layouts/Default.vue'
-import Settings from './views/Settings.vue'
+
+// Views
+import Login from '@/views/Login.vue'
+import About from '@/views/About.vue'
+import Dashboard from '@/views/Dashboard.vue'
+import Settings from '@/views/Settings.vue'
+import Users from '@/views/Users.vue'
+import Orders from '@/views/Orders.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 Vue.use(Router)
@@ -52,6 +55,16 @@ let router = new Router({
           name: 'dashboard',
           component: Dashboard,
           beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/orders',
+          name: 'orders',
+          component: Orders
+        },
+        {
+          path: '/users',
+          name: 'users',
+          component: Users
         },
         {
           path: '/settings',

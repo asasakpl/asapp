@@ -3,10 +3,6 @@
     <v-row justify="space-around">
       <Navigation />
       <router-view></router-view>
-      <v-footer app>
-        <v-spacer />
-        <span>asapp &copy; 2019</span>
-      </v-footer>
     </v-row>
   </v-container>
 </template>
@@ -19,6 +15,9 @@ import Navigation from '@/components/Navigation.vue'
 export default Vue.extend({
   components: {
     Navigation
+  },
+  created() {
+    this.$vuetify.theme.dark = true
   },
   data() {
     return {

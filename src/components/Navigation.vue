@@ -66,9 +66,6 @@ export default Vue.extend({
   props: {
     source: String
   },
-  created() {
-    this.$vuetify.theme.dark = true
-  },
   data() {
     return {
       user: [],

@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Login from './views/Login.vue'
 import About from './views/About.vue'
 import Dashboard from './views/Dashboard.vue'
+import Default from './layouts/Default.vue'
 
 Vue.use(Router)
 
@@ -35,7 +36,8 @@ let router = new Router({
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: About,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/',
@@ -57,4 +59,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
 export default router

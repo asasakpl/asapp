@@ -80,7 +80,11 @@ export default Vue.extend({
       let password = this.password
       this.$store
         .dispatch('login', { email, password })
-        .then(() => {
+        .then(res => {
+          if (res !== 'admin') {
+            this.$router.push('/about')
+            return
+          }
           this.$router.push('/')
         })
         .catch(err => console.log(err))

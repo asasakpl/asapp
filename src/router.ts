@@ -46,12 +46,12 @@ let router = new Router({
     },
     {
       path: '/',
-      name: 'dashboardLayout',
+      name: '',
       component: DashboardLayout,
       beforeEnter: ifAuthenticated,
       children: [
         {
-          path: '/dashboard',
+          path: '',
           name: 'dashboard',
           component: Dashboard,
           beforeEnter: ifAuthenticated
@@ -59,17 +59,20 @@ let router = new Router({
         {
           path: '/orders',
           name: 'orders',
-          component: Orders
+          component: Orders,
+          beforeEnter: ifAuthenticated
         },
         {
           path: '/users',
           name: 'users',
-          component: Users
+          component: Users,
+          beforeEnter: ifAuthenticated
         },
         {
           path: '/settings',
           name: 'settings',
-          component: Settings
+          component: Settings,
+          beforeEnter: ifAuthenticated
         }
       ]
     }

@@ -74,6 +74,9 @@ export default Vue.extend({
       password: ''
     }
   },
+  created() {
+    this.$vuetify.theme.dark = false
+  },
   methods: {
     login: async function() {
       let email = this.email

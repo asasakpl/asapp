@@ -44,7 +44,7 @@
             <v-list-item-title>Settings</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link v-on:click="login()">
           <v-list-item-icon>
             <v-icon>mdi-logout-variant</v-icon>
           </v-list-item-icon>
@@ -63,7 +63,6 @@ import Vue from 'vue'
 import axios from 'axios'
 
 export default Vue.extend({
-  name: 'DashboardLayout',
   props: {
     source: String
   },
@@ -75,7 +74,7 @@ export default Vue.extend({
       user: [],
       drawer: true,
       items: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard', to: 'dashboard' },
+        { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/' },
         { title: 'Orders', icon: 'mdi-truck', to: 'orders' },
         { title: 'Users', icon: 'mdi-account-group', to: 'users' }
       ],
@@ -88,6 +87,10 @@ export default Vue.extend({
     }
   },
   methods: {
+    login() {
+      this.$store.dispatch('logout')
+      this.$router.push('/login')
+    },
     async getUserdata() {
       let id = localStorage.getItem('m_user')
       await axios.get(`http://localhost:3000/v1/users/${id}`).then(res => {

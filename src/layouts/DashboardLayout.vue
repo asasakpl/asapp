@@ -17,7 +17,6 @@ import axios from 'axios'
 import Navigation from '@/components/Navigation.vue'
 
 export default Vue.extend({
-  name: 'DashboardLayout',
   components: {
     Navigation
   },

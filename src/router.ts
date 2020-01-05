@@ -5,6 +5,8 @@ import Login from './views/Login.vue'
 import About from './views/About.vue'
 import Dashboard from './views/Dashboard.vue'
 import Default from './layouts/Default.vue'
+import Settings from './views/Settings.vue'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 Vue.use(Router)
 
@@ -41,9 +43,22 @@ let router = new Router({
     },
     {
       path: '/',
-      name: 'dashboard',
-      component: Dashboard,
-      beforeEnter: ifAuthenticated
+      name: 'dashboardLayout',
+      component: DashboardLayout,
+      beforeEnter: ifAuthenticated,
+      children: [
+        {
+          path: '/dashboard',
+          name: 'dashboard',
+          component: Dashboard,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/settings',
+          name: 'settings',
+          component: Settings
+        }
+      ]
     }
   ]
 })

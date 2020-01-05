@@ -44,6 +44,7 @@
             <v-list-item-title>Settings</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
         <v-list-item link v-on:click="login()">
           <v-list-item-icon>
             <v-icon>mdi-logout-variant</v-icon>
@@ -51,6 +52,18 @@
 
           <v-list-item-content>
             <v-list-item-title>Log out</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-icon>
+            <v-icon>mdi-ev-station</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>
+              v{{ $store.getters.appVersion }}</v-list-item-title
+            >
           </v-list-item-content>
         </v-list-item>
       </v-list>

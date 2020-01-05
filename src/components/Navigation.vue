@@ -93,7 +93,6 @@ export default Vue.extend({
       await axios.get(`http://localhost:3000/v1/users/${id}`).then(res => {
         localStorage.setItem('token', res.config.headers.auth)
         this.user = res.data.data.user
-        this.$store.state.user = this.user
         return
       })
     }

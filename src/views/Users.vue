@@ -8,6 +8,7 @@
           v-model="search"
           append-icon="search"
           label="Search"
+          color="white"
           single-line
           hide-details
         ></v-text-field>
@@ -61,9 +62,9 @@ export default Vue.extend({
     }
   },
   methods: {
-    async getUserdata() {
+    getUserdata() {
       let id = localStorage.getItem('m_user')
-      await axios.get(`http://localhost:3000/v1/users`).then(res => {
+      axios.get(`http://localhost:3000/v1/users`).then(res => {
         localStorage.setItem('token', res.config.headers.auth)
         this.users = res.data.data.users
         return

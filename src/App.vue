@@ -23,6 +23,7 @@
 <style>
 .drag {
   -webkit-app-region: drag;
+  overflow: hidden;
 }
 
 .no-drag {

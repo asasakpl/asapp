@@ -1,3 +1,77 @@
 <template>
-  <h1>Users</h1>
+  <v-container>
+    <v-card class="mx-auto px-auto" max-width="90%" tile>
+      <v-card-title>
+        Users list
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="search"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        v-model="selected"
+        :headers="headers"
+        :items="users"
+        sort-by="id"
+        item-key="id"
+        :search="search"
+        class="elevation-1"
+        :page.sync="page"
+        hide-default-footer
+        :items-per-page="16"
+        @page-count="pageCount = $event"
+      >
+      </v-data-table>
+    </v-card>
+    <div class="text-center pt-2">
+      <v-pagination v-model="page" :length="pageCount"></v-pagination>
+    </div>
+  </v-container>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import axios from 'axios'
+
+export default Vue.extend({
+  data() {
+    return {
+      search: '',
+      page: 1,
+      pageCount: 0,
+      users: [],
+      singleSelect: true,
+      selected: [],
+      headers: [
+        {
+          text: 'id',
+          align: 'left',
+          sortable: true,
+          value: 'id'
+        },
+        { text: 'First name', value: 'firstName' },
+        { text: 'Last name', value: 'lastName' },
+        { text: 'Email', value: 'email' },
+        { text: 'Permission', value: 'permission' }
+      ]
+    }
+  },
+  methods: {
+    async getUserdata() {
+      let id = localStorage.getItem('m_user')
+      await axios.get(`http://localhost:3000/v1/users`).then(res => {
+        localStorage.setItem('token', res.config.headers.auth)
+        this.users = res.data.data.users
+        return
+      })
+    }
+  },
+  beforeMount() {
+    this.getUserdata()
+  }
+})
+</script>

@@ -61,8 +61,8 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>
-              v{{ $store.getters.appVersion }}</v-list-item-title
+            <v-list-item-title
+              >v{{ $store.getters.appVersion }}</v-list-item-title
             >
           </v-list-item-content>
         </v-list-item>
@@ -86,7 +86,8 @@ export default Vue.extend({
       items: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/' },
         { title: 'Orders', icon: 'mdi-truck', to: 'orders' },
-        { title: 'Users', icon: 'mdi-account-group', to: 'users' }
+        { title: 'Users', icon: 'mdi-account-group', to: 'users' },
+        { title: 'Products', icon: 'mdi-folder-home', to: 'products' }
       ],
       color: 'red',
       colors: ['primary', 'blue', 'success', 'red', 'teal'],

@@ -9,6 +9,7 @@ import Dashboard from '@/views/Dashboard.vue'
 import Settings from '@/views/Settings.vue'
 import Users from '@/views/Users.vue'
 import Orders from '@/views/Orders.vue'
+import Product from '@/views/Product.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 Vue.use(Router)
@@ -66,6 +67,12 @@ let router = new Router({
           path: '/users',
           name: 'users',
           component: Users,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/products',
+          name: 'products',
+          component: Product,
           beforeEnter: ifAuthenticated
         },
         {

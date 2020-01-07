@@ -16,7 +16,7 @@
       <v-data-table
         v-model="selected"
         :headers="headers"
-        :items="products"
+        :items="orders"
         sort-by="id"
         item-key="id"
         :search="search"
@@ -43,7 +43,7 @@ export default Vue.extend({
     return {
       page: 1,
       pageCount: 5,
-      products: [],
+      orders: [],
       search: '',
       singleSelect: true,
       selected: [],
@@ -55,7 +55,7 @@ export default Vue.extend({
           value: 'id'
         },
         { text: 'Status', value: 'status' },
-        { text: 'Ilośc produktów', value: 'products.length' },
+        { text: 'Ilośc produktów', value: 'orders.length' },
         { text: 'Imie', value: 'user.firstName' },
         { text: 'Nazwisko', value: 'user.lastName' },
         { text: 'Email', value: 'user.email' }
@@ -63,17 +63,17 @@ export default Vue.extend({
     }
   },
   methods: {
-    getProducts() {
+    getOrders() {
       let id = localStorage.getItem('m_user')
       axios.get(`http://localhost:3000/v1/orders`).then(res => {
         localStorage.setItem('token', res.config.headers.auth)
-        this.products = res.data.data.orders
+        this.orders = res.data.data.orders
         return
       })
     }
   },
   created() {
-    this.getProducts()
+    this.getOrders()
   }
 })
 </script>

@@ -1,37 +1,37 @@
 <template>
-  <v-item-group>
-    <v-container>
-      <v-card class="mx-auto px-auto" max-width="90%" tile>
-        <v-card-title
-          >Produkty <v-spacer /><v-btn disabled
-            >Nowy Produkt</v-btn
-          ></v-card-title
-        >
-        <v-row
-          class="mx-auto px-auto"
-          :items="products"
-          item-key="id"
-          :page.sync="page"
-          :items-per-page="2"
-        >
-          <v-col v-for="product in products" :key="product.id" cols="12" sm="3">
-            <v-item>
-              <v-card>
-                <v-img :src="product.pictures[0].url"></v-img>
-                <v-card-title>{{ product.name }}</v-card-title>
-                <v-card-subtitle>{{ product.name }}</v-card-subtitle>
-                <v-card-actions class="px-4">
-                  Cena: {{ product.price }} zł
-                  <v-spacer></v-spacer>
-                  <v-btn class="mb-1" disabled>Edit</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-item>
-          </v-col>
-        </v-row>
-      </v-card>
-    </v-container>
-  </v-item-group>
+  <v-container>
+    <v-card class="mx-auto px-auto" max-width="90%" tile>
+      <v-card-title>
+        Lista produktów
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="search"
+          label="Search"
+          color="white"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        v-model="selected"
+        :headers="headers"
+        :items="products"
+        sort-by="id"
+        item-key="id"
+        :search="search"
+        class="elevation-1"
+        :page.sync="page"
+        hide-default-footer
+        :items-per-page="16"
+        @page-count="pageCount = $event"
+      >
+      </v-data-table>
+    </v-card>
+    <div class="text-center pt-2">
+      <v-pagination v-model="page" :length="pageCount"></v-pagination>
+    </div>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -41,9 +41,24 @@ import axios from 'axios'
 export default Vue.extend({
   data() {
     return {
-      page: 0,
+      page: 1,
       pageCount: 5,
-      products: []
+      products: [],
+      search: '',
+      singleSelect: true,
+      selected: [],
+      headers: [
+        {
+          text: 'id',
+          align: 'left',
+          sortable: true,
+          value: 'id'
+        },
+        { text: 'Nazwa', value: 'name' },
+        { text: 'Typ', value: 'type' },
+        { text: 'Tag', value: 'tag' },
+        { text: 'Kategoria', value: 'category' }
+      ]
     }
   },
   methods: {

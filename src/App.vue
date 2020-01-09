@@ -1,9 +1,6 @@
 <template>
   <v-app>
-    <v-system-bar app lights-out height="28" class="drag">
-      <span>
-        <v-img src="./assets/m35logo.png" class="mr-3" width="80" height="15" />
-      </span>
+    <v-system-bar color="red" lights-out height="28" class="drag">
       <v-spacer></v-spacer>
       <v-btn tile icon class="no-drag" v-on:click="minimize()">
         <v-icon>mdi-minus</v-icon>
@@ -61,7 +58,7 @@ export default Vue.extend({
       }
     },
     close() {
-      const window = remote.BrowserWindow.getFocusedWindow()
+      const window = remote.getCurrentWindow()
       window.close()
     }
   }

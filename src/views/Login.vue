@@ -42,7 +42,7 @@
         </v-container>
       </v-content>
 
-      <v-footer justify-center class="grey--text" id="no-back">
+      <v-footer justify-center class="grey--text pb-10" id="no-back">
         <div class="flex-grow-1"></div>
         <div>asapp version {{ $store.getters.appVersion }}</div>
       </v-footer>
@@ -53,10 +53,12 @@
 <style scoped>
 .back {
   background-image: url(../assets/login_background.png);
-  background-size: cover;
+  background-size: fixed;
+  overflow: hidden;
 }
 #no-back {
   background: none;
+  overflow: hidden;
 }
 .space {
   height: 400px;

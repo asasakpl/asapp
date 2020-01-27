@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-system-bar color="red" lights-out height="28" class="drag">
+    <v-system-bar lights-out height="28" class="drag">
       <v-spacer></v-spacer>
       <v-btn tile icon class="no-drag" v-on:click="minimize()">
         <v-icon>mdi-minus</v-icon>
@@ -8,7 +8,7 @@
       <v-btn tile icon class="no-drag " v-on:click="maximize()">
         <v-icon>mdi-crop-square</v-icon>
       </v-btn>
-      <v-btn tile icon class="no-drag" v-on:click="minimize()">
+      <v-btn tile icon class="no-drag" v-on:click="close()">
         <v-icon>close</v-icon>
       </v-btn>
     </v-system-bar>

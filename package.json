@@ -5,12 +5,11 @@
   "description": "Production app for asasak.pl",
   "author": "asasakpl",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service electron:serve",
     "build": "vue-cli-service build",
     "test": "vue-cli-service test:unit",
     "electron:build": "vue-cli-service electron:build -p always --win",
     "electron:generate-icons": "electron-icon-builder --input=./public/icon.png --output=build --flatten",
-    "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },

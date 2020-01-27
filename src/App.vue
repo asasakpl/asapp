@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-system-bar lights-out height="28" class="drag">
+      Moje35metrow
       <v-spacer></v-spacer>
       <v-btn tile icon class="no-drag" v-on:click="minimize()">
         <v-icon>mdi-minus</v-icon>

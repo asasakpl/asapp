@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <span>test</span>
-  </div>
+  <v-container>
+    <v-card class="mx-auto px-auto" max-width="90%" tile>
+      <v-card-title>Dashboard</v-card-title>
+    </v-card>
+  </v-container>
 </template>
 
 <script lang="ts">

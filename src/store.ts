@@ -36,7 +36,7 @@ export default new Vuex.Store({
 
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/v1/auth/login',
+        url: 'http://localhost:3000/v1/auth/su/login',
         data: { email: user.email, password: user.password }
       })
         .then(resp => {

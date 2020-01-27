@@ -86,10 +86,6 @@ export default Vue.extend({
       this.$store
         .dispatch('login', { email, password })
         .then(res => {
-          if (res !== 'admin') {
-            this.$router.push('/about')
-            return
-          }
           this.$router.push('/')
         })
         .catch(err => console.log(err))

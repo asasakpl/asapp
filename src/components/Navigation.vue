@@ -23,19 +23,49 @@
 
         <v-divider></v-divider>
 
-        <v-list-item v-for="item in items" :key="item.title" link :to="item.to">
+        <v-list-item to="/">
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>Dashboard</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item to="orders" disabled>
+          <v-list-item-icon>
+            <v-icon>mdi-truck</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Zamówienia</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item to="users" disabled>
+          <v-list-item-icon>
+            <v-icon>mdi-account-group</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Użytkownicy</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item to="products" disabled>
+          <v-list-item-icon>
+            <v-icon>mdi-folder-home</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Produkty</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
       <v-spacer></v-spacer>
       <v-list dense nav>
-        <v-list-item link to="/settings">
+        <v-list-item link to="/settings" disabled>
           <v-list-item-icon>
             <v-icon>mdi-settings</v-icon>
           </v-list-item-icon>
@@ -84,12 +114,24 @@ export default Vue.extend({
       user: [],
       drawer: true,
       items: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/' },
+        {
+          title: 'Dashboard',
+          icon: 'mdi-view-dashboard',
+          to: '/'
+        },
         { title: 'Orders', icon: 'mdi-truck', to: 'orders' },
-        { title: 'Users', icon: 'mdi-account-group', to: 'users' },
-        { title: 'Products', icon: 'mdi-folder-home', to: 'products' }
+        {
+          title: 'Users',
+          icon: 'mdi-account-group',
+          to: 'users'
+        },
+        {
+          title: 'Products',
+          icon: 'mdi-folder-home',
+          to: 'products'
+        }
       ],
-      color: 'red',
+      color: '#45d66b',
       colors: ['primary', 'blue', 'success', 'red', 'teal'],
       right: false,
       miniVariant: false,

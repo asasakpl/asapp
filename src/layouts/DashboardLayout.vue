@@ -1,11 +1,13 @@
 <template>
-  <v-container>
-    <v-row justify="space-around">
+  <v-container fluid>
+    <v-row>
       <Navigation />
       <router-view></router-view>
     </v-row>
   </v-container>
 </template>
+
+<style scoped></style>
 
 <script lang="ts">
 import Vue from 'vue'

@@ -1,7 +1,62 @@
 <template>
   <v-container>
-    <v-card class="mx-auto px-auto" max-width="90%" tile>
-      <v-card-title>Dashboard</v-card-title>
+    <v-card class="mx-auto px-auto pb-5" max-width="90%" tile>
+      <v-card-title>Statystyki</v-card-title>
+      <v-col cols="12">
+        <v-row>
+          <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
+            <div class="d-flex flex-no-wrap justify-space-between">
+              <v-card-text>
+                <div>Nowi użytkownicy w tym miesiącu</div>
+                <p class="display-1 ">
+                  {{ this.users }}
+                </p>
+              </v-card-text>
+
+              <v-icon size="50">mdi-account-group</v-icon>
+            </div>
+          </v-card>
+
+          <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
+            <div class="d-flex flex-no-wrap justify-space-between">
+              <v-card-text>
+                <div>Liczba zamówień w tym miesiacu</div>
+                <p class="display-1">
+                  {{ this.orders }}
+                </p>
+              </v-card-text>
+
+              <v-icon size="50">mdi-truck</v-icon>
+            </div>
+          </v-card>
+
+          <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
+            <div class="d-flex flex-no-wrap justify-space-between">
+              <v-card-text>
+                <div>Liczba produktów w sklepie</div>
+                <p class="display-1">
+                  {{ this.products }}
+                </p>
+              </v-card-text>
+
+              <v-icon size="50">mdi-folder-home</v-icon>
+            </div>
+          </v-card>
+
+          <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
+            <div class="d-flex flex-no-wrap justify-space-between">
+              <v-card-text>
+                <div>Liczba sprzedawców</div>
+                <p class="display-1">
+                  {{ this.sellers }}
+                </p>
+              </v-card-text>
+
+              <v-icon size="50">mdi-account-group</v-icon>
+            </div>
+          </v-card>
+        </v-row>
+      </v-col>
     </v-card>
   </v-container>
 </template>
@@ -17,14 +72,57 @@ export default Vue.extend({
   },
   data() {
     return {
+      products: 0,
+      sellers: 0,
+      orders: 0,
+      users: 0,
       name: localStorage.getItem('m_name')
     }
   },
   methods: {
-    async getUserdata() {}
+    async getData() {
+      let date = new Date()
+      date.setDate(date.getDate() - 30)
+
+      await axios.get('http://localhost:3000/v1/users').then(res => {
+        let users = res.data.data.users
+        users = users.map(user => user.createdAt)
+
+        for (let x in users) {
+          let usersDate = new Date(users[x])
+          let ddd = 0
+          if (date < usersDate) {
+            ddd++
+          }
+          this.users = this.users + ddd
+        }
+      })
+
+      await axios.get('http://localhost:3000/v1/products').then(res => {
+        this.products = res.data.data.products.length
+      })
+
+      await axios.get('http://localhost:3000/v1/orders').then(res => {
+        let orders = res.data.data.orders
+        orders = orders.map(order => order.createdAt)
+
+        for (let x in orders) {
+          let orderDate = new Date(orders[x])
+          let ddd = 0
+          if (date < orderDate) {
+            ddd++
+          }
+          this.orders = this.orders + ddd
+        }
+      })
+
+      await axios.get('http://localhost:3000/v1/owners').then(res => {
+        this.sellers = res.data.data.owners.length
+      })
+    }
   },
   beforeMount() {
-    this.getUserdata()
+    this.getData()
   }
 })
 </script>

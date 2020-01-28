@@ -25,7 +25,7 @@
 
         <v-list-item to="/">
           <v-list-item-icon>
-            <v-icon>mdi-view-dashboard</v-icon>
+            <v-icon>mdi-monitor-dashboard</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>

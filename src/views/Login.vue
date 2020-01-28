@@ -17,19 +17,27 @@
                         v-model="email"
                         label="Email"
                         name="email"
+                        :error-messages="
+                          notAuthenticated ? ['Wrong password or email'] : []
+                        "
                         prepend-inner-icon="mail"
                         type="text"
+                        :rules="[rules.required]"
                       ></v-text-field>
 
                       <v-text-field
                         dark
                         v-model="password"
                         outlined
+                        :error-messages="
+                          notAuthenticated ? ['Wrong password or email'] : []
+                        "
                         id="password"
                         label="Password"
                         name="password"
                         prepend-inner-icon="lock"
                         type="password"
+                        :rules="[rules.required]"
                       ></v-text-field>
 
                       <v-btn type="sumbit">Zaloguj</v-btn>
@@ -73,7 +81,11 @@ export default Vue.extend({
     image: '../assets/login_background'
     return {
       email: '',
-      password: ''
+      password: '',
+      notAuthenticated: false,
+      rules: {
+        required: value => !!value || 'Required.'
+      }
     }
   },
   created() {
@@ -88,7 +100,9 @@ export default Vue.extend({
         .then(res => {
           this.$router.push('/')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          this.notAuthenticated = true
+        })
     }
   }
 })

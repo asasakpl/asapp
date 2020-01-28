@@ -9,6 +9,7 @@ import Dashboard from '@/views/Dashboard.vue'
 import Settings from '@/views/Settings.vue'
 import Users from '@/views/Users.vue'
 import Orders from '@/views/Orders.vue'
+import Sellers from '@/views/Sellers.vue'
 import Product from '@/views/Product.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
@@ -73,6 +74,12 @@ let router = new Router({
           path: '/products',
           name: 'products',
           component: Product,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/sellers',
+          name: 'sellers',
+          component: Sellers,
           beforeEnter: ifAuthenticated
         },
         {

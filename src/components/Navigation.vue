@@ -15,7 +15,7 @@
             <v-icon large>mdi-account</v-icon>
           </v-avatar>
 
-          <v-list-item-content>
+          <v-list-item-content class="ml-3">
             <v-list-item-title>{{ name }}</v-list-item-title>
             <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
           </v-list-item-content>
@@ -62,16 +62,26 @@
             <v-list-item-title>Produkty</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item to="sellers" disabled>
+          <v-list-item-icon>
+            <v-icon>mdi-account-cash</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Sprzedawcy</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <v-spacer></v-spacer>
       <v-list dense nav>
-        <v-list-item link to="/settings" disabled>
+        <v-list-item link to="/settings">
           <v-list-item-icon>
             <v-icon>mdi-settings</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Settings</v-list-item-title>
+            <v-list-item-title>Ustawienia</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -81,7 +91,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Log out</v-list-item-title>
+            <v-list-item-title>Wyloguj się</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-system-bar lights-out height="28" class="drag">
-      Moje35metrow
+      <div class="app-name">Moje35metrow.pl</div>
       <v-spacer></v-spacer>
       <v-btn tile icon class="no-drag" v-on:click="minimize()">
         <v-icon>mdi-minus</v-icon>
@@ -19,6 +19,10 @@
   </v-app>
 </template>
 <style>
+.app-name {
+  font-weight: 600;
+}
+
 .drag {
   -webkit-app-region: drag;
   overflow: hidden;

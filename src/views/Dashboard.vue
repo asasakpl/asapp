@@ -17,19 +17,11 @@ export default Vue.extend({
   },
   data() {
     return {
-      user: null
+      name: localStorage.getItem('m_name')
     }
   },
   methods: {
-    async getUserdata() {
-      let id = localStorage.getItem('m_user')
-      await axios.get(`http://localhost:3000/v1/users/${id}`).then(res => {
-        localStorage.setItem('token', res.config.headers.auth)
-        this.user = res.data.data.user
-        this.$store.state.user = this.user
-        return
-      })
-    }
+    async getUserdata() {}
   },
   beforeMount() {
     this.getUserdata()

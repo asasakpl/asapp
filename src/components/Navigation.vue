@@ -16,8 +16,8 @@
           </v-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ user.firstName }}</v-list-item-title>
-            <v-list-item-subtitle>{{ user.lastName }}</v-list-item-subtitle>
+            <v-list-item-title>{{ name }}</v-list-item-title>
+            <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -111,7 +111,8 @@ export default Vue.extend({
   },
   data() {
     return {
-      user: [],
+      name: localStorage.getItem('m_name'),
+      email: localStorage.getItem('m_email'),
       drawer: true,
       items: [
         {
@@ -144,14 +145,7 @@ export default Vue.extend({
       this.$store.dispatch('logout')
       this.$router.push('/login')
     },
-    async getUserdata() {
-      let id = localStorage.getItem('m_user')
-      await axios.get(`http://localhost:3000/v1/users/${id}`).then(res => {
-        localStorage.setItem('token', res.config.headers.auth)
-        this.user = res.data.data.user
-        return
-      })
-    }
+    async getUserdata() {}
   },
   beforeMount() {
     this.getUserdata()

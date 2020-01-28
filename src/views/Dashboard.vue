@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-card class="mx-auto px-auto pb-5" max-width="90%" tile>
-      <v-card-title>Statystyki</v-card-title>
+    <v-card class="mx-auto px-auto pb-5 round" max-width="90%" tile>
+      <v-card-title class="ml-10">Statystyki</v-card-title>
       <v-col cols="12">
         <v-row>
           <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
@@ -60,6 +60,12 @@
     </v-card>
   </v-container>
 </template>
+
+<style scoped>
+.round {
+  border-radius: 14px;
+}
+</style>
 
 <script lang="ts">
 import Vue from 'vue'

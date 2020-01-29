@@ -72,6 +72,16 @@
             <v-list-item-title>Sprzedawcy</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item to="mail" disabled>
+          <v-list-item-icon>
+            <v-icon>mdi-email-send</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Mail</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <v-spacer></v-spacer>
       <v-list dense nav>

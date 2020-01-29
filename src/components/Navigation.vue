@@ -101,9 +101,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title
-              >v{{ $store.getters.appVersion }}</v-list-item-title
-            >
+            <v-list-item-title>v{{ $store.getters.appVersion }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -112,8 +110,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
+import Vue from "vue";
+import axios from "axios";
 
 export default Vue.extend({
   props: {
@@ -121,44 +119,44 @@ export default Vue.extend({
   },
   data() {
     return {
-      name: localStorage.getItem('m_name'),
-      email: localStorage.getItem('m_email'),
+      name: localStorage.getItem("m_name"),
+      email: localStorage.getItem("m_email"),
       drawer: true,
       items: [
         {
-          title: 'Dashboard',
-          icon: 'mdi-view-dashboard',
-          to: '/'
+          title: "Dashboard",
+          icon: "mdi-view-dashboard",
+          to: "/"
         },
-        { title: 'Orders', icon: 'mdi-truck', to: 'orders' },
+        { title: "Orders", icon: "mdi-truck", to: "orders" },
         {
-          title: 'Users',
-          icon: 'mdi-account-group',
-          to: 'users'
+          title: "Users",
+          icon: "mdi-account-group",
+          to: "users"
         },
         {
-          title: 'Products',
-          icon: 'mdi-folder-home',
-          to: 'products'
+          title: "Products",
+          icon: "mdi-folder-home",
+          to: "products"
         }
       ],
-      color: '#45d66b',
-      colors: ['primary', 'blue', 'success', 'red', 'teal'],
+      color: "#45d66b",
+      colors: ["primary", "blue", "success", "red", "teal"],
       right: false,
       miniVariant: false,
       expandOnHover: true,
       background: false
-    }
+    };
   },
   methods: {
     login() {
-      this.$store.dispatch('logout')
-      this.$router.push('/login')
+      this.$store.dispatch("logout");
+      this.$router.push("/login");
     },
     async getUserdata() {}
   },
   beforeMount() {
-    this.getUserdata()
+    this.getUserdata();
   }
-})
+});
 </script>

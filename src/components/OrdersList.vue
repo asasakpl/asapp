@@ -104,7 +104,7 @@ export default Vue.extend({
   mounted() {
     window.setInterval(() => {
       this.getOrders()
-    }, 90000)
+    }, 900000)
   }
 })
 </script>

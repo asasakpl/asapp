@@ -13,7 +13,7 @@
     "noImplicitAny": false,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["webpack-env", "vuetify", "jest"],
+    "types": ["webpack-env", "vuetify", "jest", "webpack", "webpack-env"],
     "paths": {
       "@/*": ["src/*"]
     },

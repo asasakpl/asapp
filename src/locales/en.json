@@ -1,0 +1,40 @@
+{
+  "message": "hello i18n !!",
+  "navigation": {
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "users": "Users",
+    "products": "Products",
+    "sellers": "Sellers",
+    "mail": "Mail",
+    "settings": "Settings",
+    "log_out": "Log out"
+  },
+  "dashboard": {
+    "statistics": {
+      "title": "Statistics",
+      "users_card": "New users this month",
+      "orders_card": "Number of orders this month",
+      "products_card": "Number of products in shop",
+      "sellers_card": "Number of sellers"
+    }
+  },
+  "orders_table": {
+    "id": "ID",
+    "status": "Payment status",
+    "products": "Products",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "Email",
+    "cancel": "Canceled?"
+  },
+  "users": {},
+  "products": {},
+  "sellers": {},
+  "mail": {},
+  "settings": {
+    "title": "Settings",
+    "theme": "App theme",
+    "locale": "App language"
+  }
+}

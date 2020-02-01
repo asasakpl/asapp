@@ -29,7 +29,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
+            <v-list-item-title>{{
+              $t('navigation.dashboard')
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -39,7 +41,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Zamówienia</v-list-item-title>
+            <v-list-item-title>{{ $t('navigation.orders') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -49,7 +51,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Użytkownicy</v-list-item-title>
+            <v-list-item-title>{{ $t('navigation.users') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -59,7 +61,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Produkty</v-list-item-title>
+            <v-list-item-title>{{
+              $t('navigation.products')
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -69,7 +73,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Sprzedawcy</v-list-item-title>
+            <v-list-item-title>{{
+              $t('navigation.sellers')
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -79,7 +85,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Mail</v-list-item-title>
+            <v-list-item-title>{{ $t('navigation.mail') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -91,7 +97,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Ustawienia</v-list-item-title>
+            <v-list-item-title>{{
+              $t('navigation.settings')
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -101,7 +109,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Wyloguj się</v-list-item-title>
+            <v-list-item-title>{{
+              $t('navigation.log_out')
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 

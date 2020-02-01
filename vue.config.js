@@ -17,8 +17,16 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       builderOptions: {
-        publish: ['github']
+        publish: [
+          'github'
+        ]
       }
+    },
+    i18n: {
+      locale: 'en',
+      fallbackLocale: 'en',
+      localeDir: 'locales',
+      enableInSFC: true
     }
   }
 }

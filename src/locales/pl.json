@@ -1,0 +1,40 @@
+{
+  "message": "ddd",
+  "navigation": {
+    "dashboard": "Panel",
+    "orders": "Zamówienia",
+    "users": "Użytkownicy",
+    "products": "Produkty",
+    "sellers": "Sprzedający",
+    "mail": "Poczta ",
+    "settings": "Ustawiania",
+    "log_out": "Wyloguj się"
+  },
+  "dashboard": {
+    "statistics": {
+      "title": "Statystyki",
+      "users_card": "Nowi użytkownicy w tym miesiącu",
+      "orders_card": "Liczba zamówień w tym miesiącu",
+      "products_card": "Liczba produktów w sklepie",
+      "sellers_card": "Liczba sprzedawców"
+    }
+  },
+  "orders_table": {
+    "id": "ID",
+    "status": "Status płatności",
+    "products": "Produkty",
+    "name": "Imie",
+    "surname": "Nazwisko",
+    "email": "Email",
+    "cancel": "Anulowane"
+  },
+  "users": {},
+  "products": {},
+  "sellers": {},
+  "mail": {},
+  "settings": {
+    "title": "Ustawienia",
+    "theme": "Motyw aplikacji",
+    "locale": "Język aplikacji"
+  }
+}

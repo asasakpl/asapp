@@ -26,6 +26,9 @@
         :items-per-page="15"
         @page-count="pageCount = $event"
       >
+        <template v-for="header in headers" v-slot:[`header.${header.value}`]>
+          {{ $t(`orders_table.${header.text}`) }}
+        </template>
       </v-data-table>
     </v-card>
     <div class="text-center pt-2">
@@ -60,12 +63,12 @@ export default Vue.extend({
           sortable: true,
           value: 'id'
         },
-        { text: 'Status', value: 'paymentStatus' },
-        { text: 'Ilośc produktów', value: 'products.length' },
-        { text: 'Imie', value: 'user.firstName' },
-        { text: 'Nazwisko', value: 'user.lastName' },
-        { text: 'Email', value: 'user.email' },
-        { text: 'Anulowano', value: 'removed' }
+        { text: 'status', value: 'paymentStatus' },
+        { text: `products`, value: 'products.length' },
+        { text: 'name', value: 'user.firstName' },
+        { text: 'surname', value: 'user.lastName' },
+        { text: 'email', value: 'user.email' },
+        { text: 'cancel', value: 'removed' }
       ]
     }
   },

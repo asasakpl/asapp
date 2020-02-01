@@ -18,9 +18,7 @@ export default Vue.extend({
   components: {
     Navigation
   },
-  created() {
-    this.$vuetify.theme.dark = true
-  },
+  created() {},
   data() {
     return {
       user: []

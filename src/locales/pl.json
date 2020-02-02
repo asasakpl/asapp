@@ -49,6 +49,9 @@
     "products": {
       "title": "Zamówione produkty"
     },
+    "delivery": {
+      "title": "Dostawa"
+    },
     "company": {
       "title": "Firma",
       "name": "Nazwa firmy",

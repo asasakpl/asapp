@@ -33,7 +33,11 @@
             </v-card>
 
             <v-card class="mx-auto pr-5" color="primary" width="65%">
-              <v-card-title></v-card-title>
+              <v-card-title class="subtitle-1">
+                <div class="headline">
+                  {{ $t('order.delivery.title') }}
+                </div>
+              </v-card-title>
             </v-card>
           </v-row>
         </v-col>

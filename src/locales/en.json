@@ -49,6 +49,9 @@
     "products": {
       "title": "Ordered Products"
     },
+    "delivery": {
+      "title": "Delivery"
+    },
     "company": {
       "title": "Company",
       "name": "Company name",

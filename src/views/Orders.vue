@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <OrdersList> </OrdersList>
+    <OrdersList></OrdersList>
   </v-container>
 </template>
 

@@ -16,8 +16,8 @@
                     label="Email"
                     name="email"
                     :error-messages="
-                          notAuthenticated ? ['Wrong password or email'] : []
-                        "
+                      notAuthenticated ? ['Wrong password or email'] : []
+                    "
                     prepend-inner-icon="mail"
                     type="text"
                     :rules="[rules.required]"
@@ -28,8 +28,8 @@
                     v-model="password"
                     outlined
                     :error-messages="
-                          notAuthenticated ? ['Wrong password or email'] : []
-                        "
+                      notAuthenticated ? ['Wrong password or email'] : []
+                    "
                     id="password"
                     label="Password"
                     name="password"
@@ -38,7 +38,7 @@
                     :rules="[rules.required]"
                   ></v-text-field>
 
-                  <v-btn type="sumbit">Zaloguj</v-btn>
+                  <v-btn type="sumbit">Log in</v-btn>
                 </v-col>
               </v-row>
             </v-form>
@@ -68,36 +68,33 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue'
 
 export default Vue.extend({
   data() {
-    image: "../assets/login_background";
+    image: '../assets/login_background'
     return {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       notAuthenticated: false,
       rules: {
-        required: value => !!value || "Required."
+        required: value => !!value || 'Required.'
       }
-    };
-  },
-  created() {
-    this.$vuetify.theme.dark = false;
+    }
   },
   methods: {
     login: async function() {
-      let email = this.email;
-      let password = this.password;
+      let email = this.email
+      let password = this.password
       this.$store
-        .dispatch("login", { email, password })
+        .dispatch('login', { email, password })
         .then(res => {
-          this.$router.push("/");
+          this.$router.push('/')
         })
         .catch(err => {
-          this.notAuthenticated = true;
-        });
+          this.notAuthenticated = true
+        })
     }
   }
-});
+})
 </script>

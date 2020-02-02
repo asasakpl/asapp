@@ -20,6 +20,7 @@
     }
   },
   "orders_table": {
+    "title": "Lista zamówień",
     "id": "ID",
     "status": "Status płatności",
     "products": "Produkty",
@@ -35,6 +36,10 @@
   "settings": {
     "title": "Ustawienia",
     "theme": "Motyw aplikacji",
-    "locale": "Język aplikacji"
+    "locale": "Język aplikacji",
+    "themes": {
+      "light": "jasny",
+      "dark": "ciemny"
+    }
   }
 }

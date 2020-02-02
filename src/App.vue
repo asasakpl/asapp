@@ -34,38 +34,38 @@
 </style>
 
 <script>
-import Vue from "vue";
-import axios from "axios";
-import { remote } from "electron";
+import Vue from 'vue'
+import axios from 'axios'
+import { remote } from 'electron'
 
 export default Vue.extend({
   created: function() {
     axios.interceptors.response.use(undefined, function(err) {
       return new Promise(function(resolve, reject) {
         if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-          this.$store.dispatch(logout);
+          this.$store.dispatch(logout)
         }
-        throw err;
-      });
-    });
+        throw err
+      })
+    })
   },
   methods: {
     minimize() {
-      const window = remote.BrowserWindow.getFocusedWindow();
-      window.minimize();
+      const window = remote.BrowserWindow.getFocusedWindow()
+      window.minimize()
     },
     maximize() {
-      const window = remote.BrowserWindow.getFocusedWindow();
+      const window = remote.BrowserWindow.getFocusedWindow()
       if (window.isMaximized()) {
-        window.unmaximize();
+        window.unmaximize()
       } else {
-        window.maximize();
+        window.maximize()
       }
     },
     close() {
-      const window = remote.getCurrentWindow();
-      window.close();
+      const window = remote.getCurrentWindow()
+      window.close()
     }
   }
-});
+})
 </script>

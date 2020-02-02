@@ -18,10 +18,18 @@ export default Vue.extend({
   components: {
     Navigation
   },
-  created() {},
   data() {
     return {
       user: []
+    }
+  },
+  beforeMount() {
+    this.$i18n.locale = localStorage.getItem('i18n')
+
+    if (localStorage.getItem('theme') == 'dark') {
+      this.$vuetify.theme.dark = true
+    } else {
+      this.$vuetify.theme.dark = false
     }
   }
 })

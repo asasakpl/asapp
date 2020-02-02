@@ -2,7 +2,7 @@
   <v-container>
     <v-card class="mx-auto px-auto round" max-width="90%" height="78vh" tile>
       <v-card-title>
-        Lista zamówień
+        {{ $t('orders_table.title') }}
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"

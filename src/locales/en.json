@@ -27,7 +27,33 @@
     "name": "Name",
     "surname": "Surname",
     "email": "Email",
-    "cancel": "Canceled?"
+    "cancel": "Canceled?",
+    "status_obj": {
+      "waiting": "Waiting for a payment",
+      "finished": "Payment was done",
+      "on_place": "Paid upon arrival"
+    },
+    "removed_obj": {
+      "yes": "Yes",
+      "no": "No"
+    }
+  },
+  "order": {
+    "title": "Order number",
+    "user": {
+      "title": "User",
+      "name": "Name and surname",
+      "phone": "Phone number",
+      "email": "Email"
+    },
+    "products": {
+      "title": "Ordered Products"
+    },
+    "company": {
+      "title": "Company",
+      "name": "Company name",
+      "vat_number": "Vat number"
+    }
   },
   "users": {},
   "products": {},
@@ -41,5 +67,8 @@
       "light": "ligh",
       "dark": "dark"
     }
+  },
+  "dialogs": {
+    "close": "Close"
   }
 }

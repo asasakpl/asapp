@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-import OrdersList from '@/components/OrdersList.vue'
+import OrdersList from '@/components/Orders/OrdersList.vue'
 
 export default Vue.extend({
   components: {

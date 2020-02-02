@@ -27,7 +27,33 @@
     "name": "Imie",
     "surname": "Nazwisko",
     "email": "Email",
-    "cancel": "Anulowane"
+    "cancel": "Anulowane",
+    "status_obj": {
+      "waiting": "Oczekuje na płatność",
+      "finished": "Płatność została zakończona",
+      "on_place": "Paid upon arrival"
+    },
+    "removed_obj": {
+      "yes": "Tak",
+      "no": "Nie"
+    }
+  },
+  "order": {
+    "title": "Zamówienie numer",
+    "user": {
+      "title": "Użytkownik",
+      "name": "Imie i Nazwisko",
+      "phone": "Numer telefonu",
+      "email": "Email"
+    },
+    "products": {
+      "title": "Zamówione produkty"
+    },
+    "company": {
+      "title": "Firma",
+      "name": "Nazwa firmy",
+      "vat_number": "NIP"
+    }
   },
   "users": {},
   "products": {},
@@ -41,5 +67,8 @@
       "light": "jasny",
       "dark": "ciemny"
     }
+  },
+  "dialogs": {
+    "close": "Zamknij"
   }
 }

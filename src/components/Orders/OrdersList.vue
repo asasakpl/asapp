@@ -14,6 +14,8 @@
         ></v-text-field>
       </v-card-title>
       <v-data-table
+        @click:row="rowClick"
+        single-select
         v-model="selected"
         :headers="headers"
         :items="orders"
@@ -54,8 +56,11 @@ export default Vue.extend({
       pageCount: 5,
       search: '',
       orders: [],
+      order: null,
       singleSelect: true,
+      dialog: false,
       selected: [],
+      selectedId: -1,
       headers: [
         {
           text: 'id',
@@ -74,6 +79,9 @@ export default Vue.extend({
   },
 
   methods: {
+    rowClick: function(item) {
+      this.$router.push(`/orders/${item.id}`)
+    },
     getOrders() {
       let id = localStorage.getItem('m_user')
       axios.get(`http://localhost:3000/v1/orders`).then(res => {
@@ -81,17 +89,23 @@ export default Vue.extend({
         this.orders = res.data.data.orders
         for (let x in this.orders) {
           if (this.orders[x].paymentStatus == 0) {
-            this.orders[x].paymentStatus = 'Oczekuje na płatność'
+            this.orders[x].paymentStatus = this.$t(
+              'orders_table.status_obj.waiting'
+            )
           } else if (this.orders[x].paymentStatus == 1) {
-            this.orders[x].paymentStatus = 'Płatność zakończona'
+            this.orders[x].paymentStatus = this.$t(
+              'orders_table.status_obj.finished'
+            )
           } else {
-            this.orders[x].paymentStatus = 'Płatność przy odbiorze'
+            this.orders[x].paymentStatus = this.$t(
+              'orders_table.status_obj.on_place'
+            )
           }
 
           if (this.orders[x].removed === false) {
-            this.orders[x].removed = 'Nie'
+            this.orders[x].removed = this.$t('orders_table.removed_obj.no')
           } else {
-            this.orders[x].removed = 'Zamówienie zostało anulowane'
+            this.orders[x].removed = this.$t('orders_table.removed_obj.yes')
           }
         }
 

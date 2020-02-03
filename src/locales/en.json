@@ -21,12 +21,14 @@
   },
   "orders_table": {
     "title": "Orders list",
-    "id": "ID",
+    "id": "Order number",
     "status": "Payment status",
     "products": "Products",
     "name": "Name",
     "surname": "Surname",
     "email": "Email",
+    "created_at": "Created at",
+    "updated_at": "Updated at",
     "cancel": "Canceled?",
     "status_obj": {
       "waiting": "Waiting for a payment",
@@ -40,6 +42,7 @@
   },
   "order": {
     "title": "Order number",
+    "removed": "Order was canceled",
     "user": {
       "title": "User",
       "name": "Name and surname",
@@ -50,7 +53,17 @@
       "title": "Ordered Products"
     },
     "delivery": {
-      "title": "Delivery"
+      "title": "Delivery",
+      "courier": {
+        "title": "Courier delivery"
+      },
+      "special": {
+        "title": "Special delivery"
+      },
+      "email": {
+        "title": "Email delivery"
+      },
+      "pick_up": "Client will pickup at the company's headquarters"
     },
     "company": {
       "title": "Company",

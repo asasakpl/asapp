@@ -21,12 +21,14 @@
   },
   "orders_table": {
     "title": "Lista zamówień",
-    "id": "ID",
+    "id": "Numer zamówienia",
     "status": "Status płatności",
     "products": "Produkty",
     "name": "Imie",
     "surname": "Nazwisko",
     "email": "Email",
+    "created_at": "Utworzone",
+    "updated_at": "Zaktualizowano",
     "cancel": "Anulowane",
     "status_obj": {
       "waiting": "Oczekuje na płatność",
@@ -40,6 +42,7 @@
   },
   "order": {
     "title": "Zamówienie numer",
+    "removed": "Zamówienie zostało anulowane",
     "user": {
       "title": "Użytkownik",
       "name": "Imie i Nazwisko",
@@ -50,7 +53,17 @@
       "title": "Zamówione produkty"
     },
     "delivery": {
-      "title": "Dostawa"
+      "title": "Dostawa",
+      "courier": {
+        "title": "Kurier"
+      },
+      "special": {
+        "title": "Dowóz"
+      },
+      "email": {
+        "title": "Email"
+      },
+      "pick_up": "Klient odbierze w siedzibie firmy"
     },
     "company": {
       "title": "Firma",

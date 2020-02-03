@@ -5,8 +5,22 @@
     </v-btn>
     <v-content v-if="order">
       <v-card class="mx-auto px-auto round" max-width="90%" height="78vh" tile>
-        <v-card-title>{{ $t('order.title') }} {{ order[0].id }}</v-card-title>
-        <v-spacer></v-spacer>
+        <v-col>
+          <v-row>
+            <v-card-title
+              >{{ $t('order.title') }} {{ order[0].id }}</v-card-title
+            >
+            <v-spacer></v-spacer>
+            <v-card-title
+              class="red--text jutify-space-around"
+              v-if="order[0].removed"
+            >
+              <v-icon color="red">mdi-clipboard-alert</v-icon>
+              <div class="ml-2">{{ $t('order.removed') }}!</div>
+            </v-card-title>
+          </v-row>
+        </v-col>
+        <v-divider></v-divider>
         <v-col cols="12">
           <v-row>
             <v-card class="mx-auto pr-5" color="primary" width="25%">
@@ -36,6 +50,22 @@
               <v-card-title class="subtitle-1">
                 <div class="headline">
                   {{ $t('order.delivery.title') }}
+                </div>
+              </v-card-title>
+              <v-card-actions v-if="!pick_up">
+                <v-btn>
+                  {{ $t('order.delivery.courier.title') }}
+                </v-btn>
+                <v-btn>
+                  {{ $t('order.delivery.special.title') }}
+                </v-btn>
+                <v-btn>
+                  {{ $t('order.delivery.email.title') }}
+                </v-btn>
+              </v-card-actions>
+              <v-card-title class="title-1">
+                <div v-if="pick_up" class="font-weight-bold">
+                  {{ $t('order.delivery.pick_up') }}!
                 </div>
               </v-card-title>
             </v-card>
@@ -95,7 +125,8 @@ import axios from 'axios'
 export default Vue.extend({
   data() {
     return {
-      order: null
+      order: null,
+      pick_up: false
     }
   },
   async mounted() {
@@ -103,10 +134,21 @@ export default Vue.extend({
       .get(`http://localhost:3000/v1/orders/${this.$route.params.id}`)
       .then(res => {
         this.order = Object.values(res.data.data)
+
+        console.log(this.order[0].delivery[0].specialDelivery)
+        console.log(this.order[0].delivery[0].emailDelivery)
+        console.log(this.order[0].delivery[0].courierDelivery)
+
+        if (
+          this.order[0].delivery[0].specialDelivery == null &&
+          this.order[0].delivery[0].courierDelivery == null &&
+          this.order[0].delivery[0].emailDelivery == null
+        ) {
+          console.log('dupa')
+          this.pick_up = true
+        }
       })
       .catch(error => console.log(error))
-
-    console.log(this.order[0].user.company)
   }
 })
 </script>

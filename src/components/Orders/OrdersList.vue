@@ -94,7 +94,6 @@ export default Vue.extend({
     },
     getOrders() {
       let id = localStorage.getItem('m_user')
-      console.log(this.orders)
       axios
         .get(`http://localhost:3000/v1/orders`)
         .then(res => {

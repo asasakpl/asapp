@@ -14,6 +14,7 @@
         ></v-text-field>
       </v-card-title>
       <v-data-table
+        v-if="!error"
         v-model="selected"
         :headers="headers"
         :items="users"
@@ -27,6 +28,12 @@
         @page-count="pageCount = $event"
       >
       </v-data-table>
+      <v-data-table
+        v-else
+        loading
+        hide-default-footer
+        loading-text="Loading... Please wait"
+      ></v-data-table>
     </v-card>
     <div class="text-center pt-2">
       <v-pagination v-model="page" :length="pageCount"></v-pagination>
@@ -41,6 +48,7 @@ import axios from 'axios'
 export default Vue.extend({
   data() {
     return {
+      error: true,
       search: '',
       page: 1,
       pageCount: 0,
@@ -64,11 +72,17 @@ export default Vue.extend({
   methods: {
     getUserdata() {
       let id = localStorage.getItem('m_user')
-      axios.get(`http://localhost:3000/v1/users`).then(res => {
-        localStorage.setItem('token', res.config.headers.auth)
-        this.users = res.data.data.users
-        return
-      })
+      axios
+        .get(`http://localhost:3000/v1/users`)
+        .then(res => {
+          this.error = false
+          localStorage.setItem('token', res.config.headers.auth)
+          this.users = res.data.data.users
+          return
+        })
+        .catch(err => {
+          this.error = true
+        })
     }
   },
   beforeMount() {

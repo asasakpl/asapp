@@ -14,12 +14,13 @@
         ></v-text-field>
       </v-card-title>
       <v-data-table
+        v-if="!error"
         @click:row="rowClick"
         single-select
         v-model="selected"
         :headers="headers"
         :items="orders"
-        sort-by="id"
+        sort-by="createdAt"
         item-key="id"
         :search="search"
         class="elevation-1"
@@ -32,6 +33,13 @@
           {{ $t(`orders_table.${header.text}`) }}
         </template>
       </v-data-table>
+
+      <v-data-table
+        v-else
+        loading
+        hide-default-footer
+        loading-text="Loading... Please wait"
+      ></v-data-table>
     </v-card>
     <div class="text-center pt-2">
       <v-pagination v-model="page" :length="pageCount"></v-pagination>
@@ -52,8 +60,9 @@ import axios from 'axios'
 export default Vue.extend({
   data() {
     return {
+      error: true,
       page: 1,
-      pageCount: 5,
+      pageCount: null,
       search: '',
       orders: [],
       order: null,
@@ -64,7 +73,6 @@ export default Vue.extend({
       headers: [
         {
           text: 'id',
-          align: 'left',
           sortable: true,
           value: 'id'
         },
@@ -73,6 +81,8 @@ export default Vue.extend({
         { text: 'name', value: 'user.firstName' },
         { text: 'surname', value: 'user.lastName' },
         { text: 'email', value: 'user.email' },
+        { text: 'created_at', value: 'createdAt' },
+        { text: 'updated_at', value: 'updatedAt' },
         { text: 'cancel', value: 'removed' }
       ]
     }
@@ -84,35 +94,61 @@ export default Vue.extend({
     },
     getOrders() {
       let id = localStorage.getItem('m_user')
-      axios.get(`http://localhost:3000/v1/orders`).then(res => {
-        localStorage.setItem('token', res.config.headers.auth)
-        this.orders = res.data.data.orders
-        for (let x in this.orders) {
-          if (this.orders[x].paymentStatus == 0) {
-            this.orders[x].paymentStatus = this.$t(
-              'orders_table.status_obj.waiting'
-            )
-          } else if (this.orders[x].paymentStatus == 1) {
-            this.orders[x].paymentStatus = this.$t(
-              'orders_table.status_obj.finished'
-            )
-          } else {
-            this.orders[x].paymentStatus = this.$t(
-              'orders_table.status_obj.on_place'
-            )
+      console.log(this.orders)
+      axios
+        .get(`http://localhost:3000/v1/orders`)
+        .then(res => {
+          localStorage.setItem('token', res.config.headers.auth)
+          this.error = false
+          this.orders = res.data.data.orders
+
+          for (let x in this.orders) {
+            if (this.orders[x].paymentStatus == 0) {
+              this.orders[x].paymentStatus = this.$t(
+                'orders_table.status_obj.waiting'
+              )
+            } else if (this.orders[x].paymentStatus == 1) {
+              this.orders[x].paymentStatus = this.$t(
+                'orders_table.status_obj.finished'
+              )
+            } else {
+              this.orders[x].paymentStatus = this.$t(
+                'orders_table.status_obj.on_place'
+              )
+            }
+
+            let createdDate = new Date(this.orders[x].createdAt)
+            let updatedDate = new Date(this.orders[x].updatedAt)
+
+            let date1 =
+              ('0' + createdDate.getDate()).slice(-2) +
+              '/' +
+              ('0' + (createdDate.getMonth() + 1)).slice(-2) +
+              '/' +
+              createdDate.getFullYear()
+
+            let date2 =
+              ('0' + createdDate.getDate()).slice(-2) +
+              '/' +
+              ('0' + (createdDate.getMonth() + 1)).slice(-2) +
+              '/' +
+              createdDate.getFullYear()
+
+            this.orders[x].createdAt = date1
+            this.orders[x].updatedAt = date2
+
+            if (this.orders[x].removed === false) {
+              this.orders[x].removed = this.$t('orders_table.removed_obj.no')
+            } else {
+              this.orders[x].removed = this.$t('orders_table.removed_obj.yes')
+            }
           }
 
-          if (this.orders[x].removed === false) {
-            this.orders[x].removed = this.$t('orders_table.removed_obj.no')
-          } else {
-            this.orders[x].removed = this.$t('orders_table.removed_obj.yes')
-          }
-        }
-
-        // @click:row=“methodName” for later to add dialog with order info
-
-        return
-      })
+          return
+        })
+        .catch(err => {
+          this.error = true
+        })
     }
   },
   created() {

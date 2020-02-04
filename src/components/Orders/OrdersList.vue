@@ -1,8 +1,10 @@
 <template>
   <v-container>
-    <v-btn @click="getOrders()" icon class="ml-8">
+    <v-btn @click="loading(), getOrders()" v-if="!load" icon class="ml-8">
       <v-icon size="32">refresh</v-icon>
     </v-btn>
+    <v-btn @click="getOrders()" v-else loading icon class="ml-8"> </v-btn>
+
     <v-card class="mx-auto px-auto round" max-width="90%" height="78vh" tile>
       <v-card-title>
         {{ $t("orders_table.title") }}
@@ -64,6 +66,7 @@ export default Vue.extend({
   data() {
     return {
       error: true,
+      load: false,
       page: 1,
       pageCount: null,
       search: "",
@@ -94,6 +97,9 @@ export default Vue.extend({
   methods: {
     rowClick: function(item) {
       this.$router.push(`/orders/${item.id}`)
+    },
+    loading() {
+      this.load = true
     },
     getOrders() {
       let id = localStorage.getItem("m_user")
@@ -145,7 +151,7 @@ export default Vue.extend({
               this.orders[x].removed = this.$t("orders_table.removed_obj.yes")
             }
           }
-
+          this.load = false
           return
         })
         .catch(err => {

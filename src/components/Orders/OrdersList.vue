@@ -25,7 +25,7 @@
         v-model="selected"
         :headers="headers"
         :items="orders"
-        sort-by="createdAt"
+        sort-by="id"
         item-key="id"
         :search="search"
         class="elevation-1"
@@ -133,7 +133,11 @@ export default Vue.extend({
               "/" +
               ("0" + (createdDate.getMonth() + 1)).slice(-2) +
               "/" +
-              createdDate.getFullYear()
+              createdDate.getFullYear() +
+              " " +
+              createdDate.getHours() +
+              ":" +
+              createdDate.getMinutes()
 
             let date2 =
               ("0" + createdDate.getDate()).slice(-2) +

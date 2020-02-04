@@ -54,6 +54,7 @@
     },
     "delivery": {
       "title": "Dostawa",
+      "price": "Cena",
       "courier": {
         "title": "Kurier"
       },
@@ -63,8 +64,20 @@
       "email": {
         "title": "Email"
       },
-      "pick_up": "Klient odbierze w siedzibie firmy"
+      "pick_up": "Klient odbierze w siedzibie firmy",
+      "products": {
+        "title": "Produkty"
+      },
+      "address": {
+        "title": "Adres",
+        "house_number": "Numer domu/mieszkania",
+        "street": "Ulica",
+        "city": "Miasto",
+        "state": "Województwo",
+        "country": "Kraj"
+      }
     },
+
     "company": {
       "title": "Firma",
       "name": "Nazwa firmy",

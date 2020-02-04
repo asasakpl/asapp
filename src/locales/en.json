@@ -54,6 +54,7 @@
     },
     "delivery": {
       "title": "Delivery",
+      "price": "Price",
       "courier": {
         "title": "Courier delivery"
       },
@@ -63,7 +64,18 @@
       "email": {
         "title": "Email delivery"
       },
-      "pick_up": "Client will pickup at the company's headquarters"
+      "pick_up": "Client will pickup at the company's headquarters",
+      "products": {
+        "title": "Products"
+      },
+      "address": {
+        "title": "Address",
+        "house_number": "House number",
+        "street": "Street",
+        "city": "City",
+        "state": "State",
+        "country": "Country"
+      }
     },
     "company": {
       "title": "Company",

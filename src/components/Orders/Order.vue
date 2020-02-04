@@ -8,7 +8,7 @@
         <v-col>
           <v-row>
             <v-card-title
-              >{{ $t('order.title') }} {{ order[0].id }}</v-card-title
+              >{{ $t("order.title") }} {{ order[0].id }}</v-card-title
             >
             <v-spacer></v-spacer>
             <v-card-title
@@ -16,7 +16,7 @@
               v-if="order[0].removed"
             >
               <v-icon color="red">mdi-clipboard-alert</v-icon>
-              <div class="ml-2">{{ $t('order.removed') }}!</div>
+              <div class="ml-2">{{ $t("order.removed") }}!</div>
             </v-card-title>
           </v-row>
         </v-col>
@@ -27,20 +27,20 @@
               <v-card-title class="subtitle-1">
                 <v-col cols="12">
                   <div class="headline">
-                    {{ $t('order.user.title') }}
+                    {{ $t("order.user.title") }}
                   </div>
                   <div>
-                    {{ $t('order.user.name') }}: {{ order[0].user.firstName }}
+                    {{ $t("order.user.name") }}: {{ order[0].user.firstName }}
                     {{ order[0].user.lastName }}
                   </div>
 
                   <div v-if="order[0].user.phone_number">
-                    {{ $t('order.user.phone') }}:
+                    {{ $t("order.user.phone") }}:
                     {{ order[0].user.phone_number }}
                   </div>
 
                   <div>
-                    {{ $t('order.user.email') }}: {{ order[0].user.email }}
+                    {{ $t("order.user.email") }}: {{ order[0].user.email }}
                   </div>
                 </v-col>
               </v-card-title>
@@ -49,23 +49,23 @@
             <v-card class="mx-auto pr-5" color="primary" width="65%">
               <v-card-title class="subtitle-1">
                 <div class="headline">
-                  {{ $t('order.delivery.title') }}
+                  {{ $t("order.delivery.title") }}
                 </div>
               </v-card-title>
               <v-card-actions v-if="!pick_up">
                 <v-btn>
-                  {{ $t('order.delivery.courier.title') }}
+                  {{ $t("order.delivery.courier.title") }}
                 </v-btn>
                 <v-btn>
-                  {{ $t('order.delivery.special.title') }}
+                  {{ $t("order.delivery.special.title") }}
                 </v-btn>
                 <v-btn>
-                  {{ $t('order.delivery.email.title') }}
+                  {{ $t("order.delivery.email.title") }}
                 </v-btn>
               </v-card-actions>
               <v-card-title class="title-1">
                 <div v-if="pick_up" class="font-weight-bold">
-                  {{ $t('order.delivery.pick_up') }}!
+                  {{ $t("order.delivery.pick_up") }}!
                 </div>
               </v-card-title>
             </v-card>
@@ -77,7 +77,7 @@
               <v-card-title class="subtitle-1">
                 <v-col cols="12">
                   <div class="headline">
-                    {{ $t('order.products.title') }}
+                    {{ $t("order.products.title") }}
                   </div>
                 </v-col>
               </v-card-title>
@@ -87,16 +87,16 @@
               <v-card-title class="subtitle-1">
                 <v-col cols="12">
                   <div class="headline">
-                    {{ $t('order.company.title') }}
+                    {{ $t("order.company.title") }}
                   </div>
 
                   <div>
-                    {{ $t('order.company.name') }}:
+                    {{ $t("order.company.name") }}:
                     {{ order[0].user.company.name }}
                   </div>
 
                   <div>
-                    {{ $t('order.company.vat_number') }}:
+                    {{ $t("order.company.vat_number") }}:
                     {{ order[0].user.company.vat_number }}
                   </div>
                 </v-col>
@@ -119,8 +119,8 @@
 </style>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
+import Vue from "vue"
+import axios from "axios"
 
 export default Vue.extend({
   data() {
@@ -135,16 +135,11 @@ export default Vue.extend({
       .then(res => {
         this.order = Object.values(res.data.data)
 
-        console.log(this.order[0].delivery[0].specialDelivery)
-        console.log(this.order[0].delivery[0].emailDelivery)
-        console.log(this.order[0].delivery[0].courierDelivery)
-
         if (
           this.order[0].delivery[0].specialDelivery == null &&
           this.order[0].delivery[0].courierDelivery == null &&
           this.order[0].delivery[0].emailDelivery == null
         ) {
-          console.log('dupa')
           this.pick_up = true
         }
       })

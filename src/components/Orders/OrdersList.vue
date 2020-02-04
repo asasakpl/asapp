@@ -1,8 +1,11 @@
 <template>
   <v-container>
+    <v-btn @click="getOrders()" icon class="ml-8">
+      <v-icon size="32">refresh</v-icon>
+    </v-btn>
     <v-card class="mx-auto px-auto round" max-width="90%" height="78vh" tile>
       <v-card-title>
-        {{ $t('orders_table.title') }}
+        {{ $t("orders_table.title") }}
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
@@ -54,8 +57,8 @@
 </style>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
+import Vue from "vue"
+import axios from "axios"
 
 export default Vue.extend({
   data() {
@@ -63,7 +66,7 @@ export default Vue.extend({
       error: true,
       page: 1,
       pageCount: null,
-      search: '',
+      search: "",
       orders: [],
       order: null,
       singleSelect: true,
@@ -72,18 +75,18 @@ export default Vue.extend({
       selectedId: -1,
       headers: [
         {
-          text: 'id',
+          text: "id",
           sortable: true,
-          value: 'id'
+          value: "id"
         },
-        { text: 'status', value: 'paymentStatus' },
-        { text: `products`, value: 'products.length' },
-        { text: 'name', value: 'user.firstName' },
-        { text: 'surname', value: 'user.lastName' },
-        { text: 'email', value: 'user.email' },
-        { text: 'created_at', value: 'createdAt' },
-        { text: 'updated_at', value: 'updatedAt' },
-        { text: 'cancel', value: 'removed' }
+        { text: "status", value: "paymentStatus" },
+        { text: `products`, value: "products.length" },
+        { text: "name", value: "user.firstName" },
+        { text: "surname", value: "user.lastName" },
+        { text: "email", value: "user.email" },
+        { text: "created_at", value: "createdAt" },
+        { text: "updated_at", value: "updatedAt" },
+        { text: "cancel", value: "removed" }
       ]
     }
   },
@@ -93,26 +96,26 @@ export default Vue.extend({
       this.$router.push(`/orders/${item.id}`)
     },
     getOrders() {
-      let id = localStorage.getItem('m_user')
+      let id = localStorage.getItem("m_user")
       axios
         .get(`http://localhost:3000/v1/orders`)
         .then(res => {
-          localStorage.setItem('token', res.config.headers.auth)
+          localStorage.setItem("token", res.config.headers.auth)
           this.error = false
           this.orders = res.data.data.orders
 
           for (let x in this.orders) {
             if (this.orders[x].paymentStatus == 0) {
               this.orders[x].paymentStatus = this.$t(
-                'orders_table.status_obj.waiting'
+                "orders_table.status_obj.waiting"
               )
             } else if (this.orders[x].paymentStatus == 1) {
               this.orders[x].paymentStatus = this.$t(
-                'orders_table.status_obj.finished'
+                "orders_table.status_obj.finished"
               )
             } else {
               this.orders[x].paymentStatus = this.$t(
-                'orders_table.status_obj.on_place'
+                "orders_table.status_obj.on_place"
               )
             }
 
@@ -120,26 +123,26 @@ export default Vue.extend({
             let updatedDate = new Date(this.orders[x].updatedAt)
 
             let date1 =
-              ('0' + createdDate.getDate()).slice(-2) +
-              '/' +
-              ('0' + (createdDate.getMonth() + 1)).slice(-2) +
-              '/' +
+              ("0" + createdDate.getDate()).slice(-2) +
+              "/" +
+              ("0" + (createdDate.getMonth() + 1)).slice(-2) +
+              "/" +
               createdDate.getFullYear()
 
             let date2 =
-              ('0' + createdDate.getDate()).slice(-2) +
-              '/' +
-              ('0' + (createdDate.getMonth() + 1)).slice(-2) +
-              '/' +
+              ("0" + createdDate.getDate()).slice(-2) +
+              "/" +
+              ("0" + (createdDate.getMonth() + 1)).slice(-2) +
+              "/" +
               createdDate.getFullYear()
 
             this.orders[x].createdAt = date1
             this.orders[x].updatedAt = date2
 
             if (this.orders[x].removed === false) {
-              this.orders[x].removed = this.$t('orders_table.removed_obj.no')
+              this.orders[x].removed = this.$t("orders_table.removed_obj.no")
             } else {
-              this.orders[x].removed = this.$t('orders_table.removed_obj.yes')
+              this.orders[x].removed = this.$t("orders_table.removed_obj.yes")
             }
           }
 

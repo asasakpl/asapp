@@ -84,6 +84,29 @@
                   </div>
                 </v-col>
               </v-card-title>
+              <v-card-text>
+                <v-list-item v-for="(product, i) in order[0].products" :key="i">
+                  <template>
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        <v-row class="justify-space-between" dense>
+                          <v-col cols="9">
+                            <div v-if="lang == 'pl'">
+                              {{ product.title.pl }}
+                            </div>
+                            <div v-else>{{ product.title.en }}</div>
+                          </v-col>
+                          <v-col>
+                            <v-btn small>{{
+                              $t('order.delivery.products.change_status.title')
+                            }}</v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </template>
+                </v-list-item>
+              </v-card-text>
             </v-card>
 
             <v-card class="mx-auto pr-5" color="primary" width="30%">
@@ -194,6 +217,16 @@
 .round {
   border-radius: 8px;
 }
+
+.select {
+  max-width: 260px;
+  height: 50px;
+}
+
+.vertical {
+  vertical-align: center;
+  justify-content: center;
+}
 </style>
 
 <script lang="ts">
@@ -209,7 +242,8 @@ export default Vue.extend({
       special: null,
       dialog: false,
       delivery: null,
-      lang: null
+      lang: null,
+      statuses: ['ddd', 'ddd1', 'ddd2']
     }
   },
   methods: {

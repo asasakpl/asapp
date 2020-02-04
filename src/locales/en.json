@@ -66,7 +66,10 @@
       },
       "pick_up": "Client will pickup at the company's headquarters",
       "products": {
-        "title": "Products"
+        "title": "Products",
+        "change_status": {
+          "title": "Change status"
+        }
       },
       "address": {
         "title": "Address",

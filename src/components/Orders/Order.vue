@@ -86,25 +86,32 @@
               </v-card-title>
               <v-card-text>
                 <v-list-item v-for="(product, i) in order[0].products" :key="i">
-                  <template>
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        <v-row class="justify-space-between" dense>
-                          <v-col cols="9">
-                            <div v-if="lang == 'pl'">
-                              {{ product.title.pl }}
-                            </div>
-                            <div v-else>{{ product.title.en }}</div>
-                          </v-col>
-                          <v-col>
-                            <v-btn small>{{
-                              $t('order.delivery.products.change_status.title')
-                            }}</v-btn>
-                          </v-col>
-                        </v-row>
-                      </v-list-item-title>
-                    </v-list-item-content>
-                  </template>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <div v-if="lang == 'pl'">
+                        {{ product.title.pl }}
+                      </div>
+                      <div v-else>{{ product.title.en }}</div>
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      <div v-if="lang == 'pl'">
+                        {{ $t('order.delivery.products.list_subtitle') }}:
+                        {{
+                          $t(`order.delivery.status.${product.status.title}`)
+                        }}
+                      </div>
+                      <div v-else>
+                        {{ $t('order.delivery.products.list_subtitle') }}:
+                        {{
+                          $t(`order.delivery.status.${product.status.title}`)
+                        }}
+                      </div>
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+
+                  <v-btn @click=";(status_dialog = true), getCurrent(product)">
+                    {{ $t('order.delivery.products.dialog.title') }}
+                  </v-btn>
                 </v-list-item>
               </v-card-text>
             </v-card>
@@ -135,6 +142,43 @@
     <v-content v-else align="center">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-content>
+
+    <v-dialog v-model="status_dialog" max-width="700">
+      <v-card v-if="clicked_product">
+        <v-card-title>
+          <v-row class="justify-space-between">
+            <div v-if="lang == 'pl'">{{ clicked_product.title.pl }}</div>
+            <div v-else>{{ clicked_product.title.en }}</div>
+
+            <div class="mr-5">
+              {{ $t('order.delivery.price') }} {{ clicked_product.price }} pln
+            </div>
+          </v-row>
+        </v-card-title>
+
+        <v-card-text>
+          <v-row>
+            <v-col> </v-col>
+            <v-col col="2">
+              <v-select
+                :items="statuses"
+                @change="changeStatus"
+                item-text="title"
+                item-value="id"
+                v-bind:label="$t('order.delivery.products.dialog.set_status')"
+              ></v-select>
+            </v-col>
+          </v-row>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="red" text @click="status_dialog = false">
+            Close
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <v-dialog v-model="dialog" max-width="700">
       <v-card v-if="delivery">
@@ -241,14 +285,41 @@ export default Vue.extend({
       courier: null,
       special: null,
       dialog: false,
+      status_dialog: false,
+      clicked_product: null,
       delivery: null,
       lang: null,
-      statuses: ['ddd', 'ddd1', 'ddd2']
+      statuses: [
+        {
+          id: 0,
+          title: 'Waiting'
+        },
+        {
+          id: 1,
+          title: 'Processing'
+        },
+        {
+          id: 2,
+          title: 'Completed'
+        },
+        {
+          id: 3,
+          title: 'Sent'
+        }
+      ]
     }
   },
   methods: {
     getCourier() {
       this.delivery = this.order[0].delivery[0].courierDelivery
+    },
+    getCurrent(item) {
+      // click handler
+      this.clicked_product = item //setting current itemd
+    },
+    async changeStatus(status) {
+      console.log(this.clicked_product.id)
+      console.log(status)
     }
   },
   async mounted() {
@@ -262,6 +333,28 @@ export default Vue.extend({
           this.order[0].delivery[0].courierDelivery == null
         ) {
           this.pick_up = true
+        }
+
+        for (let x in this.order[0].products) {
+          let product = this.order[0].products[x]
+
+          switch (product.status) {
+            case 0:
+              this.order[0].products[x].status = { id: '0', title: 'waiting' }
+              break
+
+            case 1:
+              this.order[0].products[x].status = { id: '1', title: 'process' }
+              break
+
+            case 2:
+              this.order[0].products[x].status = { id: '2', title: 'completed' }
+              break
+
+            case 3:
+              this.order[0].products[x].status = { id: '3', title: 'sent' }
+              break
+          }
         }
 
         this.lang = localStorage.getItem('i18n')

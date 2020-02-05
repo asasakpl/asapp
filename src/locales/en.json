@@ -67,8 +67,10 @@
       "pick_up": "Client will pickup at the company's headquarters",
       "products": {
         "title": "Products",
-        "change_status": {
-          "title": "Change status"
+        "list_subtitle": "Status",
+        "dialog": {
+          "title": "Details",
+          "set_status": "Set status"
         }
       },
       "address": {
@@ -78,6 +80,12 @@
         "city": "City",
         "state": "State",
         "country": "Country"
+      },
+      "status": {
+        "waiting": "Waiting for relalization",
+        "process": "During",
+        "completed": "Completed",
+        "sent": "Sent"
       }
     },
     "company": {

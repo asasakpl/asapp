@@ -67,8 +67,10 @@
       "pick_up": "Klient odbierze w siedzibie firmy",
       "products": {
         "title": "Produkty",
-        "change_status": {
-          "title": "Zmień status"
+        "list_subtitle": "Status",
+        "dialog": {
+          "title": "WIĘCEJ",
+          "set_status": "Zamień status"
         }
       },
       "address": {
@@ -78,9 +80,14 @@
         "city": "Miasto",
         "state": "Województwo",
         "country": "Kraj"
+      },
+      "status": {
+        "waiting": "Oczekuje na realizacje",
+        "process": "W trakcie",
+        "completed": "Zakończono",
+        "sent": "Wysłano"
       }
     },
-
     "company": {
       "title": "Firma",
       "name": "Nazwa firmy",

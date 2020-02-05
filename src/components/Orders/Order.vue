@@ -4,7 +4,12 @@
       <v-icon size="32">arrow_back</v-icon>
     </v-btn>
     <v-content v-if="order">
-      <v-card class="mx-auto px-auto round" max-width="90%" height="78vh" tile>
+      <v-card
+        class="mx-auto px-auto pb-2 round"
+        max-width="90%"
+        max-height="90vh"
+        tile
+      >
         <v-col>
           <v-row>
             <v-card-title
@@ -97,13 +102,17 @@
                       <div v-if="lang == 'pl'">
                         {{ $t('order.delivery.products.list_subtitle') }}:
                         {{
-                          $t(`order.delivery.status.${product.status.title}`)
+                          $t(
+                            `order.delivery.status.${product.status.title.toLowerCase()}`
+                          )
                         }}
                       </div>
                       <div v-else>
                         {{ $t('order.delivery.products.list_subtitle') }}:
                         {{
-                          $t(`order.delivery.status.${product.status.title}`)
+                          $t(
+                            `order.delivery.status.${product.status.title.toLowerCase()}`
+                          )
                         }}
                       </div>
                     </v-list-item-subtitle>
@@ -137,6 +146,22 @@
             </v-card>
           </v-row>
         </v-col>
+
+        <v-card-actions class="justify-end ">
+          <div class="title mr-8">
+            {{ $t('order.status.title') }}:
+            {{ $t(`order.status.${order_status[this.order[0].status].title}`) }}
+          </div>
+          <v-btn
+            color="red"
+            medium
+            class=" mr-8"
+            v-if="this.order[0].status != 1"
+            @click="complete_dialog = true"
+          >
+            {{ $t('order.status.complete') }}
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-content>
     <v-content v-else align="center">
@@ -160,9 +185,14 @@
           <v-row>
             <v-col> </v-col>
             <v-col col="2">
+              <div>
+                {{ $t('order.delivery.products.dialog.current_status') }}:
+                {{ clicked_product.status.title }}
+              </div>
               <v-select
                 :items="statuses"
                 @change="changeStatus"
+                v-model="statuses[clicked_product.status]"
                 item-text="title"
                 item-value="id"
                 v-bind:label="$t('order.delivery.products.dialog.set_status')"
@@ -254,6 +284,33 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-dialog v-model="complete_dialog" persistent max-width="290">
+      <v-card>
+        <v-card-title class="headline">{{
+          $t('order.status.warning')
+        }}</v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="complete_dialog = false">{{
+            $t('order.status.dialog.no')
+          }}</v-btn>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="completeOrder(), (complete_dialog = false)"
+            >{{ $t('order.status.dialog.yes') }}</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-snackbar v-model="snackbar" v-if="snackbar" :timeout="5000">
+      {{ $t(`order.status.dialog.${msg}`) }}
+      <v-btn color="pink" text @click="snackbar = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -276,6 +333,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+import { error } from 'electron-log'
 
 export default Vue.extend({
   data() {
@@ -284,11 +342,24 @@ export default Vue.extend({
       pick_up: false,
       courier: null,
       special: null,
+      msg: 'null',
       dialog: false,
+      snackbar: false,
+      complete_dialog: false,
       status_dialog: false,
       clicked_product: null,
       delivery: null,
       lang: null,
+      order_status: [
+        {
+          id: 0,
+          title: 'created'
+        },
+        {
+          id: 1,
+          title: 'completed'
+        }
+      ],
       statuses: [
         {
           id: 0,
@@ -314,12 +385,28 @@ export default Vue.extend({
       this.delivery = this.order[0].delivery[0].courierDelivery
     },
     getCurrent(item) {
-      // click handler
-      this.clicked_product = item //setting current itemd
+      this.clicked_product = item
     },
     async changeStatus(status) {
-      console.log(this.clicked_product.id)
-      console.log(status)
+      this.clicked_product.status = this.statuses[status]
+      await axios.patch(
+        `http://localhost:3000/v1/orders/product/${this.clicked_product.id}`,
+        {
+          status: status
+        }
+      )
+    },
+    async completeOrder() {
+      await axios
+        .patch(`http://localhost:3000/v1/orders/complete/${this.order[0].id}`, {
+          status: 1
+        })
+        .then(res => {
+          this.msg = 'success'
+          this.snackbar = true
+          this.order[0].status = 1
+        })
+        .catch(error => ((this.snackbar = true), (this.msg = 'error')))
     }
   },
   async mounted() {
@@ -335,6 +422,8 @@ export default Vue.extend({
           this.pick_up = true
         }
 
+        console.log(this.order[0].status)
+
         for (let x in this.order[0].products) {
           let product = this.order[0].products[x]
 
@@ -344,7 +433,10 @@ export default Vue.extend({
               break
 
             case 1:
-              this.order[0].products[x].status = { id: '1', title: 'process' }
+              this.order[0].products[x].status = {
+                id: '1',
+                title: 'processing'
+              }
               break
 
             case 2:

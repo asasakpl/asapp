@@ -49,6 +49,19 @@
       "phone": "Numer telefonu",
       "email": "Email"
     },
+    "status": {
+      "title": "Status zamówienia",
+      "created": "Aktualne",
+      "completed": "Zakończone",
+      "complete": "Zakończ to zamówienie",
+      "warning": "Czy jesteś pewny że chcesz zakończyć to zamówienie?",
+      "dialog": {
+        "yes": "Tak",
+        "no": "Nie",
+        "success": "Order was successfully completed",
+        "error": "Ups, coś poszło nie tak"
+      }
+    },
     "products": {
       "title": "Zamówione produkty"
     },
@@ -70,7 +83,8 @@
         "list_subtitle": "Status",
         "dialog": {
           "title": "WIĘCEJ",
-          "set_status": "Zamień status"
+          "set_status": "Zamień status",
+          "current_status": "Obecny status"
         }
       },
       "address": {
@@ -83,7 +97,7 @@
       },
       "status": {
         "waiting": "Oczekuje na realizacje",
-        "process": "W trakcie",
+        "processing": "W trakcie",
         "completed": "Zakończono",
         "sent": "Wysłano"
       }

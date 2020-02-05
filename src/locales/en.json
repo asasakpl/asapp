@@ -43,6 +43,19 @@
   "order": {
     "title": "Order number",
     "removed": "Order was canceled",
+    "status": {
+      "title": "Order status",
+      "created": "Present",
+      "completed": "Completed",
+      "complete": "Complete order",
+      "warning": "Are you sure that you want to complete this order?",
+      "dialog": {
+        "yes": "Yes, complete",
+        "no": "No",
+        "success": "Order was successfully completed",
+        "error": "Oops, something went wrong"
+      }
+    },
     "user": {
       "title": "User",
       "name": "Name and surname",
@@ -70,7 +83,8 @@
         "list_subtitle": "Status",
         "dialog": {
           "title": "Details",
-          "set_status": "Set status"
+          "set_status": "Set status",
+          "current_status": "Current status"
         }
       },
       "address": {
@@ -83,7 +97,7 @@
       },
       "status": {
         "waiting": "Waiting for relalization",
-        "process": "During",
+        "processing": "During",
         "completed": "Completed",
         "sent": "Sent"
       }

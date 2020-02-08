@@ -147,20 +147,33 @@
           </v-row>
         </v-col>
 
-        <v-card-actions class="justify-end ">
-          <div class="title mr-8">
-            {{ $t('order.status.title') }}:
-            {{ $t(`order.status.${order_status[this.order[0].status].title}`) }}
-          </div>
-          <v-btn
-            color="red"
-            medium
-            class=" mr-8"
-            v-if="this.order[0].status != 1"
-            @click="complete_dialog = true"
-          >
-            {{ $t('order.status.complete') }}
-          </v-btn>
+        <v-card-actions class="justify-space-around">
+          <v-row>
+            <div class="title ml-10 mr-2">{{ $t('order.payment.title') }}:</div>
+            <div class="title" v-if="order[0].paymentStatus == 0">
+              {{ $t('order.payment.waiting') }}
+            </div>
+            <div class="title" v-else>{{ $t('order.payment.done') }}</div>
+          </v-row>
+          <v-spacer></v-spacer>
+
+          <v-row class="justify-end">
+            <div class="title mr-8">
+              {{ $t('order.status.title') }}:
+              {{
+                $t(`order.status.${order_status[this.order[0].status].title}`)
+              }}
+            </div>
+            <v-btn
+              color="red"
+              medium
+              class="mr-10"
+              v-if="this.order[0].status != 1"
+              @click="complete_dialog = true"
+            >
+              {{ $t('order.status.complete') }}
+            </v-btn>
+          </v-row>
         </v-card-actions>
       </v-card>
     </v-content>

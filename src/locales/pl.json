@@ -43,6 +43,11 @@
   "order": {
     "title": "Zamówienie numer",
     "removed": "Zamówienie zostało anulowane",
+    "payment": {
+      "title": "Status płatności",
+      "waiting": "Oczekuje na płatność",
+      "done": "Zakończona"
+    },
     "user": {
       "title": "Użytkownik",
       "name": "Imie i Nazwisko",

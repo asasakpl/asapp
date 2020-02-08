@@ -56,6 +56,11 @@
         "error": "Oops, something went wrong"
       }
     },
+    "payment": {
+      "title": "Payment status",
+      "waiting": "Waiting for a payment",
+      "done": "Done"
+    },
     "user": {
       "title": "User",
       "name": "Name and surname",

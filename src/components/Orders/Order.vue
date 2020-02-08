@@ -183,7 +183,6 @@
 
         <v-card-text>
           <v-row>
-            <v-col> </v-col>
             <v-col col="2">
               <div>
                 {{ $t('order.delivery.products.dialog.current_status') }}:
@@ -197,6 +196,37 @@
                 item-value="id"
                 v-bind:label="$t('order.delivery.products.dialog.set_status')"
               ></v-select>
+            </v-col>
+            <v-col>
+              <div>{{ $t('order.delivery.products.dialog.legend') }}:</div>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title
+                    >Waiting - Oczekuje na relizacje</v-list-item-title
+                  >
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title
+                    >Processing - W trakcie realizacji</v-list-item-title
+                  >
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title
+                    >Completed - Zakończono realizacje</v-list-item-title
+                  >
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>Sent - Wysłano produkt</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </v-col>
           </v-row>
         </v-card-text>
@@ -424,27 +454,26 @@ export default Vue.extend({
 
         console.log(this.order[0].status)
 
+        console.log(this.statuses[3])
+
         for (let x in this.order[0].products) {
           let product = this.order[0].products[x]
 
           switch (product.status) {
             case 0:
-              this.order[0].products[x].status = { id: '0', title: 'waiting' }
+              this.order[0].products[x].status = this.statuses[0]
               break
 
             case 1:
-              this.order[0].products[x].status = {
-                id: '1',
-                title: 'processing'
-              }
+              this.order[0].products[x].status = this.statuses[1]
               break
 
             case 2:
-              this.order[0].products[x].status = { id: '2', title: 'completed' }
+              this.order[0].products[x].status = this.statuses[2]
               break
 
             case 3:
-              this.order[0].products[x].status = { id: '3', title: 'sent' }
+              this.order[0].products[x].status = this.statuses[3]
               break
           }
         }

@@ -84,7 +84,8 @@
         "dialog": {
           "title": "WIĘCEJ",
           "set_status": "Zamień status",
-          "current_status": "Obecny status"
+          "current_status": "Obecny status",
+          "legend": "Legenda statusów zamówienia"
         }
       },
       "address": {

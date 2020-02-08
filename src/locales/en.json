@@ -84,7 +84,8 @@
         "dialog": {
           "title": "Details",
           "set_status": "Set status",
-          "current_status": "Current status"
+          "current_status": "Current status",
+          "legend": "Statuses legend"
         }
       },
       "address": {

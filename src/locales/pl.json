@@ -109,7 +109,34 @@
       "vat_number": "NIP"
     }
   },
-  "users": {},
+  "users": {
+    "title": "Użytkownik numer",
+    "data": {
+      "title": "Dane użytkownika",
+      "name": "Imie i nazwisko",
+      "email": "Email",
+      "phone_number": "Numer telefonu",
+      "address": {
+        "title": "Adres",
+        "house_number": "Numer domu/mieszkania",
+        "street": "Ulica",
+        "city": "Miasto",
+        "state": "Województwo",
+        "country": "Kraj"
+      },
+      "company": {
+        "title": "Firma",
+        "name": "Nazwa",
+        "nip": "Numer nip"
+      }
+    },
+    "orders": {
+      "title": "Zamówienia",
+      "order_number": "Numer zamówienia",
+      "products": "Liczba produktów w zamówieniu",
+      "more_info": "Więcej"
+    }
+  },
   "products": {},
   "sellers": {},
   "mail": {},

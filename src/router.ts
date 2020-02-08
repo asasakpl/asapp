@@ -9,6 +9,7 @@ import About from '@/views/About.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Settings from '@/views/Settings.vue'
 import Users from '@/views/Users.vue'
+import User from '@/components/User/User.vue'
 import Orders from '@/views/Orders.vue'
 import Sellers from '@/views/Sellers.vue'
 import Product from '@/views/Product.vue'
@@ -76,6 +77,12 @@ let router = new Router({
           path: '/users',
           name: 'users',
           component: Users,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/users/:id',
+          name: 'users/:id',
+          component: User,
           beforeEnter: ifAuthenticated
         },
         {

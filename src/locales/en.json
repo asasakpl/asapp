@@ -109,7 +109,23 @@
       "vat_number": "Vat number"
     }
   },
-  "users": {},
+  "users": {
+    "title": "User number",
+    "data": {
+      "title": "User data",
+      "name": "Name and surname",
+      "email": "Email",
+      "phone_number": "Phone number",
+      "address": {
+        "title": "Address",
+        "house_number": "House number",
+        "street": "Street",
+        "city": "City",
+        "state": "State",
+        "country": "Country"
+      }
+    }
+  },
   "products": {},
   "sellers": {},
   "mail": {},

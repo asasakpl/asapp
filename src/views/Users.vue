@@ -15,6 +15,7 @@
       </v-card-title>
       <v-data-table
         v-if="!error"
+        @click:row="rowClick"
         v-model="selected"
         :headers="headers"
         :items="users"
@@ -64,12 +65,14 @@ export default Vue.extend({
         },
         { text: 'First name', value: 'firstName' },
         { text: 'Last name', value: 'lastName' },
-        { text: 'Email', value: 'email' },
-        { text: 'Permission', value: 'permission' }
+        { text: 'Email', value: 'email' }
       ]
     }
   },
   methods: {
+    rowClick: function(item) {
+      this.$router.push(`/users/${item.id}`)
+    },
     getUserdata() {
       let id = localStorage.getItem('m_user')
       axios

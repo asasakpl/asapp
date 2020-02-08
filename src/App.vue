@@ -1,16 +1,16 @@
 <template>
-  <v-app>
+  <v-app style="overflow: hidden">
     <v-system-bar lights-out height="28" class="drag">
       <div class="app-name">Moje35metrow.pl</div>
       <v-spacer></v-spacer>
-      <v-btn tile icon class="no-drag" v-on:click="minimize()">
-        <v-icon>mdi-minus</v-icon>
+      <v-btn tile icon class="no-drag" small v-on:click="minimize()">
+        <v-icon size="24">mdi-minus</v-icon>
       </v-btn>
-      <v-btn tile icon class="no-drag" v-on:click="maximize()">
-        <v-icon>mdi-crop-square</v-icon>
+      <v-btn tile icon class="no-drag" small v-on:click="maximize()">
+        <v-icon size="18">mdi-crop-square</v-icon>
       </v-btn>
-      <v-btn tile icon class="no-drag" v-on:click="close()">
-        <v-icon>close</v-icon>
+      <v-btn tile icon class="no-drag" small v-on:click="close()">
+        <v-icon size="20">close</v-icon>
       </v-btn>
     </v-system-bar>
     <v-content>

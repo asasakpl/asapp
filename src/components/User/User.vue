@@ -136,8 +136,7 @@
     <v-dialog v-model="dialog" max-width="60%">
       <v-card v-if="order">
         <v-card-title class="headline"
-          >{{ $t('users.orders.order_number') }}:
-          {{ order.status }}</v-card-title
+          >{{ $t('users.orders.order_number') }}: {{ order.id }}</v-card-title
         >
       </v-card>
       <v-content v-else align="center">

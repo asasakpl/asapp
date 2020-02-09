@@ -465,10 +465,6 @@ export default Vue.extend({
           this.pick_up = true
         }
 
-        console.log(this.order[0].status)
-
-        console.log(this.statuses[3])
-
         for (let x in this.order[0].products) {
           let product = this.order[0].products[x]
 

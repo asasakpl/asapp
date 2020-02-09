@@ -119,10 +119,6 @@
                     {{ order.products.length }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
-
-                <v-btn @click=";(dialog = true), getOrder(order)">{{
-                  $t('users.orders.more_info')
-                }}</v-btn>
               </v-list-item>
             </v-card-text>
           </v-card>
@@ -132,20 +128,6 @@
     <v-content v-else align="center">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-content>
-
-    <v-dialog v-model="dialog" max-width="60%">
-      <v-card v-if="order">
-        <v-card-title class="headline"
-          >{{ $t('users.orders.order_number') }}: {{ order.id }}</v-card-title
-        >
-      </v-card>
-      <v-content v-else align="center">
-        <v-progress-circular
-          indeterminate
-          color="primary"
-        ></v-progress-circular>
-      </v-content>
-    </v-dialog>
   </v-container>
 </template>
 
@@ -163,14 +145,12 @@ export default Vue.extend({
   data() {
     return {
       user: null,
-      order: null,
-      dialog: false
+      order: null
     }
   },
   methods: {
     async getOrder(order) {
       this.order = order
-      console.log(order)
     }
   },
   async mounted() {

@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <v-btn @click="loading(), getUsers()" v-if="!load" icon class="ml-8">
+      <v-icon size="32">refresh</v-icon>
+    </v-btn>
+    <v-btn @click="getUsers()" v-else loading icon class="ml-8"> </v-btn>
     <v-card class="mx-auto px-auto" max-width="90%" tile>
       <v-card-title>
         Users list
@@ -51,6 +55,7 @@ export default Vue.extend({
     return {
       error: true,
       search: '',
+      load: false,
       page: 1,
       pageCount: 0,
       users: [],
@@ -70,10 +75,13 @@ export default Vue.extend({
     }
   },
   methods: {
+    loading() {
+      this.load = true
+    },
     rowClick: function(item) {
       this.$router.push(`/users/${item.id}`)
     },
-    getUserdata() {
+    getUsers() {
       let id = localStorage.getItem('m_user')
       axios
         .get(`http://localhost:3000/v1/users`)
@@ -81,15 +89,17 @@ export default Vue.extend({
           this.error = false
           localStorage.setItem('token', res.config.headers.auth)
           this.users = res.data.data.users
+
           return
         })
         .catch(err => {
           this.error = true
         })
+      this.load = false
     }
   },
   beforeMount() {
-    this.getUserdata()
+    this.getUsers()
   }
 })
 </script>

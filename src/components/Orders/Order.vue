@@ -429,6 +429,7 @@ export default Vue.extend({
     },
     getCurrent(item) {
       this.clicked_product = item
+      this.statuses[this.clicked_product.status] = undefined
     },
     async changeStatus(status) {
       this.clicked_product.status = this.statuses[status]

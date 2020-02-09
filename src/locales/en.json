@@ -131,7 +131,14 @@
       }
     }
   },
-  "products": {},
+  "products": {
+    "title": "Product ID",
+    "titles": {
+      "title": "Title",
+      "title_pl": "Polish version",
+      "title_en": "English version"
+    }
+  },
   "sellers": {},
   "mail": {},
   "settings": {

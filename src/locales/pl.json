@@ -142,7 +142,22 @@
       "more_info": "Więcej"
     }
   },
-  "products": {},
+  "products": {
+    "title": "ID produktu",
+    "titles": {
+      "title": "Tytuł",
+      "title_pl": "Polska wersja",
+      "title_en": "Angielska wersja"
+    },
+    "descriptions": {
+      "title": "Opis",
+      "description_pl": "Polski opis",
+      "description_en": "Angielski opis"
+    },
+    "attributes": {
+      "title": "Atrybuty"
+    }
+  },
   "sellers": {},
   "mail": {},
   "settings": {

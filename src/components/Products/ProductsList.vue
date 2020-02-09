@@ -18,6 +18,7 @@
         v-model="selected"
         :headers="headers"
         :items="products"
+        @click:row="rowClick"
         sort-by="id"
         item-key="id"
         :search="search"
@@ -31,7 +32,7 @@
           <div class="mx-2 mt-1 mb-1">
             <v-img
               :src="item.pictures[0].url"
-              :alt="item.id"
+              :alt="item.id.toString()"
               height="80px"
               width="80px"
             ></v-img>
@@ -81,6 +82,9 @@ export default Vue.extend({
     }
   },
   methods: {
+    rowClick: function(item) {
+      this.$router.push(`/products/${item.id}`)
+    },
     getProducts() {
       let id = localStorage.getItem('m_user')
       axios

@@ -12,7 +12,8 @@ import Users from '@/views/Users.vue'
 import User from '@/components/User/User.vue'
 import Orders from '@/views/Orders.vue'
 import Sellers from '@/views/Sellers.vue'
-import Product from '@/views/Product.vue'
+import Products from '@/views/Products.vue'
+import Product from '@/components/Products/Product.vue'
 import Order from '@/components/Orders/Order.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
@@ -69,7 +70,7 @@ let router = new Router({
         },
         {
           path: '/orders/:id',
-          name: 'orders/:id',
+          name: 'order',
           component: Order,
           beforeEnter: ifAuthenticated
         },
@@ -81,15 +82,20 @@ let router = new Router({
         },
         {
           path: '/users/:id',
-          name: 'users/:id',
+          name: 'user',
           component: User,
           beforeEnter: ifAuthenticated
         },
         {
           path: '/products',
           name: 'products',
-          component: Product,
+          component: Products,
           beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/products/:id',
+          name: 'product',
+          component: Product
         },
         {
           path: '/sellers',

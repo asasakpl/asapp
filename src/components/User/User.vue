@@ -97,7 +97,6 @@
             color="primary"
             width="60%"
             max-height="55vh"
-            style="overflow: scroll"
           >
             <v-card-title class="subtitle-1">
               <v-col cols="12">
@@ -107,19 +106,26 @@
               </v-col>
             </v-card-title>
             <v-card-text>
-              <v-list-item v-for="(order, i) in user.orders" :key="i">
-                <v-list-item-content>
-                  <v-list-item-title>
-                    <div>
-                      {{ $t('users.orders.order_number') }}: {{ order.id }}
-                    </div>
-                  </v-list-item-title>
-                  <v-list-item-subtitle>
-                    {{ $t('users.orders.products') }}:
-                    {{ order.products.length }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
+              <v-card
+                flat
+                color="primary"
+                style="overflow: scroll"
+                max-height="42vh"
+              >
+                <v-list-item v-for="(order, i) in user.orders" :key="i">
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <div>
+                        {{ $t('users.orders.order_number') }}: {{ order.id }}
+                      </div>
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      {{ $t('users.orders.products') }}:
+                      {{ order.products.length }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-card>
             </v-card-text>
           </v-card>
         </v-row>

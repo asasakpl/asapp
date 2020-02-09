@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <v-btn @click="loading(), getProducts()" v-if="!load" icon class="ml-8">
+      <v-icon size="32">refresh</v-icon>
+    </v-btn>
+    <v-btn @click="getProducts()" v-else loading icon class="ml-8"> </v-btn>
     <v-card class="mx-auto px-auto" max-width="90%" tile>
       <v-card-title>
         Lista produktów
@@ -65,6 +69,7 @@ export default Vue.extend({
       products: [],
       search: '',
       singleSelect: true,
+      load: false,
       selected: [],
       headers: [
         {
@@ -82,6 +87,9 @@ export default Vue.extend({
     }
   },
   methods: {
+    loading() {
+      this.load = true
+    },
     rowClick: function(item) {
       this.$router.push(`/products/${item.id}`)
     },
@@ -98,6 +106,8 @@ export default Vue.extend({
         .catch(err => {
           this.error = true
         })
+
+      this.load = false
     }
   },
   created() {

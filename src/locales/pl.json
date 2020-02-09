@@ -155,7 +155,11 @@
       "description_en": "Angielski opis"
     },
     "attributes": {
-      "title": "Atrybuty"
+      "title": "Atrybuty",
+      "attribute": {
+        "name_pl": "Polska nazwa",
+        "name_en": "Angielska nazwa"
+      }
     }
   },
   "sellers": {},

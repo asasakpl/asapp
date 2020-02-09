@@ -52,18 +52,43 @@
               ></v-textarea>
             </v-col>
           </v-col>
-
           <v-col>
-            <v-col cols="12" sm="6" md="3" class="pb-0">
+            <v-card flat>
               <div class="headline ml-1 mb-3">
                 {{ $t('products.attributes.title') }}
               </div>
-            </v-col>
+              <v-card
+                flat
+                color="primary"
+                style="overflow: scroll"
+                max-height="40vh"
+                max-width="80%"
+              >
+                <v-list-item
+                  v-for="(attribute, i) in product.attributes"
+                  :key="i"
+                >
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      {{ $t('products.attributes.attribute.name_pl') }}:
+                      {{ attribute.name.pl }}
+                    </v-list-item-title>
+                    <v-list-item-title>
+                      {{ $t('products.attributes.attribute.name_en') }}:
+                      {{ attribute.name.en }}
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-card>
+            </v-card>
           </v-col>
         </v-row>
       </v-card>
-    </v-content></v-container
-  >
+    </v-content>
+    <v-content v-else align="center">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </v-content>
+  </v-container>
 </template>
 
 <style scoped>

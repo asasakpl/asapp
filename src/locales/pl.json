@@ -162,6 +162,14 @@
       }
     }
   },
+  "products_table": {
+    "id": "Numer produktu",
+    "picture": "Zdjęcie",
+    "name": "Tytuł",
+    "type": "Typ",
+    "tag": "Tag",
+    "category": "Kategoria"
+  },
   "sellers": {},
   "mail": {},
   "settings": {

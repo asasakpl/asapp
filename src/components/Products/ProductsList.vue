@@ -42,6 +42,9 @@
             ></v-img>
           </div>
         </template>
+        <template v-for="header in headers" v-slot:[`header.${header.value}`]>
+          {{ $t(`products_table.${header.text}`) }}
+        </template>
       </v-data-table>
       <v-data-table
         v-else
@@ -68,6 +71,7 @@ export default Vue.extend({
       pageCount: 5,
       products: [],
       search: '',
+      lang: null,
       singleSelect: true,
       load: false,
       selected: [],
@@ -78,11 +82,11 @@ export default Vue.extend({
           sortable: true,
           value: 'id'
         },
-        { text: 'Picture', value: 'image', sortable: false },
-        { text: 'Nazwa', value: 'title.pl' },
-        { text: 'Typ', value: 'type' },
-        { text: 'Tag', value: 'tag' },
-        { text: 'Kategoria', value: 'category' }
+        { text: 'picture', value: 'image', sortable: false },
+        { text: 'name', value: 'title' },
+        { text: 'type', value: 'type' },
+        { text: 'tag', value: 'tag' },
+        { text: 'category', value: 'category' }
       ]
     }
   },
@@ -100,7 +104,17 @@ export default Vue.extend({
         .then(res => {
           this.error = false
           localStorage.setItem('token', res.config.headers.auth)
+          this.lang = localStorage.getItem('i18n')
           this.products = res.data.data.products
+
+          for (let x in this.products) {
+            if (this.lang == 'pl') {
+              this.products[x].title = this.products[x].title.pl
+            } else {
+              this.products[x].title = this.products[x].title.en
+            }
+          }
+
           return
         })
         .catch(err => {

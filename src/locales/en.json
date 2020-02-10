@@ -139,6 +139,14 @@
       "title_en": "English version"
     }
   },
+  "products_table": {
+    "id": "Product number",
+    "picture": "Picture",
+    "name": "Title",
+    "type": "Type",
+    "tag": "Tag",
+    "category": "Category"
+  },
   "sellers": {},
   "mail": {},
   "settings": {

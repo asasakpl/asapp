@@ -137,6 +137,21 @@
       "title": "Title",
       "title_pl": "Polish version",
       "title_en": "English version"
+    },
+    "descriptions": {
+      "title": "Description",
+      "description_pl": "Polish description",
+      "description_en": "English description"
+    },
+    "attributes": {
+      "title": "Attributes",
+      "attribute": {
+        "name_pl": "Polish name",
+        "name_en": "English name"
+      }
+    },
+    "pictures": {
+      "title": "Pictures"
     }
   },
   "products_table": {

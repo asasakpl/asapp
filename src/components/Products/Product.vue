@@ -10,9 +10,16 @@
         max-height="90vh"
         tile
       >
-        <v-card-title class="pb-0">
-          {{ $t('products.title') }}: {{ product.id }}</v-card-title
-        >
+        <v-card-title class="pb-2">
+          {{ $t('products.title') }}: {{ product.id }}
+          <v-spacer></v-spacer>
+          <v-btn @click="editProduct" large icon class="mb-1 pb-1">
+            <v-icon size="32" class="">mdi-pencil</v-icon>
+          </v-btn>
+        </v-card-title>
+
+        <v-divider></v-divider>
+
         <v-row>
           <v-col cols="4" class="pr-2">
             <v-col class="pb-0">
@@ -81,7 +88,36 @@
                 </v-list-item>
               </v-card>
             </v-card>
+            <v-card flat class=" mt-5">
+              <div class="headline ml-1 mb-3">
+                {{ $t('products.pictures.title') }}
+              </div>
+              <v-card
+                flat
+                color="primary"
+                style="overflow: scroll"
+                max-width="80%"
+              >
+                <v-carousel>
+                  <v-carousel-item
+                    class="mx-0 px-0 "
+                    style="width: 850px; height: 300px;"
+                    v-for="(picture, i) in product.pictures"
+                    :key="i"
+                    :src="picture.url"
+                  ></v-carousel-item>
+                </v-carousel>
+              </v-card>
+            </v-card>
           </v-col>
+        </v-row>
+        <v-row class="mr-3">
+          <v-spacer></v-spacer>
+          <v-btn @click="cancelEdit()" class="mr-3" v-show="save">Cancel</v-btn>
+
+          <v-btn @click="saveProduct(product)" color="primary" v-show="save"
+            >Save</v-btn
+          >
         </v-row>
       </v-card>
     </v-content>
@@ -107,8 +143,19 @@ export default Vue.extend({
     return {
       lang: null,
       product: null,
-      disabled: true
+      disabled: true,
+      save: false
     }
+  },
+  methods: {
+    editProduct() {
+      this.disabled = false
+      this.save = true
+    },
+    saveProduct(product) {
+      console.log(product)
+    },
+    cancelEdit() {}
   },
   async mounted() {
     await axios

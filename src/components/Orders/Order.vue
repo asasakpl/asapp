@@ -125,7 +125,12 @@
               </v-card-text>
             </v-card>
 
-            <v-card class="mx-auto pr-5" color="primary" width="30%">
+            <v-card
+              class="mx-auto pr-5"
+              color="primary"
+              width="30%"
+              v-if="order[0].user.company"
+            >
               <v-card-title class="subtitle-1">
                 <v-col cols="12">
                   <div class="headline">
@@ -328,7 +333,7 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="complete_dialog" persistent max-width="290">
+    <v-dialog v-model="complete_dialog" persistent max-width="500">
       <v-card>
         <v-card-title class="headline">{{
           $t('order.status.warning')
@@ -458,7 +463,7 @@ export default Vue.extend({
       .get(`http://localhost:3000/v1/orders/${this.$route.params.id}`)
       .then(res => {
         this.order = Object.values(res.data.data)
-
+        console.log(this.order)
         if (
           this.order[0].delivery[0].specialDelivery == null &&
           this.order[0].delivery[0].courierDelivery == null

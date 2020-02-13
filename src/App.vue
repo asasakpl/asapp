@@ -1,5 +1,5 @@
 <template>
-  <v-app style="overflow: hidden">
+  <v-app>
     <v-system-bar lights-out height="28" class="drag">
       <div class="app-name">Moje35metrow.pl</div>
       <v-spacer></v-spacer>

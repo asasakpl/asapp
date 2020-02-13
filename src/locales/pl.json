@@ -63,7 +63,7 @@
       "dialog": {
         "yes": "Tak",
         "no": "Nie",
-        "success": "Order was successfully completed",
+        "success": "Zamówienie zostało pomyślnie zakończone",
         "error": "Ups, coś poszło nie tak"
       }
     },
@@ -160,6 +160,12 @@
         "name_pl": "Polska nazwa",
         "name_en": "Angielska nazwa"
       }
+    },
+    "pictures": {
+      "title": "Zdjęcia"
+    },
+    "owner": {
+      "title": "Twórca"
     }
   },
   "products_table": {

@@ -3,11 +3,12 @@
     <v-btn @click="$router.go(-1)" icon class="ml-8">
       <v-icon size="32">arrow_back</v-icon>
     </v-btn>
-    <v-content v-if="product">
+    <v-content v-if="product" style="overflow: scroll">
       <v-card
         class="mx-auto px-auto pb-2 round"
+        style="overflow: scroll;"
         max-width="90%"
-        max-height="90vh"
+        max-height="80vh"
         tile
       >
         <v-card-title class="pb-2">
@@ -45,6 +46,7 @@
                 {{ $t('products.descriptions.title') }}
               </div>
               <v-textarea
+                rows="10"
                 outlined
                 v-bind:label="$t('products.descriptions.description_pl')"
                 :value="product.description.pl"
@@ -52,6 +54,7 @@
               ></v-textarea>
 
               <v-textarea
+                rows="10"
                 :value="product.description.en"
                 v-bind:label="$t('products.descriptions.description_en')"
                 outlined
@@ -88,20 +91,22 @@
                 </v-list-item>
               </v-card>
             </v-card>
-            <v-card flat class=" mt-5">
-              <div class="headline ml-1 mb-3">
-                {{ $t('products.pictures.title') }}
-              </div>
-              <v-card
-                flat
-                color="primary"
-                style="overflow: scroll"
-                max-width="80%"
-              >
+
+            <v-card flat max-width="800" class="mt-5">
+              <v-card-title
+                ><div class="headline ml-1 mb-3">
+                  {{ $t('products.pictures.title') }}
+                </div>
+                <v-spacer></v-spacer>
+                <v-btn @click="editProduct" large icon class="mb-1 pb-1">
+                  <v-icon size="32" class="">mdi-pencil</v-icon>
+                </v-btn>
+              </v-card-title>
+
+              <v-card flat color="primary" style="overflow: scroll">
                 <v-carousel>
                   <v-carousel-item
-                    class="mx-0 px-0 "
-                    style="width: 850px; height: 300px;"
+                    class="mx-0 px-0"
                     v-for="(picture, i) in product.pictures"
                     :key="i"
                     :src="picture.url"
@@ -111,6 +116,12 @@
             </v-card>
           </v-col>
         </v-row>
+        <v-card flat v-if="product.owner">
+          <v-card-title>{{ $t('products.owner.title') }}</v-card-title>
+          <v-card-text>
+            {{ product.owner.firstName }} {{ product.owner.lastName }}
+          </v-card-text>
+        </v-card>
         <v-row class="mr-3">
           <v-spacer></v-spacer>
           <v-btn @click="cancelEdit()" class="mr-3" v-show="save">Cancel</v-btn>
@@ -155,7 +166,10 @@ export default Vue.extend({
     saveProduct(product) {
       console.log(product)
     },
-    cancelEdit() {}
+    cancelEdit() {
+      this.disabled = true
+      this.save = false
+    }
   },
   async mounted() {
     await axios

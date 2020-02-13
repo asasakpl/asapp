@@ -152,6 +152,9 @@
     },
     "pictures": {
       "title": "Pictures"
+    },
+    "owner": {
+      "title": "Owner"
     }
   },
   "products_table": {

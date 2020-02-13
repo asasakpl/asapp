@@ -4,7 +4,7 @@
       <v-icon size="32">refresh</v-icon>
     </v-btn>
     <v-btn @click="getUsers()" v-else loading icon class="ml-8"> </v-btn>
-    <v-card class="mx-auto px-auto" max-width="90%" tile>
+    <v-card class="mx-auto px-auto round" max-width="90%" tile>
       <v-card-title>
         Users list
         <v-spacer></v-spacer>
@@ -45,6 +45,12 @@
     </div>
   </v-container>
 </template>
+
+<style scoped>
+.round {
+  border-radius: 8px;
+}
+</style>
 
 <script lang="ts">
 import Vue from 'vue'

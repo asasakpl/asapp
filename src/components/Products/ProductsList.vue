@@ -4,7 +4,7 @@
       <v-icon size="32">refresh</v-icon>
     </v-btn>
     <v-btn @click="getProducts()" v-else loading icon class="ml-8"> </v-btn>
-    <v-card class="mx-auto px-auto" max-width="90%" tile>
+    <v-card class="mx-auto px-auto round" max-width="90%" tile>
       <v-card-title>
         Lista produktów
         <v-spacer></v-spacer>
@@ -29,7 +29,7 @@
         class="elevation-1"
         :page.sync="page"
         hide-default-footer
-        :items-per-page="16"
+        :items-per-page="8"
         @page-count="pageCount = $event"
       >
         <template v-slot:item.image="{ item }">
@@ -58,6 +58,12 @@
     </div>
   </v-container>
 </template>
+
+<style scoped>
+.round {
+  border-radius: 8px;
+}
+</style>
 
 <script lang="ts">
 import Vue from 'vue'

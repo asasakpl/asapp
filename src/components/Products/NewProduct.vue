@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <v-btn @click="$router.go(-1)" icon class="ml-8">
+      <v-icon size="32">arrow_back</v-icon>
+    </v-btn>
     <v-card
       class="mx-auto px-auto pb-2 round"
       style="overflow: scroll;"

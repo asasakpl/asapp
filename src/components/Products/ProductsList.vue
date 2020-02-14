@@ -1,62 +1,78 @@
 <template>
   <v-container>
-    <v-btn @click="loading(), getProducts()" v-if="!load" icon class="ml-8">
-      <v-icon size="32">refresh</v-icon>
-    </v-btn>
-    <v-btn @click="getProducts()" v-else loading icon class="ml-8"> </v-btn>
-    <v-card class="mx-auto px-auto round" max-width="90%" tile>
-      <v-card-title>
-        Lista produktów
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="search"
-          label="Search"
-          color="white"
-          single-line
-          hide-details
-        ></v-text-field>
-      </v-card-title>
-      <v-data-table
-        v-if="!error"
-        v-model="selected"
-        :headers="headers"
-        :items="products"
-        @click:row="rowClick"
-        sort-by="id"
-        :sort-desc="true"
-        item-key="id"
-        :search="search"
-        class="elevation-1"
-        :page.sync="page"
-        hide-default-footer
-        :items-per-page="8"
-        @page-count="pageCount = $event"
+    <v-row>
+      <v-btn
+        @click="loading(), getProducts()"
+        v-if="!load"
+        icon
+        class="ml-8 mt-4"
       >
-        <template v-slot:item.image="{ item }">
-          <div class="mx-2 mt-1 mb-1">
-            <v-img
-              :src="item.pictures[0].url"
-              :alt="item.id.toString()"
-              height="80px"
-              width="80px"
-            ></v-img>
-          </div>
-        </template>
-        <template v-for="header in headers" v-slot:[`header.${header.value}`]>
-          {{ $t(`products_table.${header.text}`) }}
-        </template>
-      </v-data-table>
-      <v-data-table
-        v-else
-        loading
-        hide-default-footer
-        loading-text="Loading... Please wait"
-      ></v-data-table>
-    </v-card>
-    <div class="text-center pt-2">
-      <v-pagination v-model="page" :length="pageCount"></v-pagination>
-    </div>
+        <v-icon size="32">refresh</v-icon>
+      </v-btn>
+      <v-btn @click="getProducts()" v-else loading icon class="ml-8"> </v-btn>
+
+      <v-col>
+        <v-card class="mx-auto px-auto round" max-width="90%" tile>
+          <v-card-title>
+            Lista produktów
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="search"
+              label="Search"
+              color="white"
+              single-line
+              hide-details
+            ></v-text-field>
+          </v-card-title>
+          <v-data-table
+            v-if="!error"
+            v-model="selected"
+            :headers="headers"
+            :items="products"
+            @click:row="rowClick"
+            sort-by="id"
+            :sort-desc="true"
+            item-key="id"
+            :search="search"
+            class="elevation-1"
+            :page.sync="page"
+            hide-default-footer
+            :items-per-page="8"
+            @page-count="pageCount = $event"
+          >
+            <template v-slot:item.image="{ item }">
+              <div class="mx-2 mt-1 mb-1">
+                <v-img
+                  :src="item.pictures[0].url"
+                  :alt="item.id.toString()"
+                  height="80px"
+                  width="80px"
+                ></v-img>
+              </div>
+            </template>
+            <template
+              v-for="header in headers"
+              v-slot:[`header.${header.value}`]
+            >
+              {{ $t(`products_table.${header.text}`) }}
+            </template>
+          </v-data-table>
+          <v-data-table
+            v-else
+            loading
+            hide-default-footer
+            loading-text="Loading... Please wait"
+          ></v-data-table>
+        </v-card>
+        <div class="text-center pt-2">
+          <v-pagination v-model="page" :length="pageCount"></v-pagination>
+        </div>
+      </v-col>
+      <v-btn @click="newProduct()" icon class="ml-0 mt-4">
+        <v-icon size="32">mdi-plus-box</v-icon>
+      </v-btn>
+    </v-row>
   </v-container>
 </template>
 
@@ -100,6 +116,9 @@ export default Vue.extend({
   methods: {
     loading() {
       this.load = true
+    },
+    newProduct() {
+      this.$router.push(`/product/new`)
     },
     rowClick: function(item) {
       this.$router.push(`/products/${item.id}`)

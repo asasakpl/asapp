@@ -177,6 +177,19 @@
     "tag": "Tag",
     "category": "Kategoria"
   },
+  "new_product": {
+    "title": "Tworzysz nowy produkt",
+    "title_pl": "Polska nazwa",
+    "title_en": "Angielska nazwa",
+    "description_pl": "Opis po polsku",
+    "description_en": "Opis po angielsku",
+    "button": "Utwórz",
+    "dialog": {
+      "warning": "Jesteś pewny że wszystkie podane wartości są poprawne?",
+      "no": "Nie, chcę coś poprawić",
+      "yes": "Tak, chcę utworzyć nowy produkt"
+    }
+  },
   "sellers": {},
   "mail": {},
   "settings": {

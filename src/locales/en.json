@@ -166,6 +166,19 @@
     "tag": "Tag",
     "category": "Category"
   },
+  "new_product": {
+    "title": "You're creating new product",
+    "title_pl": "Polish name",
+    "title_en": "English name",
+    "description_pl": "Polish description",
+    "description_en": "English description",
+    "button": "Create",
+    "dialog": {
+      "warning": "Are you sure that every thing is ok?",
+      "no": "No, I want to correct something",
+      "yes": "Yes, I want to create new product"
+    }
+  },
   "sellers": {},
   "mail": {},
   "settings": {

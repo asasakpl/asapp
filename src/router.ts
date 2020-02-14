@@ -12,6 +12,7 @@ import Users from '@/views/Users.vue'
 import User from '@/components/User/User.vue'
 import Orders from '@/views/Orders.vue'
 import Sellers from '@/views/Sellers.vue'
+import NewProduct from '@/components/Products/NewProduct.vue'
 import Products from '@/views/Products.vue'
 import Product from '@/components/Products/Product.vue'
 import Order from '@/components/Orders/Order.vue'
@@ -95,7 +96,14 @@ let router = new Router({
         {
           path: '/products/:id',
           name: 'product',
-          component: Product
+          component: Product,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/product/new',
+          name: 'newproducts',
+          component: NewProduct,
+          beforeEnter: ifAuthenticated
         },
         {
           path: '/sellers',

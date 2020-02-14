@@ -165,7 +165,8 @@
       "title": "Zdjęcia"
     },
     "owner": {
-      "title": "Twórca"
+      "title": "Twórca",
+      "name": "Imie i nazwisko twórcy"
     }
   },
   "products_table": {

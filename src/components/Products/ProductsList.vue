@@ -24,6 +24,7 @@
         :items="products"
         @click:row="rowClick"
         sort-by="id"
+        :sort-desc="true"
         item-key="id"
         :search="search"
         class="elevation-1"

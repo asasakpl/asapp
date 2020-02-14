@@ -119,7 +119,8 @@
         <v-card flat v-if="product.owner">
           <v-card-title>{{ $t('products.owner.title') }}</v-card-title>
           <v-card-text>
-            {{ product.owner.firstName }} {{ product.owner.lastName }}
+            {{ $t('products.owner.name') }}: {{ product.owner.firstName }}
+            {{ product.owner.lastName }}
           </v-card-text>
         </v-card>
         <v-row class="mr-3">

@@ -154,7 +154,8 @@
       "title": "Pictures"
     },
     "owner": {
-      "title": "Owner"
+      "title": "Owner",
+      "name": "Name and surname of owner"
     }
   },
   "products_table": {

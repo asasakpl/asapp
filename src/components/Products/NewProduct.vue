@@ -37,6 +37,7 @@
               {{ $t('products.descriptions.title') }}
             </div>
             <v-textarea
+              v-model="product.description_pl"
               rows="10"
               outlined
               v-bind:label="$t('new_product.description_pl')"
@@ -93,6 +94,10 @@ import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
+      title_pl: '',
+      title_en: '',
+      description_pl: '',
+      description_en: '',
       product: null,
       create_dialog: false
     }

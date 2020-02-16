@@ -136,6 +136,7 @@
     <v-content v-else align="center">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-content>
+    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -149,14 +150,19 @@
 import Vue from 'vue'
 import axios from 'axios'
 import Vuex from 'vuex'
+import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
+  components: {
+    NetworkError
+  },
   data() {
     return {
       lang: null,
       product: null,
       disabled: true,
-      save: false
+      save: false,
+      error: true
     }
   },
   methods: {
@@ -176,10 +182,14 @@ export default Vue.extend({
     await axios
       .get(`http://localhost:3000/v1/products/${this.$route.params.id}`)
       .then(res => {
+        this.error = false
         this.product = res.data.data.product
         this.lang = localStorage.getItem('i18n')
       })
-      .catch(error => console.log(error))
+      .catch(err => {
+        this.error = true
+        console.log(err)
+      })
   }
 })
 </script>

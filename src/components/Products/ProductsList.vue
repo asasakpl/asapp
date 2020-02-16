@@ -70,9 +70,10 @@
         </div>
       </v-col>
       <v-btn @click="newProduct()" icon class="ml-0 mt-4">
-        <v-icon size="32">mdi-plus-box</v-icon>
+        <v-icon size="32">mdi-pencil-plus</v-icon>
       </v-btn>
     </v-row>
+    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -85,8 +86,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
+  components: {
+    NetworkError
+  },
   data() {
     return {
       error: true,
@@ -145,6 +150,7 @@ export default Vue.extend({
         })
         .catch(err => {
           this.error = true
+          console.log(err)
         })
 
       this.load = false

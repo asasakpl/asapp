@@ -52,6 +52,7 @@
         </v-row>
       </v-col>
     </v-card>
+    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -65,13 +66,16 @@
 import Vue from 'vue'
 import axios from 'axios'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
+import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
   components: {
+    NetworkError,
     DashboardLayout
   },
   data() {
     return {
+      error: true,
       products: 0,
       sellers: 0,
       orders: 0,
@@ -84,19 +88,25 @@ export default Vue.extend({
       let date = new Date()
       date.setDate(date.getDate() - 30)
 
-      await axios.get('http://localhost:3000/v1/users').then(res => {
-        let users = res.data.data.users
-        users = users.map(user => user.createdAt)
+      await axios
+        .get('http://localhost:3000/v1/users')
+        .then(res => {
+          this.error = false
+          let users = res.data.data.users
+          users = users.map(user => user.createdAt)
 
-        for (let x in users) {
-          let usersDate = new Date(users[x])
-          let ddd = 0
-          if (date < usersDate) {
-            ddd++
+          for (let x in users) {
+            let usersDate = new Date(users[x])
+            let ddd = 0
+            if (date < usersDate) {
+              ddd++
+            }
+            this.users = this.users + ddd
           }
-          this.users = this.users + ddd
-        }
-      })
+        })
+        .catch(err => {
+          this.error = true
+        })
 
       await axios.get('http://localhost:3000/v1/products').then(res => {
         this.products = res.data.data.products.length

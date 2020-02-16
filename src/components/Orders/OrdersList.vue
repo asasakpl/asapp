@@ -50,6 +50,7 @@
     <div class="text-center pt-2">
       <v-pagination v-model="page" :length="pageCount"></v-pagination>
     </div>
+    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -62,8 +63,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
+  components: {
+    NetworkError
+  },
   data() {
     return {
       error: true,

@@ -177,6 +177,13 @@
       "warning": "Are you sure that every thing is ok?",
       "no": "No, I want to correct something",
       "yes": "Yes, I want to create new product"
+    },
+    "other": {
+      "title": "General",
+      "category": "Category",
+      "type": "Delivery Type",
+      "price": "Price",
+      "tag": "Tag"
     }
   },
   "sellers": {},

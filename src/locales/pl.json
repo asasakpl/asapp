@@ -161,6 +161,7 @@
         "name_en": "Angielska nazwa"
       }
     },
+
     "pictures": {
       "title": "Zdjęcia"
     },
@@ -188,6 +189,13 @@
       "warning": "Jesteś pewny że wszystkie podane wartości są poprawne?",
       "no": "Nie, chcę coś poprawić",
       "yes": "Tak, chcę utworzyć nowy produkt"
+    },
+    "other": {
+      "title": "Ogólne",
+      "category": "Kategoria",
+      "type": "Rodzaj dostawy",
+      "price": "Cena",
+      "tag": "Tag"
     }
   },
   "sellers": {},

@@ -19,7 +19,11 @@ export default Vue.extend({
   async mounted() {
     if (this.error === true) {
       setTimeout(() => {
-        this.display = true
+        if (this.error === true) {
+          this.display = true
+        } else {
+          this.display = false
+        }
       }, 3000)
     }
   }

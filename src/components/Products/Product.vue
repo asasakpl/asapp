@@ -22,7 +22,7 @@
         <v-divider></v-divider>
 
         <v-row>
-          <v-col cols="4" class="pr-2">
+          <v-col cols="4" class="pr-2 ml-6">
             <v-col class="pb-0">
               <div class="headline ml-1 mb-3">
                 {{ $t('products.titles.title') }}
@@ -62,7 +62,7 @@
               ></v-textarea>
             </v-col>
           </v-col>
-          <v-col>
+          <v-col class="ml-6">
             <v-card flat>
               <div class="headline ml-1 mb-3">
                 {{ $t('products.attributes.title') }}

@@ -8,6 +8,9 @@ export default new Vuex.Store({
   state: {
     packageVersion: process.env.PACKAGE_VERSION || '0',
     status: '',
+    success: false,
+    succ_text: '',
+    succ_icon: '',
     token: localStorage.getItem('token') || '',
     userId: localStorage.getItem('m_user') || '',
     adminType: localStorage.getItem('m_type') || ''
@@ -29,6 +32,12 @@ export default new Vuex.Store({
       state.userId = ''
       state.status = ''
       state.token = ''
+    },
+    success(state, { text, icon }) {
+      state.success = true
+      state.succ_text = text
+      state.succ_icon = icon
+      console.log(state.succ_text)
     }
   },
   actions: {
@@ -70,6 +79,12 @@ export default new Vuex.Store({
         delete axios.defaults.headers.common['auth']
         resolve()
       })
+    },
+    success({ commit }, succ_obj) {
+      const text = succ_obj.text
+      const icon = succ_obj.icon
+      commit('success', { text, icon })
+      console.log(succ_obj)
     }
   },
   getters: {
@@ -77,6 +92,15 @@ export default new Vuex.Store({
     authStatus: state => state.status,
     appVersion: state => {
       return state.packageVersion
+    },
+    setSuccess: state => {
+      console.log(state.succ_icon)
+      const succ_obj = {
+        text: state.succ_text,
+        success: state.success,
+        icon: state.succ_icon
+      }
+      return succ_obj
     }
   }
 })

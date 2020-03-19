@@ -113,7 +113,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link v-on:click="login()">
+        <v-list-item link v-on:click="logout()">
           <v-list-item-icon>
             <v-icon>mdi-logout-variant</v-icon>
           </v-list-item-icon>
@@ -182,7 +182,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    login() {
+    logout() {
       this.$store.dispatch('logout')
       this.$router.push('/login')
     }

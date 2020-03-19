@@ -40,6 +40,7 @@
                 v-model="admin.email"
                 outlined
                 :disabled="disabled"
+                :rules="emailRules"
               ></v-text-field>
             </v-col>
           </v-col>
@@ -92,6 +93,7 @@
   border-radius: 8px;
 }
 </style>
+
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
@@ -103,12 +105,17 @@ export default Vue.extend({
   },
   data() {
     return {
-      lang: null,
       admin: null,
       disabled: true,
       save: false,
       error: true,
-      types: [0, 1]
+      types: [0, 1],
+      emailRules: [
+        v =>
+          !v ||
+          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+          'E-mail must be valid'
+      ]
     }
   },
   methods: {

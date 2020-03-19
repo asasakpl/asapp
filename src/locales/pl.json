@@ -216,6 +216,11 @@
       "surname": "Nazwisko",
       "email": "Adres email",
       "type": "Typ konta"
+    },
+    "new": {
+      "title": "Tworzysz nowego administratora",
+      "password": "Hasło",
+      "repeat": "Powtórz hasło"
     }
   },
   "settings": {

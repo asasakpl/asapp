@@ -8,6 +8,9 @@ export default new Vuex.Store({
   state: {
     packageVersion: process.env.PACKAGE_VERSION || '0',
     status: '',
+    error: false,
+    err_text: '',
+    err_icon: '',
     success: false,
     succ_text: '',
     succ_icon: '',
@@ -37,6 +40,11 @@ export default new Vuex.Store({
       state.success = true
       state.succ_text = text
       state.succ_icon = icon
+    },
+    error(state, { text, icon }) {
+      state.error = true
+      state.err_text = text
+      state.err_icon = icon
     }
   },
   actions: {
@@ -83,7 +91,11 @@ export default new Vuex.Store({
       const text = succ_obj.text
       const icon = succ_obj.icon
       commit('success', { text, icon })
-      console.log(succ_obj)
+    },
+    error({ commit }, err_obj) {
+      const text = err_obj.text
+      const icon = err_obj.icon
+      commit('error', { text, icon })
     }
   },
   getters: {
@@ -93,13 +105,20 @@ export default new Vuex.Store({
       return state.packageVersion
     },
     setSuccess: state => {
-      console.log(state.succ_icon)
       const succ_obj = {
         text: state.succ_text,
         success: state.success,
         icon: state.succ_icon
       }
       return succ_obj
+    },
+    setError: state => {
+      const err_obj = {
+        text: state.err_text,
+        error: state.error,
+        icon: state.err_icon
+      }
+      return err_obj
     }
   }
 })

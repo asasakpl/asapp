@@ -1,6 +1,6 @@
 <template>
   <v-snackbar bottom v-model="display" color="success" :timeout="4000">
-    {{ $t(text) }} <v-icon>mdi-{{ icon }}</v-icon>
+    {{ $t(text) }} <v-icon class="ml-2">mdi-{{ icon }}</v-icon>
   </v-snackbar>
 </template>
 

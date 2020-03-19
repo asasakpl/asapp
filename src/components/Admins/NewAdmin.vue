@@ -90,6 +90,7 @@
           >
         </v-row>
       </v-card>
+      <Error v-if="error"></Error>
     </v-content>
   </v-container>
 </template>
@@ -105,11 +106,11 @@ import Vue from 'vue'
 import axios from 'axios'
 
 // components
-import Success from '@/components/Success.vue'
+import Error from '@/components/Error.vue'
 
 export default Vue.extend({
   components: {
-    Success
+    Error
   },
   data() {
     return {
@@ -118,6 +119,7 @@ export default Vue.extend({
       },
       types: [0, 1],
       save: false,
+      error: false,
       show: false,
       rePassword: null,
       emailRules: [
@@ -134,20 +136,25 @@ export default Vue.extend({
   },
   methods: {
     async createAdmin(admin) {
-      /*  await axios
+      this.error = false
+      await axios
         .post('http://localhost:3000/v1/admins/new', admin, {
           headers: {
             auth: localStorage.getItem('token')
           }
         })
         .then(res => {
-         
+          const text = 'admin.success'
+          const icon = 'database-check'
+          this.$store.dispatch('success', { text, icon })
+          this.$router.push('/admins')
         })
-        .catch(err => console.log(err)) */
-      const text = 'admin.success'
-      const icon = 'database-check'
-      this.$store.dispatch('success', { text, icon })
-      this.$router.push('/admins')
+        .catch(err => {
+          const text = 'admin.error'
+          const icon = 'database-remove'
+          this.$store.dispatch('error', { text, icon })
+          this.error = true
+        })
     }
   },
   computed: {

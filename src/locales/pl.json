@@ -222,7 +222,8 @@
       "password": "Hasło",
       "repeat": "Powtórz hasło"
     },
-    "success": "Pomyślnie utworzono nowego administratora"
+    "success": "Pomyślnie utworzono nowego administratora",
+    "error": "Administrator z tym adresem email już istnieje"
   },
   "settings": {
     "title": "Ustawienia",

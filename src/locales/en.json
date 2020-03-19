@@ -197,7 +197,20 @@
       "second_name": "Surname",
       "email": "Email",
       "type": "Type"
-    }
+    },
+    "page": {
+      "id": "Admin number",
+      "name": "Name",
+      "surname": "Last Name",
+      "email": "Email address",
+      "type": "Account type"
+    },
+    "new": {
+      "title": "Creating new administrator",
+      "password": "Password",
+      "repeat": "Repeat password"
+    },
+    "success": "New administrator was successfully created"
   },
   "settings": {
     "title": "Settings",

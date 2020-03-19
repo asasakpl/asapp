@@ -21,11 +21,7 @@
               <div class="headline ml-1 mb-3">
                 {{ $t('admin.page.name') }}
               </div>
-              <v-text-field
-                v-model="admin.firstName"
-                outlined
-                :disabled="disabled"
-              ></v-text-field>
+              <v-text-field v-model="admin.firstName" outlined></v-text-field>
             </v-col>
             <v-col class="pb-0">
               <div class="headline ml-1 mb-3">
@@ -34,7 +30,6 @@
               <v-text-field
                 v-model="admin.email"
                 outlined
-                :disabled="disabled"
                 :rules="emailRules"
               ></v-text-field>
             </v-col>
@@ -44,7 +39,6 @@
               </div>
               <v-select
                 :items="types"
-                :disabled="disabled"
                 v-model="admin.type"
                 item-text="title"
                 v-bind:label="$t('order.delivery.products.dialog.set_status')"
@@ -57,11 +51,7 @@
               <div class="headline ml-1 mb-3">
                 {{ $t('admin.page.surname') }}
               </div>
-              <v-text-field
-                v-model="admin.lastName"
-                outlined
-                :disabled="disabled"
-              ></v-text-field>
+              <v-text-field v-model="admin.lastName" outlined></v-text-field>
             </v-col>
 
             <v-col class="pb-0">
@@ -71,8 +61,7 @@
               <v-text-field
                 v-model="admin.password"
                 outlined
-                :disabled="disabled"
-                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required, rules.min]"
                 :type="show ? 'text' : 'password'"
                 @click:append="show = !show"
@@ -85,8 +74,7 @@
               <v-text-field
                 v-model="rePassword"
                 outlined
-                :disabled="disabled"
-                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required, rules.min, passwordConfirmationRule]"
                 :type="show ? 'text' : 'password'"
                 @click:append="show = !show"
@@ -114,7 +102,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import axios from 'axios'
+
+// components
+import Success from '@/components/Success.vue'
+
 export default Vue.extend({
+  components: {
+    Success
+  },
   data() {
     return {
       admin: {
@@ -132,13 +128,26 @@ export default Vue.extend({
       ],
       rules: {
         required: value => !!value || 'Required.',
-        min: v => v.length >= 12 || 'Min 12 characters'
+        min: v => (v && v.length >= 12) || 'Min 12 characters'
       }
     }
   },
   methods: {
-    createAdmin(admin) {
-      console.log(admin)
+    async createAdmin(admin) {
+      /*  await axios
+        .post('http://localhost:3000/v1/admins/new', admin, {
+          headers: {
+            auth: localStorage.getItem('token')
+          }
+        })
+        .then(res => {
+         
+        })
+        .catch(err => console.log(err)) */
+      const text = 'admin.success'
+      const icon = 'database-check'
+      this.$store.dispatch('success', { text, icon })
+      this.$router.push('/admins')
     }
   },
   computed: {

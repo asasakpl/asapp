@@ -221,7 +221,8 @@
       "title": "Tworzysz nowego administratora",
       "password": "Hasło",
       "repeat": "Powtórz hasło"
-    }
+    },
+    "success": "Pomyślnie utworzono nowego administratora"
   },
   "settings": {
     "title": "Ustawienia",

@@ -163,7 +163,7 @@
     "picture": "Picture",
     "name": "Title",
     "type": "Type",
-    "tag": "Tag",
+    "views": "Views",
     "category": "Category"
   },
   "new_product": {

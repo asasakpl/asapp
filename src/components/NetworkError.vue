@@ -1,6 +1,6 @@
 <template>
   <v-snackbar top v-model="display" color="error" :timeout="0">
-    <div class="pl-5">
+    <div class="pl-6">
       Check your network connection
       <v-icon class="ml-12">mdi-network-strength-off</v-icon>
     </div>

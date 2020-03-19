@@ -113,7 +113,7 @@ export default Vue.extend({
         { text: 'picture', value: 'image', sortable: false },
         { text: 'name', value: 'title' },
         { text: 'type', value: 'type' },
-        { text: 'tag', value: 'tag' },
+        { text: 'views', value: 'views' },
         { text: 'category', value: 'category' }
       ]
     }

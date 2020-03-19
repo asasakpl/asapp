@@ -175,7 +175,7 @@
     "picture": "Zdjęcie",
     "name": "Tytuł",
     "type": "Typ",
-    "tag": "Tag",
+    "views": "Wyświetlenia",
     "category": "Kategoria"
   },
   "new_product": {

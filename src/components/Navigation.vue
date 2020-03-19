@@ -88,12 +88,22 @@
             <v-list-item-title>{{ $t('navigation.mail') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item to="/admins" v-if="type == 1">
+          <v-list-item-icon>
+            <v-icon>mdi-shield-account</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ $t('navigation.admins') }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <v-spacer></v-spacer>
       <v-list dense nav>
         <v-list-item link to="/settings">
           <v-list-item-icon>
-            <v-icon>mdi-settings</v-icon>
+            <v-icon>mdi-cogs</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -143,6 +153,7 @@ export default Vue.extend({
     return {
       name: localStorage.getItem('m_name'),
       email: localStorage.getItem('m_email'),
+      type: localStorage.getItem('m_type'),
       drawer: true,
       items: [
         {
@@ -174,11 +185,7 @@ export default Vue.extend({
     login() {
       this.$store.dispatch('logout')
       this.$router.push('/login')
-    },
-    async getUserdata() {}
-  },
-  beforeMount() {
-    this.getUserdata()
+    }
   }
 })
 </script>

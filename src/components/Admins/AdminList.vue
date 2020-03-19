@@ -2,34 +2,26 @@
   <v-container>
     <v-row>
       <v-btn
-        @click="loading(), getProducts()"
+        @click="loading(), getAdmins()"
         v-if="!load"
         icon
         class="ml-8 mt-4"
       >
         <v-icon size="32">refresh</v-icon>
       </v-btn>
-      <v-btn @click="getProducts()" v-else loading icon class="ml-8"> </v-btn>
+      <v-btn @click="getAdmins()" v-else loading icon class="ml-8"> </v-btn>
 
       <v-col>
         <v-card class="mx-auto px-auto round" max-width="90%" tile>
           <v-card-title>
-            Lista produktów
+            {{ $t('admin.table.title') }}
             <v-spacer></v-spacer>
-            <v-text-field
-              v-model="search"
-              append-icon="search"
-              label="Search"
-              color="white"
-              single-line
-              hide-details
-            ></v-text-field>
           </v-card-title>
           <v-data-table
             v-if="!error"
             v-model="selected"
             :headers="headers"
-            :items="products"
+            :items="admins"
             @click:row="rowClick"
             sort-by="id"
             :sort-desc="true"
@@ -55,7 +47,7 @@
               v-for="header in headers"
               v-slot:[`header.${header.value}`]
             >
-              {{ $t(`products_table.${header.text}`) }}
+              {{ $t(`admin.table.${header.text}`) }}
             </template>
           </v-data-table>
           <v-data-table
@@ -69,7 +61,7 @@
           <v-pagination v-model="page" :length="pageCount"></v-pagination>
         </div>
       </v-col>
-      <v-btn @click="newProduct()" icon class="ml-0 mt-4">
+      <v-btn @click="newAdmin()" icon class="ml-0 mt-4">
         <v-icon size="32">mdi-pencil-plus</v-icon>
       </v-btn>
     </v-row>
@@ -97,7 +89,7 @@ export default Vue.extend({
       error: true,
       page: 1,
       pageCount: 5,
-      products: [],
+      admins: [],
       search: '',
       lang: null,
       singleSelect: true,
@@ -110,11 +102,22 @@ export default Vue.extend({
           sortable: true,
           value: 'id'
         },
-        { text: 'picture', value: 'image', sortable: false },
-        { text: 'name', value: 'title' },
-        { text: 'type', value: 'type' },
-        { text: 'views', value: 'views' },
-        { text: 'category', value: 'category' }
+        {
+          text: 'name',
+          value: 'firstName'
+        },
+        {
+          text: 'second_name',
+          value: 'lastName'
+        },
+        {
+          text: 'email',
+          value: 'email'
+        },
+        {
+          text: 'type',
+          value: 'type'
+        }
       ]
     }
   },
@@ -122,30 +125,21 @@ export default Vue.extend({
     loading() {
       this.load = true
     },
-    newProduct() {
-      this.$router.push(`/product/new`)
+    newAdmin() {
+      this.$router.push(`/admins/new`)
     },
     rowClick: function(item) {
-      this.$router.push(`/products/${item.id}`)
+      console.log(item)
+      this.$router.push(`/admins/${item.id}`)
     },
-    getProducts() {
+    getAdmins() {
       let id = localStorage.getItem('m_user')
       axios
-        .get(`http://localhost:3000/v1/products`)
+        .get(`http://localhost:3000/v1/admins`)
         .then(res => {
           this.error = false
           localStorage.setItem('token', res.config.headers.auth)
-          this.lang = localStorage.getItem('i18n')
-          this.products = res.data.data.products
-
-          for (let x in this.products) {
-            if (this.lang == 'pl') {
-              this.products[x].title = this.products[x].title.pl
-            } else {
-              this.products[x].title = this.products[x].title.en
-            }
-          }
-
+          this.admins = res.data.data.admins
           return
         })
         .catch(err => {
@@ -157,7 +151,7 @@ export default Vue.extend({
     }
   },
   created() {
-    this.getProducts()
+    this.getAdmins()
   }
 })
 </script>

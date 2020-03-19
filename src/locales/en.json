@@ -7,6 +7,7 @@
     "products": "Products",
     "sellers": "Sellers",
     "mail": "Mail",
+    "admins": "Admins",
     "settings": "Settings",
     "log_out": "Log out"
   },
@@ -188,6 +189,16 @@
   },
   "sellers": {},
   "mail": {},
+  "admin": {
+    "table": {
+      "title": "Admins list",
+      "id": "Number",
+      "name": "First name",
+      "second_name": "Surname",
+      "email": "Email",
+      "type": "Type"
+    }
+  },
   "settings": {
     "title": "Settings",
     "theme": "App theme",

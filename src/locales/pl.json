@@ -6,8 +6,9 @@
     "users": "Użytkownicy",
     "products": "Produkty",
     "sellers": "Sprzedający",
-    "mail": "Poczta ",
-    "settings": "Ustawiania",
+    "mail": "Poczta",
+    "admins": "Administratorzy",
+    "settings": "Ustawienia",
     "log_out": "Wyloguj się"
   },
   "dashboard": {
@@ -200,6 +201,23 @@
   },
   "sellers": {},
   "mail": {},
+  "admin": {
+    "table": {
+      "title": "Lista administratorów",
+      "id": "Numer",
+      "name": "Imie",
+      "second_name": "Nazwisko",
+      "email": "Email",
+      "type": "Typ"
+    },
+    "page": {
+      "id": "Numer administratora",
+      "name": "Imie",
+      "surname": "Nazwisko",
+      "email": "Adres email",
+      "type": "Typ konta"
+    }
+  },
   "settings": {
     "title": "Ustawienia",
     "theme": "Motyw aplikacji",

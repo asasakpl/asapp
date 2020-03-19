@@ -9,7 +9,8 @@ export default new Vuex.Store({
     packageVersion: process.env.PACKAGE_VERSION || '0',
     status: '',
     token: localStorage.getItem('token') || '',
-    userId: localStorage.getItem('m_user') || ''
+    userId: localStorage.getItem('m_user') || '',
+    adminType: localStorage.getItem('m_type') || ''
   },
   mutations: {
     auth_request(state) {
@@ -48,6 +49,7 @@ export default new Vuex.Store({
           localStorage.setItem('m_user', user.id)
           localStorage.setItem('m_email', user.email)
           localStorage.setItem('m_name', user.firstName + ' ' + user.lastName)
+          localStorage.setItem('m_type', user.type)
           localStorage.setItem('i18n', 'en')
 
           axios.defaults.headers.common['auth'] = token

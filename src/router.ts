@@ -4,8 +4,11 @@ import Router from 'vue-router'
 
 // Views
 import Mail from '@/views/Mail.vue'
+import Admins from '@/views/Admins.vue'
 import Login from '@/views/Login.vue'
 import About from '@/views/About.vue'
+import NewAdmin from '@/components/Admins/NewAdmin.vue'
+import Admin from '@/components/Admins/Admin.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Settings from '@/views/Settings.vue'
 import Users from '@/views/Users.vue'
@@ -115,6 +118,24 @@ let router = new Router({
           path: '/mail',
           name: 'mail',
           component: Mail,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/admins',
+          name: 'admins',
+          component: Admins,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/admins/new',
+          name: 'newadmin',
+          component: NewAdmin,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/admins/:id',
+          name: 'admin',
+          component: Admin,
           beforeEnter: ifAuthenticated
         },
         {

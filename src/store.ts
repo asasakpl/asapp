@@ -37,7 +37,6 @@ export default new Vuex.Store({
       state.success = true
       state.succ_text = text
       state.succ_icon = icon
-      console.log(state.succ_text)
     }
   },
   actions: {

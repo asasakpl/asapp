@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-content>
+    <v-content v-if="release">
       <v-card class="mx-auto mb-4 round" max-width="90%" tile>
         <v-card-title class="px-8 display-1 font-weight-bold">
           <div>Release {{ release.tag_name }}</div>
@@ -10,11 +10,7 @@
         </v-card-text>
         <v-card-actions class="px-4">
           <v-list-item class="grow">
-            <v-list-item-avatar
-              color="grey darken-3"
-              size="46"
-              :href="author.url"
-            >
+            <v-list-item-avatar color="grey darken-3" size="46">
               <v-img
                 class="elevation-4"
                 :src="release.author.avatar_url"
@@ -32,6 +28,9 @@
           </v-list-item>
         </v-card-actions>
       </v-card>
+    </v-content>
+    <v-content v-else align="center">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-content>
   </v-container>
 </template>
@@ -56,12 +55,7 @@ export default Vue.extend({
   components: {},
   data() {
     return {
-      release: null,
-      changes: '',
-      title: '',
-      date: null,
-
-      author: {}
+      release: null
     }
   },
   async mounted() {
@@ -69,7 +63,6 @@ export default Vue.extend({
       .then(response => response.json())
       .then(data => {
         this.release = data
-
         this.release.body = marked(this.release.body)
         let date = new Date(this.release.published_at)
         this.release.published_at =
@@ -85,10 +78,11 @@ export default Vue.extend({
           ('0' + (date.getMonth() + 1)).slice(-2) +
           '/' +
           date.getFullYear()
-
-        console.log('dupa')
+        console.log(this.release.tag_name)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+      })
   }
 })
 </script>

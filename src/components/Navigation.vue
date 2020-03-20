@@ -125,7 +125,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item>
+        <v-list-item link to="/changelog">
           <v-list-item-icon>
             <v-icon>mdi-ev-station</v-icon>
           </v-list-item-icon>

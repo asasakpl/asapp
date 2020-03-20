@@ -10,6 +10,7 @@ import About from '@/views/About.vue'
 import NewAdmin from '@/components/Admins/NewAdmin.vue'
 import Admin from '@/components/Admins/Admin.vue'
 import Dashboard from '@/views/Dashboard.vue'
+import Changelog from '@/views/Changelog.vue'
 import Settings from '@/views/Settings.vue'
 import Users from '@/views/Users.vue'
 import User from '@/components/User/User.vue'
@@ -142,6 +143,12 @@ let router = new Router({
           path: '/settings',
           name: 'settings',
           component: Settings,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/changelog',
+          name: 'changelog',
+          component: Changelog,
           beforeEnter: ifAuthenticated
         }
       ]

@@ -6,7 +6,7 @@
           <div>Release {{ release.tag_name }}</div>
         </v-card-title>
         <v-divider></v-divider>
-        <v-card-text style="color: white" class="px-8" v-html="release.body">
+        <v-card-text class="text--primary px-8" v-html="release.body">
         </v-card-text>
         <v-card-actions class="px-4">
           <v-list-item class="grow">

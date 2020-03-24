@@ -138,7 +138,7 @@ export default Vue.extend({
     async createAdmin(admin) {
       this.error = false
       await axios
-        .post('http://localhost:3000/v1/admins/new', admin, {
+        .post('/admins/new', admin, {
           headers: {
             auth: localStorage.getItem('token')
           }

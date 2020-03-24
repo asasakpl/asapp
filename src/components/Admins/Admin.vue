@@ -133,7 +133,7 @@ export default Vue.extend({
   },
   async mounted() {
     await axios
-      .get(`http://localhost:3000/v1/admins/${this.$route.params.id}`)
+      .get(`/admins/${this.$route.params.id}`)
       .then(res => {
         this.error = false
         this.admin = res.data.data.admin

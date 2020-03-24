@@ -131,7 +131,7 @@ export default Vue.extend({
     getProducts() {
       let id = localStorage.getItem('m_user')
       axios
-        .get(`http://localhost:3000/v1/products`)
+        .get(`/products`)
         .then(res => {
           this.error = false
           localStorage.setItem('token', res.config.headers.auth)

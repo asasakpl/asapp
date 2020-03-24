@@ -438,16 +438,13 @@ export default Vue.extend({
     },
     async changeStatus(status) {
       this.clicked_product.status = this.statuses[status]
-      await axios.patch(
-        `http://localhost:3000/v1/orders/product/${this.clicked_product.id}`,
-        {
-          status: status
-        }
-      )
+      await axios.patch(`/orders/product/${this.clicked_product.id}`, {
+        status: status
+      })
     },
     async completeOrder() {
       await axios
-        .patch(`http://localhost:3000/v1/orders/complete/${this.order[0].id}`, {
+        .patch(`/orders/complete/${this.order[0].id}`, {
           status: 1
         })
         .then(res => {
@@ -460,7 +457,7 @@ export default Vue.extend({
   },
   async mounted() {
     await axios
-      .get(`http://localhost:3000/v1/orders/${this.$route.params.id}`)
+      .get(`/orders/${this.$route.params.id}`)
       .then(res => {
         this.order = Object.values(res.data.data)
         console.log(this.order)

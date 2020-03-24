@@ -89,7 +89,7 @@ export default Vue.extend({
       date.setDate(date.getDate() - 30)
 
       await axios
-        .get('http://localhost:3000/v1/users')
+        .get('/users')
         .then(res => {
           this.error = false
           let users = res.data.data.users
@@ -108,11 +108,11 @@ export default Vue.extend({
           this.error = true
         })
 
-      await axios.get('http://localhost:3000/v1/products').then(res => {
+      await axios.get('/products').then(res => {
         this.products = res.data.data.products.length
       })
 
-      await axios.get('http://localhost:3000/v1/orders').then(res => {
+      await axios.get('/orders').then(res => {
         let orders = res.data.data.orders
         orders = orders.map(order => order.createdAt)
 
@@ -126,7 +126,7 @@ export default Vue.extend({
         }
       })
 
-      await axios.get('http://localhost:3000/v1/owners').then(res => {
+      await axios.get('/owners').then(res => {
         this.sellers = res.data.data.owners.length
       })
     }

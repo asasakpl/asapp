@@ -140,7 +140,7 @@ export default Vue.extend({
     getAdmins() {
       let id = localStorage.getItem('m_user')
       axios
-        .get(`http://localhost:3000/v1/admins`)
+        .get(`/admins`)
         .then(res => {
           this.error = false
           localStorage.setItem('token', res.config.headers.auth)

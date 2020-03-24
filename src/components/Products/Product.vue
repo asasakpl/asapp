@@ -180,7 +180,7 @@ export default Vue.extend({
   },
   async mounted() {
     await axios
-      .get(`http://localhost:3000/v1/products/${this.$route.params.id}`)
+      .get(`/products/${this.$route.params.id}`)
       .then(res => {
         this.error = false
         this.product = res.data.data.product

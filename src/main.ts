@@ -12,6 +12,12 @@ if (token) {
   axios.defaults.headers.common['auth'] = token
 }
 
+if (process.env.NODE_ENV === 'production') {
+  axios.defaults.baseURL = 'https://api.moje35metrow.pl'
+} else if (process.env.NODE_ENV === 'development') {
+  axios.defaults.baseURL = 'http://localhost:3000/v1'
+}
+
 Vue.config.productionTip = false
 
 new Vue({

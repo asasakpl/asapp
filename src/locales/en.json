@@ -6,7 +6,7 @@
     "users": "Users",
     "products": "Products",
     "sellers": "Sellers",
-    "mail": "Mail",
+    "mail": "Newsletters",
     "admins": "Admins",
     "settings": "Settings",
     "log_out": "Log out"
@@ -188,7 +188,10 @@
     }
   },
   "sellers": {},
-  "mail": {},
+  "mail": {
+    "title": "Newsletters",
+    "subscribers": "Subscribers count"
+  },
   "admin": {
     "table": {
       "title": "Admins list",

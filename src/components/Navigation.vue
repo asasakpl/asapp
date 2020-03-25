@@ -35,7 +35,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/orders">
+        <v-list-item to="/orders" disabled>
           <v-list-item-icon>
             <v-icon>mdi-truck</v-icon>
           </v-list-item-icon>
@@ -45,7 +45,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/users">
+        <v-list-item to="/users" disabled>
           <v-list-item-icon>
             <v-icon>mdi-account-group</v-icon>
           </v-list-item-icon>
@@ -55,7 +55,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/products">
+        <v-list-item to="/products" disabled>
           <v-list-item-icon>
             <v-icon>mdi-folder-home</v-icon>
           </v-list-item-icon>
@@ -79,7 +79,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/mail" disabled>
+        <v-list-item to="/mail">
           <v-list-item-icon>
             <v-icon>mdi-email-send</v-icon>
           </v-list-item-icon>

@@ -6,7 +6,7 @@
     "users": "Użytkownicy",
     "products": "Produkty",
     "sellers": "Sprzedający",
-    "mail": "Poczta",
+    "mail": "Newsletters",
     "admins": "Administratorzy",
     "settings": "Ustawienia",
     "log_out": "Wyloguj się"
@@ -200,7 +200,10 @@
     }
   },
   "sellers": {},
-  "mail": {},
+  "mail": {
+    "title": "Newslettery",
+    "subscribers": "Liczba subskrybentów"
+  },
   "admin": {
     "table": {
       "title": "Lista administratorów",

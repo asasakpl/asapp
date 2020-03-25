@@ -15,6 +15,8 @@ import Settings from '@/views/Settings.vue'
 import Users from '@/views/Users.vue'
 import User from '@/components/User/User.vue'
 import Orders from '@/views/Orders.vue'
+import Asasak from '@/views/mail/Asasak.vue'
+import M35 from '@/views/mail/M35.vue'
 import Sellers from '@/views/Sellers.vue'
 import NewProduct from '@/components/Products/NewProduct.vue'
 import Products from '@/views/Products.vue'
@@ -119,6 +121,18 @@ let router = new Router({
           path: '/mail',
           name: 'mail',
           component: Mail,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/asasak',
+          name: 'asasak',
+          component: Asasak,
+          beforeEnter: ifAuthenticated
+        },
+        {
+          path: '/m35',
+          name: 'm35',
+          component: M35,
           beforeEnter: ifAuthenticated
         },
         {

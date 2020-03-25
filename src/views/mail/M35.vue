@@ -10,7 +10,7 @@
       tile
       v-if="m35"
     >
-      {{ m35 }}
+      <v-card-title>Newsletter moje35metrow.pl</v-card-title>
     </v-card>
 
     <v-content v-else align="center">
@@ -18,6 +18,12 @@
     </v-content>
   </v-container>
 </template>
+
+<style scoped>
+.round {
+  border-radius: 8px;
+}
+</style>
 
 <script lang="ts">
 import Vue from 'vue'

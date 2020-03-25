@@ -10,9 +10,9 @@
       <v-card-title>
         {{ $t('mail.title') }}
       </v-card-title>
-      <v-list-item to="/m35">
+      <v-list-item to="/m35" disabled>
         <v-list-item-content>
-          <v-list-item-title>Moje35metrow.pl newsletter</v-list-item-title>
+          <v-list-item-title>moje35metrow.pl</v-list-item-title>
         </v-list-item-content>
 
         <v-list-item-content>
@@ -22,7 +22,7 @@
 
       <v-list-item to="/asasak">
         <v-list-item-content>
-          <v-list-item-title>asasak.pl newsltter</v-list-item-title>
+          <v-list-item-title>asasak.pl</v-list-item-title>
         </v-list-item-content>
 
         <v-list-item-content>
@@ -30,9 +30,11 @@
         </v-list-item-content>
       </v-list-item>
     </v-card>
+
     <v-content v-else align="center">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-content>
+
     <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>

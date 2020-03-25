@@ -202,7 +202,16 @@
   "sellers": {},
   "mail": {
     "title": "Newslettery",
-    "subscribers": "Liczba subskrybentów"
+    "subscribers": "Liczba subskrybentów",
+    "single": {
+      "title": "Nazwa",
+      "description": "Opis",
+      "members": "Subskrybenci"
+    },
+    "table": {
+      "email": "Adres email",
+      "name": "Imie i nazwisko"
+    }
   },
   "admin": {
     "table": {

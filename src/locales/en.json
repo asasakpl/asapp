@@ -190,7 +190,16 @@
   "sellers": {},
   "mail": {
     "title": "Newsletters",
-    "subscribers": "Subscribers count"
+    "subscribers": "Subscribers count",
+    "single": {
+      "title": "Name",
+      "description": "Description",
+      "members": "Subscribers"
+    },
+    "table": {
+      "email": "Email address",
+      "name": "Name and surname"
+    }
   },
   "admin": {
     "table": {

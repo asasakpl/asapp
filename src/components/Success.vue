@@ -13,6 +13,10 @@ export default Vue.extend({
       icon: this.$store.getters.setSuccess.icon,
       display: this.$store.getters.setSuccess.success
     }
+  },
+  mounted() {
+    console.log(this.display)
+    console.log(this.$store.getters.setSuccess.success)
   }
 })
 </script>

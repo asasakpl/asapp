@@ -199,6 +199,14 @@
     "table": {
       "email": "Email address",
       "name": "Name and surname"
+    },
+    "new": {
+      "title": "Dodawanie nowego subskrybenta",
+      "name": "Name and surname (optional)",
+      "cancel": "Cancel",
+      "add": "Add",
+      "success": "Subscriber was successfully added",
+      "error": "Subscriber with this email already exists"
     }
   },
   "admin": {

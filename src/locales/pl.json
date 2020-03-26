@@ -211,6 +211,14 @@
     "table": {
       "email": "Adres email",
       "name": "Imie i nazwisko"
+    },
+    "new": {
+      "title": "Dodawanie nowego subskrybenta",
+      "name": "Imie i Nazwisko (opcjonalne)",
+      "cancel": "Anuluj",
+      "add": "Dodaj",
+      "success": "Subskrybent został dodany",
+      "error": "Subskrybent z podanym adresem email już istnieje"
     }
   },
   "admin": {

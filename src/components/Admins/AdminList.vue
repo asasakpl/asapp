@@ -143,7 +143,6 @@ export default Vue.extend({
         .get(`/admins`)
         .then(res => {
           this.error = false
-          localStorage.setItem('token', res.config.headers.auth)
           this.admins = res.data.data.admins
           return
         })

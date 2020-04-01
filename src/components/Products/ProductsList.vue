@@ -134,7 +134,7 @@ export default Vue.extend({
         .get(`/products`)
         .then(res => {
           this.error = false
-          localStorage.setItem('token', res.config.headers.auth)
+
           this.lang = localStorage.getItem('i18n')
           this.products = res.data.data.products
 

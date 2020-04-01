@@ -112,7 +112,6 @@ export default Vue.extend({
       axios
         .get(`/orders`)
         .then(res => {
-          localStorage.setItem('token', res.config.headers.auth)
           this.error = false
           this.orders = res.data.data.orders
 

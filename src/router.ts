@@ -50,8 +50,7 @@ let router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login,
-      beforeEnter: ifNotAuthenticated
+      component: Login
     },
     {
       path: '/about',

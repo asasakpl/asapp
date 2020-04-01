@@ -98,9 +98,7 @@ export default Vue.extend({
         .get(`/users`)
         .then(res => {
           this.error = false
-          localStorage.setItem('token', res.config.headers.auth)
           this.users = res.data.data.users
-
           return
         })
         .catch(err => {

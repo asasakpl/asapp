@@ -66,6 +66,7 @@ export default new Vuex.Store({
           localStorage.setItem('m_email', user.email)
           localStorage.setItem('m_name', user.firstName + ' ' + user.lastName)
           localStorage.setItem('m_type', user.type)
+          localStorage.setItem('theme', 'light')
           localStorage.setItem('i18n', 'en')
 
           axios.defaults.headers.common['auth'] = token

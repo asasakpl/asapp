@@ -38,7 +38,7 @@
                     :rules="[rules.required]"
                   ></v-text-field>
 
-                  <v-btn type="sumbit">Log in</v-btn>
+                  <v-btn type="sumbit" class="white black--text">Log in</v-btn>
                 </v-col>
               </v-row>
             </v-form>

@@ -97,7 +97,7 @@
 
 <style scoped>
 .round {
-  border-radius: 20px;
+  border-radius: 8px;
 }
 </style>
 

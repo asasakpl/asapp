@@ -239,6 +239,14 @@
     "themes": {
       "light": "ligh",
       "dark": "dark"
+    },
+    "about": {
+      "title": "About app",
+      "platform": "Operating system",
+      "electron": "Electron version",
+      "chrome": "Chromium version",
+      "node": "Node version",
+      "vue": "Vue version"
     }
   },
   "dialogs": {

@@ -252,6 +252,14 @@
     "themes": {
       "light": "jasny",
       "dark": "ciemny"
+    },
+    "about": {
+      "title": "O aplikacji",
+      "platform": "System operacyjny",
+      "electron": "Electron version",
+      "chrome": "Chromium version",
+      "node": "Node version",
+      "vue": "Vue version"
     }
   },
   "dialogs": {

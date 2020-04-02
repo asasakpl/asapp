@@ -51,7 +51,7 @@
 
 <style scoped>
 .back {
-  background-image: url(../assets/login_background.png);
+  background-image: url(../../assets/login_background.png);
   background-size: cover;
   overflow: hidden;
   height: 100%;

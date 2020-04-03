@@ -18,6 +18,7 @@
     </v-content>
   </v-app>
 </template>
+
 <style>
 .app-name {
   font-weight: 600;

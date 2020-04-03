@@ -2,28 +2,50 @@ import Vue from 'vue'
 import store from './store'
 import Router from 'vue-router'
 
-// Views
-import Mail from '@/views/Mail.vue'
-import Admins from '@/views/Admins.vue'
-import Login from '@/views/Login.vue'
-import About from '@/views/About.vue'
-import NewAdmin from '@/components/Admins/NewAdmin.vue'
-import Admin from '@/components/Admins/Admin.vue'
-import Dashboard from '@/views/Dashboard.vue'
-import Changelog from '@/views/Changelog.vue'
-import Settings from '@/views/Settings.vue'
-import Users from '@/views/Users.vue'
-import User from '@/components/User/User.vue'
-import Orders from '@/views/Orders.vue'
-import Asasak from '@/views/mail/Asasak.vue'
-import NewAsasak from '@/views/mail/NewAsasak.vue'
-import NewM35 from '@/views/mail/NewM35.vue'
-import M35 from '@/views/mail/M35.vue'
-import Sellers from '@/views/Sellers.vue'
-import NewProduct from '@/components/Products/NewProduct.vue'
-import Products from '@/views/Products.vue'
-import Product from '@/components/Products/Product.vue'
-import Order from '@/components/Orders/Order.vue'
+// Login page
+import Login from '@/pages/Login/Index.vue'
+
+// About page
+import About from '@/pages/About/Index.vue'
+
+// Admin
+import Admins from '@/pages/Admins/Index.vue'
+import Admin from '@/pages/Admins/_id.vue'
+import NewAdmin from '@/pages/Admins/New.vue'
+
+// Mailing
+import Mail from '@/pages/Mailing/Index.vue'
+import M35 from '@/pages/Mailing/m35/Index.vue'
+import NewM35 from '@/pages/Mailing/m35/New.vue'
+import Asasak from '@/pages/Mailing/asasak/Index.vue'
+import NewAsasak from '@/pages/Mailing/asasak/New.vue'
+
+// Product
+import Products from '@/pages/Products/Index.vue'
+import Product from '@/pages/Products/_id.vue'
+import NewProduct from '@/pages/Products/New.vue'
+
+// Order
+import Orders from '@/pages/Orders/Index.vue'
+import Order from '@/pages/Orders/_id.vue'
+
+// Dashboard
+import Dashboard from '@/pages/Dashboard/Index.vue'
+
+// Changelog
+import Changelog from '@/pages/Changelog/Index.vue'
+
+// Settings
+import Settings from '@/pages/Settings/Index.vue'
+
+// User
+import Users from '@/pages/Users/Index.vue'
+import User from '@/pages/Users/_id.vue'
+
+// Sellers
+import Sellers from '@/pages/Sellers/Index.vue'
+
+// Layouts
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 Vue.use(Router)
@@ -106,6 +128,7 @@ let router = new Router({
           component: Product,
           beforeEnter: ifAuthenticated
         },
+        
         {
           path: '/product/new',
           name: 'newproducts',
@@ -172,6 +195,7 @@ let router = new Router({
           component: Settings,
           beforeEnter: ifAuthenticated
         },
+
         {
           path: '/changelog',
           name: 'changelog',

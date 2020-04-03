@@ -34,11 +34,7 @@
             </v-col>
             <v-col cols="4" class="pr-2 mr-6" style="overflow: auto">
               <v-col>
-                <v-row class="mb-2 justify-space-between">
-                  <div class="headline ml-1 mb-3">
-                    {{ $t('mail.single.members') }}
-                  </div>
-
+                <v-row class="mb-2 justify-end">
                   <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on }">
                       <v-btn icon class="ml-8" large v-on="on">
@@ -76,8 +72,6 @@
                         </v-col>
                       </v-card-text>
 
-                      <v-divider></v-divider>
-
                       <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="error" text @click="dialog = false">
@@ -90,38 +84,6 @@
                     </v-card>
                   </v-dialog>
                 </v-row>
-
-                <v-data-table
-                  v-if="!error"
-                  :headers="headers"
-                  :items="asasak.members"
-                  style="overflow: scrollable;"
-                  class="elevation-4 round"
-                  :items-per-page="4"
-                  :search="search"
-                  :page.sync="page"
-                  hide-default-footer
-                  @page-count="pageCount = $event"
-                >
-                  <template
-                    v-for="header in headers"
-                    v-slot:[`header.${header.value}`]
-                  >
-                    {{ $t(`mail.table.${header.text}`) }}
-                  </template>
-                </v-data-table>
-                <v-data-table
-                  v-else
-                  loading
-                  hide-default-footer
-                  loading-text="Loading... Please wait"
-                ></v-data-table>
-                <div class="text-center pt-2">
-                  <v-pagination
-                    v-model="page"
-                    :length="pageCount"
-                  ></v-pagination>
-                </div>
               </v-col>
             </v-col>
           </v-row>

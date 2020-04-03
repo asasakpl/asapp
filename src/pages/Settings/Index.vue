@@ -51,13 +51,53 @@
           </v-flex>
         </v-card-title>
       </v-row>
+      <v-card-title>
+        {{ $t('settings.about.title') }}
+      </v-card-title>
+      <v-row class="justify-left pl-5">
+        <v-col>
+          <v-card-title>
+            <v-icon color="light-blue lighten-3">mdi-electron-framework</v-icon>
+            <span class="ml-2">
+              {{ electron }}
+            </span>
+          </v-card-title>
+
+          <v-card-title>
+            <v-icon color="green">mdi-nodejs</v-icon>
+            <span class="ml-2">
+              {{ node }}
+            </span>
+          </v-card-title>
+          <v-card-title>
+            <v-icon color="light-blue accent-4">mdi-google-chrome</v-icon>
+            <span class="ml-2">
+              {{ chrome }}
+            </span>
+          </v-card-title>
+        </v-col>
+        <v-col>
+          <v-card-title>
+            <v-icon color="green accent-3">mdi-vuejs</v-icon>
+            <span class="ml-2">
+              {{ vue }}
+            </span>
+          </v-card-title>
+          <v-card-title>
+            <v-icon color="blue lighten-2">mdi-vuetify</v-icon>
+            <span class="ml-2">
+              {{ vuetify }}
+            </span>
+          </v-card-title>
+        </v-col>
+      </v-row>
     </v-card>
   </v-container>
 </template>
 
 <style scoped>
 .round {
-  border-radius: 20px;
+  border-radius: 8px;
 }
 </style>
 
@@ -69,7 +109,13 @@ export default Vue.extend({
     return {
       theme: localStorage.getItem('theme'),
       langs: ['pl', 'en'],
-      themes: ['dark', 'light']
+      themes: ['dark', 'light'],
+      chrome: process.versions.chrome,
+      electron: process.versions.electron,
+      node: process.versions.node,
+      platform: require('os').platform(),
+      vue: require('vue/package.json').version,
+      vuetify: require('vuetify/package.json').version
     }
   },
   methods: {

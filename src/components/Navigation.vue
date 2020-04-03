@@ -81,7 +81,7 @@
 
         <v-list-item to="/mail">
           <v-list-item-icon>
-            <v-icon>mdi-email-send</v-icon>
+            <v-icon>mdi-email-multiple</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -99,7 +99,9 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
       <v-spacer></v-spacer>
+
       <v-list dense nav>
         <v-list-item link to="/settings">
           <v-list-item-icon>
@@ -147,7 +149,7 @@ import axios from 'axios'
 
 export default Vue.extend({
   props: {
-    source: String
+    source: String,
   },
   data() {
     return {
@@ -159,33 +161,33 @@ export default Vue.extend({
         {
           title: 'Dashboard',
           icon: 'mdi-view-dashboard',
-          to: '/'
+          to: '/',
         },
         { title: 'Orders', icon: 'mdi-truck', to: 'orders' },
         {
           title: 'Users',
           icon: 'mdi-account-group',
-          to: 'users'
+          to: 'users',
         },
         {
           title: 'Products',
           icon: 'mdi-folder-home',
-          to: 'products'
-        }
+          to: 'products',
+        },
       ],
       color: '#45d66b',
       colors: ['primary', 'blue', 'success', 'red', 'teal'],
       right: false,
       miniVariant: false,
       expandOnHover: true,
-      background: false
+      background: false,
     }
   },
   methods: {
     logout() {
       this.$store.dispatch('logout')
       this.$router.push('/login')
-    }
-  }
+    },
+  },
 })
 </script>

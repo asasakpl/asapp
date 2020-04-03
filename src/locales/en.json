@@ -207,6 +207,10 @@
       "add": "Add",
       "success": "Subscriber was successfully added",
       "error": "Subscriber with this email already exists"
+    },
+    "message": {
+      "success": "Message was succesfully send",
+      "error": "There was an error while sending message"
     }
   },
   "admin": {
@@ -239,6 +243,14 @@
     "themes": {
       "light": "ligh",
       "dark": "dark"
+    },
+    "about": {
+      "title": "About app",
+      "platform": "Operating system",
+      "electron": "Electron version",
+      "chrome": "Chromium version",
+      "node": "Node version",
+      "vue": "Vue version"
     }
   },
   "dialogs": {

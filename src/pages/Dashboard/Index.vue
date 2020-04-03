@@ -1,54 +1,57 @@
 <template>
   <v-container>
     <v-card class="mx-auto px-auto pb-5 round" max-width="90%" tile>
-      <v-card-title class="ml-10">{{
-        $t('dashboard.statistics.title')
-      }}</v-card-title>
+      <v-card-title>{{ $t('dashboard.statistics.title') }}</v-card-title>
       <v-col cols="12">
         <v-row>
-          <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
-            <div class="d-flex flex-no-wrap justify-space-between">
-              <v-card-text>
-                <div>{{ $t('dashboard.statistics.users_card') }}</div>
-                <p class="display-1">{{ this.users }}</p>
-              </v-card-text>
+          <v-col>
+            <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <v-card-text>
+                  <div>{{ $t('dashboard.statistics.users_card') }}</div>
+                  <p class="display-1">{{ this.users }}</p>
+                </v-card-text>
 
-              <v-icon size="50">mdi-account-group</v-icon>
-            </div>
-          </v-card>
+                <v-icon size="50">mdi-account-group</v-icon>
+              </div>
+            </v-card>
+          </v-col>
+          <v-col>
+            <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <v-card-text>
+                  <div>{{ $t('dashboard.statistics.orders_card') }}</div>
+                  <p class="display-1">{{ this.orders }}</p>
+                </v-card-text>
 
-          <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
-            <div class="d-flex flex-no-wrap justify-space-between">
-              <v-card-text>
-                <div>{{ $t('dashboard.statistics.orders_card') }}</div>
-                <p class="display-1">{{ this.orders }}</p>
-              </v-card-text>
+                <v-icon size="50">mdi-truck</v-icon>
+              </div>
+            </v-card>
+          </v-col>
+          <v-col>
+            <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <v-card-text>
+                  <div>{{ $t('dashboard.statistics.products_card') }}</div>
+                  <p class="display-1">{{ this.products }}</p>
+                </v-card-text>
 
-              <v-icon size="50">mdi-truck</v-icon>
-            </div>
-          </v-card>
+                <v-icon size="50">mdi-folder-home</v-icon>
+              </div>
+            </v-card>
+          </v-col>
+          <v-col>
+            <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <v-card-text>
+                  <div>{{ $t('dashboard.statistics.sellers_card') }}</div>
+                  <p class="display-1">{{ this.sellers }}</p>
+                </v-card-text>
 
-          <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
-            <div class="d-flex flex-no-wrap justify-space-between">
-              <v-card-text>
-                <div>{{ $t('dashboard.statistics.products_card') }}</div>
-                <p class="display-1">{{ this.products }}</p>
-              </v-card-text>
-
-              <v-icon size="50">mdi-folder-home</v-icon>
-            </div>
-          </v-card>
-
-          <v-card class="mx-auto pr-5" color="primary" dark min-width="250">
-            <div class="d-flex flex-no-wrap justify-space-between">
-              <v-card-text>
-                <div>{{ $t('dashboard.statistics.sellers_card') }}</div>
-                <p class="display-1">{{ this.sellers }}</p>
-              </v-card-text>
-
-              <v-icon size="50">mdi-account-group</v-icon>
-            </div>
-          </v-card>
+                <v-icon size="50">mdi-account-group</v-icon>
+              </div>
+            </v-card>
+          </v-col>
         </v-row>
       </v-col>
     </v-card>

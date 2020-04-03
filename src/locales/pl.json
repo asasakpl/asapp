@@ -219,6 +219,10 @@
       "add": "Dodaj",
       "success": "Subskrybent został dodany",
       "error": "Subskrybent z podanym adresem email już istnieje"
+    },
+    "message": {
+      "success": "Wiadomość została wysłana",
+      "error": "Wystąpił błąd przy wysyłaniu wiadomości"
     }
   },
   "admin": {

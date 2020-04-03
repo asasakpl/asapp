@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-btn @click="$router.go(-1)" icon class="ml-12 ">
+      <v-btn @click="$router.go(-1)" icon class="ml-12">
         <v-icon size="32">arrow_back</v-icon>
       </v-btn>
       <v-col>
@@ -32,7 +32,7 @@
                 <div class="title ml-1 mb-3">{{ asasak.list.description }}</div>
               </v-col>
             </v-col>
-            <v-col cols="4" class="pr-2 mr-6" style="overflow: auto">
+            <v-col cols="4" class="pr-2 mr-6" style="overflow: auto;">
               <v-col>
                 <v-row class="mb-2 justify-end">
                   <v-dialog v-model="dialog" width="500">
@@ -104,6 +104,7 @@
     <v-snackbar bottom v-model="display" color="success" :timeout="4000">
       {{ $t('mail.new.success') }} <v-icon>mdi-{{ icon }}</v-icon>
     </v-snackbar>
+    <Success></Success>
     <Error v-if="conflict"></Error>
     <NetworkError :error="error"></NetworkError>
   </v-container>
@@ -126,7 +127,7 @@ export default Vue.extend({
   components: {
     NetworkError,
     Success,
-    Error
+    Error,
   },
   data() {
     return {
@@ -143,29 +144,29 @@ export default Vue.extend({
       headers: [
         {
           text: 'email',
-          value: 'address'
+          value: 'address',
         },
-        { text: 'name', value: 'name' }
+        { text: 'name', value: 'name' },
       ],
       emailRules: [
-        v =>
+        (v) =>
           !v ||
           /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          'E-mail must be valid'
-      ]
+          'E-mail must be valid',
+      ],
     }
   },
   methods: {
     addMember(member) {
       axios
         .post('/asasak/add', { email: member.email, name: member.name })
-        .then(res => {
+        .then((res) => {
           this.dialog = false
           this.display = true
           this.getMembers()
           this.member = {}
         })
-        .catch(err => {
+        .catch((err) => {
           this.dialog = false
           const text = 'mail.new.error'
           const icon = 'email-alert'
@@ -179,17 +180,17 @@ export default Vue.extend({
     async getMembers() {
       axios
         .get('/mail/asasak')
-        .then(res => {
+        .then((res) => {
           this.error = false
           this.asasak = res.data.data.asasak
         })
-        .catch(err => {
+        .catch((err) => {
           this.error = true
         })
-    }
+    },
   },
   async mounted() {
     this.getMembers()
-  }
+  },
 })
 </script>

@@ -38,7 +38,7 @@
           <v-row class="mr-3">
             <v-spacer></v-spacer>
             <v-btn
-              @click="checkForm()"
+              @click="dialog = true"
               :disabled="(message.length <= 0 || title.length <= 0)"
             >
               Wyślij
@@ -64,9 +64,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-snackbar bottom v-model="display" color="success" :timeout="4000">
-      {{ $t('mail.message.success') }} <v-icon>mdi-email-send</v-icon>
-    </v-snackbar>
     <Error v-if="error"></Error>
   </v-container>
 </template>
@@ -119,7 +116,10 @@ export default Vue.extend({
         .then((res) => {
           console.log(res.status)
           this.dialog = false
-          this.display = true
+          const text = 'mail.message.success'
+          const icon = 'email-send'
+          this.$store.dispatch('success', { text, icon })
+          this.$router.push('/asasak')
         })
         .catch((err) => {
           console.log(err)

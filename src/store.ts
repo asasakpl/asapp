@@ -16,7 +16,7 @@ export default new Vuex.Store({
     succ_icon: '',
     token: localStorage.getItem('token') || '',
     userId: localStorage.getItem('m_user') || '',
-    adminType: localStorage.getItem('m_type') || ''
+    adminType: localStorage.getItem('m_type') || '',
   },
   mutations: {
     auth_request(state) {
@@ -45,7 +45,7 @@ export default new Vuex.Store({
       state.error = true
       state.err_text = text
       state.err_icon = icon
-    }
+    },
   },
   actions: {
     login({ commit }, user) {
@@ -53,10 +53,10 @@ export default new Vuex.Store({
 
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/v1/auth/su/login',
-        data: { email: user.email, password: user.password }
+        url: axios.defaults.baseURL + '/auth/su/login',
+        data: { email: user.email, password: user.password },
       })
-        .then(resp => {
+        .then((resp) => {
           const token = resp.data.token
           const user = resp.data.user
 
@@ -73,7 +73,7 @@ export default new Vuex.Store({
           commit('auth_success', { token, user })
           return user.permission
         })
-        .catch(err => {
+        .catch((err) => {
           commit('auth_error')
 
           localStorage.removeItem('token')
@@ -97,29 +97,29 @@ export default new Vuex.Store({
       const text = err_obj.text
       const icon = err_obj.icon
       commit('error', { text, icon })
-    }
+    },
   },
   getters: {
-    isLoggedIn: state => !!state.token,
-    authStatus: state => state.status,
-    appVersion: state => {
+    isLoggedIn: (state) => !!state.token,
+    authStatus: (state) => state.status,
+    appVersion: (state) => {
       return state.packageVersion
     },
-    setSuccess: state => {
+    setSuccess: (state) => {
       const succ_obj = {
         text: state.succ_text,
         success: state.success,
-        icon: state.succ_icon
+        icon: state.succ_icon,
       }
       return succ_obj
     },
-    setError: state => {
+    setError: (state) => {
       const err_obj = {
         text: state.err_text,
         error: state.error,
-        icon: state.err_icon
+        icon: state.err_icon,
       }
       return err_obj
-    }
-  }
+    },
+  },
 })

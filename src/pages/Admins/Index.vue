@@ -87,7 +87,7 @@ import Success from '@/components/Success.vue'
 export default Vue.extend({
   components: {
     NetworkError,
-    Success
+    Success,
   },
   data() {
     return {
@@ -105,25 +105,25 @@ export default Vue.extend({
           text: 'id',
           align: 'center',
           sortable: true,
-          value: 'id'
+          value: 'id',
         },
         {
           text: 'name',
-          value: 'firstName'
+          value: 'firstName',
         },
         {
           text: 'second_name',
-          value: 'lastName'
+          value: 'lastName',
         },
         {
           text: 'email',
-          value: 'email'
+          value: 'email',
         },
         {
           text: 'type',
-          value: 'type'
-        }
-      ]
+          value: 'type',
+        },
+      ],
     }
   },
   methods: {
@@ -133,29 +133,28 @@ export default Vue.extend({
     newAdmin() {
       this.$router.push(`/admins/new`)
     },
-    rowClick: function(item) {
-      console.log(item)
+    rowClick: function (item) {
       this.$router.push(`/admins/${item.id}`)
     },
     getAdmins() {
       let id = localStorage.getItem('m_user')
       axios
         .get(`/admins`)
-        .then(res => {
+        .then((res) => {
           this.error = false
           this.admins = res.data.data.admins
           return
         })
-        .catch(err => {
+        .catch((err) => {
           this.error = true
           console.log(err)
         })
 
       this.load = false
-    }
+    },
   },
   created() {
     this.getAdmins()
-  }
+  },
 })
 </script>

@@ -27,6 +27,7 @@
               large
               right
               top
+              to="/asasak/new"
             >
               <v-icon>mdi-email-edit-outline</v-icon>
             </v-btn>
@@ -116,9 +117,6 @@ export default Vue.extend({
           this.$store.dispatch('error', { text, icon })
           this.conflict = true
         })
-    },
-    newEmail() {
-      this.$router.push(`/asasak/new`)
     },
     async getMembers() {
       axios

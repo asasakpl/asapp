@@ -51,7 +51,7 @@
 
 <style scoped>
 .back {
-  background-image: url(../../assets/login_background.png);
+  background-image: url(../../assets/login/background.png);
   background-size: cover;
   overflow: hidden;
   height: 100%;
@@ -72,14 +72,13 @@ import Vue from 'vue'
 
 export default Vue.extend({
   data() {
-    image: '../assets/login_background'
     return {
       email: '',
       password: '',
       notAuthenticated: false,
       rules: {
-        required: value => !!value || 'Required.'
-      }
+        required: (value) => !!value || 'Required.',
+      },
     }
   },
   methods: {
@@ -88,13 +87,13 @@ export default Vue.extend({
       let password = this.password
       this.$store
         .dispatch('login', { email, password })
-        .then(res => {
+        .then((res) => {
           this.$router.push('/')
         })
-        .catch(err => {
+        .catch((err) => {
           this.notAuthenticated = true
         })
-    }
-  }
+    },
+  },
 })
 </script>

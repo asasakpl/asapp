@@ -1,7 +1,9 @@
 <template>
   <v-app>
-    <v-system-bar lights-out height="28" class="drag">
-      <div class="app-name">Moje35metrow.pl</div>
+    <v-system-bar lights-out height="28" class="drag pr-0">
+      <span>
+        <v-img src="@/assets/m35logo.png" class="mr-3" width="80" height="15" />
+      </span>
       <v-spacer></v-spacer>
       <v-btn tile icon class="no-drag" small v-on:click="minimize()">
         <v-icon size="24">mdi-minus</v-icon>
@@ -66,7 +68,7 @@ export default Vue.extend({
     close() {
       const window = remote.getCurrentWindow()
       window.close()
-    }
-  }
+    },
+  },
 })
 </script>

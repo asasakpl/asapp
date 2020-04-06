@@ -12,81 +12,28 @@
           tile
           v-if="asasak"
         >
-          <v-card-title>Newsletter asasak.pl</v-card-title>
-          <v-divider></v-divider>
-          <v-row class="justify-space-between">
-            <v-col cols="4" class="pr-4 ml-1 mr-12">
-              <v-col class="pb-0">
-                <div class="headline ml-1 mb-3">
-                  {{ $t('mail.single.title') }}
-                </div>
-
-                <div class="title ml-1 mb-3">{{ asasak.list.name }}</div>
-              </v-col>
-
-              <v-col class="pb-0">
-                <div class="headline ml-1 mb-3">
-                  {{ $t('mail.single.description') }}
-                </div>
-
-                <div class="title ml-1 mb-3">{{ asasak.list.description }}</div>
-              </v-col>
-            </v-col>
-            <v-col cols="4" class="pr-2 mr-6" style="overflow: auto;">
-              <v-col>
-                <v-row class="mb-2 justify-end">
-                  <v-dialog v-model="dialog" width="500">
-                    <template v-slot:activator="{ on }">
-                      <v-btn icon class="ml-8" large v-on="on">
-                        <v-icon size="32">mdi-account-plus</v-icon>
-                      </v-btn>
-                    </template>
-
-                    <v-card>
-                      <v-card-title
-                        class="headline green accent-3 lighten-2 mb-4"
-                        primary-title
-                      >
-                        {{ $t('mail.new.title') }}
-                      </v-card-title>
-
-                      <v-card-text>
-                        <v-col class="pb-0">
-                          <div class="headline ml-1 mb-3">
-                            Email
-                          </div>
-                          <v-text-field
-                            outlined
-                            v-model="member.email"
-                            :rules="emailRules"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col class="pb-0">
-                          <div class="headline ml-1 mb-3">
-                            {{ $t('mail.new.name') }}
-                          </div>
-                          <v-text-field
-                            outlined
-                            v-model="member.name"
-                          ></v-text-field>
-                        </v-col>
-                      </v-card-text>
-
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="error" text @click="dialog = false">
-                          {{ $t('mail.new.cancel') }}</v-btn
-                        >
-                        <v-btn color="primary" text @click="addMember(member)">
-                          {{ $t('mail.new.add') }}
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                </v-row>
-              </v-col>
-            </v-col>
-          </v-row>
+          <v-img
+            :aspect-ratio="16 / 9"
+            src="@/assets/newsletter/asasak.jpg"
+            max-height="400"
+          >
+          </v-img>
+          <v-card-text class="pt-6" style="position: relative;">
+            <v-btn
+              absolute
+              color="green"
+              class="white--text"
+              fab
+              large
+              right
+              top
+            >
+              <v-icon>mdi-email-edit-outline</v-icon>
+            </v-btn>
+            <div class="font-weight-light white--text title mb-2">
+              Newsletter asasak.pl
+            </div>
+          </v-card-text>
         </v-card>
 
         <v-content v-else align="center">
@@ -96,10 +43,6 @@
           ></v-progress-circular>
         </v-content>
       </v-col>
-
-      <v-btn @click="newEmail()" icon large>
-        <v-icon size="30">mdi-email-edit-outline</v-icon>
-      </v-btn>
     </v-row>
     <v-snackbar bottom v-model="display" color="success" :timeout="4000">
       {{ $t('mail.new.success') }} <v-icon>mdi-{{ icon }}</v-icon>

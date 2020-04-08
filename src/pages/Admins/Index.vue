@@ -1,21 +1,30 @@
 <template>
   <v-container>
-    <v-row>
-      <v-btn
-        @click="loading(), getAdmins()"
-        v-if="!load"
-        icon
-        class="ml-8 mt-4"
-      >
-        <v-icon size="32">refresh</v-icon>
+    <v-row class="pl-12">
+      <v-btn @click="getAdmins()" v-if="!load" icon fab class="ml-2 mt-2">
+        <v-icon size="34">refresh</v-icon>
       </v-btn>
-      <v-btn @click="getAdmins()" v-else loading icon class="ml-8"> </v-btn>
+      <v-btn
+        @click="getAdmins()"
+        v-else
+        loading
+        icon
+        fab
+        class="ml-2 mt-4"
+      ></v-btn>
 
-      <v-col>
+      <v-col class="pr-0">
         <v-card class="mx-auto px-auto round" max-width="90%" tile>
           <v-card-title>
             {{ $t('admin.table.title') }}
             <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
           </v-card-title>
           <v-data-table
             v-if="!error"
@@ -61,12 +70,13 @@
           <v-pagination v-model="page" :length="pageCount"></v-pagination>
         </div>
       </v-col>
-      <v-btn @click="newAdmin()" icon class="ml-0 mt-4">
-        <v-icon size="32">mdi-pencil-plus</v-icon>
+      <v-btn @click="newAdmin()" icon fab class="ml-0 mt-2">
+        <v-icon size="34">mdi-account-plus</v-icon>
       </v-btn>
     </v-row>
+
     <NetworkError :error="error"></NetworkError>
-    <Success></Success>
+    <Success v-if="this.$store.state.success"></Success>
   </v-container>
 </template>
 
@@ -98,7 +108,7 @@ export default Vue.extend({
       search: '',
       lang: null,
       singleSelect: true,
-      load: false,
+      load: true,
       selected: [],
       headers: [
         {
@@ -127,30 +137,27 @@ export default Vue.extend({
     }
   },
   methods: {
-    loading() {
-      this.load = true
-    },
     newAdmin() {
       this.$router.push(`/admins/new`)
     },
-    rowClick: function (item) {
+    rowClick: function(item) {
       this.$router.push(`/admins/${item.id}`)
     },
     getAdmins() {
+      this.load = true
       let id = localStorage.getItem('m_user')
       axios
         .get(`/admins`)
         .then((res) => {
           this.error = false
           this.admins = res.data.data.admins
+          this.load = false
           return
         })
         .catch((err) => {
           this.error = true
           console.log(err)
         })
-
-      this.load = false
     },
   },
   created() {

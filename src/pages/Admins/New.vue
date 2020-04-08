@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-btn @click="$router.go(-1)" icon class="ml-8">
+      <v-btn @click="$router.go(-1)" icon class="ml-8 mt-4">
         <v-icon size="32">arrow_back</v-icon>
       </v-btn>
 
@@ -113,12 +113,12 @@ import Error from '@/components/Error.vue'
 
 export default Vue.extend({
   components: {
-    Error
+    Error,
   },
   data() {
     return {
       admin: {
-        password: null
+        password: null,
       },
       types: [0, 1],
       save: false,
@@ -126,15 +126,15 @@ export default Vue.extend({
       show: false,
       rePassword: null,
       emailRules: [
-        v =>
+        (v) =>
           !v ||
           /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          'E-mail must be valid'
+          'E-mail must be valid',
       ],
       rules: {
-        required: value => !!value || 'Required.',
-        min: v => (v && v.length >= 12) || 'Min 12 characters'
-      }
+        required: (value) => !!value || 'Required.',
+        min: (v) => (v && v.length >= 12) || 'Min 12 characters',
+      },
     }
   },
   methods: {
@@ -143,28 +143,28 @@ export default Vue.extend({
       await axios
         .post('/admins/new', admin, {
           headers: {
-            auth: localStorage.getItem('token')
-          }
+            auth: localStorage.getItem('token'),
+          },
         })
-        .then(res => {
+        .then((res) => {
           const text = 'admin.success'
           const icon = 'database-check'
           this.$store.dispatch('success', { text, icon })
           this.$router.push('/admins')
         })
-        .catch(err => {
+        .catch((err) => {
           const text = 'admin.error'
           const icon = 'database-remove'
           this.$store.dispatch('error', { text, icon })
           this.error = true
         })
-    }
+    },
   },
   computed: {
     passwordConfirmationRule() {
       return () =>
         this.admin.password === this.rePassword || 'Password must match'
-    }
-  }
+    },
+  },
 })
 </script>

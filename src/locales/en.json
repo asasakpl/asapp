@@ -211,7 +211,8 @@
     "message": {
       "success": "Message was succesfully send",
       "error": "There was an error while sending message"
-    }
+    },
+    "subscriber": { "success": "New subscriber was successfully added" }
   },
   "admin": {
     "table": {

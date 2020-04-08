@@ -223,6 +223,10 @@
     "message": {
       "success": "Wiadomość została wysłana",
       "error": "Wystąpił błąd przy wysyłaniu wiadomości"
+    },
+    "subscriber": {
+      "success": "Nowy subskrybent został pomyślnie dodany",
+      "removed": "Subskrybent został pomyślnie usunięty"
     }
   },
   "admin": {

@@ -11,8 +11,13 @@ export default Vue.extend({
     return {
       text: this.$store.getters.setSuccess.text,
       icon: this.$store.getters.setSuccess.icon,
-      display: this.$store.getters.setSuccess.success
+      display: this.$store.getters.setSuccess.success,
     }
-  }
+  },
+  created() {
+    setTimeout(() => {
+      this.$store.state.success = false
+    }, 4000)
+  },
 })
 </script>

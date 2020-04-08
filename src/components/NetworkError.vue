@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar top v-model="display" color="error" :timeout="0">
+  <v-snackbar bottom v-model="display" color="error" :timeout="0" class="mb-1">
     <div class="pl-6">
       Check your network connection
       <v-icon class="ml-12">mdi-network-strength-off</v-icon>
@@ -13,7 +13,7 @@ export default Vue.extend({
   props: ['error'],
   data() {
     return {
-      display: false
+      display: false,
     }
   },
   async mounted() {
@@ -26,6 +26,6 @@ export default Vue.extend({
         }
       }, 3000)
     }
-  }
+  },
 })
 </script>

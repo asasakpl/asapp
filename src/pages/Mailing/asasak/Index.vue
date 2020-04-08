@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-btn @click="$router.go(-1)" icon class="ml-12">
-        <v-icon size="32">arrow_back</v-icon>
+      <v-btn to="/mail" icon large class="ml-12 mt-2">
+        <v-icon size="34">arrow_back</v-icon>
       </v-btn>
       <v-col>
         <v-card
@@ -17,6 +17,14 @@
             src="@/assets/newsletter/asasak.jpg"
             max-height="400"
           >
+            <v-row
+              class="lightbox white--text pa-2 fill-height ml-1"
+              align="end"
+            >
+              <v-col>
+                <div class="display-1 font-weight-medium ">asasak.pl</div>
+              </v-col>
+            </v-row>
           </v-img>
           <v-card-text class="pt-6" style="position: relative;">
             <v-btn
@@ -31,8 +39,29 @@
             >
               <v-icon>mdi-email-edit-outline</v-icon>
             </v-btn>
-            <div class="font-weight-light white--text title mb-2">
-              Newsletter asasak.pl
+            <div class="white--text title mb-2">
+              <v-row>
+                <v-col cols="6">
+                  <v-list>
+                    <v-list-item>
+                      <v-list-item-content>
+                        <v-list-item-title class="headline font-weight-medium "
+                          >Subskrybenci</v-list-item-title
+                        >
+
+                        <v-list-item-icon class="ma-0">
+                          <v-btn icon large to="/asasak/subscribers">
+                            <v-icon>mdi-account-group</v-icon>
+                          </v-btn>
+                          <v-list-item-title class="pl-1">{{
+                            asasak.list.members_count
+                          }}</v-list-item-title>
+                        </v-list-item-icon>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-col>
+              </v-row>
             </div>
           </v-card-text>
         </v-card>
@@ -48,7 +77,7 @@
     <v-snackbar bottom v-model="display" color="success" :timeout="4000">
       {{ $t('mail.new.success') }} <v-icon>mdi-{{ icon }}</v-icon>
     </v-snackbar>
-    <Success></Success>
+    <Success v-if="this.$store.state.success"></Success>
     <Error v-if="conflict"></Error>
     <NetworkError :error="error"></NetworkError>
   </v-container>
@@ -83,7 +112,6 @@ export default Vue.extend({
       icon: 'email-check',
       dialog: false,
       conflict: false,
-      member: {},
       pageCount: 0,
       headers: [
         {
@@ -101,24 +129,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    addMember(member) {
-      axios
-        .post('/asasak/add', { email: member.email, name: member.name })
-        .then((res) => {
-          this.dialog = false
-          this.display = true
-          this.getMembers()
-          this.member = {}
-        })
-        .catch((err) => {
-          this.dialog = false
-          const text = 'mail.new.error'
-          const icon = 'email-alert'
-          this.$store.dispatch('error', { text, icon })
-          this.conflict = true
-        })
-    },
-    async getMembers() {
+    async getInfo() {
       axios
         .get('/mail/asasak')
         .then((res) => {
@@ -131,7 +142,7 @@ export default Vue.extend({
     },
   },
   async mounted() {
-    this.getMembers()
+    this.getInfo()
   },
 })
 </script>

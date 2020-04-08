@@ -39,7 +39,7 @@
             <v-spacer></v-spacer>
             <v-btn
               @click="dialog = true"
-              :disabled="(message.length <= 0 || title.length <= 0)"
+              :disabled="message.length <= 0 || title.length <= 0"
             >
               Wyślij
             </v-btn>
@@ -114,7 +114,6 @@ export default Vue.extend({
           }
         )
         .then((res) => {
-          console.log(res.status)
           this.dialog = false
           const text = 'mail.message.success'
           const icon = 'email-send'
@@ -122,7 +121,6 @@ export default Vue.extend({
           this.$router.push('/asasak')
         })
         .catch((err) => {
-          console.log(err)
           const text = 'mail.message.error'
           const icon = 'email-alert'
           this.$store.dispatch('error', { text, icon })

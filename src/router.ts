@@ -19,6 +19,8 @@ import M35 from '@/pages/Mailing/m35/Index.vue'
 import NewM35 from '@/pages/Mailing/m35/New.vue'
 import Asasak from '@/pages/Mailing/asasak/Index.vue'
 import NewAsasak from '@/pages/Mailing/asasak/New.vue'
+import NewAsasakSubscriber from '@/pages/Mailing/asasak/Subscribers/New.vue'
+import AsasakSubscribers from '@/pages/Mailing/asasak/Subscribers/Index.vue'
 
 // Product
 import Products from '@/pages/Products/Index.vue'
@@ -72,13 +74,13 @@ let router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
     },
     {
       path: '/about',
       name: 'about',
       component: About,
-      beforeEnter: ifAuthenticated
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/',
@@ -90,125 +92,137 @@ let router = new Router({
           path: '',
           name: 'dashboard',
           component: Dashboard,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/orders',
           name: 'orders',
           component: Orders,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/orders/:id',
           name: 'order',
           component: Order,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/users',
           name: 'users',
           component: Users,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/users/:id',
           name: 'user',
           component: User,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/products',
           name: 'products',
           component: Products,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/products/:id',
           name: 'product',
           component: Product,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
-        
+
         {
           path: '/product/new',
           name: 'newproducts',
           component: NewProduct,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/sellers',
           name: 'sellers',
           component: Sellers,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/mail',
           name: 'mail',
           component: Mail,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/asasak',
           name: 'asasak',
           component: Asasak,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/asasak/new',
           name: 'new_asasak',
           component: NewAsasak,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
+        },
+        {
+          path: '/asasak/subscribers',
+          name: 'asasak_subscribers',
+          beforeEnter: ifAuthenticated,
+          component: AsasakSubscribers,
+        },
+        {
+          path: '/asasak/subscribers/new',
+          name: 'asasak_new_subscriber',
+          beforeEnter: ifAuthenticated,
+          component: NewAsasakSubscriber,
         },
         {
           path: '/m35',
           name: 'm35',
           component: M35,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/m35/new',
           name: 'new_m35',
           component: NewM35,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/admins',
           name: 'admins',
           component: Admins,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/admins/new',
           name: 'newadmin',
           component: NewAdmin,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/admins/:id',
           name: 'admin',
           component: Admin,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
         {
           path: '/settings',
           name: 'settings',
           component: Settings,
-          beforeEnter: ifAuthenticated
+          beforeEnter: ifAuthenticated,
         },
 
         {
           path: '/changelog',
           name: 'changelog',
           component: Changelog,
-          beforeEnter: ifAuthenticated
-        }
-      ]
-    }
-  ]
+          beforeEnter: ifAuthenticated,
+        },
+      ],
+    },
+  ],
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
       next()
       return

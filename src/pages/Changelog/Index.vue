@@ -22,7 +22,7 @@
             </v-list-item-content>
 
             <v-row align="center" justify="end">
-              <v-icon class="mr-1">mdi-calendar-clock</v-icon>
+              <v-icon class="mr-1">mdi-clock-outline</v-icon>
               <span class="subheading">{{ release.published_at }}</span>
             </v-row>
           </v-list-item>
@@ -55,13 +55,13 @@ export default Vue.extend({
   components: {},
   data() {
     return {
-      release: null
+      release: null,
     }
   },
   async mounted() {
     await fetch('https://api.github.com/repos/asasakpl/asapp/releases/latest')
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         this.release = data
         this.release.body = marked(this.release.body)
         let date = new Date(this.release.published_at)
@@ -80,9 +80,9 @@ export default Vue.extend({
           date.getFullYear()
         console.log(this.release.tag_name)
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err)
       })
-  }
+  },
 })
 </script>

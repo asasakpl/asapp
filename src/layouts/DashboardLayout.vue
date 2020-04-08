@@ -16,11 +16,12 @@ import Navigation from '@/components/Navigation.vue'
 
 export default Vue.extend({
   components: {
-    Navigation
+    Navigation,
+
   },
   data() {
     return {
-      user: []
+      user: [],
     }
   },
   beforeMount() {
@@ -31,6 +32,6 @@ export default Vue.extend({
     } else {
       this.$vuetify.theme.dark = false
     }
-  }
+  },
 })
 </script>

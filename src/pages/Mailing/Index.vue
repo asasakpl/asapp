@@ -2,38 +2,47 @@
   <v-container>
     <v-row v-if="m35" class="pl-8">
       <v-col>
-        <v-hover
-          v-slot:default="{ hover }"
-          close-delay="200"
-          disabled
-          class="dark"
-        >
+        <v-hover v-slot:default="{ hover }" close-delay="200" class="dark">
           <v-card
             :elevation="hover ? 16 : 2"
             class="mx-auto px-auto round"
             max-width="90%"
+            disabled
             tile
           >
             <v-img
               :aspect-ratio="16 / 9"
               src="@/assets/newsletter/m35.jpg"
-              gradient="to top right, rgba(19,19,19, .7), rgba(19,19,19, .7)"
+              gradient="to top right, rgba(0,0,0, .7), rgba(0,0,0, .7)"
             >
+              <div
+                class="d-flex  display-3 white--text text-center"
+                style="height: 100%;"
+              >
+                <v-row
+                  class="lightbox white--text pa-2 fill-height fill-width"
+                  align="center"
+                >
+                  <v-col>
+                    <v-icon size="62">mdi-hammer-wrench</v-icon>
+                  </v-col>
+                </v-row>
+              </div>
               <v-expand-transition>
                 <div
                   v-if="hover"
-                  class="d-flex transition-fast-in-fast-out black darken-2 v-card--reveal display-3 white--text"
+                  class="d-flex transition-fast-in-fast-out black darken-2 v-card--reveal display-3 white--text text-center"
                   style="height: 100%;"
                   @click="m35Push"
                 >
                   <v-row
                     class="lightbox white--text pa-2 fill-height fill-width"
                     align="center"
-                    justify="center"
                   >
                     <v-col>
-                      <div class="title">Moje 35 metrów newsletter</div>
-                      <div class="body-1">moje35metrow.pl</div>
+                      <div class="display-1 font-weight-medium">
+                        moje35metrow.pl
+                      </div>
                     </v-col>
                   </v-row>
                 </div>
@@ -55,18 +64,16 @@
               <v-expand-transition>
                 <div
                   v-if="hover"
-                  class="d-flex transition-fast-in-fast-out black darken-2 v-card--reveal display-3 white--text"
+                  class="d-flex transition-fast-in-fast-out black darken-2 v-card--reveal display-3 white--text text-center"
                   style="height: 100%;"
                   @click="asasakPush"
                 >
                   <v-row
-                    class="lightbox white--text pa-2 fill-height fill-width"
+                    class="lightbox white--text pa-2 fill-height "
                     align="center"
-                    justify="center"
                   >
                     <v-col>
-                      <div class="title">Asasak newsletter</div>
-                      <div class="body-1">asasak.pl</div>
+                      <div class="display-1 font-weight-medium">asasak.pl</div>
                     </v-col>
                   </v-row>
                 </div>
@@ -94,7 +101,7 @@
   align-items: center;
   bottom: 0;
   justify-content: center;
-  opacity: 0.5;
+  opacity: 0.6;
   position: absolute;
   width: 100%;
 }

@@ -63,7 +63,7 @@ export default Vue.extend({
       .then((response) => response.json())
       .then((data) => {
         this.release = data
-        this.release.body = marked(this.release.body)
+        this.release.body = marked(this.release.body, { breaks: true })
         let date = new Date(this.release.published_at)
         this.release.published_at =
           ' ' +

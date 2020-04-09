@@ -89,6 +89,12 @@
               {{ vuetify }}
             </span>
           </v-card-title>
+          <v-card-title>
+            <v-icon color="blue lighten-2">mdi-microsoft-windows</v-icon>
+            <span class="ml-2">
+              {{ platform }}
+            </span>
+          </v-card-title>
         </v-col>
       </v-row>
     </v-card>
@@ -113,9 +119,9 @@ export default Vue.extend({
       chrome: process.versions.chrome,
       electron: process.versions.electron,
       node: process.versions.node,
-      platform: require('os').platform(),
+      platform: require('os').release(),
       vue: require('vue/package.json').version,
-      vuetify: require('vuetify/package.json').version
+      vuetify: require('vuetify/package.json').version,
     }
   },
   methods: {
@@ -130,7 +136,7 @@ export default Vue.extend({
     },
     setLanguage(lang) {
       localStorage.setItem('i18n', lang)
-    }
-  }
+    },
+  },
 })
 </script>

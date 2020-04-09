@@ -1,12 +1,14 @@
 <template>
   <v-container>
-    <v-row>
-      <v-btn to="/mail" icon large class="ml-12 mt-2">
-        <v-icon size="34">arrow_back</v-icon>
-      </v-btn>
-      <v-col>
+    <v-row class="pl-4">
+      <v-col cols="1">
+        <v-btn to="/mail" icon fab class="ml-2">
+          <v-icon size="34">arrow_back</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col class="pr-0" cols="11">
         <v-card
-          class="mx-auto px-auto pb-2 round"
+          class="mx-auto px-auto round"
           max-width="90%"
           max-height="80vh"
           tile

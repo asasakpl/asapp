@@ -2,7 +2,7 @@
   <v-container
     ><v-row class="pl-4">
       <v-col>
-        <v-btn @click="$router.push('/asasak')" icon fab class="ml-2 ">
+        <v-btn @click="$router.push('/asasak')" icon fab class="ml-2">
           <v-icon size="34">arrow_back</v-icon>
         </v-btn>
 
@@ -180,7 +180,6 @@ export default Vue.extend({
           const text = 'mail.subscriber.removed'
           const icon = 'account-check'
           this.$store.dispatch('success', { text, icon })
-
           this.getInfo()
         })
         .catch((err) => {

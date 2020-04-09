@@ -212,7 +212,10 @@
       "success": "Message was succesfully send",
       "error": "There was an error while sending message"
     },
-    "subscriber": { "success": "New subscriber was successfully added" }
+    "subscriber": {
+      "success": "New subscriber was successfully added",
+      "removed": "Subscriber was successfully removed"
+    }
   },
   "admin": {
     "table": {

@@ -236,7 +236,8 @@
     "new": {
       "title": "Creating new administrator",
       "password": "Password",
-      "repeat": "Repeat password"
+      "repeat": "Repeat password",
+      "type": "Account type"
     },
     "success": "New administrator was successfully created"
   },

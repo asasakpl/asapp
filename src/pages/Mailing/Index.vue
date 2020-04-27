@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row v-if="m35" class="pl-8">
+    <v-row v-if="m35">
       <v-col>
         <v-hover v-slot:default="{ hover }" close-delay="200" class="dark">
           <v-card

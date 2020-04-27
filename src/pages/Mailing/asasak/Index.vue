@@ -1,16 +1,16 @@
 <template>
   <v-container>
-    <v-row class="pl-4">
-      <v-col cols="1">
-        <v-btn to="/mail" icon fab class="ml-2">
-          <v-icon size="34">arrow_back</v-icon>
+    <v-row>
+      <v-col cols="1" class="pt-1" align="center">
+        <v-btn to="/mail" icon fab>
+          <v-icon size="38">arrow_back</v-icon>
         </v-btn>
       </v-col>
-      <v-col class="pr-0" cols="11">
+      <v-col class="pa-0" cols="11">
         <v-card
           class="mx-auto px-auto round"
-          max-width="90%"
           max-height="80vh"
+          max-width="95%"
           tile
           v-if="asasak"
         >

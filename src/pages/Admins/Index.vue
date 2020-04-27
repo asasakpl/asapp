@@ -1,18 +1,19 @@
 <template>
   <v-container>
-    <v-row class="pl-12">
-      <v-btn @click="getAdmins()" v-if="!load" icon fab class="ml-2 mt-2">
-        <v-icon size="34">refresh</v-icon>
-      </v-btn>
-      <v-btn
-        @click="getAdmins()"
-        v-else
-        loading
-        icon
-        fab
-        class="ml-2 mt-4"
-      ></v-btn>
-
+    <v-row>
+      <v-col cols="1" align="end">
+        <v-btn @click="getAdmins()" v-if="!load" icon fab class="mt-2">
+          <v-icon size="38">refresh</v-icon>
+        </v-btn>
+        <v-btn
+          @click="getAdmins()"
+          v-else
+          loading
+          icon
+          fab
+          class="mt-4"
+        ></v-btn>
+      </v-col>
       <v-col class="pr-0">
         <v-card class="mx-auto px-auto round" max-width="90%" tile>
           <v-card-title>
@@ -70,9 +71,11 @@
           <v-pagination v-model="page" :length="pageCount"></v-pagination>
         </div>
       </v-col>
-      <v-btn @click="newAdmin()" icon fab class="ml-0 mt-2">
-        <v-icon size="34">mdi-account-plus</v-icon>
-      </v-btn>
+      <v-col cols="1">
+        <v-btn @click="newAdmin()" icon fab class="ml-0 mt-2">
+          <v-icon size="38">mdi-account-plus</v-icon>
+        </v-btn>
+      </v-col>
     </v-row>
 
     <NetworkError :error="error"></NetworkError>

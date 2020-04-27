@@ -1,7 +1,7 @@
 <template>
   <v-container
-    ><v-row class="pl-4">
-      <v-col>
+    ><v-row>
+      <v-col align="end">
         <v-btn @click="$router.push('/asasak')" icon fab class="ml-2">
           <v-icon size="34">arrow_back</v-icon>
         </v-btn>

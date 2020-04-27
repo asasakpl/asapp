@@ -1,13 +1,13 @@
 <template>
   <v-container>
-    <v-row class="pl-4">
+    <v-row>
       <v-col>
-        <v-btn @click="$router.go(-1)" icon fab class="ml-2">
+        <v-btn @click="$router.go(-1)" icon fab>
           <v-icon size="32">arrow_back</v-icon>
         </v-btn>
       </v-col>
       <v-col cols="11">
-        <v-card class="mx-auto px-auto round" max-width="90%" tile>
+        <v-card class="mx-auto ml-4 px-auto round" max-width="90%" tile>
           <v-card-title>Dodawanie nowego subskrybenta</v-card-title>
           <v-card-text>
             <v-row>

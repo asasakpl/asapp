@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-system-bar lights-out height="28" class="drag pr-0">
+    <v-system-bar lights-out height="28" class="drag pr-0" app>
       <span>
         <v-img src="@/assets/m35logo.png" class="mr-3" width="80" height="15" />
       </span>

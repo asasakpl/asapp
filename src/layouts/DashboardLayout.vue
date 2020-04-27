@@ -1,9 +1,7 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <Navigation />
-      <router-view></router-view>
-    </v-row>
+  <v-container>
+    <Navigation />
+    <router-view></router-view>
   </v-container>
 </template>
 
@@ -17,7 +15,6 @@ import Navigation from '@/components/Navigation.vue'
 export default Vue.extend({
   components: {
     Navigation,
-
   },
   data() {
     return {

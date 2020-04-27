@@ -14,8 +14,8 @@
         ></v-card-text>
         <v-card-actions class="px-4">
           <v-list-item class="grow">
-            <v-list-item-avatar color="grey darken-3" size="44">
-              <v-img class="elevation-4" :src="release.author.avatar_url"></v-img>
+            <v-list-item-avatar color="grey darken-3 mr-3" size="40">
+              <v-img class="elevation-6" :src="release.author.avatar_url"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>

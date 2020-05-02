@@ -5,18 +5,18 @@ Vue.use(Vuetify)
 
 export default new Vuetify({
   icons: {
-    iconfont: 'mdi'
+    iconfont: 'mdi',
   },
   theme: {
     themes: {
       light: {
         primary: '#45d66b',
-        error: '#ff0033'
+        error: '#ff0033',
       },
       dark: {
         primary: '#45d66b',
-        error: '#ff0033'
-      }
-    }
-  }
+        error: '#ff0033',
+      },
+    },
+  },
 })

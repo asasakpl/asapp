@@ -8,27 +8,27 @@
 <style scoped></style>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
-import Navigation from '@/components/Navigation.vue'
+import Vue from "vue";
+import axios from "axios";
+import Navigation from "@/components/Navigation.vue";
 
 export default Vue.extend({
   components: {
-    Navigation,
+    Navigation
   },
   data() {
     return {
-      user: [],
-    }
+      user: []
+    };
   },
   beforeMount() {
-    this.$i18n.locale = localStorage.getItem('i18n')
+    this.$i18n.locale = localStorage.getItem("i18n");
 
-    if (localStorage.getItem('theme') == 'dark') {
-      this.$vuetify.theme.dark = true
+    if (localStorage.getItem("theme") == "dark") {
+      this.$vuetify.theme.dark = true;
     } else {
-      this.$vuetify.theme.dark = false
+      this.$vuetify.theme.dark = false;
     }
-  },
-})
+  }
+});
 </script>

@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <v-card class="mx-auto px-auto pb-5 round" max-width="90%" tile>
+    <v-card class="mx-auto px-auto pb-5 round grid" tile>
       <v-card-title>{{ $t('dashboard.statistics.title') }}</v-card-title>
       <v-col cols="12">
         <v-row>
-          <v-col>
+          <v-col class="grid">
             <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
               <div class="d-flex flex-no-wrap justify-space-between">
                 <v-card-text>
@@ -16,31 +16,35 @@
               </div>
             </v-card>
           </v-col>
-          <v-col>
+          <v-col class="grid">
             <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
-              <div class="d-flex flex-no-wrap justify-space-between">
+              <div>
                 <v-card-text>
-                  <div>{{ $t('dashboard.statistics.orders_card') }}</div>
-                  <p class="display-1">{{ this.orders }}</p>
+                  <div>
+                    <div>{{ $t('dashboard.statistics.orders_card') }}</div>
+                  </div>
+                  <div class="d-flex flex-no-wrap justify-space-between">
+                    <p class="display-1 ma-0 pt-1">{{ this.orders }}</p>
+                    <v-icon size="50">mdi-truck</v-icon>
+                  </div>
                 </v-card-text>
-
-                <v-icon size="50">mdi-truck</v-icon>
               </div>
             </v-card>
           </v-col>
-          <v-col>
+          <v-col class="grid">
             <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
-              <div class="d-flex flex-no-wrap justify-space-between">
+              <div>
                 <v-card-text>
                   <div>{{ $t('dashboard.statistics.products_card') }}</div>
-                  <p class="display-1">{{ this.products }}</p>
+                  <div class="d-flex flex-no-wrap justify-space-between">
+                    <p class="display-1 ma-0 pt-1">{{ this.products }}</p>
+                    <v-icon size="50">mdi-folder-home</v-icon>
+                  </div>
                 </v-card-text>
-
-                <v-icon size="50">mdi-folder-home</v-icon>
               </div>
             </v-card>
           </v-col>
-          <v-col>
+          <v-col class="grid">
             <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
               <div class="d-flex flex-no-wrap justify-space-between">
                 <v-card-text>
@@ -62,6 +66,10 @@
 <style scoped>
 .round {
   border-radius: 14px;
+}
+
+.grid {
+  display: grid;
 }
 </style>
 

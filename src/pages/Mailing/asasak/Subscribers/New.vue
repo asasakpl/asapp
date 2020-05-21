@@ -12,19 +12,10 @@
           <v-card-text>
             <v-row>
               <v-col>
-                <v-text-field
-                  outlined
-                  label="Imie i nazwisko"
-                  v-model="member.name"
-                ></v-text-field>
+                <v-text-field outlined label="Imie i nazwisko" v-model="member.name"></v-text-field>
               </v-col>
               <v-col>
-                <v-text-field
-                  outlined
-                  label="Email"
-                  :rules="emailRules"
-                  v-model="member.email"
-                ></v-text-field>
+                <v-text-field outlined label="Email" :rules="emailRules" v-model="member.email"></v-text-field>
               </v-col>
             </v-row>
             <v-row class="mr-3">
@@ -33,9 +24,7 @@
                 @click="addMember(member)"
                 color="#45d66b"
                 :disabled="member.email.length <= 0"
-              >
-                Dodaj
-              </v-btn>
+              >Dodaj</v-btn>
             </v-row>
           </v-card-text>
         </v-card>
@@ -52,48 +41,48 @@
 </style>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
+import Vue from "vue"
+import axios from "axios"
 
 // Components
-import Error from '@/components/Error.vue'
+import Error from "@/components/Error.vue"
 
 export default Vue.extend({
   components: {
-    Error,
+    Error
   },
   data() {
     return {
       member: {
-        email: '',
-        name: '',
+        email: "",
+        name: ""
       },
       conflict: false,
       emailRules: [
-        (v) =>
+        v =>
           !v ||
           /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          'Adres email musi byc poprawny',
-      ],
+          "Adres email musi byc poprawny"
+      ]
     }
   },
   methods: {
     async addMember(member) {
       await axios
-        .post('/asasak/add', { email: member.email, name: member.name })
-        .then((res) => {
-          const text = 'mail.subscriber.success'
-          const icon = 'account-check'
-          this.$store.dispatch('success', { text, icon })
-          this.$router.push('/asasak/subscribers')
+        .post("/asasak/add", { email: member.email, name: member.name })
+        .then(res => {
+          const text = "mail.subscriber.success"
+          const icon = "account-check"
+          this.$store.dispatch("success", { text, icon })
+          this.$router.push("/asasak/subscribers")
         })
-        .catch((err) => {
-          const text = 'mail.new.error'
-          const icon = 'email-alert'
-          this.$store.dispatch('error', { text, icon })
+        .catch(err => {
+          const text = "mail.new.error"
+          const icon = "email-alert"
+          this.$store.dispatch("error", { text, icon })
           this.conflict = true
         })
-    },
-  },
+    }
+  }
 })
 </script>

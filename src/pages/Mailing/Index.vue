@@ -15,14 +15,8 @@
               src="@/assets/newsletter/m35.jpg"
               gradient="to top right, rgba(0,0,0, .7), rgba(0,0,0, .7)"
             >
-              <div
-                class="d-flex  display-3 white--text text-center"
-                style="height: 100%;"
-              >
-                <v-row
-                  class="lightbox white--text pa-2 fill-height fill-width"
-                  align="center"
-                >
+              <div class="d-flex display-3 text-center" style="height: 100%;">
+                <v-row class="lightbox pa-2 fill-height fill-width" align="center">
                   <v-col>
                     <v-icon size="62">mdi-hammer-wrench</v-icon>
                   </v-col>
@@ -35,14 +29,9 @@
                   style="height: 100%;"
                   @click="m35Push"
                 >
-                  <v-row
-                    class="lightbox white--text pa-2 fill-height fill-width"
-                    align="center"
-                  >
+                  <v-row class="lightbox white--text pa-2 fill-height fill-width" align="center">
                     <v-col>
-                      <div class="display-1 font-weight-medium">
-                        moje35metrow.pl
-                      </div>
+                      <div class="display-1 font-weight-medium">moje35metrow.pl</div>
                     </v-col>
                   </v-row>
                 </div>
@@ -54,12 +43,7 @@
 
       <v-col>
         <v-hover v-slot:default="{ hover }" close-delay="200">
-          <v-card
-            :elevation="hover ? 16 : 2"
-            class="mx-auto px-auto round"
-            max-width="90%"
-            tile
-          >
+          <v-card :elevation="hover ? 16 : 2" class="mx-auto px-auto round" max-width="90%" tile>
             <v-img :aspect-ratio="16 / 9" src="@/assets/newsletter/asasak.jpg">
               <v-expand-transition>
                 <div
@@ -68,10 +52,7 @@
                   style="height: 100%;"
                   @click="asasakPush"
                 >
-                  <v-row
-                    class="lightbox white--text pa-2 fill-height "
-                    align="center"
-                  >
+                  <v-row class="lightbox white--text pa-2 fill-height" align="center">
                     <v-col>
                       <div class="display-1 font-weight-medium">asasak.pl</div>
                     </v-col>
@@ -108,40 +89,40 @@
 </style>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
-import NetworkError from '@/components/NetworkError.vue'
+import Vue from "vue"
+import axios from "axios"
+import NetworkError from "@/components/NetworkError.vue"
 
 export default Vue.extend({
   components: {
-    NetworkError,
+    NetworkError
   },
   data() {
     return {
       error: true,
       m35: null,
-      asasak: null,
+      asasak: null
     }
   },
   async mounted() {
     axios
-      .get('/mail')
-      .then((res) => {
+      .get("/mail")
+      .then(res => {
         this.error = false
         this.m35 = res.data.data.m35.list
         this.asasak = res.data.data.asasak.list
       })
-      .catch((err) => {
+      .catch(err => {
         this.error = true
       })
   },
   methods: {
     asasakPush() {
-      this.$router.push('/asasak')
+      this.$router.push("/asasak")
     },
     m35Push() {
-      this.$router.push('/m35')
-    },
-  },
+      this.$router.push("/m35")
+    }
+  }
 })
 </script>

@@ -66,7 +66,13 @@ export default new Vuex.Store({
           localStorage.setItem('m_email', user.email)
           localStorage.setItem('m_name', user.firstName + ' ' + user.lastName)
           localStorage.setItem('m_type', user.type)
-          localStorage.setItem('theme', 'light')
+
+          if (localStorage.getItem('theme') == undefined) {
+            localStorage.setItem('theme', 'light')
+          } else {
+            console.log('dupa')
+          }
+
           localStorage.setItem('i18n', 'en')
 
           axios.defaults.headers.common['auth'] = token
@@ -83,7 +89,9 @@ export default new Vuex.Store({
     logout({ commit }) {
       return new Promise((resolve, reject) => {
         commit('logout')
+        const theme = localStorage.getItem('theme')
         localStorage.clear()
+        localStorage.setItem('theme', theme)
         delete axios.defaults.headers.common['auth']
         resolve()
       })

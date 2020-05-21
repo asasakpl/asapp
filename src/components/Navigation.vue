@@ -3,35 +3,34 @@
     v-model="drawer"
     :color="color"
     :expand-on-hover="expandOnHover"
-    :mini-variant="miniVariant"
     :right="right"
     dark
     app
   >
     <v-layout column fill-height>
-      <v-list dense nav class="py-0">
-        <v-list-item two-line>
-          <v-avatar size="42">
+      <v-list dense class="py-0">
+        <v-list-item class="px-2" two-line>
+          <v-list-item-avatar>
             <v-icon large>mdi-account</v-icon>
-          </v-avatar>
+          </v-list-item-avatar>
 
-          <v-list-item-content class="ml-3">
+          <v-list-item-content>
             <v-list-item-title>{{ name }}</v-list-item-title>
             <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
+      </v-list>
 
-        <v-divider></v-divider>
+      <v-divider></v-divider>
 
+      <v-list dense nav class="py-0">
         <v-list-item to="/">
           <v-list-item-icon>
             <v-icon>mdi-monitor-dashboard</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>
-              {{ $t('navigation.dashboard') }}
-            </v-list-item-title>
+            <v-list-item-title>{{ $t('navigation.dashboard') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -61,9 +60,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>
-              {{ $t('navigation.products') }}
-            </v-list-item-title>
+            <v-list-item-title>{{ $t('navigation.products') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -73,9 +70,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>
-              {{ $t('navigation.sellers') }}
-            </v-list-item-title>
+            <v-list-item-title>{{ $t('navigation.sellers') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -109,9 +104,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>
-              {{ $t('navigation.settings') }}
-            </v-list-item-title>
+            <v-list-item-title>{{ $t('navigation.settings') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -121,9 +114,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>
-              {{ $t('navigation.log_out') }}
-            </v-list-item-title>
+            <v-list-item-title>{{ $t('navigation.log_out') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -133,9 +124,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title
-              >v{{ $store.getters.appVersion }}</v-list-item-title
-            >
+            <v-list-item-title>v{{ $store.getters.appVersion }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -144,50 +133,49 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
+import Vue from "vue"
+import axios from "axios"
 
 export default Vue.extend({
   props: {
-    source: String,
+    source: String
   },
   data() {
     return {
-      name: localStorage.getItem('m_name'),
-      email: localStorage.getItem('m_email'),
-      type: localStorage.getItem('m_type'),
+      name: localStorage.getItem("m_name"),
+      email: localStorage.getItem("m_email"),
+      type: localStorage.getItem("m_type"),
       drawer: true,
       items: [
         {
-          title: 'Dashboard',
-          icon: 'mdi-view-dashboard',
-          to: '/',
+          title: "Dashboard",
+          icon: "mdi-view-dashboard",
+          to: "/"
         },
-        { title: 'Orders', icon: 'mdi-truck', to: 'orders' },
+        { title: "Orders", icon: "mdi-truck", to: "orders" },
         {
-          title: 'Users',
-          icon: 'mdi-account-group',
-          to: 'users',
+          title: "Users",
+          icon: "mdi-account-group",
+          to: "users"
         },
         {
-          title: 'Products',
-          icon: 'mdi-folder-home',
-          to: 'products',
-        },
+          title: "Products",
+          icon: "mdi-folder-home",
+          to: "products"
+        }
       ],
-      color: '#45d66b',
-      colors: ['primary', 'blue', 'success', 'red', 'teal'],
+      color: "#45d66b",
       right: false,
       miniVariant: false,
       expandOnHover: true,
-      background: false,
+      background: false
     }
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout')
-      this.$router.push('/login')
-    },
-  },
+      this.$store.dispatch("logout")
+      this.$router.push("/login")
+    }
+  }
 })
 </script>

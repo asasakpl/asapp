@@ -9,7 +9,14 @@
         <v-btn @click="getInfo()" v-if="!load" icon fab class="ml-2 mt-2">
           <v-icon size="34">refresh</v-icon>
         </v-btn>
-        <v-btn @click="getInfo()" v-else loading icon fab class="ml-2 mt-4"></v-btn>
+        <v-btn
+          @click="getInfo()"
+          v-else
+          loading
+          icon
+          fab
+          class="ml-2 mt-4"
+        ></v-btn>
       </v-col>
 
       <v-col class="pr-0" cols="10">
@@ -45,12 +52,19 @@
                 <td>{{ row.item.name }}</td>
                 <td>{{ row.item.address }}</td>
                 <td>
-                  <v-btn dark small color="#45d66b" @click="click(row.item)">Usuń</v-btn>
+                  <v-btn dark small color="#45d66b" @click="click(row.item)"
+                    >Usuń</v-btn
+                  >
                 </td>
               </tr>
             </template>
           </v-data-table>
-          <v-data-table v-else loading hide-default-footer loading-text="Loading... Please wait"></v-data-table>
+          <v-data-table
+            v-else
+            loading
+            hide-default-footer
+            loading-text="Loading... Please wait"
+          ></v-data-table>
         </v-card>
         <div class="text-center pt-2">
           <v-pagination v-model="page" :length="pageCount"></v-pagination>
@@ -65,7 +79,9 @@
 
     <v-dialog v-model="dialog" width="500">
       <v-card>
-        <v-card-title primary-title>Czy napewno chcesz usunąć ten email z listy?</v-card-title>
+        <v-card-title primary-title
+          >Czy napewno chcesz usunąć ten email z listy?</v-card-title
+        >
 
         <v-card-text class="title red--text">{{ email }}</v-card-text>
 
@@ -91,17 +107,17 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue"
-import axios from "axios"
+import Vue from 'vue'
+import axios from 'axios'
 
 // Components
-import NetworkError from "@/components/NetworkError.vue"
-import Success from "@/components/Success.vue"
+import NetworkError from '@/components/NetworkError.vue'
+import Success from '@/components/Success.vue'
 
 export default Vue.extend({
   components: {
     NetworkError,
-    Success
+    Success,
   },
   data() {
     return {
@@ -109,7 +125,7 @@ export default Vue.extend({
       error: true,
       page: 1,
       pageCount: 1,
-      search: "",
+      search: '',
       dialog: false,
       singleSelect: true,
       email: null,
@@ -117,31 +133,31 @@ export default Vue.extend({
       selected: [],
       headers: [
         {
-          text: "Imie i nazwisko",
-          value: "name"
+          text: 'Imie i nazwisko',
+          value: 'name',
         },
         {
-          text: "Adres email",
-          value: "address"
+          text: 'Adres email',
+          value: 'address',
         },
         {
-          text: "",
-          value: ""
-        }
-      ]
+          text: '',
+          value: '',
+        },
+      ],
     }
   },
   methods: {
     getInfo() {
       axios
-        .get("/mail/asasak")
-        .then(res => {
+        .get('/mail/asasak')
+        .then((res) => {
           this.load = true
-          this.members = res.data.data.asasak.members
+          this.members = res.data.asasak.members
           this.error = false
           this.load = false
         })
-        .catch(err => {
+        .catch((err) => {
           this.error = true
         })
     },
@@ -151,23 +167,23 @@ export default Vue.extend({
     },
     removeSubscriber() {
       axios
-        .post("/asasak/cancel", { email: this.email })
-        .then(res => {
+        .post('/asasak/cancel', { email: this.email })
+        .then((res) => {
           this.load = true
           this.dialog = false
-          const text = "mail.subscriber.removed"
-          const icon = "account-check"
-          this.$store.dispatch("success", { text, icon })
+          const text = 'mail.subscriber.removed'
+          const icon = 'account-check'
+          this.$store.dispatch('success', { text, icon })
           this.getInfo()
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
           return
         })
-    }
+    },
   },
   mounted() {
     this.getInfo()
-  }
+  },
 })
 </script>

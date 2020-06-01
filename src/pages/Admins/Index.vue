@@ -153,7 +153,7 @@ export default Vue.extend({
         .get(`/admins`)
         .then((res) => {
           this.error = false
-          this.admins = res.data.data.admins
+          this.admins = res.data
           this.load = false
           return
         })

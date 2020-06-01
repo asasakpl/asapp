@@ -71,15 +71,15 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue"
-import axios from "axios"
-import DashboardLayout from "@/layouts/DashboardLayout.vue"
-import NetworkError from "@/components/NetworkError.vue"
+import Vue from 'vue'
+import axios from 'axios'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
+import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
   components: {
     NetworkError,
-    DashboardLayout
+    DashboardLayout,
   },
   data() {
     return {
@@ -88,7 +88,7 @@ export default Vue.extend({
       sellers: 0,
       orders: 0,
       users: 0,
-      name: localStorage.getItem("m_name")
+      name: localStorage.getItem('m_name'),
     }
   },
   methods: {
@@ -97,11 +97,11 @@ export default Vue.extend({
       date.setDate(date.getDate() - 30)
 
       await axios
-        .get("/users")
-        .then(res => {
+        .get('/users')
+        .then((res) => {
           this.error = false
-          let users = res.data.data.users
-          users = users.map(user => user.createdAt)
+          let users = res.data
+          users = users.map((user) => user.createdAt)
 
           for (let x in users) {
             let usersDate = new Date(users[x])
@@ -112,17 +112,18 @@ export default Vue.extend({
             this.users = this.users + ddd
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.error = true
         })
 
-      await axios.get("/products").then(res => {
-        this.products = res.data.data.products.length
+      await axios.get('/products').then((res) => {
+        this.products = res.data.length
       })
 
-      await axios.get("/orders").then(res => {
-        let orders = res.data.data.orders
-        orders = orders.map(order => order.createdAt)
+      await axios.get('/orders').then((res) => {
+        let orders = res.data
+
+        orders = orders.map((order) => order.createdAt)
 
         for (let x in orders) {
           let orderDate = new Date(orders[x])
@@ -134,13 +135,13 @@ export default Vue.extend({
         }
       })
 
-      await axios.get("/owners").then(res => {
-        this.sellers = res.data.data.owners.length
+      await axios.get('/owners').then((res) => {
+        this.sellers = res.data.length
       })
-    }
+    },
   },
   beforeMount() {
     this.getData()
-  }
+  },
 })
 </script>

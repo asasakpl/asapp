@@ -43,16 +43,6 @@
             :items-per-page="8"
             @page-count="pageCount = $event"
           >
-            <template v-slot:item.image="{ item }">
-              <div class="mx-2 mt-1 mb-1">
-                <v-img
-                  :src="item.pictures[0].url"
-                  :alt="item.id.toString()"
-                  height="80px"
-                  width="80px"
-                ></v-img>
-              </div>
-            </template>
             <template
               v-for="header in headers"
               v-slot:[`header.${header.value}`]
@@ -106,7 +96,7 @@ export default Vue.extend({
     return {
       error: true,
       page: 1,
-      pageCount: 5,
+      pageCount: 1,
       admins: [],
       search: '',
       lang: null,

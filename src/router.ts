@@ -28,6 +28,15 @@ import ProductsList from '@/pages/Products/List/List.vue'
 import Product from '@/pages/Products/List/_id.vue'
 import NewProduct from '@/pages/Products/New.vue'
 
+// Shipping
+import Shipping from '@/pages/Shipping/Index.vue'
+import NewShipping from '@/pages/Shipping/New.vue'
+import ShippingMethod from '@/pages/Shipping/_id.vue'
+
+// Payments
+import Payments from '@/pages/Payments/Index.vue'
+import Payment from '@/pages/Payments/_id.vue'
+
 // Order
 import Orders from '@/pages/Orders/Index.vue'
 import Order from '@/pages/Orders/_id.vue'
@@ -137,11 +146,40 @@ let router = new Router({
           component: Product,
           beforeEnter: ifAuthenticated,
         },
-
         {
           path: '/product/new',
           name: 'newproducts',
           component: NewProduct,
+          beforeEnter: ifAuthenticated,
+        },
+        {
+          path: '/payments',
+          name: 'payments',
+          component: Payments,
+          beforeEnter: ifAuthenticated,
+        },
+        {
+          path: '/payments/:id',
+          name: 'payment',
+          component: Payment,
+          beforeEnter: ifAuthenticated,
+        },
+        {
+          path: '/shipping',
+          name: 'shipping',
+          component: Shipping,
+          beforeEnter: ifAuthenticated,
+        },
+        {
+          path: '/shipping/new',
+          name: 'new_shipping',
+          component: NewShipping,
+          beforeEnter: ifAuthenticated,
+        },
+        {
+          path: '/shipping/:id',
+          name: 'shipping_method',
+          component: ShippingMethod,
           beforeEnter: ifAuthenticated,
         },
         {

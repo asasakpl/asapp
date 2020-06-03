@@ -30,13 +30,15 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ $t('navigation.dashboard') }}</v-list-item-title>
+            <v-list-item-title>{{
+              $t('navigation.dashboard')
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
         <v-list-item to="/orders" disabled>
           <v-list-item-icon>
-            <v-icon>mdi-truck</v-icon>
+            <v-icon>mdi-truck-delivery</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -54,13 +56,39 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/products">
+        <v-list-item to="/products" disabled>
           <v-list-item-icon>
             <v-icon>mdi-folder-home</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ $t('navigation.products') }}</v-list-item-title>
+            <v-list-item-title>{{
+              $t('navigation.products')
+            }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item to="/payments">
+          <v-list-item-icon>
+            <v-icon>mdi-credit-card-marker-outline</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{
+              $t('navigation.payments')
+            }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item to="/shipping">
+          <v-list-item-icon>
+            <v-icon>mdi-truck-fast</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{
+              $t('navigation.shipping')
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -70,7 +98,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ $t('navigation.sellers') }}</v-list-item-title>
+            <v-list-item-title>{{
+              $t('navigation.sellers')
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -104,7 +134,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ $t('navigation.settings') }}</v-list-item-title>
+            <v-list-item-title>{{
+              $t('navigation.settings')
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -114,7 +146,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ $t('navigation.log_out') }}</v-list-item-title>
+            <v-list-item-title>{{
+              $t('navigation.log_out')
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -124,7 +158,9 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>v{{ $store.getters.appVersion }}</v-list-item-title>
+            <v-list-item-title
+              >v{{ $store.getters.appVersion }}</v-list-item-title
+            >
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -133,8 +169,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import axios from "axios"
+import Vue from 'vue'
+import axios from 'axios'
 
 export default Vue.extend({
   props: {
@@ -142,29 +178,29 @@ export default Vue.extend({
   },
   data() {
     return {
-      name: localStorage.getItem("m_name"),
-      email: localStorage.getItem("m_email"),
-      type: localStorage.getItem("m_type"),
+      name: localStorage.getItem('m_name'),
+      email: localStorage.getItem('m_email'),
+      type: localStorage.getItem('m_type'),
       drawer: true,
       items: [
         {
-          title: "Dashboard",
-          icon: "mdi-view-dashboard",
-          to: "/"
+          title: 'Dashboard',
+          icon: 'mdi-view-dashboard',
+          to: '/'
         },
-        { title: "Orders", icon: "mdi-truck", to: "orders" },
+        { title: 'Orders', icon: 'mdi-truck', to: 'orders' },
         {
-          title: "Users",
-          icon: "mdi-account-group",
-          to: "users"
+          title: 'Users',
+          icon: 'mdi-account-group',
+          to: 'users'
         },
         {
-          title: "Products",
-          icon: "mdi-folder-home",
-          to: "products"
+          title: 'Products',
+          icon: 'mdi-folder-home',
+          to: 'products'
         }
       ],
-      color: "#45d66b",
+      color: '#45d66b',
       right: false,
       miniVariant: false,
       expandOnHover: true,
@@ -173,8 +209,8 @@ export default Vue.extend({
   },
   methods: {
     logout() {
-      this.$store.dispatch("logout")
-      this.$router.push("/login")
+      this.$store.dispatch('logout')
+      this.$router.push('/login')
     }
   }
 })

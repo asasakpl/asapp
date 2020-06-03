@@ -81,7 +81,7 @@
       </v-col>
     </v-row>
     <v-row v-else>
-      <v-btn @click="$router.push('/admins')" icon fab class="mt-4 ml-4">
+      <v-btn @click="$router.push('/shipping')" icon fab class="mt-4 ml-4">
         <v-icon size="38">arrow_back</v-icon>
       </v-btn>
 

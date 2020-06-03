@@ -151,8 +151,8 @@ export default Vue.extend({
         })
     }
   },
-  created() {
-    this.getShipping()
+  async created() {
+    await this.getShipping()
   }
 })
 </script>

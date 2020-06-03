@@ -5,6 +5,8 @@
     "orders": "Zamówienia",
     "users": "Użytkownicy",
     "products": "Produkty",
+    "payments": "Metody Płatności",
+    "shipping": "Metody Wysyłki",
     "sellers": "Sprzedający",
     "mail": "Newsletters",
     "admins": "Administratorzy",
@@ -145,7 +147,7 @@
   },
   "products": {
     "dashboard": {
-      "title": "Produkty"
+      "title": "Panel produktów"
     },
     "title": "ID produktu",
     "titles": {
@@ -200,6 +202,47 @@
       "price": "Cena",
       "tag": "Tag"
     }
+  },
+  "payments": {
+    "table": {
+      "title": "Metody płatności",
+      "id": "Numer",
+      "name_pl": "Nazwa pl",
+      "name_en": "Nazwa en",
+      "price": "Cena",
+      "code": "Kod"
+    },
+    "new": {
+      "title": "Dodawanie nowej metody płatności",
+      "id": "Numer metody płatności",
+      "name_pl": "Polski tytuł",
+      "name_en": "Angielski tytuł",
+      "code": "Code",
+      "btn": "Utwórz"
+    },
+    "success": "Metoda płatności została utworzona",
+    "error": "Metoda płatności z taką nazwą już istnieje"
+  },
+  "shipping": {
+    "table": {
+      "title": "Metody wysyłki",
+      "id": "Numer",
+      "name_pl": "Nazwa pl",
+      "name_en": "Nazwa en",
+      "price": "Cena",
+      "code": "Kod"
+    },
+    "new": {
+      "id": "Numer sposobu wysyłki",
+      "title": "Dodawanie nowej metody wysyłki",
+      "name_pl": "Polski tytuł",
+      "name_en": "Angielski tytuł",
+      "code": "Kod metody wysyłki",
+      "price": "Cena",
+      "btn": "Utwórz"
+    },
+    "success": "Sposób wysyłki został pomyślnie utworzony",
+    "error": "Sposób wysyłki z tą nazwą już istnieje"
   },
   "sellers": {},
   "mail": {

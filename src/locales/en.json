@@ -5,6 +5,8 @@
     "orders": "Orders",
     "users": "Users",
     "products": "Products",
+    "payments": "Payment Methods",
+    "shipping": "Shipping Methods",
     "sellers": "Sellers",
     "mail": "Newsletters",
     "admins": "Admins",
@@ -134,7 +136,7 @@
   },
   "products": {
     "dashboard": {
-      "title": "Products"
+      "title": "Products panel"
     },
     "title": "Product ID",
     "titles": {
@@ -189,6 +191,47 @@
       "price": "Price",
       "tag": "Tag"
     }
+  },
+  "payments": {
+    "table": {
+      "title": "Payment Methods",
+      "id": "Number",
+      "name_pl": "Name pl",
+      "name_en": "Name en",
+      "price": "Price",
+      "code": "Code"
+    },
+    "new": {
+      "title": "Create new payment method",
+      "id": "Payment method number",
+      "name_pl": "Polish title",
+      "name_en": "Enlgish title",
+      "code": "Code",
+      "btn": "Utwórz"
+    },
+    "success": "Payment methods was successfuly created",
+    "error": "Payment method with this name already exist"
+  },
+  "shipping": {
+    "table": {
+      "title": "Shipping Methods",
+      "id": "Number",
+      "name_pl": "Name pl",
+      "name_en": "Name en",
+      "price": "Price",
+      "code": "Code"
+    },
+    "new": {
+      "id": "Shipping method number",
+      "title": "Create new shipping method",
+      "name_pl": "Polish title",
+      "name_en": "English title",
+      "code": "Shipping method code",
+      "price": "Price",
+      "btn": "Create"
+    },
+    "success": "Method was successfuly created",
+    "error": "Shipping method with this name already exists"
   },
   "sellers": {},
   "mail": {

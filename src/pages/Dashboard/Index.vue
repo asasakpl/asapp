@@ -79,7 +79,7 @@ import NetworkError from '@/components/NetworkError.vue'
 export default Vue.extend({
   components: {
     NetworkError,
-    DashboardLayout,
+    DashboardLayout
   },
   data() {
     return {
@@ -88,7 +88,7 @@ export default Vue.extend({
       sellers: 0,
       orders: 0,
       users: 0,
-      name: localStorage.getItem('m_name'),
+      name: localStorage.getItem('m_name')
     }
   },
   methods: {
@@ -96,32 +96,9 @@ export default Vue.extend({
       let date = new Date()
       date.setDate(date.getDate() - 30)
 
-      await axios
-        .get('/users')
-        .then((res) => {
-          this.error = false
-          let users = res.data
-          users = users.map((user) => user.createdAt)
-
-          for (let x in users) {
-            let usersDate = new Date(users[x])
-            let ddd = 0
-            if (date < usersDate) {
-              ddd++
-            }
-            this.users = this.users + ddd
-          }
-        })
-        .catch((err) => {
-          this.error = true
-        })
-
-      await axios.get('/products').then((res) => {
-        this.products = res.data.length
-      })
-
-      await axios.get('/orders').then((res) => {
-        let orders = res.data
+      await axios.get('/dashboard').then((res) => {
+        this.error = false
+        let orders = res.data.orders
 
         orders = orders.map((order) => order.createdAt)
 
@@ -133,15 +110,29 @@ export default Vue.extend({
           }
           this.orders = this.orders + ddd
         }
-      })
 
-      await axios.get('/owners').then((res) => {
-        this.sellers = res.data.length
+        this.sellers = 0 + res.data.sellers.length
+
+        this.products = 0 + res.data.products.length
+
+        let users = res.data.users
+        users = users.map((user) => user.createdAt)
+
+        for (let x in users) {
+          let usersDate = new Date(users[x])
+          let ddd = 0
+          if (date < usersDate) {
+            ddd++
+          }
+          this.users = this.users + ddd
+        }
+
+        return
       })
-    },
+    }
   },
   beforeMount() {
     this.getData()
-  },
+  }
 })
 </script>

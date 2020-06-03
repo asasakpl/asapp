@@ -5,6 +5,8 @@
         <v-img src="@/assets/m35logo.png" class="mr-3" width="80" height="15" />
       </span>
       <v-spacer></v-spacer>
+      <div style="font-weight: 100">{{ dev }}</div>
+      <v-spacer></v-spacer>
       <v-btn tile icon class="no-drag" small v-on:click="minimize()">
         <v-icon size="24">mdi-minus</v-icon>
       </v-btn>
@@ -42,6 +44,11 @@ import axios from 'axios'
 import { remote } from 'electron'
 
 export default Vue.extend({
+  data() {
+    return {
+      dev: ''
+    }
+  },
   created: function() {
     axios.interceptors.response.use(undefined, function(err) {
       return new Promise(function(resolve, reject) {
@@ -51,6 +58,10 @@ export default Vue.extend({
         throw err
       })
     })
+
+    if (process.env.NODE_ENV === 'development') {
+      this.dev = 'Development version'
+    }
   },
   methods: {
     minimize() {
@@ -68,7 +79,7 @@ export default Vue.extend({
     close() {
       const window = remote.getCurrentWindow()
       window.close()
-    },
-  },
+    }
+  }
 })
 </script>

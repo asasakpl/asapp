@@ -111,7 +111,7 @@ export default Vue.extend({
           this.orders = this.orders + ddd
         }
 
-        this.sellers = 0 + res.data.sellers.length
+        this.sellers = 0 + res.data.owners.length
 
         this.products = 0 + res.data.products.length
 

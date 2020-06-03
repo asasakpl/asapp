@@ -1,28 +1,26 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="1" align="center" class="pr-0">
-        <v-btn @click="getAdmins()" v-if="!load" icon fab class="mt-2">
-          <v-icon size="38">refresh</v-icon>
-        </v-btn>
-        <v-btn
-          @click="getAdmins()"
-          v-else
-          loading
-          icon
-          fab
-          class="mt-4"
-        ></v-btn>
-      </v-col>
-      <v-col class="pr-0 pl-0">
+      <v-btn
+        @click="loading(), getProducts()"
+        v-if="!load"
+        icon
+        class="ml-8 mt-4"
+      >
+        <v-icon size="32">refresh</v-icon>
+      </v-btn>
+      <v-btn @click="getProducts()" v-else loading icon class="ml-8"> </v-btn>
+
+      <v-col>
         <v-card class="mx-auto px-auto round" max-width="90%" tile>
           <v-card-title>
-            {{ $t('admin.table.title') }}
+            Lista produktów
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"
-              append-icon="mdi-magnify"
+              append-icon="search"
               label="Search"
+              color="white"
               single-line
               hide-details
             ></v-text-field>
@@ -31,7 +29,7 @@
             v-if="!error"
             v-model="selected"
             :headers="headers"
-            :items="admins"
+            :items="products"
             @click:row="rowClick"
             sort-by="id"
             :sort-desc="true"
@@ -57,7 +55,7 @@
               v-for="header in headers"
               v-slot:[`header.${header.value}`]
             >
-              {{ $t(`admin.table.${header.text}`) }}
+              {{ $t(`products_table.${header.text}`) }}
             </template>
           </v-data-table>
           <v-data-table
@@ -71,15 +69,11 @@
           <v-pagination v-model="page" :length="pageCount"></v-pagination>
         </div>
       </v-col>
-      <v-col cols="1">
-        <v-btn @click="newAdmin()" icon fab class="ml-0 mt-2">
-          <v-icon size="38">mdi-account-plus</v-icon>
-        </v-btn>
-      </v-col>
+      <v-btn @click="newProduct()" icon class="ml-0 mt-4">
+        <v-icon size="32">mdi-pencil-plus</v-icon>
+      </v-btn>
     </v-row>
-
     <NetworkError :error="error"></NetworkError>
-    <Success v-if="this.$store.state.success"></Success>
   </v-container>
 </template>
 
@@ -92,79 +86,78 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-
-// components
 import NetworkError from '@/components/NetworkError.vue'
-import Success from '@/components/Success.vue'
 
 export default Vue.extend({
   components: {
-    NetworkError,
-    Success,
+    NetworkError
   },
   data() {
     return {
       error: true,
       page: 1,
-      pageCount: 5,
-      admins: [],
+      pageCount: 1,
+      products: [],
       search: '',
       lang: null,
       singleSelect: true,
-      load: true,
+      load: false,
       selected: [],
       headers: [
         {
           text: 'id',
           align: 'center',
           sortable: true,
-          value: 'id',
+          value: 'id'
         },
-        {
-          text: 'name',
-          value: 'firstName',
-        },
-        {
-          text: 'second_name',
-          value: 'lastName',
-        },
-        {
-          text: 'email',
-          value: 'email',
-        },
-        {
-          text: 'type',
-          value: 'type',
-        },
-      ],
+        { text: 'picture', value: 'image', sortable: false },
+        { text: 'name', value: 'title' },
+        { text: 'type', value: 'type' },
+        { text: 'views', value: 'views' },
+        { text: 'category', value: 'category' }
+      ]
     }
   },
   methods: {
-    newAdmin() {
-      this.$router.push(`/admins/new`)
+    loading() {
+      this.load = true
+    },
+    newProduct() {
+      this.$router.push(`/product/new`)
     },
     rowClick: function(item) {
-      this.$router.push(`/admins/${item.id}`)
+      this.$router.push(`/products/${item.id}`)
     },
-    getAdmins() {
-      this.load = true
+    getProducts() {
       let id = localStorage.getItem('m_user')
       axios
-        .get(`/admins`)
-        .then((res) => {
+        .get(`/products`)
+        .then(res => {
           this.error = false
-          this.admins = res.data
-          this.load = false
+
+          this.lang = localStorage.getItem('i18n')
+          this.products = res.data.products
+
+          for (let x in this.products) {
+            if (this.lang == 'pl') {
+              this.products[x].title = this.products[x].title.pl
+            } else {
+              this.products[x].title = this.products[x].title.en
+            }
+          }
+
           return
         })
-        .catch((err) => {
+        .catch(err => {
           this.error = true
           console.log(err)
         })
-    },
+
+      this.load = false
+    }
   },
   created() {
-    this.getAdmins()
-  },
+    this.getProducts()
+  }
 })
 </script>

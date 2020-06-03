@@ -81,7 +81,7 @@
       </v-col>
     </v-row>
 
-    <v-content v-else align="center">
+    <v-content v-else align="center" class="pl-0 ml-0 mr-12">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-content>
 

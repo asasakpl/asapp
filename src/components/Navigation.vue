@@ -54,7 +54,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/products" disabled>
+        <v-list-item to="/products">
           <v-list-item-icon>
             <v-icon>mdi-folder-home</v-icon>
           </v-list-item-icon>

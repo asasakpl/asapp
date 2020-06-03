@@ -144,6 +144,9 @@
     }
   },
   "products": {
+    "dashboard": {
+      "title": "Produkty"
+    },
     "title": "ID produktu",
     "titles": {
       "title": "Tytuł",
@@ -162,7 +165,6 @@
         "name_en": "Angielska nazwa"
       }
     },
-
     "pictures": {
       "title": "Zdjęcia"
     },

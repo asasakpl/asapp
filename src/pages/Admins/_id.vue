@@ -80,19 +80,16 @@
       </v-col>
     </v-row>
     <v-row v-else>
-      <v-col>
-        <v-btn @click="$router.push('/admins')" icon fab class="mt-2">
+        <v-btn @click="$router.push('/admins')" icon fab class="mt-4 ml-4">
           <v-icon size="38">arrow_back</v-icon>
         </v-btn>
-      </v-col>
-      <v-col cols="7" class="mr-12">
-        <v-content>
+      
+        <v-content align="center" class="pl-0 mr-12 pr-12">
           <v-progress-circular
             indeterminate
             color="primary"
           ></v-progress-circular>
         </v-content>
-      </v-col>
     </v-row>
 
     <NetworkError :error="error"></NetworkError>

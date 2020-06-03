@@ -133,6 +133,9 @@
     }
   },
   "products": {
+    "dashboard": {
+      "title": "Products"
+    },
     "title": "Product ID",
     "titles": {
       "title": "Title",

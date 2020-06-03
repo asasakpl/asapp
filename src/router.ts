@@ -24,7 +24,8 @@ import AsasakSubscribers from '@/pages/Mailing/asasak/Subscribers/Index.vue'
 
 // Product
 import Products from '@/pages/Products/Index.vue'
-import Product from '@/pages/Products/_id.vue'
+import ProductsList from '@/pages/Products/List/List.vue'
+import Product from '@/pages/Products/List/_id.vue'
 import NewProduct from '@/pages/Products/New.vue'
 
 // Order
@@ -122,6 +123,12 @@ let router = new Router({
           path: '/products',
           name: 'products',
           component: Products,
+          beforeEnter: ifAuthenticated,
+        },
+        {
+          path: '/products/list',
+          name: 'products_list',
+          component: ProductsList,
           beforeEnter: ifAuthenticated,
         },
         {

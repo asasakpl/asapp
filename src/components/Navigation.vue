@@ -68,7 +68,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/payments">
+        <v-list-item to="/payments" v-if="type == 1">
           <v-list-item-icon>
             <v-icon>mdi-credit-card-marker-outline</v-icon>
           </v-list-item-icon>
@@ -80,7 +80,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/shipping">
+        <v-list-item to="/shipping" v-if="type == 1">
           <v-list-item-icon>
             <v-icon>mdi-truck-fast</v-icon>
           </v-list-item-icon>

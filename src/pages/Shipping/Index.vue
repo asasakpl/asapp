@@ -151,7 +151,7 @@ export default Vue.extend({
         })
     }
   },
-  async created() {
+  async mounted() {
     await this.getShipping()
   }
 })

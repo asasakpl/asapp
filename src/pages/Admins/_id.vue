@@ -80,16 +80,16 @@
       </v-col>
     </v-row>
     <v-row v-else>
-        <v-btn @click="$router.push('/admins')" icon fab class="mt-4 ml-4">
-          <v-icon size="38">arrow_back</v-icon>
-        </v-btn>
-      
-        <v-content align="center" class="pl-0 mr-12 pr-12">
-          <v-progress-circular
-            indeterminate
-            color="primary"
-          ></v-progress-circular>
-        </v-content>
+      <v-btn @click="$router.push('/admins')" icon fab class="mt-4 ml-4">
+        <v-icon size="38">arrow_back</v-icon>
+      </v-btn>
+
+      <v-content align="center" class="pl-0 mr-12 pr-12">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+        ></v-progress-circular>
+      </v-content>
     </v-row>
 
     <NetworkError :error="error"></NetworkError>
@@ -109,7 +109,7 @@ import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
   components: {
-    NetworkError,
+    NetworkError
   },
   data() {
     return {
@@ -122,8 +122,8 @@ export default Vue.extend({
         (v) =>
           !v ||
           /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          'E-mail must be valid',
-      ],
+          'E-mail must be valid'
+      ]
     }
   },
   methods: {
@@ -137,7 +137,7 @@ export default Vue.extend({
     cancelEdit() {
       this.disabled = true
       this.save = false
-    },
+    }
   },
   async mounted() {
     await axios
@@ -148,8 +148,7 @@ export default Vue.extend({
       })
       .catch((err) => {
         this.error = true
-        console.log(err)
       })
-  },
+  }
 })
 </script>

@@ -132,7 +132,7 @@ export default Vue.extend({
       let id = localStorage.getItem('m_user')
       axios
         .get(`/products`)
-        .then(res => {
+        .then((res) => {
           this.error = false
 
           this.lang = localStorage.getItem('i18n')
@@ -148,9 +148,8 @@ export default Vue.extend({
 
           return
         })
-        .catch(err => {
+        .catch((err) => {
           this.error = true
-          console.log(err)
         })
 
       this.load = false

@@ -143,7 +143,6 @@ export default Vue.extend({
           this.error = false
           this.shipping = res.data
           this.load = false
-          console.log(this.shipping)
           return
         })
         .catch((err) => {

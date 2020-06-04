@@ -181,14 +181,13 @@ export default Vue.extend({
   async mounted() {
     await axios
       .get(`/products/${this.$route.params.id}`)
-      .then(res => {
+      .then((res) => {
         this.error = false
         this.product = res.data.data.product
         this.lang = localStorage.getItem('i18n')
       })
-      .catch(err => {
+      .catch((err) => {
         this.error = true
-        console.log(err)
       })
   }
 })

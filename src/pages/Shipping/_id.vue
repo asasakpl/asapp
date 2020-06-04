@@ -146,11 +146,9 @@ export default Vue.extend({
       .then((res) => {
         this.error = false
         this.shipping = res.data
-        console.log(res.data)
       })
       .catch((err) => {
         this.error = true
-        console.log(err)
       })
   }
 })

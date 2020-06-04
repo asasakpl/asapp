@@ -90,7 +90,7 @@ import Success from '@/components/Success.vue'
 export default Vue.extend({
   components: {
     NetworkError,
-    Success,
+    Success
   },
   data() {
     return {
@@ -108,25 +108,25 @@ export default Vue.extend({
           text: 'id',
           align: 'center',
           sortable: true,
-          value: 'id',
+          value: 'id'
         },
         {
           text: 'name',
-          value: 'firstName',
+          value: 'firstName'
         },
         {
           text: 'second_name',
-          value: 'lastName',
+          value: 'lastName'
         },
         {
           text: 'email',
-          value: 'email',
+          value: 'email'
         },
         {
           text: 'type',
-          value: 'type',
-        },
-      ],
+          value: 'type'
+        }
+      ]
     }
   },
   methods: {
@@ -149,12 +149,11 @@ export default Vue.extend({
         })
         .catch((err) => {
           this.error = true
-          console.log(err)
         })
-    },
+    }
   },
   created() {
     this.getAdmins()
-  },
+  }
 })
 </script>

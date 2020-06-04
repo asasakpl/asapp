@@ -134,7 +134,6 @@ export default Vue.extend({
     },
     rowClick: function(item) {
       this.$router.push(`/payments/${item.id}`)
-      console.log(item.id)
     },
     getPayments() {
       axios

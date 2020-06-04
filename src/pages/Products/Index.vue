@@ -1,11 +1,11 @@
 <template>
   <v-container>
-      <v-col>
-        <v-card class="mx-auto px-auto round" tile>
-          <v-card-title>
-           {{ $t('products.dashboard.title')}} 
-          </v-card-title>
-        </v-card>
+    <v-col>
+      <v-card class="mx-auto px-auto round" tile>
+        <v-card-title>
+          {{ $t('products.dashboard.title') }}
+        </v-card-title>
+      </v-card>
     </v-col>
 
     <NetworkError :error="error"></NetworkError>
@@ -67,7 +67,7 @@ export default Vue.extend({
       let id = localStorage.getItem('m_user')
       axios
         .get(`/products`)
-        .then(res => {
+        .then((res) => {
           this.error = false
 
           this.lang = localStorage.getItem('i18n')
@@ -83,9 +83,8 @@ export default Vue.extend({
 
           return
         })
-        .catch(err => {
+        .catch((err) => {
           this.error = true
-          console.log(err)
         })
 
       this.load = false

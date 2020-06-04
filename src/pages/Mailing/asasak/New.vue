@@ -89,28 +89,25 @@ export default Vue.extend({
       disabled: true,
       error: false,
       rules: [(v) => v.length <= 998 || 'Maksymalnie 998 znaków!'],
-      titleRule: [(v) => v.length <= 78 || 'Maksymalnie 78 znaków!'],
+      titleRule: [(v) => v.length <= 78 || 'Maksymalnie 78 znaków!']
     }
   },
   components: {
-    Error,
+    Error
   },
   methods: {
-    select() {
-      console.log(window.getSelection())
-    },
     async sendMessage() {
       await axios
         .post(
           '/asasak/send',
           {
             title: this.title,
-            message: this.message,
+            message: this.message
           },
           {
             headers: {
-              auth: localStorage.getItem('token'),
-            },
+              auth: localStorage.getItem('token')
+            }
           }
         )
         .then((res) => {
@@ -127,7 +124,7 @@ export default Vue.extend({
           this.dialog = false
           this.error = true
         })
-    },
-  },
+    }
+  }
 })
 </script>

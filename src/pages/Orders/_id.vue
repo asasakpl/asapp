@@ -447,20 +447,20 @@ export default Vue.extend({
         .patch(`/orders/complete/${this.order[0].id}`, {
           status: 1
         })
-        .then(res => {
+        .then((res) => {
           this.msg = 'success'
           this.snackbar = true
           this.order[0].status = 1
         })
-        .catch(error => ((this.snackbar = true), (this.msg = 'error')))
+        .catch((error) => ((this.snackbar = true), (this.msg = 'error')))
     }
   },
   async mounted() {
     await axios
       .get(`/orders/${this.$route.params.id}`)
-      .then(res => {
+      .then((res) => {
         this.order = Object.values(res.data.data)
-        console.log(this.order)
+
         if (
           this.order[0].delivery[0].specialDelivery == null &&
           this.order[0].delivery[0].courierDelivery == null
@@ -492,7 +492,7 @@ export default Vue.extend({
 
         this.lang = localStorage.getItem('i18n')
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error))
   }
 })
 </script>

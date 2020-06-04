@@ -15,7 +15,10 @@
         <v-card-actions class="px-4">
           <v-list-item class="grow">
             <v-list-item-avatar color="grey darken-3 mr-3" size="40">
-              <v-img class="elevation-6" :src="release.author.avatar_url"></v-img>
+              <v-img
+                class="elevation-6"
+                :src="release.author.avatar_url"
+              ></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -48,50 +51,49 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue";
-import axios from "axios";
-import marked from "marked";
+import Vue from 'vue'
+import axios from 'axios'
+import marked from 'marked'
 
 export default Vue.extend({
   components: {},
   data() {
     return {
       release: null
-    };
+    }
   },
   async mounted() {
-    await fetch("https://api.github.com/repos/asasakpl/asapp/releases/latest")
-      .then(response => response.json())
-      .then(data => {
-        this.release = data;
-        this.release.body = marked(this.release.body, { breaks: true });
-        let date = new Date(this.release.published_at);
+    await fetch('https://api.github.com/repos/asasakpl/asapp/releases/latest')
+      .then((response) => response.json())
+      .then((data) => {
+        this.release = data
+        this.release.body = marked(this.release.body, { breaks: true })
+        let date = new Date(this.release.published_at)
         const monthNames = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ];
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December'
+        ]
         this.release.published_at =
-          " " +
-          ("0" + date.getDate()).slice(-2) +
-          " " +
+          ' ' +
+          ('0' + date.getDate()).slice(-2) +
+          ' ' +
           monthNames[date.getMonth()] +
-          " " +
-          date.getFullYear();
-        console.log(this.release.tag_name);
+          ' ' +
+          date.getFullYear()
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch((err) => {
+        console.log(err)
+      })
   }
-});
+})
 </script>

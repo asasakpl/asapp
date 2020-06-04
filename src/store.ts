@@ -16,7 +16,7 @@ export default new Vuex.Store({
     succ_icon: '',
     token: localStorage.getItem('token') || '',
     userId: localStorage.getItem('m_user') || '',
-    adminType: localStorage.getItem('m_type') || '',
+    adminType: localStorage.getItem('m_type') || ''
   },
   mutations: {
     auth_request(state) {
@@ -45,7 +45,7 @@ export default new Vuex.Store({
       state.error = true
       state.err_text = text
       state.err_icon = icon
-    },
+    }
   },
   actions: {
     login({ commit }, user) {
@@ -54,7 +54,7 @@ export default new Vuex.Store({
       return axios({
         method: 'post',
         url: axios.defaults.baseURL + '/auth/su/login',
-        data: { email: user.email, password: user.password },
+        data: { email: user.email, password: user.password }
       })
         .then((resp) => {
           const token = resp.data.token
@@ -69,8 +69,6 @@ export default new Vuex.Store({
 
           if (localStorage.getItem('theme') == undefined) {
             localStorage.setItem('theme', 'light')
-          } else {
-            console.log('dupa')
           }
 
           localStorage.setItem('i18n', 'en')
@@ -105,7 +103,7 @@ export default new Vuex.Store({
       const text = err_obj.text
       const icon = err_obj.icon
       commit('error', { text, icon })
-    },
+    }
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
@@ -117,7 +115,7 @@ export default new Vuex.Store({
       const succ_obj = {
         text: state.succ_text,
         success: state.success,
-        icon: state.succ_icon,
+        icon: state.succ_icon
       }
       return succ_obj
     },
@@ -125,9 +123,9 @@ export default new Vuex.Store({
       const err_obj = {
         text: state.err_text,
         error: state.error,
-        icon: state.err_icon,
+        icon: state.err_icon
       }
       return err_obj
-    },
-  },
+    }
+  }
 })

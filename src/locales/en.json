@@ -231,7 +231,7 @@
       "btn": "Create"
     },
     "success": "Method was successfuly created",
-    "error": "Shipping method with this name already exists"
+    "error": "Shipping method with this name/code already exists"
   },
   "sellers": {},
   "mail": {

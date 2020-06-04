@@ -242,7 +242,7 @@
       "btn": "Utwórz"
     },
     "success": "Sposób wysyłki został pomyślnie utworzony",
-    "error": "Sposób wysyłki z tą nazwą już istnieje"
+    "error": "Sposób wysyłki z tą nazwą/kodem już istnieje"
   },
   "sellers": {},
   "mail": {

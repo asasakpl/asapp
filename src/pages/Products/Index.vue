@@ -1,14 +1,19 @@
 <template>
   <v-container>
-    <v-col>
-      <v-card class="mx-auto px-auto round" tile>
-        <v-card-title>
-          {{ $t('products.dashboard.title') }}
-        </v-card-title>
-        <v-btn to="/product/new">New</v-btn>
-      </v-card>
-    </v-col>
-
+    <v-row>
+      <v-col>
+        <v-card class="mx-auto px-auto round" tile>
+          <v-card-title>
+            {{ $t('products.dashboard.title') }}
+          </v-card-title>
+        </v-card>
+      </v-col>
+      <v-col cols="1" class="mx-auto mt-2" align="center">
+        <v-btn to="/products/new" icon large rounded>
+          <v-icon size="36">mdi-plus-circle</v-icon></v-btn
+        >
+      </v-col>
+    </v-row>
     <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
@@ -61,14 +66,14 @@ export default Vue.extend({
       this.load = true
     },
     newProduct() {
-      this.$router.push(`/product/new`)
+      this.$router.push(`/products/new`)
     },
     rowClick: function(item) {
       this.$router.push(`/products/${item.id}`)
     },
-    getProducts() {
+    async getProducts() {
       let id = localStorage.getItem('m_user')
-      axios
+      await axios
         .get(`/products`)
         .then((res) => {
           this.error = false

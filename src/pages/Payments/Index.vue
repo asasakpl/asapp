@@ -61,7 +61,7 @@
         </div>
       </v-col>
       <v-col cols="1">
-        <v-btn @click="newPayment()" icon fab class="ml-0 mt-2">
+        <v-btn to="/payments/new" icon fab class="ml-0 mt-2">
           <v-icon size="36">mdi-credit-card-plus-outline</v-icon>
         </v-btn>
       </v-col>
@@ -129,14 +129,11 @@ export default Vue.extend({
     }
   },
   methods: {
-    newPayment() {
-      this.$router.push(`/payments/new`)
-    },
     rowClick: function(item) {
       this.$router.push(`/payments/${item.id}`)
     },
-    getPayments() {
-      axios
+    async getPayments() {
+      await axios
         .get(`/products/groups/payments`)
         .then((res) => {
           this.error = false

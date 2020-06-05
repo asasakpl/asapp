@@ -36,7 +36,7 @@ export default Vue.extend({
     }
   },
   async mounted() {
-    axios.get('/mail/m35').then(res => {
+    await axios.get('/mail/m35').then((res) => {
       this.m35 = res.data.data.m35.list
     })
   }

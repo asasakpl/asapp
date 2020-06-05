@@ -69,7 +69,7 @@
           <v-pagination v-model="page" :length="pageCount"></v-pagination>
         </div>
       </v-col>
-      <v-btn @click="newProduct()" icon class="ml-0 mt-4">
+      <v-btn to="/products/new" icon class="ml-0 mt-4">
         <v-icon size="32">mdi-pencil-plus</v-icon>
       </v-btn>
     </v-row>
@@ -121,9 +121,6 @@ export default Vue.extend({
   methods: {
     loading() {
       this.load = true
-    },
-    newProduct() {
-      this.$router.push(`/product/new`)
     },
     rowClick: function(item) {
       this.$router.push(`/products/${item.id}`)

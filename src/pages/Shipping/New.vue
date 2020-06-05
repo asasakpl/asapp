@@ -8,12 +8,7 @@
       </v-col>
       <v-col cols="11">
         <v-content v-if="shipping" class="pa-0">
-          <v-card
-            class="mx-auto pb-2 round"
-            max-width="90%"
-            max-height="80vh"
-            tile
-          >
+          <v-card class="mx-auto pb-2 round" max-height="80vh" tile>
             <v-card-title class="pb-2">{{
               $t('shipping.new.title')
             }}</v-card-title>

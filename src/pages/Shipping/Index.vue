@@ -61,7 +61,7 @@
         </div>
       </v-col>
       <v-col cols="1">
-        <v-btn @click="newShipping()" icon fab class="ml-0 mt-2">
+        <v-btn to="/shipping/new" icon fab class="ml-0 mt-2">
           <v-icon size="36">mdi-briefcase-plus-outline</v-icon>
         </v-btn>
       </v-col>
@@ -129,9 +129,6 @@ export default Vue.extend({
     }
   },
   methods: {
-    newShipping() {
-      this.$router.push(`/shipping/new`)
-    },
     rowClick: function(item) {
       this.$router.push(`/shipping/${item.id}`)
     },

@@ -107,153 +107,213 @@ let router = new Router({
         },
         {
           path: '/orders',
-          name: 'orders',
-          component: Orders,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/orders/:id',
-          name: 'order',
-          component: Order,
-          beforeEnter: ifAuthenticated
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'orders',
+              component: Orders,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/orders/:id',
+              name: 'order',
+              component: Order,
+              beforeEnter: ifAuthenticated
+            }
+          ]
         },
         {
           path: '/users',
-          name: 'users',
-          component: Users,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/users/:id',
-          name: 'user',
-          component: User,
-          beforeEnter: ifAuthenticated
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'users',
+              component: Users,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/users/:id',
+              name: 'user',
+              component: User,
+              beforeEnter: ifAuthenticated
+            }
+          ]
         },
         {
           path: '/products',
-          name: 'products',
-          component: Products,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/products/list',
-          name: 'products_list',
-          component: ProductsList,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/products/:id',
-          name: 'product',
-          component: Product,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/product/new',
-          name: 'newproducts',
-          component: NewProduct,
-          beforeEnter: ifAuthenticated
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'products',
+              component: Products,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/list',
+              name: 'products_list',
+              component: ProductsList,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/products/:id',
+              name: 'product',
+              component: Product,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/products/new',
+              name: 'newproducts',
+              component: NewProduct,
+              beforeEnter: ifAuthenticated
+            }
+          ]
         },
         {
           path: '/payments',
-          name: 'payments',
-          component: Payments,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/payments/new',
-          name: 'new_payment',
-          component: NewPayment,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/payments/:id',
-          name: 'payment',
-          component: Payment,
-          beforeEnter: ifAuthenticated
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'payments',
+              component: Payments,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/payments/new',
+              name: 'new_payment',
+              component: NewPayment,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/payments/:id',
+              name: 'payment',
+              component: Payment,
+              beforeEnter: ifAuthenticated
+            }
+          ]
         },
         {
           path: '/shipping',
-          name: 'shipping',
-          component: Shipping,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/shipping/new',
-          name: 'new_shipping',
-          component: NewShipping,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/shipping/:id',
-          name: 'shipping_method',
-          component: ShippingMethod,
-          beforeEnter: ifAuthenticated
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'shipping',
+              component: Shipping,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/shipping/new',
+              name: 'new_shipping',
+              component: NewShipping,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/shipping/:id',
+              name: 'shipping_method',
+              component: ShippingMethod,
+              beforeEnter: ifAuthenticated
+            }
+          ]
         },
         {
           path: '/sellers',
-          name: 'sellers',
-          component: Sellers,
-          beforeEnter: ifAuthenticated
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'sellers',
+              component: Sellers,
+              beforeEnter: ifAuthenticated
+            }
+          ]
         },
         {
           path: '/mail',
-          name: 'mail',
-          component: Mail,
-          beforeEnter: ifAuthenticated
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'mail',
+              component: Mail,
+              beforeEnter: ifAuthenticated
+            }
+          ]
         },
         {
           path: '/asasak',
-          name: 'asasak',
-          component: Asasak,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/asasak/new',
-          name: 'new_asasak',
-          component: NewAsasak,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/asasak/subscribers',
-          name: 'asasak_subscribers',
-          beforeEnter: ifAuthenticated,
-          component: AsasakSubscribers
-        },
-        {
-          path: '/asasak/subscribers/new',
-          name: 'asasak_new_subscriber',
-          beforeEnter: ifAuthenticated,
-          component: NewAsasakSubscriber
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'asasak',
+              component: Asasak,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/asasak/new',
+              name: 'new_asasak',
+              component: NewAsasak,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/asasak/subscribers',
+              name: 'asasak_subscribers',
+              beforeEnter: ifAuthenticated,
+              component: AsasakSubscribers
+            },
+            {
+              path: '/asasak/subscribers/new',
+              name: 'asasak_new_subscriber',
+              beforeEnter: ifAuthenticated,
+              component: NewAsasakSubscriber
+            }
+          ]
         },
         {
           path: '/m35',
-          name: 'm35',
-          component: M35,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/m35/new',
-          name: 'new_m35',
-          component: NewM35,
-          beforeEnter: ifAuthenticated
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'm35',
+              component: M35,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/m35/new',
+              name: 'new_m35',
+              component: NewM35,
+              beforeEnter: ifAuthenticated
+            }
+          ]
         },
         {
           path: '/admins',
-          name: 'admins',
-          component: Admins,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/admins/new',
-          name: 'newadmin',
-          component: NewAdmin,
-          beforeEnter: ifAuthenticated
-        },
-        {
-          path: '/admins/:id',
-          name: 'admin',
-          component: Admin,
-          beforeEnter: ifAuthenticated
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'admins',
+              component: Admins,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/admins/new',
+              name: 'newadmin',
+              component: NewAdmin,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/admins/:id',
+              name: 'admin',
+              component: Admin,
+              beforeEnter: ifAuthenticated
+            }
+          ]
         },
         {
           path: '/settings',
@@ -261,7 +321,6 @@ let router = new Router({
           component: Settings,
           beforeEnter: ifAuthenticated
         },
-
         {
           path: '/changelog',
           name: 'changelog',
@@ -271,18 +330,6 @@ let router = new Router({
       ]
     }
   ]
-})
-
-router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
-      next()
-      return
-    }
-    next('/login')
-  } else {
-    next()
-  }
 })
 
 export default router

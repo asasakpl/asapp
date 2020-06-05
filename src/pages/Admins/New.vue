@@ -8,19 +8,32 @@
       </v-col>
       <v-col cols="11">
         <v-content v-if="admin" class="pa-0">
-          <v-card class="mx-auto pb-2 round" max-width="90%" max-height="80vh" tile>
-            <v-card-title class="pb-2">{{ $t('admin.new.title') }}</v-card-title>
+          <v-card class="mx-auto pb-2 round" max-height="80vh" tile>
+            <v-card-title class="pb-2">{{
+              $t('admin.new.title')
+            }}</v-card-title>
             <v-divider></v-divider>
             <v-card-actions>
               <v-row>
                 <v-col cols="5" class="pr-2 ml-6">
                   <v-col class="pb-0">
-                    <div class="headline ml-1 mb-3">{{ $t('admin.page.name') }}</div>
-                    <v-text-field v-model="admin.firstName" outlined></v-text-field>
+                    <div class="headline ml-1 mb-3">
+                      {{ $t('admin.page.name') }}
+                    </div>
+                    <v-text-field
+                      v-model="admin.firstName"
+                      outlined
+                    ></v-text-field>
                   </v-col>
                   <v-col class="pb-0">
-                    <div class="headline ml-1 mb-3">{{ $t('admin.page.email') }}</div>
-                    <v-text-field v-model="admin.email" outlined :rules="emailRules"></v-text-field>
+                    <div class="headline ml-1 mb-3">
+                      {{ $t('admin.page.email') }}
+                    </div>
+                    <v-text-field
+                      v-model="admin.email"
+                      outlined
+                      :rules="emailRules"
+                    ></v-text-field>
                   </v-col>
                   <v-col class="pb-0">
                     <div class="headline">{{ $t('admin.page.type') }}</div>
@@ -34,12 +47,19 @@
                 </v-col>
                 <v-col cols="5" class="pr-2 ml-6">
                   <v-col class="pb-0">
-                    <div class="headline ml-1 mb-3">{{ $t('admin.page.surname') }}</div>
-                    <v-text-field v-model="admin.lastName" outlined></v-text-field>
+                    <div class="headline ml-1 mb-3">
+                      {{ $t('admin.page.surname') }}
+                    </div>
+                    <v-text-field
+                      v-model="admin.lastName"
+                      outlined
+                    ></v-text-field>
                   </v-col>
 
                   <v-col class="pb-0">
-                    <div class="headline ml-1 mb-3">{{ $t('admin.new.password') }}</div>
+                    <div class="headline ml-1 mb-3">
+                      {{ $t('admin.new.password') }}
+                    </div>
                     <v-text-field
                       v-model="admin.password"
                       outlined
@@ -50,7 +70,9 @@
                     ></v-text-field>
                   </v-col>
                   <v-col class="pb-0">
-                    <div class="headline ml-1 mb-3">{{ $t('admin.new.repeat') }}</div>
+                    <div class="headline ml-1 mb-3">
+                      {{ $t('admin.new.repeat') }}
+                    </div>
                     <v-text-field
                       v-model="rePassword"
                       outlined
@@ -58,7 +80,7 @@
                       :rules="[
                         rules.required,
                         rules.min,
-                        passwordConfirmationRule,
+                        passwordConfirmationRule
                       ]"
                       :type="show ? 'text' : 'password'"
                       @click:append="show = !show"
@@ -70,7 +92,12 @@
 
             <v-row class="mr-3">
               <v-spacer></v-spacer>
-              <v-btn @click="createAdmin(admin)" color="primary" class="mr-4 mb-4">Create</v-btn>
+              <v-btn
+                @click="createAdmin(admin)"
+                color="primary"
+                class="mr-4 mb-4"
+                >Create</v-btn
+              >
             </v-row>
           </v-card>
           <Error v-if="error"></Error>
@@ -87,11 +114,11 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue";
-import axios from "axios";
+import Vue from 'vue'
+import axios from 'axios'
 
 // components
-import Error from "@/components/Error.vue";
+import Error from '@/components/Error.vue'
 
 export default Vue.extend({
   components: {
@@ -101,56 +128,56 @@ export default Vue.extend({
     return {
       admin: {
         password: null,
-        type: { name: "Pracownik", value: 0 }
+        type: { name: 'Pracownik', value: 0 }
       },
       types: [
-        { name: "Pracownik", value: 0 },
-        { name: "Administrator", value: 1 }
+        { name: 'Pracownik', value: 0 },
+        { name: 'Administrator', value: 1 }
       ],
       save: false,
       error: false,
       show: false,
       rePassword: null,
       emailRules: [
-        v =>
+        (v) =>
           !v ||
           /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          "E-mail must be valid"
+          'E-mail must be valid'
       ],
       rules: {
-        required: value => !!value || "Required.",
-        min: v => (v && v.length >= 12) || "Min 12 characters"
+        required: (value) => !!value || 'Required.',
+        min: (v) => (v && v.length >= 12) || 'Min 12 characters'
       }
-    };
+    }
   },
   methods: {
     async createAdmin(admin) {
-      this.error = false;
+      this.error = false
       await axios
-        .post("/admins/new", admin, {
+        .post('/admins/new', admin, {
           headers: {
-            auth: localStorage.getItem("token")
+            auth: localStorage.getItem('token')
           }
         })
-        .then(res => {
-          const text = "admin.success";
-          const icon = "database-check";
-          this.$store.dispatch("success", { text, icon });
-          this.$router.push("/admins");
+        .then((res) => {
+          const text = 'admin.success'
+          const icon = 'database-check'
+          this.$store.dispatch('success', { text, icon })
+          this.$router.push('/admins')
         })
-        .catch(err => {
-          const text = "admin.error";
-          const icon = "database-remove";
-          this.$store.dispatch("error", { text, icon });
-          this.error = true;
-        });
+        .catch((err) => {
+          const text = 'admin.error'
+          const icon = 'database-remove'
+          this.$store.dispatch('error', { text, icon })
+          this.error = true
+        })
     }
   },
   computed: {
     passwordConfirmationRule() {
       return () =>
-        this.admin.password === this.rePassword || "Password must match";
+        this.admin.password === this.rePassword || 'Password must match'
     }
   }
-});
+})
 </script>

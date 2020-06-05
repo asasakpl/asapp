@@ -62,7 +62,7 @@
         </div>
       </v-col>
       <v-col cols="1">
-        <v-btn @click="newAdmin()" icon fab class="ml-0 mt-2">
+        <v-btn to="/admins/new" icon fab class="ml-0 mt-2">
           <v-icon size="38">mdi-account-plus</v-icon>
         </v-btn>
       </v-col>
@@ -130,9 +130,6 @@ export default Vue.extend({
     }
   },
   methods: {
-    newAdmin() {
-      this.$router.push(`/admins/new`)
-    },
     rowClick: function(item) {
       this.$router.push(`/admins/${item.id}`)
     },

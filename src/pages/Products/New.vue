@@ -1,24 +1,29 @@
 <template>
   <v-container>
-    <v-btn @click="$router.go(-1)" icon class="ml-8">
-      <v-icon size="32">arrow_back</v-icon>
-    </v-btn>
-    <v-card
-      class="mx-auto px-auto pb-2 round"
-      style="overflow: scroll"
-      max-width="90%"
-      max-height="88vh"
-      tile
-    >
-      <v-card-title class="pb-2">
-        {{ $t('new_product.title') }}
-      </v-card-title>
+    <v-row>
+      <v-col cols="1">
+        <v-btn @click="$router.go(-1)" icon class="mt-2">
+          <v-icon size="38">arrow_back</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col cols="11">
+        <v-card
+          class="mx-auto px-auto pb-2 round"
+          style="overflow: scroll"
+          max-height="88vh"
+          tile
+        >
+          <v-card-title class="pb-2">
+            {{ $t('new_product.title') }}
+          </v-card-title>
 
-      <v-divider></v-divider>
-      <v-card-text>
-        <v-btn v-on:click="uploadPictures()">Upload</v-btn>
-      </v-card-text>
-    </v-card>
+          <v-divider></v-divider>
+          <v-card-text>
+            <v-btn v-on:click="uploadPictures()">Upload</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -45,7 +50,8 @@ export default Vue.extend({
       product: {
         title: {},
         description: {},
-        type: Number
+        type: Number,
+        pictures: []
       },
       file: '',
       create_dialog: false,
@@ -67,16 +73,13 @@ export default Vue.extend({
       const ddd = document.getElementById('file')
       let content = 'dupa'
 
-      const imageRemoteName = `m35_${new Date().getTime()}.png`
+      const imageName = `m35_${new Date().getTime()}.png`
 
       dialog.showOpenDialog((path) => {
-        console.log(path)
-        console.log(path[0])
-
         s3.putObject({
           Bucket: 'm35m2',
           Body: fs.readFileSync(path[0]),
-          Key: 'products/' + imageRemoteName,
+          Key: 'products/' + imageName,
           ACL: 'public-read',
           ContentType: 'inline'
         })
@@ -84,28 +87,16 @@ export default Vue.extend({
           .then((response) => {
             const url = s3.getSignedUrl('getObject', {
               Bucket: 'm35m2',
-              Key: 'products/' + imageRemoteName
+              Key: 'products/' + imageName
             })
 
-            console.log(url.split('?')[0])
+            this.product.pictures.push(url.split('?')[0])
           })
           .catch((err) => {
             console.log('failed:', err)
           })
 
-        fs.readFileSync(path[0], (err, content) => {
-          console.log('ddd')
-          if (err != undefined) {
-            console.log(err)
-            console.log('dd')
-          } else {
-            console.log(content)
-
-            console.log('ddd')
-
-            console.log('ddd')
-          }
-        })
+        console.log(this.product.pictures)
       })
     },
     createProduct(product) {

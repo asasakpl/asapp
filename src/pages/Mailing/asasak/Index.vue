@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="1" class="pt-1 px-10">
+      <v-col cols="1" class="pt-1 px-10" align="end">
         <v-btn to="/mail" icon fab>
           <v-icon size="38">arrow_back</v-icon>
         </v-btn>
@@ -102,7 +102,7 @@ export default Vue.extend({
   components: {
     NetworkError,
     Success,
-    Error,
+    Error
   },
   data() {
     return {
@@ -118,16 +118,16 @@ export default Vue.extend({
       headers: [
         {
           text: 'email',
-          value: 'address',
+          value: 'address'
         },
-        { text: 'name', value: 'name' },
+        { text: 'name', value: 'name' }
       ],
       emailRules: [
         (v) =>
           !v ||
           /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          'E-mail must be valid',
-      ],
+          'E-mail must be valid'
+      ]
     }
   },
   methods: {
@@ -141,10 +141,10 @@ export default Vue.extend({
         .catch((err) => {
           this.error = true
         })
-    },
+    }
   },
   async mounted() {
     this.getInfo()
-  },
+  }
 })
 </script>

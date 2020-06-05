@@ -5,6 +5,7 @@
         <v-card-title>
           {{ $t('products.dashboard.title') }}
         </v-card-title>
+        <v-btn to="/product/new">New</v-btn>
       </v-card>
     </v-col>
 
@@ -21,6 +22,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+
+// Components
 import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({

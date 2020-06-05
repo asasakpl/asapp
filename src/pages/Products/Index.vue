@@ -65,9 +65,6 @@ export default Vue.extend({
     loading() {
       this.load = true
     },
-    newProduct() {
-      this.$router.push(`/products/new`)
-    },
     rowClick: function(item) {
       this.$router.push(`/products/${item.id}`)
     },

@@ -56,9 +56,10 @@ export default new Vuex.Store({
         url: axios.defaults.baseURL + '/auth/su/login',
         data: { email: user.email, password: user.password }
       })
-        .then((resp) => {
-          const token = resp.data.token
-          const user = resp.data.user
+        .then((res) => {
+          const token = res.data.token
+          const user = res.data.user
+          const aws = res.data.aws
 
           // Set items in local storage
           localStorage.setItem('token', token)
@@ -66,6 +67,8 @@ export default new Vuex.Store({
           localStorage.setItem('m_email', user.email)
           localStorage.setItem('m_name', user.firstName + ' ' + user.lastName)
           localStorage.setItem('m_type', user.type)
+          localStorage.setItem('aws_key', aws.key)
+          localStorage.setItem('aws_secret', aws.secret)
 
           if (localStorage.getItem('theme') == undefined) {
             localStorage.setItem('theme', 'light')

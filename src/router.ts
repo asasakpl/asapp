@@ -158,15 +158,15 @@ let router = new Router({
               beforeEnter: ifAuthenticated
             },
             {
-              path: '/products/:id',
-              name: 'product',
-              component: Product,
-              beforeEnter: ifAuthenticated
-            },
-            {
               path: '/products/new',
               name: 'newproducts',
               component: NewProduct,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/products/:id',
+              name: 'product',
+              component: Product,
               beforeEnter: ifAuthenticated
             }
           ]

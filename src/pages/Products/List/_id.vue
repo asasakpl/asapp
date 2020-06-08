@@ -180,10 +180,10 @@ export default Vue.extend({
   },
   async mounted() {
     await axios
-      .get(`/products/${this.$route.params.id}`)
+      .get(`/products/admin/${this.$route.params.id}`)
       .then((res) => {
         this.error = false
-        this.product = res.data.data.product
+        this.product = res.data
         this.lang = localStorage.getItem('i18n')
       })
       .catch((err) => {

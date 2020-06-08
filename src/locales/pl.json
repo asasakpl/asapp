@@ -149,6 +149,15 @@
     "dashboard": {
       "title": "Panel produktów"
     },
+    "list": {
+      "title": "Produkty",
+      "description": "Przejdź do listy produtków aby zarządzać istniejącymi produkami."
+    },
+    "group": {
+      "title": "Grupy",
+      "description": "Przejdź do listy grup aby zarządzać istniejącymi grupami produktów."
+    },
+    "btn": "Przejdź",
     "title": "ID produktu",
     "titles": {
       "title": "Tytuł",
@@ -181,12 +190,12 @@
     "name": "Tytuł",
     "type": "Typ",
     "views": "Wyświetlenia",
-    "category": "Kategoria"
+    "owner": "Twórca"
   },
   "new_product": {
     "title": "Tworzysz nowy produkt",
-    "title_pl": "Polska nazwa",
-    "title_en": "Angielska nazwa",
+    "title_pl": "Nazwa produktu",
+    "title_en": "Nazwa produktu po angielsku",
     "description_pl": "Opis po polsku",
     "description_en": "Opis po angielsku",
     "button": "Utwórz",
@@ -201,7 +210,8 @@
       "type": "Rodzaj dostawy",
       "price": "Cena",
       "tag": "Tag"
-    }
+    },
+    "success": "Pomyślnie utworzyłeś nowy produkt"
   },
   "payments": {
     "table": {

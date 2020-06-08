@@ -160,14 +160,13 @@
     "btn": "Przejdź",
     "title": "ID produktu",
     "titles": {
-      "title": "Tytuł",
-      "title_pl": "Polska wersja",
-      "title_en": "Angielska wersja"
+      "title_pl": "Polski tytuł",
+      "title_en": "Angielski tytuł"
     },
     "descriptions": {
       "title": "Opis",
-      "description_pl": "Polski opis",
-      "description_en": "Angielski opis"
+      "description_pl": "Opis po polsku",
+      "description_en": "Opis po angielsku"
     },
     "attributes": {
       "title": "Atrybuty",

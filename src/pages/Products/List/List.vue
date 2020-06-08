@@ -51,7 +51,7 @@
             <template v-slot:item.image="{ item }">
               <div class="mx-2 mt-1 mb-1">
                 <v-img
-                  :src="item.pictures[0].url"
+                  :src="item.pictures[item.pictures.length - 1].url"
                   :alt="item.id.toString()"
                   height="80px"
                   width="80px"

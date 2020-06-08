@@ -51,6 +51,7 @@
                 v-bind:label="$t('products.descriptions.description_pl')"
                 :value="product.description.pl"
                 :disabled="disabled"
+                auto-grow
               ></v-textarea>
 
               <v-textarea
@@ -59,6 +60,7 @@
                 v-bind:label="$t('products.descriptions.description_en')"
                 outlined
                 :disabled="disabled"
+                auto-grow
               ></v-textarea>
             </v-col>
           </v-col>

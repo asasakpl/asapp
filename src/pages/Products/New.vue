@@ -221,18 +221,15 @@ export default Vue.extend({
       }
     },
     createProduct(product) {
-      console.log('ddd')
       axios
         .post('/products', product)
         .then((res) => {
           const text = 'new_product.success'
           const icon = 'check'
           this.$store.dispatch('success', { text, icon })
-          this.$router.push('/products')
-          console.log('dupa')
+          this.$router.push('/products/list')
         })
         .catch((err) => {
-          console.log('dupa')
           const text = err.response.data.error.message
           const icon = 'alert-circle-outline'
           this.$store.dispatch('error', { text, icon })

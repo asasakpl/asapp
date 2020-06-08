@@ -45,13 +45,13 @@
             class="elevation-1"
             :page.sync="page"
             hide-default-footer
-            :items-per-page="8"
+            :items-per-page="5"
             @page-count="pageCount = $event"
           >
             <template v-slot:item.image="{ item }">
               <div class="mx-2 mt-1 mb-1">
                 <v-img
-                  :src="item.pictures[item.pictures.length - 1].url"
+                  :src="item.pictures[0].url"
                   :alt="item.id.toString()"
                   height="80px"
                   width="80px"

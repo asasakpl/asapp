@@ -152,7 +152,7 @@ let router = new Router({
               beforeEnter: ifAuthenticated
             },
             {
-              path: '/list',
+              path: '/products/list',
               name: 'products_list',
               component: ProductsList,
               beforeEnter: ifAuthenticated

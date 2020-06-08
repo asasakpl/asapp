@@ -1,18 +1,25 @@
 <template>
   <v-container>
     <v-row>
-      <v-btn
-        @click="loading(), getProducts()"
-        v-if="!load"
-        icon
-        class="ml-8 mt-4"
-      >
-        <v-icon size="32">refresh</v-icon>
-      </v-btn>
-      <v-btn @click="getProducts()" v-else loading icon class="ml-8"> </v-btn>
+      <v-col cols="1" align="center" justify="center">
+        <div class="flex-column">
+          <v-btn @click="$router.push('/products')" icon fab class="mt-2">
+            <v-icon size="38">arrow_back</v-icon>
+          </v-btn>
+          <v-btn
+            @click="loading(), getProducts()"
+            v-if="!load"
+            icon
+            class="mt-2"
+          >
+            <v-icon size="32">refresh</v-icon>
+          </v-btn>
+          <v-btn @click="getProducts()" v-else loading icon> </v-btn>
+        </div>
+      </v-col>
 
       <v-col>
-        <v-card class="mx-auto px-auto round" max-width="90%" tile>
+        <v-card class="mx-auto px-auto round" tile>
           <v-card-title>
             Lista produktów
             <v-spacer></v-spacer>
@@ -69,9 +76,11 @@
           <v-pagination v-model="page" :length="pageCount"></v-pagination>
         </div>
       </v-col>
-      <v-btn to="/products/new" icon class="ml-0 mt-4">
-        <v-icon size="32">mdi-pencil-plus</v-icon>
-      </v-btn>
+      <v-col cols="1" align="center">
+        <v-btn to="/products/new" icon class="ml-0 mt-4">
+          <v-icon size="32">mdi-pencil-plus</v-icon>
+        </v-btn>
+      </v-col>
     </v-row>
     <NetworkError :error="error"></NetworkError>
   </v-container>
@@ -80,6 +89,11 @@
 <style scoped>
 .round {
   border-radius: 8px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
 </style>
 
@@ -114,7 +128,7 @@ export default Vue.extend({
         { text: 'name', value: 'title' },
         { text: 'type', value: 'type' },
         { text: 'views', value: 'views' },
-        { text: 'category', value: 'category' }
+        { text: 'owner', value: 'owner.name' }
       ]
     }
   },
@@ -133,13 +147,21 @@ export default Vue.extend({
           this.error = false
 
           this.lang = localStorage.getItem('i18n')
-          this.products = res.data.products
+          this.products = res.data
 
           for (let x in this.products) {
             if (this.lang == 'pl') {
               this.products[x].title = this.products[x].title.pl
             } else {
               this.products[x].title = this.products[x].title.en
+            }
+          }
+
+          for (let i in this.products) {
+            if (this.products[i].owner == null) {
+              this.products[i].owner = {
+                name: 'asasak.pl'
+              }
             }
           }
 

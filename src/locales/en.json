@@ -138,6 +138,15 @@
     "dashboard": {
       "title": "Products panel"
     },
+    "list": {
+      "title": "Products list",
+      "description": "Go to products list to manage them."
+    },
+    "group": {
+      "title": "Groups list",
+      "description": "Go to groups list to manage them"
+    },
+    "btn": "Go",
     "title": "Product ID",
     "titles": {
       "title": "Title",
@@ -170,12 +179,12 @@
     "name": "Title",
     "type": "Type",
     "views": "Views",
-    "category": "Category"
+    "owner": "Creator"
   },
   "new_product": {
     "title": "You're creating new product",
-    "title_pl": "Polish name",
-    "title_en": "English name",
+    "title_pl": "Polish title",
+    "title_en": "English title",
     "description_pl": "Polish description",
     "description_en": "English description",
     "button": "Create",
@@ -190,7 +199,8 @@
       "type": "Delivery Type",
       "price": "Price",
       "tag": "Tag"
-    }
+    },
+    "success": "Product was successfuly created"
   },
   "payments": {
     "table": {

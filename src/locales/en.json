@@ -149,12 +149,10 @@
     "btn": "Go",
     "title": "Product ID",
     "titles": {
-      "title": "Title",
       "title_pl": "Polish title",
       "title_en": "English title"
     },
     "descriptions": {
-      "title": "Description",
       "description_pl": "Polish description",
       "description_en": "English description"
     },

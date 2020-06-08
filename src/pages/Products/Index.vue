@@ -14,7 +14,33 @@
         >
       </v-col>
     </v-row>
-    <NetworkError :error="error"></NetworkError>
+
+    <v-row>
+      <v-col>
+        <v-card class="mx-auto px-auto round">
+          <v-card-title>{{ $t('products.list.title') }}</v-card-title>
+          <v-card-text>{{ $t('products.list.description') }}</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn to="/products/list" color="primary"
+              >{{ $t('products.btn') }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+
+      <v-col>
+        <v-card class="mx-auto px-auto round" disabled>
+          <v-card-title>{{ $t('products.group.title') }}</v-card-title>
+          <v-card-text>{{ $t('products.list.description') }}</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" disabled>{{ $t('products.btn') }}</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+    <Success v-if="this.$store.state.success"></Success>
   </v-container>
 </template>
 
@@ -29,11 +55,11 @@ import Vue from 'vue'
 import axios from 'axios'
 
 // Components
-import NetworkError from '@/components/NetworkError.vue'
+import Success from '@/components/Success.vue'
 
 export default Vue.extend({
   components: {
-    NetworkError
+    Success
   },
   data() {
     return {
@@ -60,43 +86,6 @@ export default Vue.extend({
         { text: 'category', value: 'category' }
       ]
     }
-  },
-  methods: {
-    loading() {
-      this.load = true
-    },
-    rowClick: function(item) {
-      this.$router.push(`/products/${item.id}`)
-    },
-    async getProducts() {
-      let id = localStorage.getItem('m_user')
-      await axios
-        .get(`/products`)
-        .then((res) => {
-          this.error = false
-
-          this.lang = localStorage.getItem('i18n')
-          this.products = res.data.products
-
-          for (let x in this.products) {
-            if (this.lang == 'pl') {
-              this.products[x].title = this.products[x].title.pl
-            } else {
-              this.products[x].title = this.products[x].title.en
-            }
-          }
-
-          return
-        })
-        .catch((err) => {
-          this.error = true
-        })
-
-      this.load = false
-    }
-  },
-  created() {
-    this.getProducts()
   }
 })
 </script>

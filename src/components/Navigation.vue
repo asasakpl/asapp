@@ -38,7 +38,7 @@
 
         <v-list-item to="/orders" disabled>
           <v-list-item-icon>
-            <v-icon>mdi-truck-delivery</v-icon>
+            <v-icon>mdi-truck-fast</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -64,30 +64,6 @@
           <v-list-item-content>
             <v-list-item-title>{{
               $t('navigation.products')
-            }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item to="/payments" v-if="type == 1">
-          <v-list-item-icon>
-            <v-icon>mdi-credit-card-marker-outline</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{
-              $t('navigation.payments')
-            }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item to="/shipping" v-if="type == 1">
-          <v-list-item-icon>
-            <v-icon>mdi-truck-fast</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{
-              $t('navigation.shipping')
             }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>

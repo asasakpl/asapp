@@ -9,7 +9,7 @@
       <v-col>
         <v-content v-if="product" style="overflow: scroll" class="pt-0 pl-0">
           <v-card
-            class="mx-auto  px-autopb-2 round"
+            class="mx-auto  px-auto pb-2 round"
             style="overflow: scroll;"
             max-height="80vh"
             tile

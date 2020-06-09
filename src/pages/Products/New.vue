@@ -1,8 +1,14 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="1">
-        <v-btn @click="$router.go(-1), removeAllPictures()" icon class="mt-2">
+      <v-col cols="1" align="center" class="mt-2">
+        <v-btn
+          @click="$router.go(-1), removeAllPictures()"
+          icon
+          fab
+          class="mt-2"
+          large
+        >
           <v-icon size="38">arrow_back</v-icon>
         </v-btn>
       </v-col>

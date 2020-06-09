@@ -144,7 +144,15 @@
     },
     "group": {
       "title": "Groups list",
-      "description": "Go to groups list to manage them"
+      "description": "Go to groups list to manage them."
+    },
+    "payments": {
+      "title": "Payment methods",
+      "description": "Go to payment methods list to manage them."
+    },
+    "shipping": {
+      "title": "Shipping methods",
+      "description": "Go to shipping methods list to manage them."
     },
     "btn": "Go",
     "title": "Product ID",

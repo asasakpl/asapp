@@ -157,6 +157,14 @@
       "title": "Grupy",
       "description": "Przejdź do listy grup aby zarządzać istniejącymi grupami produktów."
     },
+    "payments": {
+      "title": "Metody płatności",
+      "description": "Przejdź do listy metod płatności aby zarządzać istniejącymi metodami."
+    },
+    "shipping": {
+      "title": "Metody wysyłki",
+      "description": "Przejdź do listy metod wysyłki aby zarzadzać istniejącymi metodami."
+    },
     "btn": "Przejdź",
     "title": "ID produktu",
     "titles": {

@@ -78,7 +78,7 @@
                       <v-list-item v-bind:key="index">
                         <v-list-item-content class="round">
                           <v-list-item-title
-                            >{{ picture }}
+                            >{{ picture.url }}
 
                             <v-btn icon @click="removePicture(picture)">
                               <v-icon>mdi-close</v-icon>
@@ -189,7 +189,7 @@ export default Vue.extend({
               Key: 'products/' + imageName
             })
 
-            this.product.pictures.push(url.split('?')[0])
+            this.product.pictures.push({ url: url.split('?')[0] })
           })
           .catch((err) => {
             console.log('failed:', err)

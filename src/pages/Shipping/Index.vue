@@ -1,21 +1,26 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="1" align="center" class="pr-0">
-        <v-btn @click="getShipping()" v-if="!load" icon fab class="mt-2">
-          <v-icon size="38">refresh</v-icon>
-        </v-btn>
-        <v-btn
-          @click="getShipping()"
-          v-else
-          loading
-          icon
-          fab
-          class="mt-4"
-        ></v-btn>
+      <v-col cols="1" align="center" justify="center">
+        <div class="flex-column">
+          <v-btn @click="$router.push('/products')" icon fab class="mt-2">
+            <v-icon size="38">arrow_back</v-icon>
+          </v-btn>
+          <v-btn @click="getShipping()" v-if="!load" icon fab class="mt-2">
+            <v-icon size="38">refresh</v-icon>
+          </v-btn>
+          <v-btn
+            @click="getShipping()"
+            v-else
+            loading
+            icon
+            fab
+            class="mt-4"
+          ></v-btn>
+        </div>
       </v-col>
       <v-col class="pr-0 pl-0">
-        <v-card class="mx-auto px-auto round" max-width="90%" tile>
+        <v-card class="mx-auto px-auto round" tile>
           <v-card-title>
             {{ $t('shipping.table.title') }}
             <v-spacer></v-spacer>
@@ -75,6 +80,11 @@
 <style scoped>
 .round {
   border-radius: 8px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
 </style>
 

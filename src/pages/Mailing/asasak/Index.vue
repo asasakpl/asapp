@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="1" class="pt-1 px-10" align="end">
+      <v-col cols="1" class="pt-1 pr-6" align="end">
         <v-btn to="/mail" icon fab>
           <v-icon size="38">arrow_back</v-icon>
         </v-btn>

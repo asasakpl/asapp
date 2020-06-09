@@ -15,7 +15,7 @@
         ></v-btn>
       </v-col>
       <v-col class="pr-0 pl-0">
-        <v-card class="mx-auto px-auto round" max-width="90%" tile>
+        <v-card class="mx-auto px-auto round" tile>
           <v-card-title>
             {{ $t('admin.table.title') }}
             <v-spacer></v-spacer>

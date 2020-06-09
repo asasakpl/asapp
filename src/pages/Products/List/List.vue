@@ -6,13 +6,8 @@
           <v-btn @click="$router.push('/products')" icon fab class="mt-2">
             <v-icon size="38">arrow_back</v-icon>
           </v-btn>
-          <v-btn
-            @click="loading(), getProducts()"
-            v-if="!load"
-            icon
-            class="mt-2"
-          >
-            <v-icon size="32">refresh</v-icon>
+          <v-btn @click="loading(), getProducts()" v-if="!load" icon fab>
+            <v-icon size="38">refresh</v-icon>
           </v-btn>
           <v-btn @click="getProducts()" v-else loading icon> </v-btn>
         </div>

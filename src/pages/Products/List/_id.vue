@@ -23,7 +23,7 @@
             </v-card-title>
 
             <v-row class="mx-auto">
-              <v-col class="pb-0">
+              <v-col>
                 <v-text-field
                   v-model="product.title.pl"
                   v-bind:label="$t('products.titles.title_pl')"
@@ -64,7 +64,7 @@
             </v-row>
 
             <v-col align="center">
-              <v-card flat max-width="800">
+              <v-card flat max-width="1200">
                 <v-card-title class="ml-0 pl-2 mt-0"
                   ><div class="headline mb-3">
                     {{ $t('products.pictures.title') }}
@@ -84,12 +84,16 @@
               </v-card>
             </v-col>
 
-            <v-card flat v-if="product.owner">
-              <v-card-title>{{ $t('products.owner.title') }}</v-card-title>
-              <v-card-text>
-                {{ $t('products.owner.name') }}: {{ product.owner.name }}
-              </v-card-text>
-            </v-card>
+            <v-col cols="4">
+              <v-card v-if="product.owner" outlined>
+                <v-card-title>{{ $t('products.owner.title') }}</v-card-title>
+                <v-card-text>
+                  {{ $t('products.owner.name') }}: {{ product.owner.name }}
+                  <br />
+                  Email: {{ product.owner.email }}
+                </v-card-text>
+              </v-card>
+            </v-col>
             <v-row class="mr-3">
               <v-spacer></v-spacer>
               <v-btn @click="cancelEdit()" class="mr-3" v-show="save"

@@ -6,7 +6,7 @@
           <v-icon size="38">arrow_back</v-icon>
         </v-btn>
       </v-col>
-      <v-col>
+      <v-col cols="11" class="mr-0 pr-0">
         <v-content v-if="product" style="overflow: scroll" class="pt-0 pl-0">
           <v-card
             class="mx-auto  px-auto pb-2 round"
@@ -84,7 +84,43 @@
               </v-card>
             </v-col>
 
-            <v-col cols="4">
+            <v-col v-if="product.variants.length > 0">
+              <span class="title">Warianty</span>
+              <v-flex align="center">
+                <v-expansion-panels light>
+                  <v-expansion-panel
+                    v-for="(item, i) in product.variants"
+                    :key="i"
+                  >
+                    <v-expansion-panel-header
+                      class="subtitle-1 font-weight-bold "
+                    >
+                      {{ item.title[app_lang] }}
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                      <v-col class="body-1 pt-0 pb-0">
+                        Cena: {{ item.price }} pln
+                      </v-col>
+                      <v-col class="body-1 pt-0 pb-0">
+                        Cena "pay to go": {{ item.payToGo }} pln
+                        <div class="overline pl-2">
+                          *cena do zapłacenia przez użytkownika aby utworzyć
+                          zamówienie
+                        </div>
+                      </v-col>
+                      <v-col class="body-1 pt-0 pb-0"
+                        >Liczba atrybutów: {{ item.attributes.length }}</v-col
+                      >
+                      <v-col class="body-1 pt-0 pb-0"
+                        >Grupa: {{ item.group.name[app_lang] }}</v-col
+                      >
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-expansion-panels>
+              </v-flex>
+            </v-col>
+
+            <v-col cols="5">
               <v-card v-if="product.owner" outlined>
                 <v-card-title>{{ $t('products.owner.title') }}</v-card-title>
                 <v-card-text>
@@ -94,6 +130,7 @@
                 </v-card-text>
               </v-card>
             </v-col>
+
             <v-row class="mr-3">
               <v-spacer></v-spacer>
               <v-btn @click="cancelEdit()" class="mr-3" v-show="save"
@@ -140,7 +177,8 @@ export default Vue.extend({
       product: null,
       disabled: true,
       save: false,
-      error: true
+      error: true,
+      app_lang: localStorage.getItem('i18n')
     }
   },
   methods: {
@@ -163,9 +201,9 @@ export default Vue.extend({
         this.error = false
         this.product = res.data
         this.lang = localStorage.getItem('i18n')
+        console.log(this.product)
       })
       .catch((err) => {
-        console.log(err)
         this.error = true
       })
   }

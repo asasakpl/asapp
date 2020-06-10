@@ -220,6 +220,23 @@
     },
     "success": "Pomyślnie utworzyłeś nowy produkt"
   },
+  "groups": {
+    "table": {
+      "title": "Groupy produktów",
+      "id": "Numer",
+      "name_pl": "Nazwa pl",
+      "name_en": "Nazwa en",
+      "payment": "Ilośc metod płatności",
+      "shipping": "Ilość metod wysyłki"
+    },
+    "single": {
+      "number": "Numer grupy",
+      "name_pl": "Nazwa pl",
+      "name_en": "Nazwa en",
+      "payment": "Metody płatności",
+      "shipping": "Metody wysyłki"
+    }
+  },
   "payments": {
     "table": {
       "title": "Metody płatności",

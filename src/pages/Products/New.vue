@@ -214,6 +214,16 @@
                     ></v-text-field>
                   </v-col>
                 </v-row>
+                <v-row class="mx-auto">
+                  <v-select
+                    :items="groups"
+                    :item-text="'name.' + app_lang"
+                    item-value="id"
+                    label="Groupa określająca metody dostawy/płatności"
+                    v-model="variant.group"
+                    outlined
+                  ></v-select>
+                </v-row>
                 <v-row class="mx-auto" justify="center">
                   <v-col class="mx-1">
                     <v-row>
@@ -239,7 +249,7 @@
                               </div>
                               <div class="body-1">
                                 Ilość opcji:
-                                {{ attribute.attributeValues.length }}
+                                {{ attribute.values.length }}
                               </div>
                             </v-col>
                             <v-spacer></v-spacer>
@@ -308,10 +318,7 @@
                       </v-btn>
                     </v-row>
 
-                    <v-col
-                      v-for="(value, i) in attribute.attributeValues"
-                      :key="i"
-                    >
+                    <v-col v-for="(value, i) in attribute.values" :key="i">
                       <v-card light>
                         <v-card-text>
                           <v-row>
@@ -329,7 +336,7 @@
                               <v-btn
                                 icon
                                 large
-                                @click="attribute.attributeValues.splice(i, 1)"
+                                @click="attribute.values.splice(i, 1)"
                               >
                                 <v-icon color="error" size="32"
                                   >mdi-close</v-icon
@@ -466,7 +473,7 @@ export default Vue.extend({
           pl: '',
           en: ''
         },
-        attributeValues: []
+        values: []
       },
       value: {
         name: {
@@ -542,9 +549,8 @@ export default Vue.extend({
     },
     createProduct(product) {
       // Reverse images
-      product.pictures.reverse()
-      console.log(product)
-      /* axios
+
+      axios
         .post('/products', product)
         .then((res) => {
           const text = 'new_product.success'
@@ -560,11 +566,12 @@ export default Vue.extend({
         })
       setTimeout(() => {
         this.error = false
-      }, 4000) */
+      }, 4000)
     },
     pushVariant(variant) {
       this.product.variants.push(variant)
       this.variant_dialog = false
+      console.log(this.variant)
       this.variant = {
         title: {
           pl: '',
@@ -574,7 +581,6 @@ export default Vue.extend({
         payToGo: null,
         attributes: []
       }
-      console.log(this.product.variants)
     },
     removeVariant(variant) {
       this.product.variants.splice(variant, 1)
@@ -585,7 +591,7 @@ export default Vue.extend({
           pl: '',
           en: ''
         },
-        attributeValues: []
+        values: []
       }
       this.prev()
     },
@@ -596,12 +602,12 @@ export default Vue.extend({
           pl: '',
           en: ''
         },
-        attributeValues: []
+        values: []
       }
       this.prev()
     },
     pushValue(value) {
-      this.attribute.attributeValues.push(value)
+      this.attribute.values.push(value)
       this.value = {
         name: {
           pl: '',

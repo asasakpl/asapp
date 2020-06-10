@@ -8,9 +8,9 @@
           </v-card-title>
         </v-card>
       </v-col>
-      <v-col cols="1" class="mx-auto mt-2" align="center">
-        <v-btn to="/products/new" icon large rounded>
-          <v-icon size="36">mdi-plus-circle</v-icon></v-btn
+      <v-col cols="1" class="mx-auto mt-1 pl-2" align="center">
+        <v-btn to="/products/new" icon fab>
+          <v-icon size="40">mdi-plus-circle</v-icon></v-btn
         >
       </v-col>
     </v-row>

@@ -104,6 +104,62 @@
                 ></v-select>
               </v-col>
             </v-row>
+
+            <v-row>
+              <v-col cols="12">
+                <v-card light class="pl-1 title">
+                  <v-card-title>
+                    Warianty
+                    <v-spacer></v-spacer>
+                    <v-btn icon large @click="variant_dialog = true">
+                      <v-icon size="32">mdi-plus-box</v-icon>
+                    </v-btn>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-expansion-panels dark>
+                      <v-expansion-panel
+                        dark
+                        v-for="(item, i) in product.variants"
+                        :key="i"
+                        tile
+                      >
+                        <v-expansion-panel-header
+                          disable-icon-rotate
+                          class="subtitle-1 font-weight-bold "
+                        >
+                          {{ item.title[app_lang] }}
+                          <template v-slot:actions>
+                            <v-btn icon large @click="removeVariant(i)"
+                              ><v-icon color="error" size="32"
+                                >mdi-close</v-icon
+                              >
+                            </v-btn>
+                          </template>
+                        </v-expansion-panel-header>
+                        <v-expansion-panel-content>
+                          <v-col class="body-1 pt-0 pb-0">
+                            Cena: {{ item.price }} pln
+                          </v-col>
+                          <v-col class="body-1 pt-0 pb-0">
+                            Cena "pay to go": {{ item.payToGo }} pln
+                            <div class="overline pl-2">
+                              *cena do zapłacenia przez użytkownika aby utworzyć
+                              zamówienie
+                            </div>
+                          </v-col>
+                          <v-col class="body-1 pt-0 pb-0"
+                            >Liczba atrybutów:
+                            {{ item.attributes.length }}</v-col
+                          >
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
+                    </v-expansion-panels>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-spacer></v-spacer>
+              <v-col> </v-col>
+            </v-row>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -117,6 +173,234 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-dialog v-model="variant_dialog" width="60%" persistent>
+      <v-card flat tile>
+        <v-window v-model="onboarding" :continuous="false">
+          <v-window-item>
+            <v-card>
+              <v-card-title>Nowy wariant</v-card-title>
+              <v-divider></v-divider>
+
+              <v-card-text>
+                <v-row>
+                  <v-col class="pb-0">
+                    <v-text-field
+                      label="Nazwa wariantu pl"
+                      v-model="variant.title.pl"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="pb-0">
+                    <v-text-field
+                      label="Nazwa wariantu en"
+                      v-model="variant.title.en"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col class="pb-0 pt-0">
+                    <v-text-field
+                      label="Cena"
+                      v-model="variant.price"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="pb-0 pt-0">
+                    <v-text-field
+                      label='Cena "pay to go"'
+                      v-model="variant.payToGo"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row class="mx-auto" justify="center">
+                  <v-col class="mx-1">
+                    <v-row>
+                      <span class="title font-weight-bold">Atrybuty</span>
+                      <v-spacer></v-spacer>
+                      <v-btn icon large @click="next"
+                        ><v-icon size="34">mdi-plus-box</v-icon>
+                      </v-btn>
+                    </v-row>
+                    <v-col
+                      v-for="(attribute, i) in variant.attributes"
+                      :key="i"
+                    >
+                      <v-card light>
+                        <v-card-text>
+                          <v-row>
+                            <v-col>
+                              <div class="body-1">
+                                Nazwa pl: {{ attribute.name.pl }}
+                              </div>
+                              <div class="body-1">
+                                Nazwa en: {{ attribute.name.en }}
+                              </div>
+                              <div class="body-1">
+                                Ilość opcji:
+                                {{ attribute.attributeValues.length }}
+                              </div>
+                            </v-col>
+                            <v-spacer></v-spacer>
+                            <v-col align="end">
+                              <v-btn
+                                icon
+                                large
+                                @click="variant.attributes.splice(i, 1)"
+                              >
+                                <v-icon color="error" size="32"
+                                  >mdi-close</v-icon
+                                >
+                              </v-btn>
+                            </v-col>
+                          </v-row>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="error" text @click="variant_dialog = false"
+                  >Anuluj</v-btn
+                >
+                <v-btn color="primary" text @click="pushVariant(variant)"
+                  >Dodaj</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-window-item>
+          <v-window-item>
+            <v-card>
+              <v-card-title>Nowy atrybut</v-card-title>
+              <v-divider></v-divider>
+
+              <v-card-text>
+                <v-row>
+                  <v-col class="pb-0">
+                    <v-text-field
+                      label="Nazwa atrybutu pl"
+                      v-model="attribute.name.pl"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="pb-0">
+                    <v-text-field
+                      label="Nazwa atrybutu en"
+                      v-model="attribute.name.en"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+
+                <v-row class="mx-auto" justify="center">
+                  <v-col class="mx-1">
+                    <v-row>
+                      <span class="title font-weight-bold"
+                        >Wartości atrybutów (ex. Czerwony, Czarny)</span
+                      >
+                      <v-spacer></v-spacer>
+                      <v-btn icon large @click="next"
+                        ><v-icon size="34">mdi-plus-box</v-icon>
+                      </v-btn>
+                    </v-row>
+
+                    <v-col
+                      v-for="(value, i) in attribute.attributeValues"
+                      :key="i"
+                    >
+                      <v-card light>
+                        <v-card-text>
+                          <v-row>
+                            <v-col>
+                              <div class="body-1">
+                                Nazwa pl: {{ value.name.pl }}
+                              </div>
+                              <div class="body-1">
+                                Nazwa en: {{ value.name.en }}
+                              </div>
+                              <div class="body-1">Cena: {{ value.price }}</div>
+                            </v-col>
+                            <v-spacer></v-spacer>
+                            <v-col align="end">
+                              <v-btn
+                                icon
+                                large
+                                @click="attribute.attributeValues.splice(i, 1)"
+                              >
+                                <v-icon color="error" size="32"
+                                  >mdi-close</v-icon
+                                ></v-btn
+                              >
+                            </v-col>
+                          </v-row>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="error" text @click="cleanAttribute">Cofnij</v-btn>
+                <v-btn color="primary" text @click="pushAttribute(attribute)"
+                  >Dodaj</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-window-item>
+
+          <v-window-item>
+            <v-card>
+              <v-card-title>Nowa wartość atrybutu</v-card-title>
+              <v-divider></v-divider>
+
+              <v-card-text>
+                <v-row>
+                  <v-col class="pb-0">
+                    <v-text-field
+                      label="Nazwa atrybutu pl"
+                      v-model="value.name.pl"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="pb-0">
+                    <v-text-field
+                      label="Nazwa atrybutu en"
+                      v-model="value.name.en"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+
+                <v-row>
+                  <v-col class="pb-0">
+                    <v-text-field
+                      label="Cena"
+                      v-model="value.price"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="error" text @click="prev">Cofnij</v-btn>
+                <v-btn color="primary" text @click="pushValue(value)"
+                  >Dodaj</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-window-item>
+        </v-window>
+      </v-card>
+    </v-dialog>
+
     <Error v-if="error"></Error>
   </v-container>
 </template>
@@ -150,6 +434,9 @@ export default Vue.extend({
   data() {
     return {
       pic: null,
+      attribute_dialog: false,
+      length: 3,
+      onboarding: 0,
       product: {
         title: {
           pl: null,
@@ -161,13 +448,40 @@ export default Vue.extend({
         },
         pictures: [],
         price: '',
-        owner: null
+        owner: null,
+        variants: []
       },
+      variant_dialog: false,
+      variant: {
+        title: {
+          pl: '',
+          en: ''
+        },
+        price: null,
+        payToGo: null,
+        attributes: []
+      },
+      attribute: {
+        name: {
+          pl: '',
+          en: ''
+        },
+        attributeValues: []
+      },
+      value: {
+        name: {
+          pl: '',
+          en: ''
+        },
+        price: null
+      },
+      groups: [],
       owners: [],
       empty: false,
       error: false,
       create_dialog: false,
-      rules: []
+      rules: [],
+      app_lang: localStorage.getItem('i18n')
     }
   },
   methods: {
@@ -229,8 +543,8 @@ export default Vue.extend({
     createProduct(product) {
       // Reverse images
       product.pictures.reverse()
-
-      axios
+      console.log(product)
+      /* axios
         .post('/products', product)
         .then((res) => {
           const text = 'new_product.success'
@@ -246,7 +560,56 @@ export default Vue.extend({
         })
       setTimeout(() => {
         this.error = false
-      }, 4000)
+      }, 4000) */
+    },
+    pushVariant(variant) {
+      this.product.variants.push(variant)
+      this.variant_dialog = false
+      this.variant = {
+        title: {
+          pl: '',
+          en: ''
+        },
+        price: null,
+        payToGo: null,
+        attributes: []
+      }
+      console.log(this.product.variants)
+    },
+    removeVariant(variant) {
+      this.product.variants.splice(variant, 1)
+    },
+    cleanAttribute() {
+      this.attribute = {
+        name: {
+          pl: '',
+          en: ''
+        },
+        attributeValues: []
+      }
+      this.prev()
+    },
+    pushAttribute(attribute) {
+      this.variant.attributes.push(attribute)
+      this.attribute = {
+        name: {
+          pl: '',
+          en: ''
+        },
+        attributeValues: []
+      }
+      this.prev()
+    },
+    pushValue(value) {
+      this.attribute.attributeValues.push(value)
+      this.value = {
+        name: {
+          pl: '',
+          en: ''
+        },
+        price: null
+      }
+      this.prev()
     },
     getAllOwners() {
       axios
@@ -254,11 +617,31 @@ export default Vue.extend({
         .then((res) => {
           this.owners = res.data
         })
-        .catch((err) => {})
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getAllGroups() {
+      axios
+        .get('/products/groups')
+        .then((res) => {
+          this.groups = res.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    next() {
+      this.onboarding =
+        this.onboarding + 1 === this.length ? 0 : this.onboarding + 1
+    },
+    prev() {
+      this.onboarding =
+        this.onboarding - 1 < 0 ? this.length - 1 : this.onboarding - 1
     }
   },
   mounted() {
-    this.getAllOwners()
+    this.getAllOwners(), this.getAllGroups()
   }
 })
 </script>

@@ -20,7 +20,7 @@
         <v-card class="mx-auto px-auto round">
           <v-card-title
             >{{ $t('products.list.title') }} <v-spacer></v-spacer
-            ><v-icon>mdi-home-group</v-icon></v-card-title
+            ><v-icon>mdi-folder-home</v-icon></v-card-title
           >
           <v-card-text>{{ $t('products.list.description') }}</v-card-text>
           <v-card-actions>
@@ -33,16 +33,16 @@
       </v-col>
 
       <v-col>
-        <v-card class="mx-auto px-auto round" disabled>
+        <v-card class="mx-auto px-auto round">
           <v-card-title
             >{{ $t('products.group.title') }} <v-spacer></v-spacer
-            ><v-icon>mdi-hammer-wrench</v-icon></v-card-title
+            ><v-icon>mdi-home-group</v-icon></v-card-title
           >
 
           <v-card-text>{{ $t('products.list.description') }}</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" disabled>{{ $t('products.btn') }}</v-btn>
+            <v-btn color="primary" to="/groups">{{ $t('products.btn') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

@@ -5,8 +5,6 @@
     "orders": "Orders",
     "users": "Users",
     "products": "Products",
-    "payments": "Payment Methods",
-    "shipping": "Shipping Methods",
     "sellers": "Sellers",
     "mail": "Newsletters",
     "admins": "Admins",
@@ -207,6 +205,23 @@
       "tag": "Tag"
     },
     "success": "Product was successfuly created"
+  },
+  "groups": {
+    "table": {
+      "title": "Product groups",
+      "id": "Number",
+      "name_pl": "Name pl",
+      "name_en": "Name en",
+      "payment": "Payment methods number",
+      "shipping": "Shipping methods number"
+    },
+    "single": {
+      "number": "Group number",
+      "name_pl": "Name pl",
+      "name_en": "Name en",
+      "payment": "Payment methods",
+      "shipping": "Shipping methods"
+    }
   },
   "payments": {
     "table": {

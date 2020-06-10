@@ -28,6 +28,10 @@ import ProductsList from '@/pages/Products/List/List.vue'
 import Product from '@/pages/Products/List/_id.vue'
 import NewProduct from '@/pages/Products/New.vue'
 
+// Groups
+import Groups from '@/pages/Groups/Index.vue'
+import Group from '@/pages/Groups/_id.vue'
+
 // Shipping
 import Shipping from '@/pages/Shipping/Index.vue'
 import NewShipping from '@/pages/Shipping/New.vue'
@@ -167,6 +171,24 @@ let router = new Router({
               path: '/products/:id',
               name: 'product',
               component: Product,
+              beforeEnter: ifAuthenticated
+            }
+          ]
+        },
+        {
+          path: '/groups',
+          component: DashboardLayout,
+          children: [
+            {
+              path: '',
+              name: 'groups',
+              component: Groups,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/groups/:id',
+              name: 'group',
+              component: Group,
               beforeEnter: ifAuthenticated
             }
           ]

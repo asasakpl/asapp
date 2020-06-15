@@ -548,8 +548,7 @@ export default Vue.extend({
       }
     },
     createProduct(product) {
-      // Reverse images
-
+      // Save product
       axios
         .post('/products', product)
         .then((res) => {

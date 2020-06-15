@@ -600,7 +600,8 @@ export default Vue.extend({
       }
     },
     createProduct(product) {
-      // Save product
+      
+      // Check if product have pictures
       if (product.pictures.length <= 0) {
         const text = 'Produkt musi posiadać przynajmniej jedno zdjęcie!'
         const icon = 'file-alert-outline'
@@ -609,7 +610,8 @@ export default Vue.extend({
         return
       }
 
-      /* axios
+      // Save product
+      axios
         .post('/products', product)
         .then((res) => {
           const text = 'new_product.success'
@@ -625,7 +627,7 @@ export default Vue.extend({
         })
       setTimeout(() => {
         this.error = false
-      }, 4000) */
+      }, 4000)
     },
     pushVariant(variant) {
       this.product.variants.push(variant)

@@ -121,7 +121,6 @@ export default Vue.extend({
         },
         { text: 'picture', value: 'image', sortable: false },
         { text: 'name', value: 'title' },
-        { text: 'type', value: 'type' },
         { text: 'views', value: 'views' },
         { text: 'owner', value: 'owner.name' }
       ]

@@ -235,6 +235,9 @@
       "name_en": "Nazwa en",
       "payment": "Metody płatności",
       "shipping": "Metody wysyłki"
+    },
+    "new": {
+      "title": "Dodawanie nowej groupy"
     }
   },
   "payments": {

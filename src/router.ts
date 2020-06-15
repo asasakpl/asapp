@@ -31,6 +31,7 @@ import NewProduct from '@/pages/Products/New.vue'
 // Groups
 import Groups from '@/pages/Groups/Index.vue'
 import Group from '@/pages/Groups/_id.vue'
+import NewGroup from '@/pages/Groups/New.vue'
 
 // Shipping
 import Shipping from '@/pages/Shipping/Index.vue'
@@ -183,6 +184,12 @@ let router = new Router({
               path: '',
               name: 'groups',
               component: Groups,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/groups/new',
+              name: 'new_group',
+              component: NewGroup,
               beforeEnter: ifAuthenticated
             },
             {

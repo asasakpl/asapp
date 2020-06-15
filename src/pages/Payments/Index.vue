@@ -74,7 +74,6 @@
     </v-row>
 
     <NetworkError class="mb-3" :error="error"></NetworkError>
-    <Success class="mb-3" v-if="this.$store.state.success"></Success>
   </v-container>
 </template>
 

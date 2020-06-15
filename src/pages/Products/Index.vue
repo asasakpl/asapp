@@ -79,7 +79,6 @@
         </v-card>
       </v-col>
     </v-row>
-    <Success v-if="this.$store.state.success"></Success>
   </v-container>
 </template>
 

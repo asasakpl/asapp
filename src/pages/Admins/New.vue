@@ -13,82 +13,87 @@
               $t('admin.new.title')
             }}</v-card-title>
             <v-divider></v-divider>
-            <v-card-actions>
-              <v-row>
-                <v-col cols="5" class="pr-2 ml-6">
-                  <v-col class="pb-0">
-                    <div class="headline ml-1 mb-3">
-                      {{ $t('admin.page.name') }}
-                    </div>
-                    <v-text-field
-                      v-model="admin.firstName"
-                      outlined
-                    ></v-text-field>
+            <v-form v-model="isValidAdmin">
+              <v-card-actions>
+                <v-row>
+                  <v-col cols="5" class="pr-2 ml-6">
+                    <v-col class="pb-0">
+                      <div class="headline ml-1 mb-3">
+                        {{ $t('admin.page.name') }}
+                      </div>
+                      <v-text-field
+                        v-model="admin.firstName"
+                        outlined
+                        :rules="[rules.required]"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col class="pb-0">
+                      <div class="headline ml-1 mb-3">
+                        {{ $t('admin.page.email') }}
+                      </div>
+                      <v-text-field
+                        v-model="admin.email"
+                        outlined
+                        :rules="[rules.required, rules.email]"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col class="pb-0">
+                      <div class="headline">{{ $t('admin.page.type') }}</div>
+                      <v-select
+                        :items="types"
+                        v-model="admin.type"
+                        label="Wybierz typ konta"
+                        item-text="name"
+                        item-value="value"
+                      ></v-select>
+                    </v-col>
                   </v-col>
-                  <v-col class="pb-0">
-                    <div class="headline ml-1 mb-3">
-                      {{ $t('admin.page.email') }}
-                    </div>
-                    <v-text-field
-                      v-model="admin.email"
-                      outlined
-                      :rules="emailRules"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col class="pb-0">
-                    <div class="headline">{{ $t('admin.page.type') }}</div>
-                    <v-select
-                      :items="types"
-                      v-model="admin.type"
-                      item-text="name"
-                      item-value="value"
-                    ></v-select>
-                  </v-col>
-                </v-col>
-                <v-col cols="5" class="pr-2 ml-6">
-                  <v-col class="pb-0">
-                    <div class="headline ml-1 mb-3">
-                      {{ $t('admin.page.surname') }}
-                    </div>
-                    <v-text-field
-                      v-model="admin.lastName"
-                      outlined
-                    ></v-text-field>
-                  </v-col>
+                  <v-col cols="5" class="pr-2 ml-6">
+                    <v-col class="pb-0">
+                      <div class="headline ml-1 mb-3">
+                        {{ $t('admin.page.surname') }}
+                      </div>
+                      <v-text-field
+                        v-model="admin.lastName"
+                        outlined
+                        :rules="[rules.required]"
+                      ></v-text-field>
+                    </v-col>
 
-                  <v-col class="pb-0">
-                    <div class="headline ml-1 mb-3">
-                      {{ $t('admin.new.password') }}
-                    </div>
-                    <v-text-field
-                      v-model="admin.password"
-                      outlined
-                      :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                      :rules="[rules.required, rules.min]"
-                      :type="show ? 'text' : 'password'"
-                      @click:append="show = !show"
-                    ></v-text-field>
+                    <v-col class="pb-0">
+                      <div class="headline ml-1 mb-3">
+                        {{ $t('admin.new.password') }}
+                      </div>
+                      <v-text-field
+                        v-model="admin.password"
+                        outlined
+                        :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                        :rules="[rules.required, rules.min]"
+                        :type="show ? 'text' : 'password'"
+                        @click:append="show = !show"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col class="pb-0">
+                      <div class="headline ml-1 mb-3">
+                        {{ $t('admin.new.repeat') }}
+                      </div>
+                      <v-text-field
+                        v-model="rePassword"
+                        outlined
+                        :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                        :rules="[
+                          rules.required,
+                          rules.min,
+                          passwordConfirmationRule
+                        ]"
+                        :type="show ? 'text' : 'password'"
+                        @click:append="show = !show"
+                      ></v-text-field>
+                    </v-col>
                   </v-col>
-                  <v-col class="pb-0">
-                    <div class="headline ml-1 mb-3">
-                      {{ $t('admin.new.repeat') }}
-                    </div>
-                    <v-text-field
-                      v-model="rePassword"
-                      outlined
-                      :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                      :rules="[
-                        rules.required,
-                        rules.min,
-                        passwordConfirmationRule
-                      ]"
-                      :type="show ? 'text' : 'password'"
-                      @click:append="show = !show"
-                    ></v-text-field>
-                  </v-col>
-                </v-col>
-              </v-row>
-            </v-card-actions>
+                </v-row>
+              </v-card-actions>
+            </v-form>
 
             <v-row class="mr-3">
               <v-spacer></v-spacer>
@@ -96,6 +101,7 @@
                 @click="createAdmin(admin)"
                 color="primary"
                 class="mr-4 mb-4"
+                :disabled="!isValidAdmin"
                 >Create</v-btn
               >
             </v-row>
@@ -128,7 +134,7 @@ export default Vue.extend({
     return {
       admin: {
         password: null,
-        type: { name: 'Pracownik', value: 0 }
+        type: null
       },
       types: [
         { name: 'Pracownik', value: 0 },
@@ -138,13 +144,12 @@ export default Vue.extend({
       error: false,
       show: false,
       rePassword: null,
-      emailRules: [
-        (v) =>
+      isValidAdmin: false,
+      rules: {
+        email: (v) =>
           !v ||
           /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          'E-mail must be valid'
-      ],
-      rules: {
+          'E-mail must be valid',
         required: (value) => !!value || 'Required.',
         min: (v) => (v && v.length >= 12) || 'Min 12 characters'
       }

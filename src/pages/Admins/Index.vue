@@ -69,7 +69,6 @@
     </v-row>
 
     <NetworkError :error="error"></NetworkError>
-    <Success v-if="this.$store.state.success"></Success>
   </v-container>
 </template>
 

@@ -64,17 +64,13 @@
 .round {
   border-radius: 14px;
 }
-
-.grid {
-  display: grid;
-}
 </style>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
-import DashboardLayout from '@/layouts/DashboardLayout.vue'
-import NetworkError from '@/components/NetworkError.vue'
+import Vue from "vue"
+import axios from "axios"
+import DashboardLayout from "@/layouts/DashboardLayout.vue"
+import NetworkError from "@/components/NetworkError.vue"
 
 export default Vue.extend({
   components: {
@@ -88,7 +84,7 @@ export default Vue.extend({
       sellers: 0,
       orders: 0,
       users: 0,
-      name: localStorage.getItem('m_name')
+      name: localStorage.getItem("m_name")
     }
   },
   methods: {
@@ -96,11 +92,11 @@ export default Vue.extend({
       let date = new Date()
       date.setDate(date.getDate() - 30)
 
-      await axios.get('/dashboard').then((res) => {
+      await axios.get("/dashboard").then(res => {
         this.error = false
         let orders = res.data.orders
 
-        orders = orders.map((order) => order.createdAt)
+        orders = orders.map(order => order.createdAt)
 
         for (let x in orders) {
           let orderDate = new Date(orders[x])
@@ -116,7 +112,7 @@ export default Vue.extend({
         this.products = 0 + res.data.products.length
 
         let users = res.data.users
-        users = users.map((user) => user.createdAt)
+        users = users.map(user => user.createdAt)
 
         for (let x in users) {
           let usersDate = new Date(users[x])

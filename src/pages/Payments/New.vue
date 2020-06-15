@@ -105,7 +105,7 @@ export default Vue.extend({
           }
         })
         .then((res) => {
-          const text = 'shipping.success'
+          const text = 'payments.success'
           const icon = 'briefcase-check'
           this.$store.dispatch('success', { text, icon })
           this.$router.push('/payments')

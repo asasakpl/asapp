@@ -13,7 +13,7 @@
         </v-btn>
       </v-col>
       <v-col>
-        <v-form v-model="isValidProduct">
+        <v-form v-model="isValidProduct" ref="productForm">
           <v-card
             class="mx-auto px-auto round"
             style="overflow: scroll"
@@ -78,27 +78,26 @@
                   <v-card-title class="pl-1">
                     Zdjęcia
                   </v-card-title>
-                  <v-form>
-                    <v-list :rules="[rules.picture]">
-                      <template v-for="(picture, index) in product.pictures">
-                        <v-list-item v-bind:key="index">
-                          <v-list-item-content class="round">
-                            <v-list-item-title
-                              >{{ picture.url }}
 
-                              <v-btn
-                                icon
-                                @click="removePicture(picture)"
-                                color="error"
-                              >
-                                <v-icon>mdi-close</v-icon>
-                              </v-btn></v-list-item-title
+                  <v-list :rules="[rules.picture]">
+                    <template v-for="(picture, index) in product.pictures">
+                      <v-list-item v-bind:key="index">
+                        <v-list-item-content class="round">
+                          <v-list-item-title
+                            >{{ picture.url }}
+
+                            <v-btn
+                              icon
+                              @click="removePicture(picture)"
+                              color="error"
                             >
-                          </v-list-item-content>
-                        </v-list-item>
-                      </template>
-                    </v-list>
-                  </v-form>
+                              <v-icon>mdi-close</v-icon>
+                            </v-btn></v-list-item-title
+                          >
+                        </v-list-item-content>
+                      </v-list-item>
+                    </template>
+                  </v-list>
 
                   <v-btn @click="uploadPictures()">Upload</v-btn>
                 </v-col>
@@ -186,7 +185,7 @@
       </v-col>
     </v-row>
     <v-dialog v-model="variant_dialog" width="60%" persistent>
-      <v-form v-model="isValidVariant">
+      <v-form v-model="isValidVariant" ref="variantForm">
         <v-card flat tile>
           <v-window v-model="onboarding" :continuous="false">
             <v-window-item>
@@ -226,7 +225,7 @@
                       <v-text-field
                         label='Cena "pay to go"'
                         v-model="variant.payToGo"
-                        :rules="[rules.required, rules.max, rules.number]"
+                        :rules="[rules.max, rules.number]"
                         outlined
                       ></v-text-field>
                     </v-col>
@@ -306,7 +305,7 @@
               </v-card>
             </v-window-item>
             <v-window-item>
-              <v-form v-model="isValidAttribute">
+              <v-form v-model="isValidAttribute" ref="attributeForm">
                 <v-card>
                   <v-card-title>Nowy atrybut</v-card-title>
                   <v-divider></v-divider>
@@ -396,7 +395,7 @@
             </v-window-item>
 
             <v-window-item>
-              <v-form v-model="isValidAttributeValue">
+              <v-form v-model="isValidAttributeValue" ref="attributeValueForm">
                 <v-card>
                   <v-card-title>Nowa wartość atrybutu</v-card-title>
                   <v-divider></v-divider>
@@ -517,8 +516,8 @@ export default Vue.extend({
           pl: '',
           en: ''
         },
-        price: null,
-        payToGo: null,
+        price: '',
+        payToGo: '',
         attributes: []
       },
       attribute: {
@@ -600,7 +599,6 @@ export default Vue.extend({
       }
     },
     createProduct(product) {
-      
       // Check if product have pictures
       if (product.pictures.length <= 0) {
         const text = 'Produkt musi posiadać przynajmniej jedno zdjęcie!'
@@ -632,29 +630,14 @@ export default Vue.extend({
     pushVariant(variant) {
       this.product.variants.push(variant)
       this.variant_dialog = false
-      console.log(this.variant)
-      this.variant = {
-        title: {
-          pl: '',
-          en: ''
-        },
-        price: null,
-        payToGo: null,
-        attributes: []
-      }
+      ;(this.$refs.variantForm as any).reset()
     },
     removeVariant(variant) {
       this.product.variants.splice(variant, 1)
     },
     cleanAttribute() {
-      this.attribute = {
-        name: {
-          pl: '',
-          en: ''
-        },
-        values: []
-      }
       this.prev()
+      ;(this.$refs.attributeForm as any).reset()
     },
     pushAttribute(attribute) {
       this.variant.attributes.push(attribute)
@@ -666,17 +649,12 @@ export default Vue.extend({
         values: []
       }
       this.prev()
+      ;(this.$refs.attributeForm as any).reset()
     },
     pushValue(value) {
       this.attribute.values.push(value)
-      this.value = {
-        name: {
-          pl: '',
-          en: ''
-        },
-        price: null
-      }
       this.prev()
+      ;(this.$refs.attributeValueForm as any).reset()
     },
     getAllOwners() {
       axios

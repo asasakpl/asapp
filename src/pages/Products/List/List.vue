@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="1" align="center" justify="center">
         <div class="flex-column">
-          <v-btn @click="$router.push('/products')" icon fab class="mt-2">
+          <v-btn @click="$router.push('/products')" icon fab>
             <v-icon size="38">arrow_back</v-icon>
           </v-btn>
           <v-btn @click="loading(), getProducts()" v-if="!load" icon fab>

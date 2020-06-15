@@ -3,7 +3,7 @@
     <v-row v-if="admin">
       <v-col cols="1" align="end">
         <v-btn @click="$router.push('/admins')" icon fab class="mt-2">
-          <v-icon size="38">arrow_back</v-icon>
+          <v-icon large>arrow_back</v-icon>
         </v-btn>
       </v-col>
       <v-col>
@@ -19,7 +19,7 @@
               {{ $t('admin.page.id') }}: {{ admin.id }}
               <v-spacer></v-spacer>
               <v-btn @click="editAdmin" large icon class="mb-1 pb-1">
-                <v-icon size="32" class>mdi-pencil</v-icon>
+                <v-icon size="32">mdi-pencil</v-icon>
               </v-btn>
             </v-card-title>
             <v-divider></v-divider>

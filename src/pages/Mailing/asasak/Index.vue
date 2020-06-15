@@ -1,16 +1,15 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="1" class="pt-1 pr-6" align="end">
+      <v-col cols="1" class="mx-auto px-auto" align="center">
         <v-btn to="/mail" icon fab>
-          <v-icon size="38">arrow_back</v-icon>
+          <v-icon large>arrow_back</v-icon>
         </v-btn>
       </v-col>
-      <v-col class="pa-0" cols="11">
+      <v-col class="mx-auto px-auto" cols="11">
         <v-card
           class="mx-auto px-auto round"
           max-height="80vh"
-          max-width="95%"
           tile
           v-if="asasak"
         >
@@ -55,9 +54,9 @@
                           <v-btn icon large to="/asasak/subscribers">
                             <v-icon>mdi-account-group</v-icon>
                           </v-btn>
-                          <v-list-item-title class="pl-1">
-                            {{ asasak.list.members_count }}
-                          </v-list-item-title>
+                          <v-list-item-title class="pl-1">{{
+                            asasak.list.members_count
+                          }}</v-list-item-title>
                         </v-list-item-icon>
                       </v-list-item-content>
                     </v-list-item>

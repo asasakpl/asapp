@@ -1,17 +1,13 @@
 <template>
   <v-container>
     <v-row>
-      <v-btn @click="$router.go(-1)" icon class="ml-12">
-        <v-icon size="32">arrow_back</v-icon>
-      </v-btn>
-
+      <v-col cols="1">
+        <v-btn @click="$router.go(-1)" icon fab>
+          <v-icon large>arrow_back</v-icon>
+        </v-btn>
+      </v-col>
       <v-col>
-        <v-card
-          class="mx-auto px-auto pb-2 round"
-          max-width="90%"
-          max-height="84vh"
-          tile
-        >
+        <v-card class="mx-auto px-auto pb-2 round" max-height="84vh" tile>
           <v-card-title class="pb-0">
             <v-text-field
               outlined

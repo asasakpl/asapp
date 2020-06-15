@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <v-row>
-      <v-col align="end">
+      <v-col align="center" class="mx-auto px-auto">
         <v-btn @click="$router.push('/asasak')" icon fab class="ml-2">
-          <v-icon size="34">arrow_back</v-icon>
+          <v-icon large>arrow_back</v-icon>
         </v-btn>
 
         <v-btn @click="getInfo()" v-if="!load" icon fab class="ml-2 mt-2">
-          <v-icon size="34">refresh</v-icon>
+          <v-icon large>refresh</v-icon>
         </v-btn>
         <v-btn
           @click="getInfo()"
@@ -19,8 +19,8 @@
         ></v-btn>
       </v-col>
 
-      <v-col class="pr-0" cols="10">
-        <v-card class="mx-auto px-auto round" max-width="90%" tile>
+      <v-col cols="10" class="mx-auto px-auto">
+        <v-card class="mx-auto px-auto round" tile>
           <v-card-title>
             Subskrybenci
             <v-spacer></v-spacer>
@@ -70,7 +70,7 @@
           <v-pagination v-model="page" :length="pageCount"></v-pagination>
         </div>
       </v-col>
-      <v-col>
+      <v-col align="center" class="mx-auto px-auto">
         <v-btn icon fab class="ml-0 mt-2" to="/asasak/subscribers/new">
           <v-icon size="34">mdi-account-plus</v-icon>
         </v-btn>

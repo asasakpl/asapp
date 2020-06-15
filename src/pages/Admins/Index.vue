@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="1" align="center" class="pr-0">
-        <v-btn @click="getAdmins()" v-if="!load" icon fab class="mt-2">
+      <v-col cols="1" align="center" class="mx-auto px-auto">
+        <v-btn @click="getAdmins()" v-if="!load" icon fab class=" mt-2">
           <v-icon size="38">refresh</v-icon>
         </v-btn>
         <v-btn
@@ -14,7 +14,7 @@
           class="mt-4"
         ></v-btn>
       </v-col>
-      <v-col class="pr-0 pl-0">
+      <v-col cols="10" class="mx-auto px-auto">
         <v-card class="mx-auto px-auto round" tile>
           <v-card-title>
             {{ $t('admin.table.title') }}
@@ -61,7 +61,7 @@
           <v-pagination v-model="page" :length="pageCount"></v-pagination>
         </div>
       </v-col>
-      <v-col cols="1">
+      <v-col cols="1" class="mx-auto px-auto" align="center">
         <v-btn to="/admins/new" icon fab class="ml-0 mt-2">
           <v-icon size="38">mdi-account-plus</v-icon>
         </v-btn>

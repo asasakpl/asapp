@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
+      <v-col align="center">
         <v-btn @click="$router.push('/admins')" icon fab class="mt-2">
-          <v-icon size="38">arrow_back</v-icon>
+          <v-icon large>arrow_back</v-icon>
         </v-btn>
       </v-col>
       <v-col cols="11">

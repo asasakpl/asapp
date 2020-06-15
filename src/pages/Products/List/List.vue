@@ -77,6 +77,7 @@
         </v-btn>
       </v-col>
     </v-row>
+
     <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
@@ -96,10 +97,12 @@
 import Vue from 'vue'
 import axios from 'axios'
 import NetworkError from '@/components/NetworkError.vue'
+import Success from '@/components/Success.vue'
 
 export default Vue.extend({
   components: {
-    NetworkError
+    NetworkError,
+    Success
   },
   data() {
     return {

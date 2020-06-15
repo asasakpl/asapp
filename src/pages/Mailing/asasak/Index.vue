@@ -79,7 +79,6 @@
       {{ $t('mail.new.success') }}
       <v-icon>mdi-{{ icon }}</v-icon>
     </v-snackbar>
-    <Success v-if="this.$store.state.success"></Success>
     <Error v-if="conflict"></Error>
     <NetworkError :error="error"></NetworkError>
   </v-container>

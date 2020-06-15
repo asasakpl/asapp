@@ -95,7 +95,6 @@
       </v-card>
     </v-dialog>
 
-    <Success v-if="this.$store.state.success"></Success>
     <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
@@ -117,7 +116,7 @@ import Success from '@/components/Success.vue'
 export default Vue.extend({
   components: {
     NetworkError,
-    Success,
+    Success
   },
   data() {
     return {
@@ -134,17 +133,17 @@ export default Vue.extend({
       headers: [
         {
           text: 'Imie i nazwisko',
-          value: 'name',
+          value: 'name'
         },
         {
           text: 'Adres email',
-          value: 'address',
+          value: 'address'
         },
         {
           text: '',
-          value: '',
-        },
-      ],
+          value: ''
+        }
+      ]
     }
   },
   methods: {
@@ -180,10 +179,10 @@ export default Vue.extend({
           console.log(err)
           return
         })
-    },
+    }
   },
   mounted() {
     this.getInfo()
-  },
+  }
 })
 </script>

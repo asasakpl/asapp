@@ -221,6 +221,9 @@
       "name_en": "Name en",
       "payment": "Payment methods",
       "shipping": "Shipping methods"
+    },
+    "new": {
+      "title": "Add new product group"
     }
   },
   "payments": {

@@ -23,7 +23,7 @@
       <v-col>
         <v-card class="mx-auto px-auto round" tile>
           <v-card-title>
-            {{ $t('payments.table.title') }}
+            {{ $t('groups.table.title') }}
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"
@@ -66,7 +66,7 @@
         </div>
       </v-col>
       <v-col cols="1">
-        <v-btn to="/payments/new" icon fab class="ml-0 mt-2">
+        <v-btn to="/groups/new" icon fab class="ml-0 mt-2">
           <v-icon size="36">mdi-credit-card-plus-outline</v-icon>
         </v-btn>
       </v-col>

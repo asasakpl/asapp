@@ -26,6 +26,7 @@
                     ></v-text-field>
                   </v-col>
                   <v-col>
+                    <v-card-title class="pl-0">Metody wysyłki</v-card-title>
                     <v-list-item
                       v-for="(item, i) in group.shippingMethods"
                       v-bind:key="i"
@@ -100,6 +101,7 @@
                     ></v-text-field>
                   </v-col>
                   <v-col>
+                    <v-card-title class="pl-0">Metody płatności</v-card-title>
                     <v-list-item
                       v-for="(item, i) in group.paymentMethods"
                       v-bind:key="i"

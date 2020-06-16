@@ -291,7 +291,7 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="error" text @click="variant_dialog = false"
+                  <v-btn color="error" text @click="cancelVariant()"
                     >Anuluj</v-btn
                   >
                   <v-btn
@@ -430,7 +430,6 @@
                         ></v-text-field>
                       </v-col>
                     </v-row>
-                    {{ value.price }}
                   </v-card-text>
 
                   <v-card-actions>
@@ -489,7 +488,8 @@ export default Vue.extend({
       length: 3,
       rules: {
         required: (value) => !!value || 'Pole wymagane',
-        max: (v) => v.length <= 9 || 'Max 8 znaków przed przecinkiem, po 2',
+        max: (v) =>
+          (v || '').length <= 8 || 'Max 8 znaków przed przecinkiem, po 2',
         number: (v) => !isNaN(v) || 'Cena nie może zawierać liter'
       },
       isValidProduct: false,
@@ -507,7 +507,7 @@ export default Vue.extend({
           en: ''
         },
         pictures: [],
-        price: '',
+        price: null,
         owner: null,
         variants: []
       },
@@ -517,7 +517,7 @@ export default Vue.extend({
           pl: '',
           en: ''
         },
-        price: '',
+        price: null,
         payToGo: '',
         attributes: []
       },
@@ -533,7 +533,7 @@ export default Vue.extend({
           pl: '',
           en: ''
         },
-        price: ''
+        price: null
       },
       groups: [],
       owners: [],
@@ -619,6 +619,8 @@ export default Vue.extend({
           this.$router.push(`/products/${res.data.id}`)
         })
         .catch((err) => {
+          console.log(err)
+          console.log('dupa')
           const text = err.response.data.error.message
           const icon = 'alert-circle-outline'
           this.$store.dispatch('error', { text, icon })
@@ -627,6 +629,19 @@ export default Vue.extend({
       setTimeout(() => {
         this.error = false
       }, 4000)
+    },
+    cancelVariant() {
+      ;(this.variant = {
+        title: {
+          pl: '',
+          en: ''
+        },
+        price: null,
+        payToGo: '',
+        attributes: []
+      }),
+        (this.variant_dialog = false)
+      ;(this.$refs.variantForm as any).resetValidation()
     },
     pushVariant(variant) {
       this.product.variants.push(variant)
@@ -659,7 +674,7 @@ export default Vue.extend({
           pl: '',
           en: ''
         },
-        price: ''
+        price: null
       }
       this.prev()
       ;(this.$refs.attributeValueForm as any).resetValidation()

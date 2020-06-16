@@ -72,8 +72,8 @@
         </div>
       </v-col>
       <v-col cols="1" align="center">
-        <v-btn to="/products/new" icon class="ml-0 mt-4">
-          <v-icon size="32">mdi-pencil-plus</v-icon>
+        <v-btn to="/products/new" icon fab>
+          <v-icon large>mdi-pencil-plus</v-icon>
         </v-btn>
       </v-col>
     </v-row>

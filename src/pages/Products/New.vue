@@ -430,6 +430,7 @@
                         ></v-text-field>
                       </v-col>
                     </v-row>
+                    {{ value.price }}
                   </v-card-text>
 
                   <v-card-actions>
@@ -498,12 +499,12 @@ export default Vue.extend({
       onboarding: 0,
       product: {
         title: {
-          pl: null,
-          en: null
+          pl: '',
+          en: ''
         },
         description: {
-          pl: null,
-          en: null
+          pl: '',
+          en: ''
         },
         pictures: [],
         price: '',
@@ -630,14 +631,14 @@ export default Vue.extend({
     pushVariant(variant) {
       this.product.variants.push(variant)
       this.variant_dialog = false
-      ;(this.$refs.variantForm as any).reset()
+      ;(this.$refs.variantForm as any).resetValidation()
     },
     removeVariant(variant) {
       this.product.variants.splice(variant, 1)
     },
     cleanAttribute() {
       this.prev()
-      ;(this.$refs.attributeForm as any).reset()
+      ;(this.$refs.attributeForm as any).resetValidation()
     },
     pushAttribute(attribute) {
       this.variant.attributes.push(attribute)
@@ -649,12 +650,19 @@ export default Vue.extend({
         values: []
       }
       this.prev()
-      ;(this.$refs.attributeForm as any).reset()
+      ;(this.$refs.attributeForm as any).resetValidation()
     },
     pushValue(value) {
       this.attribute.values.push(value)
+      this.value = {
+        name: {
+          pl: '',
+          en: ''
+        },
+        price: ''
+      }
       this.prev()
-      ;(this.$refs.attributeValueForm as any).reset()
+      ;(this.$refs.attributeValueForm as any).resetValidation()
     },
     getAllOwners() {
       axios

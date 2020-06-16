@@ -114,6 +114,24 @@
                       <v-col class="body-1 pt-0 pb-0"
                         >Grupa: {{ item.group.name[app_lang] }}</v-col
                       >
+
+                      <v-col>
+                        Atrybuty
+                        <v-treeview
+                          :items="item.attributes"
+                          v-model="tree"
+                          :open="open"
+                          :item-text="`name.${app_lang}`"
+                          item-children="attributeValues"
+                          open-on-click
+                        >
+                          <template v-slot:prepend="{ item, open }">
+                            <v-icon>
+                              {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
+                            </v-icon>
+                          </template>
+                        </v-treeview>
+                      </v-col>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
                 </v-expansion-panels>
@@ -173,6 +191,8 @@ export default Vue.extend({
   },
   data() {
     return {
+      open: ['public'],
+      tree: [],
       lang: null,
       product: null,
       disabled: true,
@@ -201,7 +221,6 @@ export default Vue.extend({
         this.error = false
         this.product = res.data
         this.lang = localStorage.getItem('i18n')
-        console.log(this.product)
       })
       .catch((err) => {
         this.error = true

@@ -13,7 +13,7 @@ export default Vue.extend({
   props: ['error'],
   data() {
     return {
-      display: false,
+      display: false
     }
   },
   async mounted() {
@@ -24,8 +24,8 @@ export default Vue.extend({
         } else {
           this.display = false
         }
-      }, 3000)
+      }, 5000)
     }
-  },
+  }
 })
 </script>

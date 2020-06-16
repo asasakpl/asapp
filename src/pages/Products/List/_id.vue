@@ -63,6 +63,17 @@
               </v-col>
             </v-row>
 
+            <v-row class="mx-auto">
+              <v-col cols="6">
+                <v-text-field
+                  v-model="product.price"
+                  v-bind:label="$t('products.price')"
+                  outlined
+                  :disabled="disabled"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+
             <v-col align="center">
               <v-card flat max-width="1200">
                 <v-card-title class="ml-0 pl-2 mt-0"

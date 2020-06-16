@@ -489,7 +489,15 @@ export default Vue.extend({
       rules: {
         required: (value) => !!value || 'Pole wymagane',
         max: (v) =>
-          (v || '').length <= 8 || 'Max 8 znaków przed przecinkiem, po 2',
+          (v || '').length <= 8 ||
+          (v.indexOf('.') !== -1
+            ? v.split('.')[0].length <= 8
+              ? v.split('.')[1].length <= 2 ||
+                'Po przecinku mogą być tylko 2 cyfry'
+              : 'Przed przecinkiem może być tylko 8 cyfr'
+            : v.length > 8
+            ? 'Max 8 cyfr'
+            : ''),
         number: (v) => !isNaN(v) || 'Cena nie może zawierać liter'
       },
       isValidProduct: false,

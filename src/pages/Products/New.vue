@@ -532,7 +532,7 @@ export default Vue.extend({
           pl: '',
           en: ''
         },
-        price: null
+        price: ''
       },
       groups: [],
       owners: [],

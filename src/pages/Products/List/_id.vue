@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="1" align="center">
-        <v-btn @click="$router.go(-1)" icon large class="mt-2">
+        <v-btn to="/products/list" icon large class="mt-2">
           <v-icon size="38">arrow_back</v-icon>
         </v-btn>
       </v-col>

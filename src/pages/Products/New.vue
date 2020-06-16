@@ -615,7 +615,7 @@ export default Vue.extend({
           const text = 'new_product.success'
           const icon = 'check'
           this.$store.dispatch('success', { text, icon })
-          this.$router.push('/products/list')
+          this.$router.push(`/products/${res.data.id}`)
         })
         .catch((err) => {
           const text = err.response.data.error.message

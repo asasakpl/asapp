@@ -246,8 +246,8 @@
                       <v-row>
                         <span class="title font-weight-bold">Atrybuty</span>
                         <v-spacer></v-spacer>
-                        <v-btn icon large @click="next"
-                          ><v-icon size="34">mdi-plus-box</v-icon>
+                        <v-btn icon fab @click="next"
+                          ><v-icon large>mdi-plus-box</v-icon>
                         </v-btn>
                       </v-row>
                       <v-col
@@ -337,8 +337,8 @@
                             >Wartości atrybutów (ex. Czerwony, Czarny)</span
                           >
                           <v-spacer></v-spacer>
-                          <v-btn icon large @click="next"
-                            ><v-icon size="34">mdi-plus-box</v-icon>
+                          <v-btn icon fab @click="next"
+                            ><v-icon large>mdi-plus-box</v-icon>
                           </v-btn>
                         </v-row>
 

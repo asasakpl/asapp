@@ -430,6 +430,7 @@
                         ></v-text-field>
                       </v-col>
                     </v-row>
+                    {{ value.price }}
                   </v-card-text>
 
                   <v-card-actions>

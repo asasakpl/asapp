@@ -129,6 +129,11 @@
         "city": "City",
         "state": "State",
         "country": "Country"
+      },
+      "company": {
+        "title": "Company",
+        "name": "Name",
+        "nip": "Vat number"
       }
     }
   },

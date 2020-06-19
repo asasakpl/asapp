@@ -1,48 +1,55 @@
 <template>
   <v-container>
-    <v-btn @click="loading(), getUsers()" v-if="!load" icon class="ml-8">
-      <v-icon size="32">refresh</v-icon>
-    </v-btn>
-    <v-btn @click="getUsers()" v-else loading icon class="ml-8"> </v-btn>
-    <v-card class="mx-auto px-auto round" max-width="90%" tile>
-      <v-card-title>
-        Users list
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="search"
-          label="Search"
-          color="white"
-          single-line
-          hide-details
-        ></v-text-field>
-      </v-card-title>
-      <v-data-table
-        v-if="!error"
-        @click:row="rowClick"
-        v-model="selected"
-        :headers="headers"
-        :items="users"
-        sort-by="id"
-        item-key="id"
-        :search="search"
-        class="elevation-1"
-        :page.sync="page"
-        hide-default-footer
-        :items-per-page="16"
-        @page-count="pageCount = $event"
-      >
-      </v-data-table>
-      <v-data-table
-        v-else
-        loading
-        hide-default-footer
-        loading-text="Loading... Please wait"
-      ></v-data-table>
-    </v-card>
-    <div class="text-center pt-2">
-      <v-pagination v-model="page" :length="pageCount"></v-pagination>
-    </div>
+    <v-row>
+      <v-col cols="1">
+        <v-btn @click="loading(), getUsers()" v-if="!load" icon fab>
+          <v-icon large>refresh</v-icon>
+        </v-btn>
+
+        <v-btn @click="getUsers()" fab v-else large loading icon> </v-btn>
+      </v-col>
+      <v-col class="pl-0 pr-0">
+        <v-card class="mx-auto px-auto round" tile>
+          <v-card-title>
+            Users list
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="search"
+              label="Search"
+              color="white"
+              single-line
+              hide-details
+            ></v-text-field>
+          </v-card-title>
+          <v-data-table
+            v-if="!error"
+            @click:row="rowClick"
+            v-model="selected"
+            :headers="headers"
+            :items="users"
+            sort-by="id"
+            item-key="id"
+            :search="search"
+            class="elevation-1"
+            :page.sync="page"
+            hide-default-footer
+            :items-per-page="16"
+            @page-count="pageCount = $event"
+          >
+          </v-data-table>
+          <v-data-table
+            v-else
+            loading
+            hide-default-footer
+            loading-text="Loading... Please wait"
+          ></v-data-table>
+        </v-card>
+        <div class="text-center pt-2">
+          <v-pagination v-model="page" :length="pageCount"></v-pagination>
+        </div>
+      </v-col>
+    </v-row>
     <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
@@ -93,21 +100,21 @@ export default Vue.extend({
       this.$router.push(`/users/${item.id}`)
     },
     getUsers() {
-      let id = localStorage.getItem('m_user')
+      this.load = true
       axios
         .get(`/users`)
-        .then(res => {
+        .then((res) => {
           this.error = false
-          this.users = res.data.data.users
+          this.users = res.data
+          this.load = false
           return
         })
-        .catch(err => {
+        .catch((err) => {
           this.error = true
         })
-      this.load = false
     }
   },
-  beforeMount() {
+  async mounted() {
     this.getUsers()
   }
 })

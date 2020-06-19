@@ -51,6 +51,7 @@
               <tr>
                 <td>{{ row.item.name }}</td>
                 <td>{{ row.item.address }}</td>
+                <td>{{ row.item.subscribed }}</td>
                 <td>
                   <v-btn dark small color="#45d66b" @click="click(row.item)"
                     >Usuń</v-btn
@@ -140,6 +141,10 @@ export default Vue.extend({
           value: 'address'
         },
         {
+          text: 'Subskrybuje?',
+          value: 'subscribed'
+        },
+        {
           text: '',
           value: ''
         }
@@ -152,6 +157,13 @@ export default Vue.extend({
         .get('/mail/asasak')
         .then((res) => {
           this.load = true
+          for (let x in res.data.asasak.members) {
+            if (res.data.asasak.members[x].subscribed == true) {
+              res.data.asasak.members[x].subscribed = 'Tak'
+            } else {
+              res.data.asasak.members[x].subscribed = 'Nie'
+            }
+          }
           this.members = res.data.asasak.members
           this.error = false
           this.load = false

@@ -1,55 +1,63 @@
 <template>
   <v-container>
-    <v-btn @click="loading(), getOrders()" v-if="!load" icon class="ml-8">
-      <v-icon size="32">refresh</v-icon>
-    </v-btn>
-    <v-btn @click="getOrders()" v-else loading icon class="ml-8"> </v-btn>
+    <v-row>
+      <v-col cols="1" align="center">
+        <v-btn @click="loading(), getOrders()" v-if="!load" fab icon>
+          <v-icon large>refresh</v-icon>
+        </v-btn>
+        <v-btn @click="getOrders()" v-else loading fab large icon> </v-btn>
+      </v-col>
+      <v-col>
+        <v-card class="mx-auto px-auto  round" tile>
+          <v-card-title>
+            {{ $t('orders_table.title') }}
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="search"
+              label="Search"
+              color="white"
+              single-line
+              hide-details
+            ></v-text-field>
+          </v-card-title>
+          <v-data-table
+            v-if="!error"
+            @click:row="rowClick"
+            single-select
+            v-model="selected"
+            :headers="headers"
+            :items="orders"
+            sort-by="id"
+            :sort-desc="true"
+            item-key="id"
+            :search="search"
+            class="elevation-1"
+            :page.sync="page"
+            hide-default-footer
+            :items-per-page="9"
+            @page-count="pageCount = $event"
+          >
+            <template
+              v-for="header in headers"
+              v-slot:[`header.${header.value}`]
+            >
+              {{ $t(`orders_table.${header.text}`) }}
+            </template>
+          </v-data-table>
 
-    <v-card class="mx-auto px-auto round" max-width="90%" height="78vh" tile>
-      <v-card-title>
-        {{ $t('orders_table.title') }}
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="search"
-          label="Search"
-          color="white"
-          single-line
-          hide-details
-        ></v-text-field>
-      </v-card-title>
-      <v-data-table
-        v-if="!error"
-        @click:row="rowClick"
-        single-select
-        v-model="selected"
-        :headers="headers"
-        :items="orders"
-        sort-by="createdAt"
-        :sort-desc="true"
-        item-key="id"
-        :search="search"
-        class="elevation-1"
-        :page.sync="page"
-        hide-default-footer
-        :items-per-page="15"
-        @page-count="pageCount = $event"
-      >
-        <template v-for="header in headers" v-slot:[`header.${header.value}`]>
-          {{ $t(`orders_table.${header.text}`) }}
-        </template>
-      </v-data-table>
-
-      <v-data-table
-        v-else
-        loading
-        hide-default-footer
-        loading-text="Loading... Please wait"
-      ></v-data-table>
-    </v-card>
-    <div class="text-center pt-2">
-      <v-pagination v-model="page" :length="pageCount"></v-pagination>
-    </div>
+          <v-data-table
+            v-else
+            loading
+            hide-default-footer
+            loading-text="Loading... Please wait"
+          ></v-data-table>
+        </v-card>
+        <div class="text-center pt-2">
+          <v-pagination v-model="page" :length="pageCount"></v-pagination>
+        </div>
+      </v-col>
+    </v-row>
     <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
@@ -111,9 +119,9 @@ export default Vue.extend({
       let id = localStorage.getItem('m_user')
       axios
         .get(`/orders`)
-        .then(res => {
+        .then((res) => {
           this.error = false
-          this.orders = res.data.data.orders
+          this.orders = res.data
 
           for (let x in this.orders) {
             if (this.orders[x].paymentStatus == 0) {
@@ -165,7 +173,7 @@ export default Vue.extend({
           this.load = false
           return
         })
-        .catch(err => {
+        .catch((err) => {
           this.error = true
         })
     }

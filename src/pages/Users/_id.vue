@@ -87,23 +87,22 @@
                 </v-card>
               </v-col>
             </v-row>
-            <v-row class="mx-auto px-auto"
+            <v-row class="mx-auto px-auto" v-if="user.orders.length > 0"
               ><v-col cols="12">
                 <div class="headline pb-2">Zamówienia</div>
                 <v-expansion-panels
                   light
+                  accordion
                   style="overflow: scroll; height: 50vh;"
                 >
                   <v-expansion-panel v-for="(item, i) in user.orders" :key="i">
                     <v-expansion-panel-header
-                      >Zamówienie numer {{ i + 1 }}</v-expansion-panel-header
+                      >Zamówienie użytkownika numer
+                      {{ i + 1 }}</v-expansion-panel-header
                     >
-                    <v-expansion-panel-content class="d-flex flex-column">
+                    <v-expansion-panel-content>
                       <div>Status płatności: {{ item.paymentStatus }}</div>
-                      <div>
-                        Utworzono:
-                        {{ new Date(item.createdAt) }}
-                      </div>
+                      <div>Utworzono: {{ new Date(item.createdAt) }}</div>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
                 </v-expansion-panels></v-col

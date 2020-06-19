@@ -1,190 +1,145 @@
 <template>
   <v-container>
-    <v-btn @click="$router.go(-1)" icon class="ml-8">
-      <v-icon size="32">arrow_back</v-icon>
-    </v-btn>
-    <v-content v-if="order">
-      <v-card
-        class="mx-auto px-auto pb-2 round"
-        max-width="90%"
-        max-height="90vh"
-        tile
-      >
+    <v-row>
+      <v-content v-if="order">
         <v-col>
-          <v-row>
-            <v-card-title
-              >{{ $t('order.title') }} {{ order[0].id }}</v-card-title
-            >
-            <v-spacer></v-spacer>
-            <v-card-title
-              class="red--text jutify-space-around"
-              v-if="order[0].removed"
-            >
-              <v-icon color="red">mdi-clipboard-alert</v-icon>
-              <div class="ml-2">{{ $t('order.removed') }}!</div>
-            </v-card-title>
-          </v-row>
+          <v-btn @click="$router.go(-1)" icon fab class="ml-8">
+            <v-icon large>arrow_back</v-icon>
+          </v-btn>
         </v-col>
-        <v-divider></v-divider>
-        <v-col cols="12">
-          <v-row>
-            <v-card class="mx-auto pr-5" color="primary" width="25%">
-              <v-card-title class="subtitle-1">
-                <v-col cols="12">
-                  <div class="headline">
-                    {{ $t('order.user.title') }}
-                  </div>
-                  <div>
-                    {{ $t('order.user.name') }}: {{ order[0].user.firstName }}
-                    {{ order[0].user.lastName }}
-                  </div>
-
-                  <div v-if="order[0].user.phone_number">
-                    {{ $t('order.user.phone') }}:
-                    {{ order[0].user.phone_number }}
-                  </div>
-
-                  <div>
-                    {{ $t('order.user.email') }}: {{ order[0].user.email }}
-                  </div>
-                </v-col>
-              </v-card-title>
-            </v-card>
-
-            <v-card class="mx-auto pr-5" color="primary" width="65%">
-              <v-card-title class="subtitle-1">
-                <div class="headline">
-                  {{ $t('order.delivery.title') }}
-                </div>
-              </v-card-title>
-              <v-card-actions v-if="!pick_up">
-                <v-btn
-                  @click=";(dialog = true), getCourier()"
-                  v-if="this.order[0].delivery[0].courierDelivery"
+        <v-col>
+          <v-card class="mx-auto px-auto pb-2 round" tile>
+            <v-col>
+              <v-row>
+                <v-card-title
+                  >{{ $t('order.title') }} {{ order.id }}</v-card-title
                 >
-                  {{ $t('order.delivery.courier.title') }}
-                </v-btn>
-                <v-btn
-                  @click="dialog = true"
-                  v-if="this.order[0].delivery[0].specialDelivery"
+                <v-spacer></v-spacer>
+                <v-card-title
+                  class="red--text jutify-space-around"
+                  v-if="order.removed"
                 >
-                  {{ $t('order.delivery.special.title') }}
-                </v-btn>
-              </v-card-actions>
-              <v-card-title class="title-1">
-                <div v-if="pick_up" class="font-weight-bold">
-                  {{ $t('order.delivery.pick_up') }}!
+                  <v-icon color="red">mdi-clipboard-alert</v-icon>
+                  <div class="ml-2">{{ $t('order.removed') }}!</div>
+                </v-card-title>
+              </v-row>
+            </v-col>
+            <v-divider></v-divider>
+            <v-col cols="12">
+              <v-row>
+                <v-card class="mx-auto pr-5" color="primary" width="25%">
+                  <v-card-title class="subtitle-1">
+                    <v-col cols="12">
+                      <div class="headline">
+                        {{ $t('order.user.title') }}
+                      </div>
+                      <div>
+                        {{ $t('order.user.name') }}:
+                        {{ order.user.firstName }}
+                        {{ order.user.lastName }}
+                      </div>
+
+                      <div v-if="order.user.phone_number">
+                        {{ $t('order.user.phone') }}:
+                        {{ order.user.phone_number }}
+                      </div>
+
+                      <div>
+                        {{ $t('order.user.email') }}: {{ order.user.email }}
+                      </div>
+                    </v-col>
+                  </v-card-title>
+                </v-card>
+              </v-row>
+            </v-col>
+            <v-col cols="12">
+              <v-row>
+                <v-card class="mx-auto pr-5" color="primary" min-width="60%">
+                  <v-card-title class="subtitle-1">
+                    <v-col cols="12">
+                      <div class="headline">
+                        {{ $t('order.products.title') }}
+                      </div>
+                    </v-col>
+                  </v-card-title>
+                </v-card>
+
+                <v-card
+                  class="mx-auto pr-5"
+                  color="primary"
+                  width="30%"
+                  v-if="order.user.company"
+                >
+                  <v-card-title class="subtitle-1">
+                    <v-col cols="12">
+                      <div class="headline">
+                        {{ $t('order.company.title') }}
+                      </div>
+
+                      <div>
+                        {{ $t('order.company.name') }}:
+                        {{ order.user.company.name }}
+                      </div>
+
+                      <div>
+                        {{ $t('order.company.vat_number') }}:
+                        {{ order.user.company.vat_number }}
+                      </div>
+                    </v-col>
+                  </v-card-title>
+                </v-card>
+              </v-row>
+            </v-col>
+
+            <v-card-actions class="justify-space-around">
+              <v-row>
+                <div class="title ml-10 mr-2">
+                  {{ $t('order.payment.title') }}:
                 </div>
-              </v-card-title>
-            </v-card>
-          </v-row>
+                <div class="title" v-if="order.paymentStatus == 0">
+                  {{ $t('order.payment.waiting') }}
+                </div>
+                <div class="title" v-else>{{ $t('order.payment.done') }}</div>
+              </v-row>
+              <v-spacer></v-spacer>
+
+              <v-row class="justify-end">
+                <div class="title mr-8">
+                  {{ $t('order.status.title') }}:
+                  {{
+                    $t(`order.status.${order_status[this.order.status].title}`)
+                  }}
+                </div>
+                <v-btn
+                  color="red"
+                  medium
+                  class="mr-10"
+                  v-if="this.order.status != 1"
+                  @click="complete_dialog = true"
+                >
+                  {{ $t('order.status.complete') }}
+                </v-btn>
+              </v-row>
+            </v-card-actions>
+          </v-card>
         </v-col>
-        <v-col cols="12">
-          <v-row>
-            <v-card class="mx-auto pr-5" color="primary" min-width="60%">
-              <v-card-title class="subtitle-1">
-                <v-col cols="12">
-                  <div class="headline">
-                    {{ $t('order.products.title') }}
-                  </div>
-                </v-col>
-              </v-card-title>
-              <v-card-text>
-                <v-list-item v-for="(product, i) in order[0].products" :key="i">
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      <div v-if="lang == 'pl'">
-                        {{ product.title.pl }}
-                      </div>
-                      <div v-else>{{ product.title.en }}</div>
-                    </v-list-item-title>
-                    <v-list-item-subtitle>
-                      <div v-if="lang == 'pl'">
-                        {{ $t('order.delivery.products.list_subtitle') }}:
-                        {{
-                          $t(
-                            `order.delivery.status.${product.status.title.toLowerCase()}`
-                          )
-                        }}
-                      </div>
-                      <div v-else>
-                        {{ $t('order.delivery.products.list_subtitle') }}:
-                        {{
-                          $t(
-                            `order.delivery.status.${product.status.title.toLowerCase()}`
-                          )
-                        }}
-                      </div>
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-
-                  <v-btn @click=";(status_dialog = true), getCurrent(product)">
-                    {{ $t('order.delivery.products.dialog.title') }}
-                  </v-btn>
-                </v-list-item>
-              </v-card-text>
-            </v-card>
-
-            <v-card
-              class="mx-auto pr-5"
-              color="primary"
-              width="30%"
-              v-if="order[0].user.company"
-            >
-              <v-card-title class="subtitle-1">
-                <v-col cols="12">
-                  <div class="headline">
-                    {{ $t('order.company.title') }}
-                  </div>
-
-                  <div>
-                    {{ $t('order.company.name') }}:
-                    {{ order[0].user.company.name }}
-                  </div>
-
-                  <div>
-                    {{ $t('order.company.vat_number') }}:
-                    {{ order[0].user.company.vat_number }}
-                  </div>
-                </v-col>
-              </v-card-title>
-            </v-card>
-          </v-row>
-        </v-col>
-
-        <v-card-actions class="justify-space-around">
-          <v-row>
-            <div class="title ml-10 mr-2">{{ $t('order.payment.title') }}:</div>
-            <div class="title" v-if="order[0].paymentStatus == 0">
-              {{ $t('order.payment.waiting') }}
-            </div>
-            <div class="title" v-else>{{ $t('order.payment.done') }}</div>
-          </v-row>
-          <v-spacer></v-spacer>
-
-          <v-row class="justify-end">
-            <div class="title mr-8">
-              {{ $t('order.status.title') }}:
-              {{
-                $t(`order.status.${order_status[this.order[0].status].title}`)
-              }}
-            </div>
-            <v-btn
-              color="red"
-              medium
-              class="mr-10"
-              v-if="this.order[0].status != 1"
-              @click="complete_dialog = true"
-            >
-              {{ $t('order.status.complete') }}
+      </v-content>
+      <v-content v-else class="pa-0">
+        <v-row justify="space-between">
+          <v-col cols="1" align="center">
+            <v-btn @click="$router.push('/orders')" fab icon>
+              <v-icon large>arrow_back</v-icon>
             </v-btn>
-          </v-row>
-        </v-card-actions>
-      </v-card>
-    </v-content>
-    <v-content v-else align="center">
-      <v-progress-circular indeterminate color="primary"></v-progress-circular>
-    </v-content>
+          </v-col>
+          <v-col class="mr-12 mt-3" cols="6">
+            <v-progress-circular
+              indeterminate
+              color="primary"
+            ></v-progress-circular>
+          </v-col>
+        </v-row>
+      </v-content>
+    </v-row>
 
     <v-dialog v-model="status_dialog" max-width="700">
       <v-card v-if="clicked_product">
@@ -459,14 +414,7 @@ export default Vue.extend({
     await axios
       .get(`/orders/${this.$route.params.id}`)
       .then((res) => {
-        this.order = Object.values(res.data.data)
-
-        if (
-          this.order[0].delivery[0].specialDelivery == null &&
-          this.order[0].delivery[0].courierDelivery == null
-        ) {
-          this.pick_up = true
-        }
+        this.order = res.data
 
         for (let x in this.order[0].products) {
           let product = this.order[0].products[x]

@@ -8,13 +8,13 @@
       <div style="font-weight: 100">{{ dev }}</div>
       <v-spacer></v-spacer>
       <v-btn tile icon class="no-drag" small v-on:click="minimize()">
-        <v-icon size="24">mdi-minus</v-icon>
+        <v-icon size="24" class="ma-0">mdi-minus</v-icon>
       </v-btn>
       <v-btn tile icon class="no-drag" small v-on:click="maximize()">
-        <v-icon size="18">mdi-crop-square</v-icon>
+        <v-icon size="18" class="ma-0">mdi-crop-square</v-icon>
       </v-btn>
       <v-btn tile icon class="no-drag" small v-on:click="close()">
-        <v-icon size="20">close</v-icon>
+        <v-icon size="20" class="ma-0">close</v-icon>
       </v-btn>
     </v-system-bar>
     <v-content>

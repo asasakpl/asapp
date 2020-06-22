@@ -23,15 +23,20 @@
   "orders_table": {
     "title": "Orders list",
     "id": "Order number",
-    "status": "Payment status",
+    "payment_status": "Payment status",
     "products": "Products",
     "name": "Name",
     "surname": "Surname",
     "email": "Email",
     "created_at": "Created at",
-    "updated_at": "Updated at",
+    "status": "Status",
     "cancel": "Canceled?",
     "status_obj": {
+      "created": "Created",
+      "during": "During",
+      "finished": "Finished"
+    },
+    "payment_status_obj": {
       "waiting": "Waiting for a payment",
       "finished": "Payment was done",
       "on_place": "Paid upon arrival"
@@ -48,6 +53,7 @@
       "title": "Order status",
       "created": "Present",
       "completed": "Completed",
+      "change_status": "Change order status",
       "complete": "Complete order",
       "warning": "Are you sure that you want to complete this order?",
       "dialog": {

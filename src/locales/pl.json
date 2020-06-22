@@ -25,15 +25,20 @@
   "orders_table": {
     "title": "Lista zamówień",
     "id": "Numer zamówienia",
-    "status": "Status płatności",
+    "payment_status": "Status płatności",
     "products": "Produkty",
     "name": "Imie",
     "surname": "Nazwisko",
     "email": "Email",
     "created_at": "Utworzone",
-    "updated_at": "Zaktualizowano",
+    "status": "Status",
     "cancel": "Anulowane",
     "status_obj": {
+      "created": "Utworzono",
+      "during": "W trakcie",
+      "finished": "Zamówienie zakończone"
+    },
+    "payment_status_obj": {
       "waiting": "Oczekuje na płatność",
       "finished": "Płatność została zakończona",
       "on_place": "Paid upon arrival"
@@ -59,8 +64,10 @@
     },
     "status": {
       "title": "Status zamówienia",
+      "info": "Informacje dot. zamówienia",
       "created": "Aktualne",
       "completed": "Zakończone",
+      "change_status": "Zmień status zamówienia",
       "complete": "Zakończ to zamówienie",
       "warning": "Czy jesteś pewny że chcesz zakończyć to zamówienie?",
       "dialog": {

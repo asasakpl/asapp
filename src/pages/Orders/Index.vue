@@ -8,7 +8,7 @@
         <v-btn @click="getOrders()" v-else loading fab large icon> </v-btn>
       </v-col>
       <v-col>
-        <v-card class="mx-auto px-auto  round" tile>
+        <v-card class="mx-auto px-auto round" tile>
           <v-card-title>
             {{ $t('orders_table.title') }}
             <v-spacer></v-spacer>
@@ -96,13 +96,13 @@ export default Vue.extend({
           sortable: true,
           value: 'id'
         },
-        { text: 'status', value: 'paymentStatus' },
+        { text: 'payment_status', value: 'paymentStatus' },
         { text: `products`, value: 'products.length' },
+        { text: 'status', value: 'status' },
         { text: 'name', value: 'user.firstName' },
         { text: 'surname', value: 'user.lastName' },
         { text: 'email', value: 'user.email' },
         { text: 'created_at', value: 'createdAt' },
-        { text: 'updated_at', value: 'updatedAt' },
         { text: 'cancel', value: 'removed' }
       ]
     }
@@ -124,18 +124,35 @@ export default Vue.extend({
           this.orders = res.data
 
           for (let x in this.orders) {
-            if (this.orders[x].paymentStatus == 0) {
-              this.orders[x].paymentStatus = this.$t(
-                'orders_table.status_obj.waiting'
-              )
-            } else if (this.orders[x].paymentStatus == 1) {
-              this.orders[x].paymentStatus = this.$t(
-                'orders_table.status_obj.finished'
-              )
-            } else {
-              this.orders[x].paymentStatus = this.$t(
-                'orders_table.status_obj.on_place'
-              )
+            switch (this.orders[x].paymentStatus) {
+              case (this.orders[x].paymentStatus = 0):
+                this.orders[x].paymentStatus = this.$t(
+                  'orders_table.payment_status_obj.waiting'
+                )
+                break
+              case (this.orders[x].paymentStatus = 1):
+                this.orders[x].paymentStatus = this.$t(
+                  'orders_table.payment_status_obj.finished'
+                )
+                break
+            }
+
+            switch (this.orders[x].status) {
+              case (this.orders[x].status = 0):
+                this.orders[x].status = this.$t(
+                  'orders_table.status_obj.created'
+                )
+                break
+              case (this.orders[x].status = 1):
+                this.orders[x].status = this.$t(
+                  'orders_table.status_obj.during'
+                )
+                break
+              case (this.orders[x].status = 2):
+                this.orders[x].status = this.$t(
+                  'orders_table.status_obj.finished'
+                )
+                break
             }
 
             let createdDate = new Date(this.orders[x].createdAt)

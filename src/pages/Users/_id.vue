@@ -162,15 +162,15 @@ export default Vue.extend({
         for (let x in this.user.orders) {
           if (this.user.orders[x].paymentStatus == 0) {
             this.user.orders[x].paymentStatus = this.$t(
-              'orders_table.status_obj.waiting'
+              'orders_table.payment_status_obj.waiting'
             )
           } else if (this.user.orders[x].paymentStatus == 1) {
             this.user.orders[x].paymentStatus = this.$t(
-              'orders_table.status_obj.finished'
+              'orders_table.payment_status_obj.finished'
             )
           } else {
             this.user.orders[x].paymentStatus = this.$t(
-              'orders_table.status_obj.on_place'
+              'orders_table.payment_status_obj.on_place'
             )
           }
         }

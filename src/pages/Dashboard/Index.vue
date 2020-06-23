@@ -1,61 +1,86 @@
 <template>
   <v-container>
-    <v-card class="mx-auto px-auto pb-5 round" max-width="90%" tile>
-      <v-card-title>{{ $t('dashboard.statistics.title') }}</v-card-title>
-      <v-col cols="12">
-        <v-row>
-          <v-col>
-            <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
-              <div class="d-flex flex-no-wrap justify-space-between">
-                <v-card-text>
-                  <div>{{ $t('dashboard.statistics.users_card') }}</div>
-                  <p class="display-1">{{ this.users }}</p>
-                </v-card-text>
+    <v-col>
+      <v-card class="mx-auto px-auto pb-5 round" max-width="90%" tile>
+        <v-card-title>{{ $t('dashboard.statistics.title') }}</v-card-title>
+        <v-col cols="12">
+          <v-row>
+            <v-col>
+              <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
+                <div class="d-flex flex-no-wrap justify-space-between">
+                  <v-card-text>
+                    <div>{{ $t('dashboard.statistics.users_card') }}</div>
+                    <p class="display-1">{{ this.users }}</p>
+                  </v-card-text>
 
-                <v-icon size="50">mdi-account-group</v-icon>
-              </div>
-            </v-card>
-          </v-col>
-          <v-col>
-            <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
-              <div class="d-flex flex-no-wrap justify-space-between">
-                <v-card-text>
-                  <div>{{ $t('dashboard.statistics.orders_card') }}</div>
+                  <v-icon size="50">mdi-account-group</v-icon>
+                </div>
+              </v-card>
+            </v-col>
+            <v-col>
+              <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
+                <div class="d-flex flex-no-wrap justify-space-between">
+                  <v-card-text>
+                    <div>{{ $t('dashboard.statistics.orders_card') }}</div>
 
-                  <p class="display-1">{{ this.orders }}</p>
-                </v-card-text>
+                    <p class="display-1">{{ this.orders }}</p>
+                  </v-card-text>
 
-                <v-icon size="50">mdi-truck</v-icon>
-              </div>
-            </v-card>
-          </v-col>
-          <v-col>
-            <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
-              <div class="d-flex flex-no-wrap justify-space-between">
-                <v-card-text>
-                  {{ $t('dashboard.statistics.products_card') }}
-                  <p class="display-1">{{ this.products }}</p>
-                </v-card-text>
+                  <v-icon size="50">mdi-truck</v-icon>
+                </div>
+              </v-card>
+            </v-col>
+            <v-col>
+              <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
+                <div class="d-flex flex-no-wrap justify-space-between">
+                  <v-card-text>
+                    {{ $t('dashboard.statistics.products_card') }}
+                    <p class="display-1">{{ this.products }}</p>
+                  </v-card-text>
 
-                <v-icon size="50">mdi-folder-home</v-icon>
-              </div>
-            </v-card>
-          </v-col>
-          <v-col>
-            <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
-              <div class="d-flex flex-no-wrap justify-space-between">
-                <v-card-text>
-                  <div>{{ $t('dashboard.statistics.sellers_card') }}</div>
-                  <p class="display-1">{{ this.sellers }}</p>
-                </v-card-text>
+                  <v-icon size="50">mdi-folder-home</v-icon>
+                </div>
+              </v-card>
+            </v-col>
+            <v-col>
+              <v-card class="mx-auto pr-4" color="primary" dark min-width="250">
+                <div class="d-flex flex-no-wrap justify-space-between">
+                  <v-card-text>
+                    <div>{{ $t('dashboard.statistics.sellers_card') }}</div>
+                    <p class="display-1">{{ this.sellers }}</p>
+                  </v-card-text>
 
-                <v-icon size="50">mdi-account-group</v-icon>
-              </div>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-card>
+                  <v-icon size="50">mdi-account-group</v-icon>
+                </div>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-card>
+    </v-col>
+    <v-col v-if="product">
+      <v-card
+        :elevation="hover ? 16 : 2"
+        class="mx-auto px-auto round"
+        max-width="40%"
+        tile
+      >
+        <v-img :aspect-ratio="16 / 9" :src="product.pictures[0].url">
+          <v-expand-transition>
+            <v-row class="lightbox white--text pa-2 fill-height" align="end">
+              <v-col>
+                <div class="headline font-weight-medium">
+                  {{ product.title[app_lang] }}
+                </div>
+                <div class="title font-weight-medium">
+                  Wyświetlenia: {{ product.views }}
+                </div>
+              </v-col>
+            </v-row>
+          </v-expand-transition>
+        </v-img>
+      </v-card>
+    </v-col>
     <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
@@ -84,10 +109,17 @@ export default Vue.extend({
       sellers: 0,
       orders: 0,
       users: 0,
-      name: localStorage.getItem('m_name')
+      product: null,
+      name: localStorage.getItem('m_name'),
+      app_lang: localStorage.getItem('i18n')
     }
   },
   methods: {
+    async getPopular() {
+      await axios.get(`/products/admin/${this.product.id}`).then((res) => {
+        this.product = res.data
+      })
+    },
     async getData() {
       let date = new Date()
       date.setDate(date.getDate() - 30)
@@ -110,6 +142,23 @@ export default Vue.extend({
         this.sellers = 0 + res.data.owners.length
 
         this.products = 0 + res.data.products.length
+
+        const views = Math.max.apply(
+          Math,
+          res.data.products.map((p) => {
+            return p.views
+          })
+        )
+
+        const popularProducts = []
+        for (let x in res.data.products) {
+          if (res.data.products[x].views === views) {
+            popularProducts.push(res.data.products[x])
+          }
+        }
+
+        this.product = popularProducts[0]
+        this.getPopular()
 
         let users = res.data.users
         users = users.map((user) => user.createdAt)

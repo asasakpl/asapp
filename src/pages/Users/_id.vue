@@ -93,7 +93,7 @@
                 <v-expansion-panels
                   light
                   accordion
-                  style="overflow: scroll; height: 50vh;"
+                  style="overflow: scroll; max-height: 50vh;"
                 >
                   <v-expansion-panel v-for="(item, i) in user.orders" :key="i">
                     <v-expansion-panel-header

@@ -36,7 +36,8 @@
     "status_obj": {
       "created": "Utworzono",
       "during": "W trakcie",
-      "finished": "Zamówienie zakończone"
+      "ready": "Gotowe do wysyłki",
+      "finished": "Zamówienie zakończone i wysłane"
     },
     "payment_status_obj": {
       "waiting": "Oczekuje na płatność",
@@ -75,7 +76,8 @@
         "no": "Nie",
         "success": "Zamówienie zostało pomyślnie zakończone",
         "error": "Ups, coś poszło nie tak"
-      }
+      },
+      "success": "Pomyślnie zmieniłeś status zamówienia"
     },
     "products": {
       "title": "Zamówione produkty"

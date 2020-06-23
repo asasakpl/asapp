@@ -7,7 +7,11 @@
         </v-btn>
       </v-col>
       <v-col>
-        <v-card class="mx-auto px-auto round" tile>
+        <v-card
+          class="mx-auto px-auto round"
+          style="max-height: 80vh; overflow: scroll;"
+          tile
+        >
           <v-card-title>{{ $t('order.title') }} {{ order.id }}</v-card-title>
           <v-spacer></v-spacer>
           <v-card-title
@@ -81,7 +85,9 @@
                 </v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn> {{ $t('order.status.change_status') }} </v-btn>
+                  <v-btn @click="status_dialog = true">
+                    {{ $t('order.status.change_status') }}
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-col>
@@ -168,13 +174,6 @@
               </v-card>
             </v-col>
           </v-row>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="red" medium @click="change_status = true">
-              {{ $t('order.status.complete') }}
-            </v-btn>
-          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -193,6 +192,56 @@
         </v-col>
       </v-row>
     </v-row>
+
+    <v-dialog v-model="status_dialog" width="50%" persistent>
+      <v-window v-model="onboarding" class="elevation-1">
+        <v-window-item>
+          <v-card>
+            <v-card-title class="pb-0">
+              <v-select
+                outlined
+                :items="order_status"
+                v-model="status"
+                item-text="title"
+                item-value="id"
+                label="Zmień status zamówienia"
+              >
+                <template slot="default" slot-scope="{ item }">
+                  {{ $t(`orders_table.status_obj.${item.title}`) }}
+                </template>
+                <template slot="selection" slot-scope="{ item }">
+                  {{ $t(`orders_table.status_obj.${item.title}`) }}
+                </template>
+                <template slot="item" slot-scope="{ item }">
+                  {{ $t(`orders_table.status_obj.${item.title}`) }}
+                </template>
+              </v-select>
+            </v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="error" @click="status_dialog = false">Anuluj</v-btn>
+              <v-btn color="primary" @click="next">Zmień</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-window-item>
+        <v-window-item>
+          <v-card>
+            <v-card-title>
+              Czy jesteś pewny że chcesz zmienić status zamówienia?
+            </v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="error" @click="prev">Nie</v-btn>
+              <v-btn
+                color="primary"
+                @click="changeStatus(status), (status_dialog = false)"
+                >Tak</v-btn
+              >
+            </v-card-actions>
+          </v-card></v-window-item
+        >
+      </v-window>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -224,12 +273,15 @@ export default Vue.extend({
       pick_up: false,
       courier: null,
       special: null,
+      length: 2,
+      onboarding: 0,
       msg: 'null',
       snackbar: false,
-      change_status: false,
+      status_dialog: false,
       clicked_product: null,
       delivery: null,
       app_lang: null,
+      status: null,
       order_status: [
         {
           id: 0,
@@ -241,32 +293,43 @@ export default Vue.extend({
         },
         {
           id: 2,
+          title: 'ready'
+        },
+        {
+          id: 3,
           title: 'finished'
         }
       ]
     }
   },
   methods: {
+    next() {
+      this.onboarding =
+        this.onboarding + 1 === this.length ? 0 : this.onboarding + 1
+    },
+    prev() {
+      this.onboarding =
+        this.onboarding - 1 < 0 ? this.length - 1 : this.onboarding - 1
+    },
     getCurrent(item) {
       this.clicked_product = item
     },
     async changeStatus(status) {
-      this.clicked_product.status = this.order_status[status]
-      await axios.patch(`/orders/product/${this.clicked_product.id}`, {
-        status: status
-      })
-    },
-    async completeOrder() {
       await axios
-        .patch(`/orders/complete/${this.order[0].id}`, {
-          status: 1
+        .patch(`/orders/status/${this.$route.params.id}`, {
+          status: status
         })
         .then((res) => {
-          this.msg = 'success'
-          this.snackbar = true
-          this.order[0].status = 1
+          this.order.status = res.data.order.status
+          this.onboarding = 0
+          const text = 'order.status.success'
+          const icon = 'package-variant'
+          this.$store.dispatch('success', { text, icon })
         })
-        .catch((error) => ((this.snackbar = true), (this.msg = 'error')))
+        .catch((err) => {
+          console.log(err)
+        })
+      // add notification
     }
   },
   async mounted() {
@@ -274,6 +337,7 @@ export default Vue.extend({
       .get(`/orders/${this.$route.params.id}`)
       .then((res) => {
         this.order = res.data
+        this.status = this.order_status[this.order.status]
         this.app_lang = localStorage.getItem('i18n')
       })
       .catch((error) => console.log(error))

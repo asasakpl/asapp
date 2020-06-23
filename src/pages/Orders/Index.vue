@@ -149,6 +149,9 @@ export default Vue.extend({
                 )
                 break
               case (this.orders[x].status = 2):
+                this.orders[x].status = this.$t('orders_table.status_obj.ready')
+                break
+              case (this.orders[x].status = 3):
                 this.orders[x].status = this.$t(
                   'orders_table.status_obj.finished'
                 )

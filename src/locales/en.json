@@ -34,7 +34,8 @@
     "status_obj": {
       "created": "Created",
       "during": "During",
-      "finished": "Finished"
+      "ready": "Ready for shipping",
+      "finished": "Completed and shipped"
     },
     "payment_status_obj": {
       "waiting": "Waiting for a payment",

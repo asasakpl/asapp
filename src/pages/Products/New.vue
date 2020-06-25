@@ -98,6 +98,13 @@
                       </v-list-item>
                     </template>
                   </v-list>
+                  <v-col>
+                    <v-progress-circular
+                      v-if="upload_picture"
+                      indeterminate
+                      color="primary"
+                    ></v-progress-circular>
+                  </v-col>
 
                   <v-btn @click="uploadPictures()">Upload</v-btn>
                 </v-col>
@@ -225,7 +232,12 @@
                       <v-text-field
                         label='Cena "pay to go"'
                         v-model="variant.payToGo"
-                        :rules="[rules.max, rules.number]"
+                        :rules="[
+                          rules.required,
+                          rules.max_payToGo,
+                          rules.max,
+                          rules.number
+                        ]"
                         outlined
                       ></v-text-field>
                     </v-col>
@@ -451,6 +463,10 @@
       </v-form>
     </v-dialog>
 
+    <v-overlay v-model="create_product_dialog">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </v-overlay>
+
     <Error v-if="error"></Error>
   </v-container>
 </template>
@@ -486,6 +502,8 @@ export default Vue.extend({
       pic: null,
       attribute_dialog: false,
       length: 3,
+      upload_picture: false,
+      create_product_dialog: false,
       rules: {
         required: (value) => !!value || 'Pole wymagane',
         max: (v) =>
@@ -497,6 +515,16 @@ export default Vue.extend({
               : 'Przed przecinkiem może być tylko 8 cyfr'
             : v.length > 8
             ? 'Max 8 cyfr'
+            : ''),
+        max_payToGo: (v) =>
+          (v || '').length <= 6 ||
+          (v.indexOf('.') !== -1
+            ? v.split('.')[0].length <= 6
+              ? v.split('.')[1].length <= 2 ||
+                'Po przecinku mogą być tylko 2 cyfry'
+              : 'Przed przecinkiem może być tylko 6 cyfr'
+            : v.length > 6
+            ? 'Max 6 cyfr'
             : ''),
         number: (v) => !isNaN(v) || 'Cena nie może zawierać liter'
       },
@@ -556,6 +584,7 @@ export default Vue.extend({
       const imageName = `m35_${new Date().getTime()}.png`
 
       dialog.showOpenDialog((path) => {
+        this.upload_picture = true
         s3.putObject({
           Bucket: 'm35m2',
           Body: fs.readFileSync(path[0]),
@@ -571,10 +600,17 @@ export default Vue.extend({
             })
 
             this.product.pictures.push({ url: url.split('?')[0] })
+            this.upload_picture = false
           })
           .catch((err) => {
-            console.log('failed:', err)
+            const text = err
+            const icon = 'alert-circle-outline'
+            this.$store.dispatch('error', { text, icon })
+            this.error = true
           })
+        setTimeout(() => {
+          this.error = false
+        }, 4000)
       })
     },
     removePicture(picture) {
@@ -588,8 +624,14 @@ export default Vue.extend({
           this.product.pictures.splice(index)
         })
         .catch((err) => {
-          console.log('failed:', err)
+          const text = err
+          const icon = 'alert-circle-outline'
+          this.$store.dispatch('error', { text, icon })
+          this.error = true
         })
+      setTimeout(() => {
+        this.error = false
+      }, 4000)
     },
     removeAllPictures() {
       // Remove all pictures from aws so we dont have a mess if someone randomly quit this page
@@ -603,8 +645,14 @@ export default Vue.extend({
             this.product.pictures = []
           })
           .catch((err) => {
-            console.log('failed:', err)
+            const text = err
+            const icon = 'alert-circle-outline'
+            this.$store.dispatch('error', { text, icon })
+            this.error = true
           })
+        setTimeout(() => {
+          this.error = false
+        }, 4000)
       }
     },
     createProduct(product) {
@@ -617,6 +665,16 @@ export default Vue.extend({
         return
       }
 
+      if (product.variants.length <= 0) {
+        const text = 'Produkt musi posiadać przynajmniej jeden wariant!'
+        const icon = 'package-variant'
+        this.$store.dispatch('error', { text, icon })
+        this.error = true
+        return
+      }
+
+      this.create_product_dialog = true
+
       // Save product
       axios
         .post('/products', product)
@@ -625,10 +683,10 @@ export default Vue.extend({
           const icon = 'check'
           this.$store.dispatch('success', { text, icon })
           this.$router.push(`/products/${res.data.id}`)
+          this.create_product_dialog = false
         })
         .catch((err) => {
-          console.log(err)
-          console.log('dupa')
+          this.create_product_dialog = false
           const text = err.response.data.error.message
           const icon = 'alert-circle-outline'
           this.$store.dispatch('error', { text, icon })

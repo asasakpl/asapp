@@ -49,10 +49,32 @@
                     outlined
                   ></v-text-field>
                 </v-col>
-                <v-col class="pt-5" sm="5" justify="center"
+                <v-col class="pt-5" sm="4" justify="center"
                   >* Cena wyświetlana użytkownikowi w produkcie, jest to cena
                   największa jaką możę osiągnąć produkt ex. 125 000 pln.</v-col
                 >
+                <v-col cols="5">
+                  <v-select
+                    :items="categories"
+                    label="Kategoria"
+                    :item-text="categories[app_lang]"
+                    solo
+                    outlined
+                    v-model="product.category"
+                    :rules="[rules.required]"
+                    item-value="id"
+                  >
+                    <template slot="default" slot-scope="{ item }">
+                      {{ item[app_lang] }}
+                    </template>
+                    <template slot="selection" slot-scope="{ item }">
+                      {{ item[app_lang] }}
+                    </template>
+                    <template slot="item" slot-scope="{ item }">
+                      {{ item[app_lang] }}
+                    </template></v-select
+                  >
+                </v-col>
               </v-row>
 
               <v-row>
@@ -73,6 +95,7 @@
                   ></v-textarea>
                 </v-col>
               </v-row>
+
               <v-row>
                 <v-col>
                   <v-card-title class="pl-1">
@@ -240,6 +263,24 @@
                         ]"
                         outlined
                       ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-textarea
+                        v-bind:label="$t('new_product.description_pl')"
+                        v-model="variant.description.pl"
+                        :rules="[rules.required]"
+                        outlined
+                      ></v-textarea>
+                    </v-col>
+                    <v-col>
+                      <v-textarea
+                        v-bind:label="$t('new_product.description_en')"
+                        v-model="variant.description.en"
+                        :rules="[rules.required]"
+                        outlined
+                      ></v-textarea>
                     </v-col>
                   </v-row>
                   <v-row class="mx-auto">
@@ -502,6 +543,7 @@ export default Vue.extend({
       pic: null,
       attribute_dialog: false,
       length: 3,
+      categories: [],
       upload_picture: false,
       create_product_dialog: false,
       rules: {
@@ -545,11 +587,16 @@ export default Vue.extend({
         pictures: [],
         price: null,
         owner: null,
-        variants: []
+        variants: [],
+        category: null
       },
       variant_dialog: false,
       variant: {
         title: {
+          pl: '',
+          en: ''
+        },
+        description: {
           pl: '',
           en: ''
         },
@@ -580,6 +627,14 @@ export default Vue.extend({
     }
   },
   methods: {
+    async getCategories() {
+      await axios
+        .get('/products/category')
+        .then((res) => (this.categories = res.data))
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     uploadPictures() {
       const imageName = `m35_${new Date().getTime()}.png`
 
@@ -702,12 +757,16 @@ export default Vue.extend({
           pl: '',
           en: ''
         },
+        description: {
+          pl: '',
+          en: ''
+        },
         price: null,
         payToGo: '',
         attributes: []
       }),
-        (this.variant_dialog = false)
-      ;(this.$refs.variantForm as any).resetValidation()
+        (this.$refs.variantForm as any).resetValidation()
+      this.variant_dialog = false
     },
     pushVariant(variant) {
       this.product.variants.push(variant)
@@ -775,7 +834,7 @@ export default Vue.extend({
     }
   },
   mounted() {
-    this.getAllOwners(), this.getAllGroups()
+    this.getAllOwners(), this.getAllGroups(), this.getCategories()
   }
 })
 </script>

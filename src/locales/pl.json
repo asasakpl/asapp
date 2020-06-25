@@ -181,6 +181,7 @@
       "title_en": "Angielski tytuł"
     },
     "price": "Cena",
+    "category": "Kategoria",
     "descriptions": {
       "title": "Opis",
       "description_pl": "Opis po polsku",

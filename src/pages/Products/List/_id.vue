@@ -72,6 +72,15 @@
                   :disabled="disabled"
                 ></v-text-field>
               </v-col>
+
+              <v-col cols="6">
+                <v-text-field
+                  v-model="product.category[app_lang]"
+                  v-bind:label="$t('products.category')"
+                  outlined
+                  :disabled="disabled"
+                ></v-text-field>
+              </v-col>
             </v-row>
 
             <v-col align="center">
@@ -110,6 +119,28 @@
                     </v-expansion-panel-header>
                     <v-expansion-panel-content>
                       <v-col class="body-1 pt-0 pb-0">
+                        <v-row>
+                          <v-textarea
+                            v-model="item.description.pl"
+                            label="Opis pl"
+                            outlined
+                            class="mr-1"
+                            auto-grow
+                            disabled
+                          >
+                          </v-textarea>
+                          <v-textarea
+                            v-model="item.description.en"
+                            label="Opis en"
+                            auto-grow
+                            outlined
+                            class="ml-1"
+                            disabled
+                          >
+                          </v-textarea>
+                        </v-row>
+                      </v-col>
+                      <v-col class="body-1 pt-0 pb-0">
                         Cena: {{ item.price }} pln
                       </v-col>
                       <v-col class="body-1 pt-0 pb-0">
@@ -126,22 +157,67 @@
                         >Grupa: {{ item.group.name[app_lang] }}</v-col
                       >
 
-                      <v-col>
-                        Atrybuty
-                        <v-treeview
-                          :items="item.attributes"
-                          v-model="tree"
-                          :open="open"
-                          :item-text="`name.${app_lang}`"
-                          item-children="attributeValues"
-                          open-on-click
-                        >
-                          <template v-slot:prepend="{ item, open }">
-                            <v-icon>
-                              {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
-                            </v-icon>
-                          </template>
-                        </v-treeview>
+                      <v-col v-if="item.attributes.length > 0">
+                        <div class="title font-weight-bold">
+                          Atrybuty
+                        </div>
+                        <v-expansion-panels dark>
+                          <v-expansion-panel
+                            v-for="(attribute, index) in item.attributes"
+                            :key="index"
+                          >
+                            <v-expansion-panel-header
+                              class="subtitle-1 font-weight-bold "
+                            >
+                              Nazwa: {{ attribute.name[app_lang] }}
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                              <v-list light>
+                                <v-list-item v-bind:key="index">
+                                  <v-col>
+                                    <v-row>
+                                      <v-col>
+                                        <v-list-item-title
+                                          >Nazwa atrybutu:
+                                          {{ attribute.name[app_lang] }}
+                                        </v-list-item-title>
+                                      </v-col>
+                                    </v-row>
+                                    <v-row>
+                                      <v-col>
+                                        <div class="font-weight-bold">
+                                          Wartości atrybutu
+                                        </div>
+                                        <v-list dark dense>
+                                          <template
+                                            v-for="(value,
+                                            index) in attribute.attributeValues"
+                                          >
+                                            <v-list-item v-bind:key="index">
+                                              <v-list-item-title>
+                                                Nazwa:
+                                                {{
+                                                  value.name[app_lang]
+                                                }}</v-list-item-title
+                                              >
+                                              <v-list-item-subtitle
+                                                class="white--text"
+                                                >Cena:
+                                                {{
+                                                  value.price
+                                                }}</v-list-item-subtitle
+                                              >
+                                            </v-list-item>
+                                          </template>
+                                        </v-list>
+                                      </v-col>
+                                    </v-row>
+                                  </v-col>
+                                </v-list-item>
+                              </v-list>
+                            </v-expansion-panel-content>
+                          </v-expansion-panel>
+                        </v-expansion-panels>
                       </v-col>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
@@ -202,8 +278,6 @@ export default Vue.extend({
   },
   data() {
     return {
-      open: ['public'],
-      tree: [],
       lang: null,
       product: null,
       disabled: true,

@@ -171,6 +171,7 @@
       "title_en": "English title"
     },
     "price": "Price",
+    "category": "Category",
     "descriptions": {
       "description_pl": "Polish description",
       "description_en": "English description"

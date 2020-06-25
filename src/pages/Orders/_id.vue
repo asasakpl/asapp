@@ -234,7 +234,11 @@
               <v-btn color="error" @click="prev">Nie</v-btn>
               <v-btn
                 color="primary"
-                @click="changeStatus(status), (status_dialog = false)"
+                @click="
+                  changeStatus(status),
+                    (status_dialog = false),
+                    (onboarding = 0)
+                "
                 >Tak</v-btn
               >
             </v-card-actions>

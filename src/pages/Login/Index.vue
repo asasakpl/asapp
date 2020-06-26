@@ -77,8 +77,8 @@ export default Vue.extend({
       password: '',
       notAuthenticated: false,
       rules: {
-        required: (value) => !!value || 'Required.',
-      },
+        required: (value) => !!value || 'Required.'
+      }
     }
   },
   methods: {
@@ -93,7 +93,7 @@ export default Vue.extend({
         .catch((err) => {
           this.notAuthenticated = true
         })
-    },
-  },
+    }
+  }
 })
 </script>

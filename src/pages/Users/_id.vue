@@ -175,7 +175,20 @@ export default Vue.extend({
           }
         }
       })
-      .catch((error) => {})
+      .catch((error) => {
+        let text
+        let icon
+        if (!error.response) {
+          // network error
+          text = 'Check your internet connection'
+          icon = 'network-strength-off'
+        } else {
+          text = error
+          icon = 'alert-circle-outline'
+        }
+
+        this.$store.dispatch('error', { text, icon })
+      })
   }
 })
 </script>

@@ -122,10 +122,18 @@ export default Vue.extend({
           this.$router.push('/shipping')
         })
         .catch((err) => {
-          const text = 'shipping.error'
-          const icon = 'briefcase-remove'
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = 'shipping.error'
+            icon = 'briefcase-remove'
+          }
+
           this.$store.dispatch('error', { text, icon })
-          this.error = true
         })
       setTimeout(() => {
         this.error = false

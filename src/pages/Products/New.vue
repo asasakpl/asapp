@@ -658,8 +658,17 @@ export default Vue.extend({
             this.upload_picture = false
           })
           .catch((err) => {
-            const text = err
-            const icon = 'alert-circle-outline'
+            let text
+            let icon
+            if (!err.response) {
+              // network error
+              text = 'Check your internet connection'
+              icon = 'network-strength-off'
+            } else {
+              text = err
+              icon = 'alert-circle-outline'
+            }
+
             this.$store.dispatch('error', { text, icon })
             this.error = true
           })

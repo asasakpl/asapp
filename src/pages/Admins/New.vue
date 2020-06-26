@@ -106,7 +106,6 @@
               >
             </v-row>
           </v-card>
-          <Error v-if="error"></Error>
         </v-content>
       </v-col>
     </v-row>
@@ -123,13 +122,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-// components
-import Error from '@/components/Error.vue'
-
 export default Vue.extend({
-  components: {
-    Error
-  },
   data() {
     return {
       admin: {
@@ -141,7 +134,6 @@ export default Vue.extend({
         { name: 'Administrator', value: 1 }
       ],
       save: false,
-      error: false,
       show: false,
       rePassword: null,
       isValidAdmin: false,
@@ -157,7 +149,6 @@ export default Vue.extend({
   },
   methods: {
     async createAdmin(admin) {
-      this.error = false
       await axios
         .post('/admins/new', admin, {
           headers: {
@@ -171,10 +162,18 @@ export default Vue.extend({
           this.$router.push('/admins')
         })
         .catch((err) => {
-          const text = 'admin.error'
-          const icon = 'database-remove'
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = 'admin.error'
+            icon = 'database-remove'
+          }
+
           this.$store.dispatch('error', { text, icon })
-          this.error = true
         })
     }
   },

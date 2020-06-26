@@ -71,8 +71,6 @@
         </v-btn>
       </v-col>
     </v-row>
-
-    <NetworkError class="mb-3" :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -91,18 +89,9 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-// components
-import NetworkError from '@/components/NetworkError.vue'
-import Success from '@/components/Success.vue'
-
 export default Vue.extend({
-  components: {
-    NetworkError,
-    Success
-  },
   data() {
     return {
-      error: true,
       load: true,
       shipping: [],
       search: '',
@@ -146,13 +135,23 @@ export default Vue.extend({
       axios
         .get(`/products/groups/shipping`)
         .then((res) => {
-          this.error = false
           this.shipping = res.data
           this.load = false
           return
         })
         .catch((err) => {
-          this.error = true
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = err
+            icon = 'alert-circle-outline'
+          }
+
+          this.$store.dispatch('error', { text, icon })
         })
     }
   },

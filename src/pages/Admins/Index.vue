@@ -28,7 +28,7 @@
             ></v-text-field>
           </v-card-title>
           <v-data-table
-            v-if="!error"
+            v-if="!load"
             v-model="selected"
             :headers="headers"
             :items="admins"
@@ -67,8 +67,6 @@
         </v-btn>
       </v-col>
     </v-row>
-
-    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -82,18 +80,9 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-// components
-import NetworkError from '@/components/NetworkError.vue'
-import Success from '@/components/Success.vue'
-
 export default Vue.extend({
-  components: {
-    NetworkError,
-    Success
-  },
   data() {
     return {
-      error: true,
       page: 1,
       pageCount: 1,
       admins: [],
@@ -138,13 +127,23 @@ export default Vue.extend({
       axios
         .get(`/admins`)
         .then((res) => {
-          this.error = false
           this.admins = res.data
           this.load = false
           return
         })
         .catch((err) => {
-          this.error = true
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = err
+            icon = 'alert-circle-outline'
+          }
+
+          this.$store.dispatch('error', { text, icon })
         })
     }
   },

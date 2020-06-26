@@ -28,7 +28,7 @@
             ></v-text-field>
           </v-card-title>
           <v-data-table
-            v-if="!error"
+            v-if="!load"
             v-model="selected"
             :headers="headers"
             :items="products"
@@ -81,8 +81,6 @@
         </v-btn>
       </v-col>
     </v-row>
-
-    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -110,7 +108,6 @@ export default Vue.extend({
   },
   data() {
     return {
-      error: true,
       page: 1,
       pageCount: 1,
       products: [],
@@ -141,12 +138,11 @@ export default Vue.extend({
       this.$router.push(`/products/${item.id}`)
     },
     getProducts() {
+      this.load = true
       let id = localStorage.getItem('m_user')
       axios
         .get(`/products`)
         .then((res) => {
-          this.error = false
-
           this.lang = localStorage.getItem('i18n')
           this.products = res.data
 
@@ -165,14 +161,23 @@ export default Vue.extend({
               }
             }
           }
-
+          this.load = false
           return
         })
         .catch((err) => {
-          this.error = true
-        })
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = err.response.data.error.message
+            icon = 'alert-circle-outline'
+          }
 
-      this.load = false
+          this.$store.dispatch('error', { text, icon })
+        })
     }
   },
   created() {

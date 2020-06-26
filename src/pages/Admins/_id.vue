@@ -92,7 +92,6 @@
       </v-content>
     </v-row>
 
-    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -143,11 +142,22 @@ export default Vue.extend({
     await axios
       .get(`/admins/${this.$route.params.id}`)
       .then((res) => {
-        this.error = false
+       
         this.admin = res.data
       })
       .catch((err) => {
-        this.error = true
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = err.response.data.error.message
+            icon = 'alert-circle-outline'
+          }
+
+          this.$store.dispatch('error', { text, icon })
       })
   }
 })

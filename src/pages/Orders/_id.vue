@@ -331,9 +331,19 @@ export default Vue.extend({
           this.$store.dispatch('success', { text, icon })
         })
         .catch((err) => {
-          console.log(err)
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = err
+            icon = 'alert-circle-outline'
+          }
+
+          this.$store.dispatch('error', { text, icon })
         })
-      // add notification
     }
   },
   async mounted() {
@@ -344,7 +354,20 @@ export default Vue.extend({
         this.status = this.order_status[this.order.status]
         this.app_lang = localStorage.getItem('i18n')
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        let text
+        let icon
+        if (!error.response) {
+          // network error
+          text = 'Check your internet connection'
+          icon = 'network-strength-off'
+        } else {
+          text = error.response.data.error.message
+          icon = 'alert-circle-outline'
+        }
+
+        this.$store.dispatch('error', { text, icon })
+      })
   }
 })
 </script>

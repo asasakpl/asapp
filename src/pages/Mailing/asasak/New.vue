@@ -60,7 +60,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <Error v-if="error"></Error>
   </v-container>
 </template>
 
@@ -73,7 +72,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-import Error from '@/components/Error.vue'
 
 export default Vue.extend({
   data() {
@@ -87,9 +85,6 @@ export default Vue.extend({
       rules: [(v) => v.length <= 998 || 'Maksymalnie 998 znaków!'],
       titleRule: [(v) => v.length <= 78 || 'Maksymalnie 78 znaków!']
     }
-  },
-  components: {
-    Error
   },
   methods: {
     async sendMessage() {
@@ -114,11 +109,19 @@ export default Vue.extend({
           this.$router.push('/asasak')
         })
         .catch((err) => {
-          const text = 'mail.message.error'
-          const icon = 'email-alert'
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = 'mail.message.error'
+            icon = 'email-alert'
+          }
+
           this.$store.dispatch('error', { text, icon })
           this.dialog = false
-          this.error = true
         })
     }
   }

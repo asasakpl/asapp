@@ -118,8 +118,6 @@
         ></v-progress-circular>
       </v-content>
     </v-row>
-
-    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -132,18 +130,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
-  components: {
-    NetworkError
-  },
   data() {
     return {
       group: null,
       disabled: true,
       save: false,
-      error: true,
       types: [0, 1],
       app_lang: localStorage.getItem('i18n'),
       emailRules: [
@@ -171,11 +164,21 @@ export default Vue.extend({
     await axios
       .get(`/products/groups/${this.$route.params.id}`)
       .then((res) => {
-        this.error = false
         this.group = res.data
       })
       .catch((err) => {
-        this.error = true
+        let text
+        let icon
+        if (!err.response) {
+          // network error
+          text = 'Check your internet connection'
+          icon = 'network-strength-off'
+        } else {
+          text = err
+          icon = 'alert-circle-outline'
+        }
+
+        this.$store.dispatch('error', { text, icon })
       })
   }
 })

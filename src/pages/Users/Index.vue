@@ -23,7 +23,7 @@
             ></v-text-field>
           </v-card-title>
           <v-data-table
-            v-if="!error"
+            v-if="!load"
             @click:row="rowClick"
             v-model="selected"
             :headers="headers"
@@ -50,7 +50,6 @@
         </div>
       </v-col>
     </v-row>
-    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -63,15 +62,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
-  components: {
-    NetworkError
-  },
   data() {
     return {
-      error: true,
       search: '',
       load: false,
       page: 1,
@@ -104,13 +98,23 @@ export default Vue.extend({
       axios
         .get(`/users`)
         .then((res) => {
-          this.error = false
           this.users = res.data
           this.load = false
           return
         })
         .catch((err) => {
-          this.error = true
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = err
+            icon = 'alert-circle-outline'
+          }
+
+          this.$store.dispatch('error', { text, icon })
         })
     }
   },

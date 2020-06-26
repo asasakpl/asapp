@@ -81,7 +81,6 @@
         </v-img>
       </v-card>
     </v-col>
-    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -95,16 +94,13 @@
 import Vue from 'vue'
 import axios from 'axios'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
-import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
   components: {
-    NetworkError,
     DashboardLayout
   },
   data() {
     return {
-      error: true,
       products: 0,
       sellers: 0,
       orders: 0,
@@ -124,56 +120,71 @@ export default Vue.extend({
       let date = new Date()
       date.setDate(date.getDate() - 30)
 
-      await axios.get('/dashboard').then((res) => {
-        this.error = false
-        let orders = res.data.orders
+      await axios
+        .get('/dashboard')
+        .then((res) => {
+          let orders = res.data.orders
 
-        orders = orders.map((order) => order.createdAt)
+          orders = orders.map((order) => order.createdAt)
 
-        for (let x in orders) {
-          let orderDate = new Date(orders[x])
-          let ddd = 0
-          if (date < orderDate) {
-            ddd++
+          for (let x in orders) {
+            let orderDate = new Date(orders[x])
+            let ddd = 0
+            if (date < orderDate) {
+              ddd++
+            }
+            this.orders = this.orders + ddd
           }
-          this.orders = this.orders + ddd
-        }
 
-        this.sellers = 0 + res.data.owners.length
+          this.sellers = 0 + res.data.owners.length
 
-        this.products = 0 + res.data.products.length
+          this.products = 0 + res.data.products.length
 
-        const views = Math.max.apply(
-          Math,
-          res.data.products.map((p) => {
-            return p.views
-          })
-        )
+          const views = Math.max.apply(
+            Math,
+            res.data.products.map((p) => {
+              return p.views
+            })
+          )
 
-        const popularProducts = []
-        for (let x in res.data.products) {
-          if (res.data.products[x].views === views) {
-            popularProducts.push(res.data.products[x])
+          const popularProducts = []
+          for (let x in res.data.products) {
+            if (res.data.products[x].views === views) {
+              popularProducts.push(res.data.products[x])
+            }
           }
-        }
 
-        this.product = popularProducts[0]
-        this.getPopular()
+          this.product = popularProducts[0]
+          this.getPopular()
 
-        let users = res.data.users
-        users = users.map((user) => user.createdAt)
+          let users = res.data.users
+          users = users.map((user) => user.createdAt)
 
-        for (let x in users) {
-          let usersDate = new Date(users[x])
-          let ddd = 0
-          if (date < usersDate) {
-            ddd++
+          for (let x in users) {
+            let usersDate = new Date(users[x])
+            let ddd = 0
+            if (date < usersDate) {
+              ddd++
+            }
+            this.users = this.users + ddd
           }
-          this.users = this.users + ddd
-        }
 
-        return
-      })
+          return
+        })
+        .catch((err) => {
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = err
+            icon = 'alert-circle-outline'
+          }
+
+          this.$store.dispatch('error', { text, icon })
+        })
     }
   },
   beforeMount() {

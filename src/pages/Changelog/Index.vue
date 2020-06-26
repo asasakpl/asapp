@@ -92,7 +92,10 @@ export default Vue.extend({
           date.getFullYear()
       })
       .catch((err) => {
-        console.log(err)
+        const text = 'Check your internet connection'
+        const icon = 'network-strength-off'
+
+        this.$store.dispatch('error', { text, icon })
       })
   }
 })

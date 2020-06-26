@@ -9,9 +9,6 @@ import Vue from 'vue'
 import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
-  components: {
-    NetworkError
-  },
   data() {
     return {
       error: true

@@ -176,7 +176,6 @@
               >
             </v-row>
           </v-card>
-          <Error v-if="error"></Error>
         </v-content>
       </v-col>
     </v-row>
@@ -193,13 +192,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-// components
-import Error from '@/components/Error.vue'
-
 export default Vue.extend({
-  components: {
-    Error
-  },
   data() {
     return {
       error: false,
@@ -251,10 +244,18 @@ export default Vue.extend({
           this.$router.push('/groups')
         })
         .catch((err) => {
-          const text = 'shipping.error'
-          const icon = 'briefcase-remove'
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = 'Check your internet connection'
+            icon = 'network-strength-off'
+          } else {
+            text = 'shipping.error'
+            icon = 'briefcase-remove'
+          }
+
           this.$store.dispatch('error', { text, icon })
-          this.error = true
         })
       setTimeout(() => {
         this.error = false

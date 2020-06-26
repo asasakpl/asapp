@@ -84,8 +84,6 @@
     <v-content v-else align="center" class="pl-0 ml-0 mr-12">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-content>
-
-    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -107,29 +105,34 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-import NetworkError from '@/components/NetworkError.vue'
 
 export default Vue.extend({
-  components: {
-    NetworkError,
-  },
   data() {
     return {
-      error: true,
       m35: null,
-      asasak: null,
+      asasak: null
     }
   },
   async mounted() {
     axios
       .get('/mail')
       .then((res) => {
-        this.error = false
         this.m35 = res.data.m35.list
         this.asasak = res.data.asasak.list
       })
       .catch((err) => {
-        this.error = true
+        let text
+        let icon
+        if (!err.response) {
+          // network error
+          text = 'Check your internet connection'
+          icon = 'network-strength-off'
+        } else {
+          text = err.response.data.error.message
+          icon = 'alert-circle-outline'
+        }
+
+        this.$store.dispatch('error', { text, icon })
       })
   },
   methods: {
@@ -138,7 +141,7 @@ export default Vue.extend({
     },
     m35Push() {
       this.$router.push('/m35')
-    },
-  },
+    }
+  }
 })
 </script>

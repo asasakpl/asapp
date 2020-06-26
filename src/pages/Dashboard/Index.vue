@@ -59,13 +59,12 @@
       </v-card>
     </v-col>
     <v-col v-if="product">
-      <v-card
-        :elevation="hover ? 16 : 2"
-        class="mx-auto px-auto round"
-        max-width="40%"
-        tile
-      >
-        <v-img :aspect-ratio="16 / 9" :src="product.pictures[0].url">
+      <v-card class="mx-auto px-auto round" max-width="40%" tile>
+        <v-img
+          v-if="product.pictures"
+          :aspect-ratio="16 / 9"
+          :src="product.pictures[0].url"
+        >
           <v-expand-transition>
             <v-row class="lightbox white--text pa-2 fill-height" align="end">
               <v-col>

@@ -41,6 +41,7 @@
                 ></v-text-field>
               </v-col>
             </v-row>
+
             <v-row class="mx-auto">
               <v-col max-width="50%">
                 <v-textarea
@@ -115,7 +116,7 @@
                     <v-expansion-panel-header
                       class="subtitle-1 font-weight-bold "
                     >
-                      {{ item.title[app_lang] }}
+                      PL: {{ item.title.pl }} | EN: {{ item.title.en }}
                     </v-expansion-panel-header>
                     <v-expansion-panel-content>
                       <v-col class="body-1 pt-0 pb-0">
@@ -225,16 +226,36 @@
               </v-flex>
             </v-col>
 
-            <v-col cols="5">
-              <v-card v-if="product.owner" outlined>
-                <v-card-title>{{ $t('products.owner.title') }}</v-card-title>
-                <v-card-text>
-                  {{ $t('products.owner.name') }}: {{ product.owner.name }}
-                  <br />
-                  Email: {{ product.owner.email }}
-                </v-card-text>
-              </v-card>
-            </v-col>
+            <v-row class="mx-auto px-auto">
+              <v-col cols="6" class="d-flex flex-no-wrap flex-column">
+                <v-card outlined class="flex d-flex flex-column">
+                  <v-card-title>Stripe info</v-card-title>
+                  <v-card-text>
+                    <div class="title">Produkt</div>
+                    <div>ID produktu pl: {{ product.productPlId }}</div>
+                    <div>
+                      ID produktu en:
+                      {{ product.productEnId }}
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+
+              <v-col cols="6" class="d-flex flex-no-wrap flex-column">
+                <v-card
+                  v-if="product.owner"
+                  outlined
+                  class="flex d-flex flex-column"
+                >
+                  <v-card-title>{{ $t('products.owner.title') }}</v-card-title>
+                  <v-card-text>
+                    {{ $t('products.owner.name') }}: {{ product.owner.name }}
+                    <br />
+                    Email: {{ product.owner.email }}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
 
             <v-row class="mr-3">
               <v-spacer></v-spacer>

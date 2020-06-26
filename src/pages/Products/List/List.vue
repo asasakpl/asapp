@@ -75,6 +75,10 @@
         <v-btn to="/products/new" icon fab>
           <v-icon large>mdi-pencil-plus</v-icon>
         </v-btn>
+
+        <v-btn to="/categories" icon fab>
+          <v-icon large>mdi-home-group</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
 

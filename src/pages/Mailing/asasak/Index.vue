@@ -1,18 +1,13 @@
 <template>
   <v-container fluid>
-    <v-row>
+    <v-row v-if="asasak">
       <v-col cols="1" class="mx-auto px-auto" align="center">
         <v-btn to="/mail" icon fab>
           <v-icon large>arrow_back</v-icon>
         </v-btn>
       </v-col>
       <v-col class="mx-auto px-auto" cols="11">
-        <v-card
-          class="mx-auto px-auto round"
-          max-height="80vh"
-          tile
-          v-if="asasak"
-        >
+        <v-card class="mx-auto px-auto round" max-height="80vh" tile>
           <v-img
             :aspect-ratio="16 / 9"
             src="@/assets/newsletter/asasak.jpg"
@@ -66,14 +61,24 @@
             </div>
           </v-card-text>
         </v-card>
-        <div v-else align="center">
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-row justify="space-between">
+        <v-col cols="1" align="center">
+          <v-btn @click="$router.push('/mail')" fab icon>
+            <v-icon large>arrow_back</v-icon>
+          </v-btn>
+        </v-col>
+        <v-col class="mr-12 mt-3" cols="6">
           <v-progress-circular
             indeterminate
             color="primary"
           ></v-progress-circular>
-        </div>
-      </v-col>
+        </v-col>
+      </v-row>
     </v-row>
+
     <v-snackbar bottom v-model="display" color="success" :timeout="4000">
       {{ $t('mail.new.success') }}
       <v-icon>mdi-{{ icon }}</v-icon>

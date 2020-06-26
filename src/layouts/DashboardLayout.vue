@@ -3,6 +3,7 @@
     <Navigation />
     <router-view></router-view>
     <Success v-if="this.$store.state.success"></Success>
+    <Error v-if="this.$store.state.error"></Error>
   </v-container>
 </template>
 
@@ -13,11 +14,13 @@ import Vue from 'vue'
 import axios from 'axios'
 import Navigation from '@/components/Navigation.vue'
 import Success from '@/components/Success.vue'
+import Error from '@/components/Error.vue'
 
 export default Vue.extend({
   components: {
     Navigation,
-    Success
+    Success,
+    Error
   },
   data() {
     return {

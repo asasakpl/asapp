@@ -6,14 +6,19 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
       text: this.$store.getters.setError.text,
       icon: this.$store.getters.setError.icon,
       display: this.$store.getters.setError.error
-    };
+    }
+  },
+  created() {
+    setTimeout(() => {
+      this.$store.state.error = false
+    }, 4000)
   }
-});
+})
 </script>

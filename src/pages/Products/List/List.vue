@@ -1,16 +1,14 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="1" align="center" justify="center">
-        <div class="flex-column">
-          <v-btn @click="$router.push('/products')" icon fab>
-            <v-icon size="38">arrow_back</v-icon>
-          </v-btn>
-          <v-btn @click="loading(), getProducts()" v-if="!load" icon fab>
-            <v-icon size="38">refresh</v-icon>
-          </v-btn>
-          <v-btn @click="getProducts()" v-else loading icon> </v-btn>
-        </div>
+      <v-col cols="1" class="flex-column align-center">
+        <v-btn @click="$router.push('/products')" class="mb-1" icon fab>
+          <v-icon size="38">arrow_back</v-icon>
+        </v-btn>
+        <v-btn @click="loading(), getProducts()" v-if="!load" icon fab>
+          <v-icon size="38">refresh</v-icon>
+        </v-btn>
+        <v-btn @click="getProducts()" v-else loading icon> </v-btn>
       </v-col>
 
       <v-col>
@@ -71,8 +69,8 @@
           <v-pagination v-model="page" :length="pageCount"></v-pagination>
         </div>
       </v-col>
-      <v-col cols="1" align="center">
-        <v-btn to="/products/new" icon fab>
+      <v-col cols="1" align="end" class="flex-column align-center">
+        <v-btn to="/products/new" class="mb-1" icon fab>
           <v-icon large>mdi-pencil-plus</v-icon>
         </v-btn>
 
@@ -157,7 +155,7 @@ export default Vue.extend({
           for (let i in this.products) {
             if (this.products[i].owner == null) {
               this.products[i].owner = {
-                name: 'asasak.pl'
+                name: 'asasak'
               }
             }
           }

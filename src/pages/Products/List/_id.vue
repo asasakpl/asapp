@@ -231,11 +231,8 @@
                 <v-card outlined class="flex d-flex flex-column">
                   <v-card-title>Stripe info</v-card-title>
                   <v-card-text>
-                    <div class="title">Produkt</div>
-                    <div>ID produktu pl: {{ product.productPlId }}</div>
                     <div>
-                      ID produktu en:
-                      {{ product.productEnId }}
+                      ID produktu: <strong>{{ product.productId }}</strong>
                     </div>
                   </v-card-text>
                 </v-card>

@@ -34,7 +34,7 @@
             class="elevation-1"
             :page.sync="page"
             hide-default-footer
-            :items-per-page="16"
+            :items-per-page="9"
             @page-count="pageCount = $event"
           >
           </v-data-table>

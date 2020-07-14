@@ -17,7 +17,6 @@
                     outlined
                     label="Imie i nazwisko"
                     v-model="member.name"
-                    :rules="[rules.required]"
                   ></v-text-field>
                 </v-col>
                 <v-col class="mb-0 pb-0">

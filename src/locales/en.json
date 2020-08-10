@@ -253,7 +253,7 @@
       "title": "Create new payment method",
       "id": "Payment method number",
       "name_pl": "Polish title",
-      "name_en": "Enlgish title",
+      "name_en": "English title",
       "code": "Code",
       "btn": "Utwórz"
     },

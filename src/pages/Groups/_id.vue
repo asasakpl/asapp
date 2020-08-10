@@ -61,7 +61,6 @@
                       <v-expansion-panel-header
                         class="subtitle-1 font-weight-bold "
                       >
-                        {{ item.method.name[app_lang] }}
                       </v-expansion-panel-header>
                       <v-expansion-panel-content>
                         <v-col class="body-1">
@@ -85,7 +84,6 @@
                       <v-expansion-panel-header
                         class="subtitle-1 font-weight-bold "
                       >
-                        {{ item.method.name[app_lang] }}
                       </v-expansion-panel-header>
                       <v-expansion-panel-content>
                         <v-col class="body-1">

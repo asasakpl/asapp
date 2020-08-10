@@ -30,9 +30,11 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{
+            <v-list-item-title>
+              {{
               $t('navigation.dashboard')
-            }}</v-list-item-title>
+              }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -62,9 +64,11 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{
+            <v-list-item-title>
+              {{
               $t('navigation.products')
-            }}</v-list-item-title>
+              }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -74,9 +78,11 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{
+            <v-list-item-title>
+              {{
               $t('navigation.sellers')
-            }}</v-list-item-title>
+              }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -110,9 +116,11 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{
+            <v-list-item-title>
+              {{
               $t('navigation.settings')
-            }}</v-list-item-title>
+              }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -122,9 +130,11 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{
+            <v-list-item-title>
+              {{
               $t('navigation.log_out')
-            }}</v-list-item-title>
+              }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -134,9 +144,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title
-              >v{{ $store.getters.appVersion }}</v-list-item-title
-            >
+            <v-list-item-title>v{{ $store.getters.appVersion }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -145,49 +153,49 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
+import Vue from "vue"
+import axios from "axios"
 
 export default Vue.extend({
   props: {
-    source: String
+    source: String,
   },
   data() {
     return {
-      name: localStorage.getItem('m_name'),
-      email: localStorage.getItem('m_email'),
-      type: localStorage.getItem('m_type'),
+      name: localStorage.getItem("m_name"),
+      email: localStorage.getItem("m_email"),
+      type: localStorage.getItem("m_type"),
       drawer: true,
       items: [
         {
-          title: 'Dashboard',
-          icon: 'mdi-view-dashboard',
-          to: '/'
+          title: "Dashboard",
+          icon: "mdi-view-dashboard",
+          to: "/",
         },
-        { title: 'Orders', icon: 'mdi-truck', to: 'orders' },
+        { title: "Orders", icon: "mdi-truck", to: "orders" },
         {
-          title: 'Users',
-          icon: 'mdi-account-group',
-          to: 'users'
+          title: "Users",
+          icon: "mdi-account-group",
+          to: "users",
         },
         {
-          title: 'Products',
-          icon: 'mdi-folder-home',
-          to: 'products'
-        }
+          title: "Products",
+          icon: "mdi-folder-home",
+          to: "products",
+        },
       ],
-      color: '#45d66b',
+      color: "#45d66b",
       right: false,
       miniVariant: false,
       expandOnHover: true,
-      background: false
+      background: false,
     }
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout')
-      this.$router.push('/login')
-    }
-  }
+      this.$store.dispatch("logout")
+      this.$router.push("/login")
+    },
+  },
 })
 </script>

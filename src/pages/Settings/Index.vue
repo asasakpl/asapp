@@ -79,7 +79,7 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from "vue"
 
 export default Vue.extend({
   data() {
@@ -93,22 +93,19 @@ export default Vue.extend({
       platform: require("os").release(),
       vue: require("vue/package.json").version,
       version: process.env.PACKAGE_VERSION,
-      vuetify: require("vuetify/package.json").version
-    };
+      vuetify: require("vuetify/package.json").version,
+    }
   },
   methods: {
     setTheme(themeColor) {
       if (themeColor == "light") {
-        this.$vuetify.theme.dark = false;
-        localStorage.setItem("theme", "light");
+        this.$vuetify.theme.dark = false
+        localStorage.setItem("theme", "light")
       } else if (themeColor == "dark") {
-        this.$vuetify.theme.dark = true;
-        localStorage.setItem("theme", "dark");
+        this.$vuetify.theme.dark = true
+        localStorage.setItem("theme", "dark")
       }
     },
-    setLanguage(lang) {
-      localStorage.setItem("i18n", lang);
-    }
-  }
-});
+  },
+})
 </script>

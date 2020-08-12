@@ -7,24 +7,9 @@
             :elevation="hover ? 16 : 2"
             class="mx-auto px-auto round"
             max-width="90%"
-            disabled
             tile
           >
-            <v-img
-              :aspect-ratio="16 / 9"
-              src="@/assets/newsletter/m35.jpg"
-              gradient="to top right, rgba(0,0,0, .7), rgba(0,0,0, .7)"
-            >
-              <div class="d-flex display-3 text-center" style="height: 100%;">
-                <v-row
-                  class="lightbox pa-2 fill-height fill-width"
-                  align="center"
-                >
-                  <v-col>
-                    <v-icon size="62">mdi-hammer-wrench</v-icon>
-                  </v-col>
-                </v-row>
-              </div>
+            <v-img :aspect-ratio="16 / 9" src="@/assets/newsletter/m35.jpg">
               <v-expand-transition>
                 <div
                   v-if="hover"

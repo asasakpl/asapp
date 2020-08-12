@@ -49,10 +49,10 @@
                     outlined
                   ></v-text-field>
                 </v-col>
-                <v-col class="pt-5" sm="4" justify="center"
-                  >* Cena wyświetlana użytkownikowi w produkcie, jest to cena
-                  największa jaką możę osiągnąć produkt ex. 125 000 pln.</v-col
-                >
+                <v-col class="pt-5" sm="4" justify="center">
+                  * Cena wyświetlana użytkownikowi w produkcie, jest to cena
+                  największa jaką możę osiągnąć produkt ex. 125 000 pln.
+                </v-col>
                 <v-col cols="5">
                   <v-select
                     :items="categories"
@@ -64,59 +64,60 @@
                     :rules="[rules.required]"
                     item-value="id"
                   >
-                    <template slot="default" slot-scope="{ item }">
-                      {{ item[app_lang] }}
-                    </template>
-                    <template slot="selection" slot-scope="{ item }">
-                      {{ item[app_lang] }}
-                    </template>
-                    <template slot="item" slot-scope="{ item }">
-                      {{ item[app_lang] }}
-                    </template></v-select
-                  >
+                    <template slot="default" slot-scope="{ item }">{{
+                      item[app_lang]
+                    }}</template>
+                    <template slot="selection" slot-scope="{ item }">{{
+                      item[app_lang]
+                    }}</template>
+                    <template slot="item" slot-scope="{ item }">{{
+                      item[app_lang]
+                    }}</template>
+                  </v-select>
                 </v-col>
               </v-row>
 
               <v-row>
                 <v-col>
-                  <v-textarea
+                  <tiptap-vuetify
+                    :extensions="extensions"
                     v-bind:label="$t('new_product.description_pl')"
                     v-model="product.description.pl"
                     :rules="[rules.required]"
+                    :toolbar-attributes="{ color: 'primary' }"
                     outlined
-                  ></v-textarea>
+                  />
                 </v-col>
                 <v-col>
-                  <v-textarea
+                  <tiptap-vuetify
                     v-bind:label="$t('new_product.description_en')"
+                    :extensions="extensions"
                     v-model="product.description.en"
                     :rules="[rules.required]"
+                    :toolbar-attributes="{ color: 'primary' }"
                     outlined
-                  ></v-textarea>
+                  />
                 </v-col>
               </v-row>
 
               <v-row>
                 <v-col>
-                  <v-card-title class="pl-1">
-                    Zdjęcia
-                  </v-card-title>
+                  <v-card-title class="pl-1">Zdjęcia</v-card-title>
 
                   <v-list :rules="[rules.picture]">
                     <template v-for="(picture, index) in product.pictures">
                       <v-list-item v-bind:key="index">
                         <v-list-item-content class="round">
-                          <v-list-item-title
-                            >{{ picture.url }}
-
+                          <v-list-item-title>
+                            {{ picture.url }}
                             <v-btn
                               icon
                               @click="removePicture(picture)"
                               color="error"
                             >
                               <v-icon>mdi-close</v-icon>
-                            </v-btn></v-list-item-title
-                          >
+                            </v-btn>
+                          </v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </template>
@@ -165,21 +166,21 @@
                         >
                           <v-expansion-panel-header
                             disable-icon-rotate
-                            class="subtitle-1 font-weight-bold "
+                            class="subtitle-1 font-weight-bold"
                           >
                             {{ item.title[app_lang] }}
                             <template v-slot:actions>
-                              <v-btn icon large @click="removeVariant(i)"
-                                ><v-icon color="error" size="32"
+                              <v-btn icon large @click="removeVariant(i)">
+                                <v-icon color="error" size="32"
                                   >mdi-close</v-icon
                                 >
                               </v-btn>
                             </template>
                           </v-expansion-panel-header>
                           <v-expansion-panel-content>
-                            <v-col class="body-1 pt-0 pb-0">
-                              Cena: {{ item.price }} pln
-                            </v-col>
+                            <v-col class="body-1 pt-0 pb-0"
+                              >Cena: {{ item.price }} pln</v-col
+                            >
                             <v-col class="body-1 pt-0 pb-0">
                               Cena "pay to go": {{ item.payToGo }} pln
                               <div class="overline pl-2">
@@ -187,10 +188,10 @@
                                 utworzyć zamówienie
                               </div>
                             </v-col>
-                            <v-col class="body-1 pt-0 pb-0"
-                              >Liczba atrybutów:
-                              {{ item.attributes.length }}</v-col
-                            >
+                            <v-col class="body-1 pt-0 pb-0">
+                              Liczba atrybutów:
+                              {{ item.attributes.length }}
+                            </v-col>
                           </v-expansion-panel-content>
                         </v-expansion-panel>
                       </v-expansion-panels>
@@ -198,9 +199,10 @@
                   </v-card>
                 </v-col>
                 <v-spacer></v-spacer>
-                <v-col> </v-col>
+                <v-col></v-col>
               </v-row>
             </v-card-text>
+
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -253,7 +255,7 @@
                     </v-col>
                     <v-col class="pb-0 pt-0">
                       <v-text-field
-                        label='Cena "pay to go"'
+                        label="Cena 'pay to go'"
                         v-model="variant.payToGo"
                         :rules="[
                           rules.required,
@@ -267,20 +269,24 @@
                   </v-row>
                   <v-row>
                     <v-col>
-                      <v-textarea
+                      <tiptap-vuetify
+                        :extensions="extensions"
                         v-bind:label="$t('new_product.description_pl')"
                         v-model="variant.description.pl"
                         :rules="[rules.required]"
                         outlined
-                      ></v-textarea>
+                        :toolbar-attributes="{ color: 'primary' }"
+                      />
                     </v-col>
                     <v-col>
-                      <v-textarea
+                      <tiptap-vuetify
+                        :extensions="extensions"
                         v-bind:label="$t('new_product.description_en')"
                         v-model="variant.description.en"
                         :rules="[rules.required]"
                         outlined
-                      ></v-textarea>
+                        :toolbar-attributes="{ color: 'primary' }"
+                      />
                     </v-col>
                   </v-row>
                   <v-row class="mx-auto">
@@ -299,8 +305,8 @@
                       <v-row>
                         <span class="title font-weight-bold">Atrybuty</span>
                         <v-spacer></v-spacer>
-                        <v-btn icon fab @click="next"
-                          ><v-icon large>mdi-plus-box</v-icon>
+                        <v-btn icon fab @click="next">
+                          <v-icon large>mdi-plus-box</v-icon>
                         </v-btn>
                       </v-row>
                       <v-col
@@ -390,8 +396,8 @@
                             >Wartości atrybutów (ex. Czerwony, Czarny)</span
                           >
                           <v-spacer></v-spacer>
-                          <v-btn icon fab @click="next"
-                            ><v-icon large>mdi-plus-box</v-icon>
+                          <v-btn icon fab @click="next">
+                            <v-icon large>mdi-plus-box</v-icon>
                           </v-btn>
                         </v-row>
 
@@ -419,8 +425,8 @@
                                   >
                                     <v-icon color="error" size="32"
                                       >mdi-close</v-icon
-                                    ></v-btn
-                                  >
+                                    >
+                                  </v-btn>
                                 </v-col>
                               </v-row>
                             </v-card-text>
@@ -532,11 +538,39 @@ import { s3 } from '@/plugins/aws.ts'
 // Components
 import Success from '@/components/Success.vue'
 import Error from '@/components/Error.vue'
+import {
+  // component
+  TiptapVuetify,
+  // extensions
+  Heading,
+  Bold,
+  Italic,
+  Strike,
+  Underline,
+  Code,
+  Paragraph,
+  BulletList,
+  OrderedList,
+  ListItem,
+  Link,
+  Blockquote,
+  HardBreak,
+  HorizontalRule,
+  History,
+  Image,
+  TodoList,
+  TodoItem,
+  Table,
+  TableCell,
+  TableHeader,
+  TableRow
+} from 'tiptap-vuetify'
 
 export default Vue.extend({
   components: {
     Success,
-    Error
+    Error,
+    TiptapVuetify
   },
   data() {
     return {
@@ -570,6 +604,29 @@ export default Vue.extend({
             : ''),
         number: (v) => !isNaN(v) || 'Cena nie może zawierać liter'
       },
+      extensions: [
+        History,
+        Blockquote,
+        Underline,
+        Strike,
+        Italic,
+        ListItem,
+        BulletList,
+        OrderedList,
+        [
+          Heading,
+          {
+            options: {
+              levels: [1, 2, 3]
+            }
+          }
+        ],
+        Bold,
+        Code,
+        HorizontalRule,
+        Paragraph,
+        HardBreak
+      ],
       isValidProduct: false,
       isValidVariant: false,
       isValidAttribute: false,

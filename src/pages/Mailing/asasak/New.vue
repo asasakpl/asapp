@@ -20,15 +20,15 @@
           </v-card-title>
           <v-divider></v-divider>
           <v-card-text>
-            <v-textarea
-              counter
-              outlined
-              :rules="rules"
-              label="Wiadomość"
-              auto-grow
-              maxLength="998"
+            <tiptap-vuetify
+              :extensions="extensions"
               v-model="message"
-            ></v-textarea>
+              :rules="rules"
+              counter
+              :toolbar-attributes="{ color: 'primary' }"
+              outlined
+              maxLength="998"
+            />
           </v-card-text>
 
           <v-row class="mr-3">
@@ -73,9 +73,64 @@
 import Vue from 'vue'
 import axios from 'axios'
 
+// Components
+import {
+  // component
+  TiptapVuetify,
+  // extensions
+  Heading,
+  Bold,
+  Italic,
+  Strike,
+  Underline,
+  Code,
+  Paragraph,
+  BulletList,
+  OrderedList,
+  ListItem,
+  Link,
+  Blockquote,
+  HardBreak,
+  HorizontalRule,
+  History,
+  Image,
+  TodoList,
+  TodoItem,
+  Table,
+  TableCell,
+  TableHeader,
+  TableRow
+} from 'tiptap-vuetify'
+
 export default Vue.extend({
+  components: {
+    TiptapVuetify
+  },
   data() {
     return {
+      extensions: [
+        History,
+        Blockquote,
+        Underline,
+        Strike,
+        Italic,
+        ListItem,
+        BulletList,
+        OrderedList,
+        [
+          Heading,
+          {
+            options: {
+              levels: [1, 2, 3]
+            }
+          }
+        ],
+        Bold,
+        Code,
+        HorizontalRule,
+        Paragraph,
+        HardBreak
+      ],
       title: '',
       message: '',
       dialog: false,

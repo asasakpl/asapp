@@ -1,21 +1,90 @@
 <template>
-  <v-container>
-    <v-btn @click="$router.go(-1)" icon class="ml-8">
-      <v-icon size="32">arrow_back</v-icon>
-    </v-btn>
-    <v-card
-      class="mx-auto px-auto pb-2 round"
-      max-width="90%"
-      max-height="80vh"
-      tile
-      v-if="m35"
-    >
-      <v-card-title>Newsletter moje35metrow.pl</v-card-title>
-    </v-card>
+  <v-container fluid>
+    <v-row v-if="m35">
+      <v-col cols="1" class="mx-auto px-auto" align="center">
+        <v-btn to="/mail" icon fab>
+          <v-icon large>arrow_back</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col class="mx-auto px-auto" cols="11">
+        <v-card class="mx-auto px-auto round" max-height="80vh" tile>
+          <v-img
+            :aspect-ratio="16 / 9"
+            src="@/assets/newsletter/m35.jpg"
+            max-height="400"
+          >
+            <v-row
+              class="lightbox white--text pa-2 fill-height ml-1"
+              align="end"
+            >
+              <v-col>
+                <div class="display-1 font-weight-medium">moje35metrow.pl</div>
+              </v-col>
+            </v-row>
+          </v-img>
+          <v-card-text class="pt-6" style="position: relative;">
+            <v-btn
+              absolute
+              color="green"
+              class="white--text"
+              fab
+              large
+              right
+              top
+              to="/m35/new"
+            >
+              <v-icon>mdi-email-edit-outline</v-icon>
+            </v-btn>
+            <div class="white--text title mb-2">
+              <v-row>
+                <v-col cols="6">
+                  <v-list>
+                    <v-list-item>
+                      <v-list-item-content>
+                        <v-list-item-title class="headline font-weight-medium"
+                          >Subskrybenci</v-list-item-title
+                        >
 
-    <v-content v-else align="center">
-      <v-progress-circular indeterminate color="primary"></v-progress-circular>
-    </v-content>
+                        <v-list-item-icon class="ma-0">
+                          <v-btn icon large to="/m35/subscribers">
+                            <v-icon>mdi-account-group</v-icon>
+                          </v-btn>
+                          <v-list-item-title class="pl-1">{{
+                            m35.list.members_count
+                          }}</v-list-item-title>
+                        </v-list-item-icon>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-col>
+              </v-row>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-row justify="space-between">
+        <v-col cols="1" align="center">
+          <v-btn @click="$router.push('/mail')" fab icon>
+            <v-icon large>arrow_back</v-icon>
+          </v-btn>
+        </v-col>
+        <v-col class="mr-12 mt-3" cols="6">
+          <v-progress-circular
+            indeterminate
+            color="primary"
+          ></v-progress-circular>
+        </v-col>
+      </v-row>
+    </v-row>
+
+    <v-snackbar bottom v-model="display" color="success" :timeout="4000">
+      {{ $t('mail.new.success') }}
+      <v-icon>mdi-{{ icon }}</v-icon>
+    </v-snackbar>
+    <Error v-if="conflict"></Error>
+    <NetworkError :error="error"></NetworkError>
   </v-container>
 </template>
 
@@ -28,17 +97,57 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+import NetworkError from '@/components/NetworkError.vue'
+import Success from '@/components/Success.vue'
+import Error from '@/components/Error.vue'
 
 export default Vue.extend({
+  components: {
+    NetworkError,
+    Success,
+    Error
+  },
   data() {
     return {
-      m35: null
+      error: true,
+      m35: null,
+      search: '',
+      page: 1,
+      display: false,
+      icon: 'email-check',
+      dialog: false,
+      conflict: false,
+      pageCount: 0,
+      headers: [
+        {
+          text: 'email',
+          value: 'address'
+        },
+        { text: 'name', value: 'name' }
+      ],
+      emailRules: [
+        (v) =>
+          !v ||
+          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+          'E-mail must be valid'
+      ]
+    }
+  },
+  methods: {
+    async getInfo() {
+      axios
+        .get('/mail')
+        .then((res) => {
+          this.error = false
+          this.m35 = res.data.m35
+        })
+        .catch((err) => {
+          this.error = true
+        })
     }
   },
   async mounted() {
-    await axios.get('/mail/m35').then((res) => {
-      this.m35 = res.data.data.m35.list
-    })
+    this.getInfo()
   }
 })
 </script>

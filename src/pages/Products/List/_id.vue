@@ -44,18 +44,26 @@
 
             <v-row class="mx-auto">
               <v-col max-width="50%">
-                <v-textarea
+                <v-card-title>{{
+                  $t('products.descriptions.description_pl')
+                }}</v-card-title>
+                <v-text-field
+                  class="pl-4"
                   outlined
                   v-bind:label="$t('products.descriptions.description_pl')"
-                  :value="product.description.pl"
+                  v-html="product.description.pl"
                   :disabled="disabled"
                   auto-grow
-                ></v-textarea>
+                ></v-text-field>
               </v-col>
 
               <v-col>
+                <v-card-title>{{
+                  $t('products.descriptions.description_en')
+                }}</v-card-title>
                 <v-textarea
-                  :value="product.description.en"
+                  class="pl-4"
+                  v-html="product.description.en"
                   v-bind:label="$t('products.descriptions.description_en')"
                   outlined
                   :disabled="disabled"
@@ -123,6 +131,7 @@
                         <v-row>
                           <v-textarea
                             v-model="item.description.pl"
+                            v-html="item.description.pl"
                             label="Opis pl"
                             outlined
                             class="mr-1"
@@ -132,6 +141,7 @@
                           </v-textarea>
                           <v-textarea
                             v-model="item.description.en"
+                            v-html="item.description.en"
                             label="Opis en"
                             auto-grow
                             outlined

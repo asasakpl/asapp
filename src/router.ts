@@ -16,6 +16,7 @@ import NewAdmin from '@/pages/Admins/New.vue'
 // Mailing
 import Mail from '@/pages/Mailing/Index.vue'
 import M35 from '@/pages/Mailing/m35/Index.vue'
+import m35Subscribers from '@/pages/Mailing/m35/Subscribers/Index.vue'
 import NewM35 from '@/pages/Mailing/m35/New.vue'
 import Asasak from '@/pages/Mailing/asasak/Index.vue'
 import NewAsasak from '@/pages/Mailing/asasak/New.vue'
@@ -284,6 +285,18 @@ let router = new Router({
               name: 'mail',
               component: Mail,
               beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/mail/new',
+              name: 'new_mail',
+              component: NewM35,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/mail/subscribers',
+              name: 'mail_subscribers',
+              component: M35,
+              beforeEnter: ifAuthenticated
             }
           ]
         },
@@ -331,6 +344,12 @@ let router = new Router({
               path: '/m35/new',
               name: 'new_m35',
               component: NewM35,
+              beforeEnter: ifAuthenticated
+            },
+            {
+              path: '/m35/subscribers',
+              name: '35_subscibers',
+              component: m35Subscribers,
               beforeEnter: ifAuthenticated
             }
           ]

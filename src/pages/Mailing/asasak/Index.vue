@@ -109,6 +109,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      
       error: true,
       asasak: null,
       search: '',

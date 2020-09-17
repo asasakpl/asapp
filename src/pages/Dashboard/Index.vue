@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-col>
-      <v-card class="mx-auto px-auto pb-5 round" max-width="90%" tile>
+      <v-card class="mx-auto px-auto pb-5 round" max-width="95%" tile>
         <v-card-title>{{ $t('dashboard.statistics.title') }}</v-card-title>
         <v-col cols="12">
           <v-row>
@@ -58,27 +58,28 @@
         </v-col>
       </v-card>
     </v-col>
-    <v-col v-if="product">
-      <v-card class="mx-auto px-auto round" max-width="40%" tile>
-        <v-img
-          v-if="product.pictures"
-          :aspect-ratio="16 / 9"
-          :src="product.pictures[0].url"
+    <v-col v-if="popularProducts">
+      <v-row>
+        <v-card
+          class="mx-auto px-auto round"
+          tile
+          v-for="product in popularProducts"
+          :key="product.id"
+          width="26%"
+          @click="$router.replace('/products/' + product.id)"
         >
-          <v-expand-transition>
-            <v-row class="lightbox white--text pa-2 fill-height" align="end">
-              <v-col>
-                <div class="headline font-weight-medium">
-                  {{ product.title[app_lang] }}
-                </div>
-                <div class="title font-weight-medium">
-                  Wyświetlenia: {{ product.views }}
-                </div>
-              </v-col>
-            </v-row>
-          </v-expand-transition>
-        </v-img>
-      </v-card>
+          <v-img v-if="product.pictures" :aspect-ratio="16 / 9" :src="product.pictures[0].url">
+            <v-expand-transition>
+              <v-row class="lightbox white--text pa-2 fill-height" align="end">
+                <v-col>
+                  <div class="headline font-weight-medium">{{ product.title[app_lang] }}</div>
+                  <div class="title font-weight-medium">Wyświetlenia: {{ product.views }}</div>
+                </v-col>
+              </v-row>
+            </v-expand-transition>
+          </v-img>
+        </v-card>
+      </v-row>
     </v-col>
   </v-container>
 </template>
@@ -90,13 +91,13 @@
 </style>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
-import DashboardLayout from '@/layouts/DashboardLayout.vue'
+import Vue from "vue"
+import axios from "axios"
+import DashboardLayout from "@/layouts/DashboardLayout.vue"
 
 export default Vue.extend({
   components: {
-    DashboardLayout
+    DashboardLayout,
   },
   data() {
     return {
@@ -105,8 +106,9 @@ export default Vue.extend({
       orders: 0,
       users: 0,
       product: null,
-      name: localStorage.getItem('m_name'),
-      app_lang: localStorage.getItem('i18n')
+      popularProducts: null,
+      name: localStorage.getItem("m_name"),
+      app_lang: localStorage.getItem("i18n"),
     }
   },
   methods: {
@@ -120,7 +122,27 @@ export default Vue.extend({
       date.setDate(date.getDate() - 30)
 
       await axios
-        .get('/dashboard')
+        .get("/products/popular")
+        .then((res) => {
+          this.popularProducts = res.data
+        })
+        .catch((err) => {
+          let text
+          let icon
+          if (!err.response) {
+            // network error
+            text = "Check your internet connection"
+            icon = "network-strength-off"
+          } else {
+            text = err
+            icon = "alert-circle-outline"
+          }
+
+          this.$store.dispatch("error", { text, icon })
+        })
+
+      await axios
+        .get("/dashboard")
         .then((res) => {
           let orders = res.data.orders
 
@@ -175,19 +197,19 @@ export default Vue.extend({
           let icon
           if (!err.response) {
             // network error
-            text = 'Check your internet connection'
-            icon = 'network-strength-off'
+            text = "Check your internet connection"
+            icon = "network-strength-off"
           } else {
             text = err
-            icon = 'alert-circle-outline'
+            icon = "alert-circle-outline"
           }
 
-          this.$store.dispatch('error', { text, icon })
+          this.$store.dispatch("error", { text, icon })
         })
-    }
+    },
   },
   beforeMount() {
     this.getData()
-  }
+  },
 })
 </script>

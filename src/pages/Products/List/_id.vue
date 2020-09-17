@@ -9,7 +9,7 @@
       <v-col cols="11" class="mr-0 pr-0">
         <v-content v-if="product" style="overflow: scroll" class="pt-0 pl-0">
           <v-card
-            class="mx-auto  px-auto pb-2 round"
+            class="mx-auto px-auto pb-2 round"
             style="overflow: scroll;"
             max-height="80vh"
             tile
@@ -18,7 +18,7 @@
               {{ $t('products.title') }}: {{ product.id }}
               <v-spacer></v-spacer>
               <v-btn @click="editProduct" large icon class="mb-1 pb-1">
-                <v-icon size="32" class="">mdi-pencil</v-icon>
+                <v-icon size="32" class>mdi-pencil</v-icon>
               </v-btn>
             </v-card-title>
 
@@ -44,31 +44,35 @@
 
             <v-row class="mx-auto">
               <v-col max-width="50%">
-                <v-card-title>{{
+                <v-card-title>
+                  {{
                   $t('products.descriptions.description_pl')
-                }}</v-card-title>
-                <v-text-field
-                  class="pl-4"
+                  }}
+                </v-card-title>
+                <div
+                  class="pl-4 grey--text"
                   outlined
                   v-bind:label="$t('products.descriptions.description_pl')"
                   v-html="product.description.pl"
                   :disabled="disabled"
                   auto-grow
-                ></v-text-field>
+                ></div>
               </v-col>
 
               <v-col>
-                <v-card-title>{{
+                <v-card-title>
+                  {{
                   $t('products.descriptions.description_en')
-                }}</v-card-title>
-                <v-textarea
-                  class="pl-4"
+                  }}
+                </v-card-title>
+                <div
+                  class="pl-4 grey--text"
                   v-html="product.description.en"
                   v-bind:label="$t('products.descriptions.description_en')"
                   outlined
                   :disabled="disabled"
                   auto-grow
-                ></v-textarea>
+                ></div>
               </v-col>
             </v-row>
 
@@ -94,10 +98,8 @@
 
             <v-col align="center">
               <v-card flat max-width="1200">
-                <v-card-title class="ml-0 pl-2 mt-0"
-                  ><div class="headline mb-3">
-                    {{ $t('products.pictures.title') }}
-                  </div>
+                <v-card-title class="ml-0 pl-2 mt-0">
+                  <div class="headline mb-3">{{ $t('products.pictures.title') }}</div>
                 </v-card-title>
 
                 <v-card flat style="overflow: scroll">
@@ -117,43 +119,30 @@
               <span class="title">Warianty</span>
               <v-flex align="center">
                 <v-expansion-panels light>
-                  <v-expansion-panel
-                    v-for="(item, i) in product.variants"
-                    :key="i"
-                  >
+                  <v-expansion-panel v-for="(item, i) in product.variants" :key="i">
                     <v-expansion-panel-header
-                      class="subtitle-1 font-weight-bold "
-                    >
-                      PL: {{ item.title.pl }} | EN: {{ item.title.en }}
-                    </v-expansion-panel-header>
+                      class="subtitle-1 font-weight-bold"
+                    >PL: {{ item.title.pl }} | EN: {{ item.title.en }}</v-expansion-panel-header>
                     <v-expansion-panel-content>
-                      <v-col class="body-1 pt-0 pb-0">
-                        <v-row>
-                          <v-textarea
-                            v-model="item.description.pl"
-                            v-html="item.description.pl"
-                            label="Opis pl"
-                            outlined
-                            class="mr-1"
-                            auto-grow
-                            disabled
-                          >
-                          </v-textarea>
-                          <v-textarea
-                            v-model="item.description.en"
-                            v-html="item.description.en"
-                            label="Opis en"
-                            auto-grow
-                            outlined
-                            class="ml-1"
-                            disabled
-                          >
-                          </v-textarea>
-                        </v-row>
+                      <v-col class="body-1 pt-0 pb-0 grey--text">
+                        <div
+                          v-html="item.description.pl"
+                          label="Opis pl"
+                          outlined
+                          class="mr-1 grey--text"
+                          auto-grow
+                          disabled
+                        ></div>
+                        <div
+                          v-html="item.description.en"
+                          label="Opis en"
+                          auto-grow
+                          outlined
+                          class="ml-1 grey--text"
+                          disabled
+                        ></div>
                       </v-col>
-                      <v-col class="body-1 pt-0 pb-0">
-                        Cena: {{ item.price }} pln
-                      </v-col>
+                      <v-col class="body-1 pt-0 pb-0">Cena: {{ item.price }} pln</v-col>
                       <v-col class="body-1 pt-0 pb-0">
                         Cena "pay to go": {{ item.payToGo }} pln
                         <div class="overline pl-2">
@@ -161,44 +150,34 @@
                           zamówienie
                         </div>
                       </v-col>
-                      <v-col class="body-1 pt-0 pb-0"
-                        >Liczba atrybutów: {{ item.attributes.length }}</v-col
-                      >
-                      <v-col class="body-1 pt-0 pb-0"
-                        >Grupa: {{ item.group.name[app_lang] }}</v-col
-                      >
+                      <v-col class="body-1 pt-0 pb-0">Liczba atrybutów: {{ item.attributes.length }}</v-col>
+                      <v-col class="body-1 pt-0 pb-0">Grupa: {{ item.group.name[app_lang] }}</v-col>
 
                       <v-col v-if="item.attributes.length > 0">
-                        <div class="title font-weight-bold">
-                          Atrybuty
-                        </div>
+                        <div class="title font-weight-bold">Atrybuty</div>
                         <v-expansion-panels dark>
                           <v-expansion-panel
                             v-for="(attribute, index) in item.attributes"
                             :key="index"
                           >
                             <v-expansion-panel-header
-                              class="subtitle-1 font-weight-bold "
-                            >
-                              Nazwa: {{ attribute.name[app_lang] }}
-                            </v-expansion-panel-header>
+                              class="subtitle-1 font-weight-bold"
+                            >Nazwa: {{ attribute.name[app_lang] }}</v-expansion-panel-header>
                             <v-expansion-panel-content>
                               <v-list light>
                                 <v-list-item v-bind:key="index">
                                   <v-col>
                                     <v-row>
                                       <v-col>
-                                        <v-list-item-title
-                                          >Nazwa atrybutu:
+                                        <v-list-item-title>
+                                          Nazwa atrybutu:
                                           {{ attribute.name[app_lang] }}
                                         </v-list-item-title>
                                       </v-col>
                                     </v-row>
                                     <v-row>
                                       <v-col>
-                                        <div class="font-weight-bold">
-                                          Wartości atrybutu
-                                        </div>
+                                        <div class="font-weight-bold">Wartości atrybutu</div>
                                         <v-list dark dense>
                                           <template
                                             v-for="(value,
@@ -208,16 +187,15 @@
                                               <v-list-item-title>
                                                 Nazwa:
                                                 {{
-                                                  value.name[app_lang]
-                                                }}</v-list-item-title
-                                              >
-                                              <v-list-item-subtitle
-                                                class="white--text"
-                                                >Cena:
+                                                value.name[app_lang]
+                                                }}
+                                              </v-list-item-title>
+                                              <v-list-item-subtitle class="white--text">
+                                                Cena:
                                                 {{
-                                                  value.price
-                                                }}</v-list-item-subtitle
-                                              >
+                                                value.price
+                                                }}
+                                              </v-list-item-subtitle>
                                             </v-list-item>
                                           </template>
                                         </v-list>
@@ -242,18 +220,15 @@
                   <v-card-title>Stripe info</v-card-title>
                   <v-card-text>
                     <div>
-                      ID produktu: <strong>{{ product.productId }}</strong>
+                      ID produktu:
+                      <strong>{{ product.productId }}</strong>
                     </div>
                   </v-card-text>
                 </v-card>
               </v-col>
 
               <v-col cols="6" class="d-flex flex-no-wrap flex-column">
-                <v-card
-                  v-if="product.owner"
-                  outlined
-                  class="flex d-flex flex-column"
-                >
+                <v-card v-if="product.owner" outlined class="flex d-flex flex-column">
                   <v-card-title>{{ $t('products.owner.title') }}</v-card-title>
                   <v-card-text>
                     {{ $t('products.owner.name') }}: {{ product.owner.name }}
@@ -266,21 +241,14 @@
 
             <v-row class="mr-3">
               <v-spacer></v-spacer>
-              <v-btn @click="cancelEdit()" class="mr-3" v-show="save"
-                >Cancel</v-btn
-              >
+              <v-btn @click="cancelEdit()" class="mr-3" v-show="save">Cancel</v-btn>
 
-              <v-btn @click="saveProduct(product)" color="primary" v-show="save"
-                >Save</v-btn
-              >
+              <v-btn @click="saveProduct(product)" color="primary" v-show="save">Save</v-btn>
             </v-row>
           </v-card>
         </v-content>
         <v-content v-else align="center">
-          <v-progress-circular
-            indeterminate
-            color="primary"
-          ></v-progress-circular>
+          <v-progress-circular indeterminate color="primary"></v-progress-circular>
         </v-content>
       </v-col>
       <NetworkError :error="error"></NetworkError>
@@ -295,14 +263,14 @@
 </style>
 
 <script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
-import Vuex from 'vuex'
-import NetworkError from '@/components/NetworkError.vue'
+import Vue from "vue"
+import axios from "axios"
+import Vuex from "vuex"
+import NetworkError from "@/components/NetworkError.vue"
 
 export default Vue.extend({
   components: {
-    NetworkError
+    NetworkError,
   },
   data() {
     return {
@@ -311,7 +279,7 @@ export default Vue.extend({
       disabled: true,
       save: false,
       error: true,
-      app_lang: localStorage.getItem('i18n')
+      app_lang: localStorage.getItem("i18n"),
     }
   },
   methods: {
@@ -325,7 +293,7 @@ export default Vue.extend({
     cancelEdit() {
       this.disabled = true
       this.save = false
-    }
+    },
   },
   async mounted() {
     await axios
@@ -333,11 +301,11 @@ export default Vue.extend({
       .then((res) => {
         this.error = false
         this.product = res.data
-        this.lang = localStorage.getItem('i18n')
+        this.lang = localStorage.getItem("i18n")
       })
       .catch((err) => {
         this.error = true
       })
-  }
+  },
 })
 </script>
